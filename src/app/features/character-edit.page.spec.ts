@@ -31,6 +31,13 @@ describe('Character sheet', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     service.load.mockResolvedValue(structuredClone(record));
+    service.save.mockImplementation(
+      async (record: SheetRecord, name: string, core: SheetRecord['core']) => ({
+        ...record,
+        core,
+        row: { ...record.row, name, data: { core }, updated_at: 'new-timestamp' },
+      }),
+    );
     TestBed.configureTestingModule({
       imports: [CharacterEditPage],
       providers: [
@@ -87,20 +94,20 @@ describe('Character sheet', () => {
     expect(page.dirty()).toBe(false);
     expect(page.weight()).toBe(6);
   });
-  it('advances a draft level with HP input and recalculates proficiency', async () => {
+  it('saves a level-up immediately and recalculates proficiency', async () => {
     const fixture = await create();
     const page = fixture.componentInstance;
     page.patch({ level: 4, hpMax: 20 });
     page.beginLevelUp();
     page.hpGain.set(5);
     page.newFeature.set('New perk');
-    page.applyLevelUp();
+    await page.applyLevelUp();
     expect(page.core().level).toBe(5);
     expect(page.core().hpMax).toBe(25);
     expect(page.pb()).toBe(3);
     expect(page.core().abilities[0].name).toBe('New perk');
-    expect(page.dirty()).toBe(true);
-    expect(service.save).not.toHaveBeenCalled();
+    expect(page.dirty()).toBe(false);
+    expect(service.save).toHaveBeenCalledTimes(1);
   });
   it('preserves edits when saving fails', async () => {
     const fixture = await create();
@@ -123,17 +130,17 @@ describe('Character sheet', () => {
     const page = fixture.componentInstance;
     page.beginLevelUp();
     page.allocate('con', 2);
-    page.applyLevelUp();
+    await page.applyLevelUp();
     expect(page.core().level).toBe(2);
     expect(page.error()).toContain('feat');
     page.newFeature.set('Test Feat (placeholder)');
-    page.applyLevelUp();
+    await page.applyLevelUp();
     expect(page.core().level).toBe(3);
     expect(page.core().scores.con).toBe(15);
     expect(page.core().hpMax).toBe(30);
     expect(page.core().abilities.some((a) => a.name === 'Dual Wield')).toBe(true);
-    expect(page.dirty()).toBe(true);
-    expect(service.save).not.toHaveBeenCalled();
+    expect(page.dirty()).toBe(false);
+    expect(service.save).toHaveBeenCalledTimes(1);
   });
   it('caps gains, multiplies only Heat gains, and blocks unaffordable costs', async () => {
     const core = createCore();
@@ -154,5 +161,22 @@ describe('Character sheet', () => {
     page.patch({ level: 12 });
     page.beginLevelUp();
     expect(page.leveling()).toBe(false);
+  });
+  it('retains an unsaved level-up after failure and prevents advancing twice on retry', async () => {
+    const page = (await create()).componentInstance;
+    page.patch({ hpMax: 20 });
+    page.beginLevelUp();
+    page.hpGain.set(5);
+    service.save.mockRejectedValueOnce(new Error('Network failure'));
+    await page.applyLevelUp();
+    expect(page.core().level).toBe(2);
+    expect(page.dirty()).toBe(true);
+    expect(page.pendingLevelUp()).toBe(true);
+    page.beginLevelUp();
+    expect(page.leveling()).toBe(false);
+    await page.save();
+    expect(page.core().level).toBe(2);
+    expect(page.core().hpMax).toBe(25);
+    expect(page.pendingLevelUp()).toBe(false);
   });
 });

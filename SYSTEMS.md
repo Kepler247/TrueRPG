@@ -8,7 +8,7 @@ The system hub contains every page of the 69-page author-provided PDF, searchabl
 
 Implemented clarifications: maximum level 12; scores may exceed 20; two ability points every level; shared feat choices at levels 3/6/9/12; Gunslinger d10 HP with fixed 6 or a roll plus Constitution; Fan the Hammer costs 2 Heat. Feats are not defined yet. The optional testing placeholder has no mechanical effect and is clearly labeled.
 
-Gunslinger creation and level-up add unlocked ability references. Heat gains, costs, maximums, long-rest reset, and level-based gain multipliers are tracked on the edit page and saved with the character. Attack resolution, advantage, automatic kill effects, probability of Divine Intervention consequences, creature stat blocks, drugs, and item statistics are not invented where the draft does not supply them. Resolve narrative and combat effects with the GM using the feature text and original reference.
+Gunslinger creation and level-up add unlocked ability references. Heat gains, costs, maximums, long-rest reset, and level-based gain multipliers can be managed directly on the character summary and are saved with the character. Attack resolution, advantage, automatic kill effects, probability of Divine Intervention consequences, creature stat blocks, drugs, and item statistics are not invented where the draft does not supply them. Resolve narrative and combat effects with the GM using the feature text and reference.
 
 ## Plain 5E
 
@@ -27,5 +27,7 @@ node scripts/import-5e-progression.mjs
 The 501 importer copies the exact input PDF and writes page-based UTF-8 text plus its SHA-256 hash. Approved corrections can be applied to the app's PDF before importing it; keep PDF text and readable text synchronized. The one-time `scripts/correct-501-rads-pdf.py` correction uses PyMuPDF and the existing VT323 font, preserves the layout and 69-page count, and requires distinct input/output paths. The author's Downloads file is untouched. For a new author revision, import with a new revision identifier, update the hub's active reference, review mechanic changes in the system adapter, and add a new database migration if catalog metadata changes. Text extraction is a reading aid; the PDF remains authoritative for formatting, tables, and illustrations. Mechanical definitions are deliberately maintained separately from imported prose.
 
 Character core payloads remain version 2, with unknown fields preserved. System-specific Heat uses an additive core field; invalid or newer saved payloads are never replaced on load. Save validation uses the active ruleset's score and level limits. Database RLS remains responsible for ownership and campaign authorization.
+
+All future 501 Rads classes are expected to earn and spend a class resource. `CharacterRuleset.classResource` supplies its name, current-value storage adapter, maximum, gain multiplier, help text, and optional long-rest reset. Summary, editor, and creator controls use that definition. Heat is the first implementation; other classes' mechanics remain undefined until supplied by the author.
 
 Run `npm.cmd run build`, `npm.cmd test -- --watch=false`, and `npm.cmd run test:db` after changes to these features or migrations.

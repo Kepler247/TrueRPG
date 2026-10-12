@@ -52,6 +52,6 @@ Do not publish or create external resources unless requested.
 
 ## Character presentation
 
-- Character detail URLs are read-only summaries; keep editing controls on /characters/:id/edit.
+- Character detail URLs show summaries with authorized quick current-HP/Heat controls and local dice rolls. Keep general sheet editing controls on /characters/:id/edit. Applying a level-up saves immediately; preserve failed level-up changes for retry without advancing twice.
 - Summary layouts must remain compact and readable on phones, including skill totals and stat modifiers/saves.
 - Write text assets as UTF-8; use HTML entities or escaped Unicode for symbols when shell encoding could corrupt them.

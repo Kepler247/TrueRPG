@@ -189,10 +189,12 @@
                     <dt>Speed</dt>
                     <dd>{{ core.speed.distance }} {{ core.speed.unit }} / {{ core.speed.per }}</dd>
                   </div>
-                  @if (rules().hasHeat?.(core)) {
+                  @if (rules().classResource?.(core); as resource) {
                     <div>
-                      <dt>Starting Heat</dt>
-                      <dd>0 / {{ rules().heatCapacity?.(core.level) ?? 'unlimited' }}</dd>
+                      <dt>Starting {{ resource.name }}</dt>
+                      <dd>
+                        {{ resource.current(core) }} / {{ resource.maximum(core) ?? 'unlimited' }}
+                      </dd>
                     </div>
                   }
                 </dl>

@@ -34,16 +34,36 @@
       <dd>{{ record.core.level }}</dd>
     </div>
     <div>
+      <dt>Current HP</dt>
+      <dd>{{ hp() ?? 'Not set' }} / {{ record.core.hpMax ?? '--' }}</dd>
+    </div>
+    <div>
       <dt>Maximum HP</dt>
       <dd>{{ record.core.hpMax ?? 'Not set' }}</dd>
     </div>
     <div>
       <dt>Initiative</dt>
-      <dd>{{ signed(rules().initiative(record.core, rules())) }}</dd>
+      <dd>
+        <button
+          class="roll-button"
+          (click)="roll('Initiative', rules().initiative(record.core, rules()))"
+          aria-label="Roll initiative"
+        >
+          {{ signed(rules().initiative(record.core, rules())) }}
+        </button>
+      </dd>
     </div>
     <div>
       <dt>Proficiency</dt>
-      <dd>{{ signed(rules().proficiencyBonus(record.core.level)) }}</dd>
+      <dd>
+        <button
+          class="roll-button"
+          (click)="roll('Proficiency bonus only', rules().proficiencyBonus(record.core.level))"
+          aria-label="Roll with proficiency bonus only"
+        >
+          {{ signed(rules().proficiencyBonus(record.core.level)) }}
+        </button>
+      </dd>
     </div>
     <div>
       <dt>Speed</dt>
@@ -56,21 +76,124 @@
       <dd class="capitalize">{{ record.core.size }}</dd>
     </div>
   </dl>
+  @if (record.canEdit) {
+    <section class="panel quick-resources" aria-labelledby="resources-title">
+      <h2 id="resources-title">HP{{ resource() ? ' and ' + resource()?.name : '' }}</h2>
+      <p>Resource buttons save the values shown here immediately.</p>
+      @if (record.core.hpMax !== null) {
+        <div class="resource-row">
+          <mat-form-field appearance="outline"
+            ><mat-label>Current HP</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              [max]="record.core.hpMax"
+              step="1"
+              [ngModel]="hpInput()"
+              (ngModelChange)="hpInput.set($event)"
+              [disabled]="saving()"
+          /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Damage / healing amount</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              step="1"
+              [ngModel]="hpAmount()"
+              (ngModelChange)="hpAmount.set($event)"
+              [disabled]="saving()"
+          /></mat-form-field>
+          <div class="actions">
+            <button mat-stroked-button (click)="changeHp(-1)" [disabled]="saving()">
+              Take damage</button
+            ><button mat-stroked-button (click)="changeHp(1)" [disabled]="saving()">Heal</button>
+          </div>
+        </div>
+      } @else {
+        <p>Set maximum HP on the edit page to start tracking current HP.</p>
+      }
+      @if (resource(); as resource) {
+        <div class="resource-row">
+          <mat-form-field appearance="outline"
+            ><mat-label>Current {{ resource.name }}</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              [attr.max]="resource.maximum(record.core)"
+              step="1"
+              [ngModel]="heatInput()"
+              (ngModelChange)="heatInput.set($event)"
+              [disabled]="saving()"
+          /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Base {{ resource.name }} gain / cost</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              step="1"
+              [ngModel]="heatAmount()"
+              (ngModelChange)="heatAmount.set($event)"
+              [disabled]="saving()"
+          /></mat-form-field>
+          <div class="actions">
+            <button mat-stroked-button (click)="changeHeat(1)" [disabled]="saving()">
+              Gain {{ resource.name }}</button
+            ><button mat-stroked-button (click)="changeHeat(-1)" [disabled]="saving()">
+              Spend {{ resource.name }}
+            </button>
+            @if (resource.resetsOnLongRest) {
+              <button mat-button (click)="saveVitals(undefined, 0)" [disabled]="saving()">
+                Long rest: reset {{ resource.name }}
+              </button>
+            }
+          </div>
+        </div>
+        <p class="legend">{{ resource.help }}</p>
+      }
+      <button
+        mat-flat-button
+        (click)="saveVitals()"
+        [disabled]="saving() || (record.core.hpMax === null && !resource())"
+      >
+        {{ saving() ? 'Saving...' : 'Save resources' }}
+      </button>
+    </section>
+  }
   <section class="panel" aria-labelledby="stats-title">
     <h2 id="stats-title">Core stats</h2>
+    <p class="legend">
+      Tap a modifier, save, skill total, or initiative to roll d{{ rules().checkDie ?? 20 }} plus
+      that bonus.
+    </p>
     <div class="stats-grid">
       @for (stat of stats; track stat.key) {
         <div class="stat-tile">
           <h3>{{ stat.key.toUpperCase() }}</h3>
           <span class="stat-name">{{ stat.name }}</span>
-          <strong class="modifier">{{
-            signed(rules().abilityModifier(record.core.scores[stat.key]))
-          }}</strong>
-          <span class="score">Score {{ record.core.scores[stat.key] }}</span>
-          <span class="save"
-            >Save {{ signed(rules().savingThrow(record.core, stat.key, rules()))
-            }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}</span
+          <button
+            class="roll-button modifier"
+            [attr.aria-label]="'Roll ' + stat.name + ' check'"
+            (click)="
+              roll(stat.name + ' check', rules().abilityModifier(record.core.scores[stat.key]))
+            "
           >
+            {{ signed(rules().abilityModifier(record.core.scores[stat.key])) }}
+          </button>
+          <span class="score">Score {{ record.core.scores[stat.key] }}</span>
+          <button
+            class="roll-button save"
+            [attr.aria-label]="'Roll ' + stat.name + ' saving throw'"
+            (click)="
+              roll(stat.name + ' saving throw', rules().savingThrow(record.core, stat.key, rules()))
+            "
+          >
+            Save {{ signed(rules().savingThrow(record.core, stat.key, rules()))
+            }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}
+          </button>
         </div>
       }
     </div>
@@ -97,7 +220,13 @@
               >{{ skill.stat.toUpperCase() }} &middot; {{ trainingLabel(skill.id) }}</span
             >
           </div>
-          <strong class="skill-total">{{ signed(skillTotal(index)) }}</strong>
+          <button
+            class="roll-button skill-total"
+            [attr.aria-label]="'Roll ' + skill.name"
+            (click)="roll(skill.name, skillTotal(index))"
+          >
+            {{ signed(skillTotal(index)) }}
+          </button>
         </div>
       }
     </div>
@@ -150,13 +279,12 @@
   </section>
   <section class="panel" aria-labelledby="abilities-title">
     <h2 id="abilities-title">Abilities</h2>
-    @if (rules().hasHeat?.(record.core)) {
+    @if (resource(); as resource) {
       <p>
         <strong
-          >Heat {{ heat() }} /
-          {{ rules().heatCapacity?.(record.core.level) ?? 'unlimited' }}</strong
+          >{{ resource.name }} {{ heat() }} /
+          {{ resource.maximum(record.core) ?? 'unlimited' }}</strong
         >
-        &middot; Manage Heat on the edit page.
       </p>
     }
     <ul class="entry-list">
@@ -186,4 +314,21 @@
 @if (error(); as problem) {
   <p class="feedback error" role="alert">{{ problem }}</p>
 }
+@if (message(); as success) {
+  <p class="feedback" role="status">{{ success }}</p>
+}
 <footer><a href="/rules-attribution.txt">Rules attribution</a></footer>
+@if (lastRoll(); as result) {
+  <aside class="roll-result" role="status" aria-live="polite" aria-atomic="true">
+    <div>
+      <strong>{{ result.label }}: {{ result.total }}</strong
+      ><span
+        >d{{ result.sides }} ({{ result.die }}) {{ signed(result.modifier) }} =
+        {{ result.total }} &middot; Roll {{ rollCount() }}</span
+      >
+    </div>
+    <button mat-button (click)="lastRoll.set(null)" aria-label="Dismiss roll result">
+      Dismiss
+    </button>
+  </aside>
+}

@@ -10,9 +10,21 @@ import {
   StatKey,
 } from './character-core';
 
+export interface ClassResourceDefinition {
+  id: string;
+  name: string;
+  current: (core: CharacterCore) => number;
+  setCurrent: (core: CharacterCore, value: number) => CharacterCore;
+  maximum: (core: CharacterCore) => number | null;
+  gainMultiplier: (core: CharacterCore) => number;
+  help: string;
+  resetsOnLongRest?: boolean;
+}
 export interface CharacterRuleset {
+  classResource?: (core: CharacterCore) => ClassResourceDefinition | null;
   maxLevel?: number;
   maxScore?: number;
+  checkDie?: number;
   initialize?: (core: CharacterCore) => CharacterCore;
   advance?: (core: CharacterCore) => CharacterCore;
   hitDie?: (core: CharacterCore) => number | null;
@@ -46,6 +58,7 @@ export interface CharacterRuleset {
 export const BASE_5E_RULES: CharacterRuleset = {
   maxLevel: 20,
   maxScore: 30,
+  checkDie: 20,
   improvementMax: 20,
   skills: BASE_SKILLS,
   // These catalogs are supplied by the actual system, rather than assuming fantasy classes/races.

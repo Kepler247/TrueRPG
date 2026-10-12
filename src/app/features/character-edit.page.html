@@ -17,7 +17,7 @@
         mat-stroked-button
         type="button"
         (click)="beginLevelUp()"
-        [disabled]="disabled() || core().level >= (rules().maxLevel ?? 20)"
+        [disabled]="disabled() || pendingLevelUp() || core().level >= (rules().maxLevel ?? 20)"
       >
         Level up
       </button>
@@ -28,9 +28,13 @@
   @if (dirty()) {
     <p role="status">Unsaved changes</p>
   }
+  @if (pendingLevelUp()) {
+    <p role="status">Your level-up has not saved yet. Retry Save sheet before advancing again.</p>
+  }
   @if (leveling()) {
     <section class="panel">
       <h2>Advance to level {{ core().level + 1 }}</h2>
+      <p>Applying this level-up saves your sheet, including any other unsaved changes.</p>
       @if (points()) {
         <p>Allocate {{ points() }} ability-score points. Allocated: {{ allocated() }}.</p>
         <div class="field-grid">
@@ -107,8 +111,9 @@
       </ul>
       <p>Proficiency and trained skill/save bonuses recalculate from the new level.</p>
       <div class="actions">
-        <button mat-flat-button (click)="applyLevelUp()">Apply to draft</button
-        ><button mat-button (click)="leveling.set(false)">Cancel</button>
+        <button mat-flat-button (click)="applyLevelUp()" [disabled]="saving()">
+          Apply and save level-up</button
+        ><button mat-button (click)="leveling.set(false)" [disabled]="saving()">Cancel</button>
       </div>
     </section>
   }
@@ -148,6 +153,18 @@
           [disabled]="disabled()"
         /><mat-hint>Set according to your class or system.</mat-hint></mat-form-field
       >
+      <mat-form-field appearance="outline"
+        ><mat-label>Current HP</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          [max]="core().hpMax"
+          step="1"
+          [ngModel]="currentHp()"
+          (ngModelChange)="patch({ hpCurrent: $event })"
+          [disabled]="disabled() || core().hpMax === null"
+      /></mat-form-field>
       <mat-form-field appearance="outline"
         ><mat-label>Speed</mat-label
         ><input
@@ -394,9 +411,9 @@
   </section>
   <section class="panel">
     <h2>Abilities</h2>
-    @if (rules().hasHeat?.(core())) {
-      <h3>Heat: {{ heat() }} / {{ rules().heatCapacity?.(core().level) ?? 'unlimited' }}</h3>
-      <p>{{ rules().heatHelp }}</p>
+    @if (resource(); as resource) {
+      <h3>{{ resource.name }}: {{ heat() }} / {{ resource.maximum(core()) ?? 'unlimited' }}</h3>
+      <p>{{ resource.help }}</p>
       <mat-form-field
         ><mat-label>Base gain or cost</mat-label
         ><input
@@ -409,11 +426,16 @@
           [disabled]="disabled()"
       /></mat-form-field>
       <div class="actions">
-        <button mat-button (click)="changeHeat(1)" [disabled]="disabled()">Gain Heat</button
-        ><button mat-button (click)="changeHeat(-1)" [disabled]="disabled()">Spend Heat</button
-        ><button mat-button (click)="patch({ heat: 0 })" [disabled]="disabled()">
-          Long rest: reset Heat
+        <button mat-button (click)="changeHeat(1)" [disabled]="disabled()">
+          Gain {{ resource.name }}</button
+        ><button mat-button (click)="changeHeat(-1)" [disabled]="disabled()">
+          Spend {{ resource.name }}
         </button>
+        @if (resource.resetsOnLongRest) {
+          <button mat-button (click)="resetResource()" [disabled]="disabled()">
+            Long rest: reset {{ resource.name }}
+          </button>
+        }
       </div>
     }
     <p>Record spells, talents, perks, or other features.</p>

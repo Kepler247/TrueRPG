@@ -1,5 +1,5 @@
 import { RulesetService } from '../core/characters/character-ruleset';
-import { currentHeat, validateSystemCore } from '../core/systems/system-rules';
+import { validateSystemCore } from '../core/systems/system-rules';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,6 +25,7 @@ import {
   CharacterCore,
   createCore,
   createEntryId,
+  currentHitPoints,
   InventoryEntry,
   inventoryWeight,
   SaveTraining,
@@ -76,13 +77,16 @@ export class CharacterEditPage {
   readonly initiative = computed(() => this.rules().initiative(this.core(), this.rules()));
   readonly capacity = computed(() => this.rules().carryCapacity(this.core()));
   readonly weight = computed(() => inventoryWeight(this.core()));
+  readonly currentHp = computed(() => currentHitPoints(this.core()));
   readonly disabled = computed(() => !this.record()?.canEdit || this.saving());
   readonly leveling = signal(false);
+  readonly pendingLevelUp = signal(false);
   readonly hpGain = signal(0);
   readonly newFeature = signal('');
   readonly allocation = signal<Partial<Record<StatKey, number>>>({});
   readonly hpDieResult = signal(0);
-  readonly heat = computed(() => currentHeat(this.core()));
+  readonly resource = computed(() => this.rules().classResource?.(this.core()) ?? null);
+  readonly heat = computed(() => this.resource()?.current(this.core()) ?? 0);
   readonly heatAmount = signal(1);
   readonly points = computed(
     () => this.rules().statPoints?.(this.core(), this.core().level + 1) ?? 0,
@@ -95,23 +99,26 @@ export class CharacterEditPage {
     this.allocation.update((a) => ({ ...a, [stat]: value }));
   }
   changeHeat(direction: number): void {
+    const resource = this.resource();
+    if (!resource || this.disabled()) return;
     const amount = this.heatAmount();
     if (!Number.isSafeInteger(amount) || amount < 0) {
-      this.error.set('Enter a nonnegative whole-number Heat amount.');
+      this.error.set(`Enter a nonnegative whole-number ${resource.name} amount.`);
       return;
     }
     const value =
-      this.heat() +
-      direction *
-        amount *
-        (direction > 0 ? (this.rules().heatGainMultiplier?.(this.core().level) ?? 1) : 1);
+      this.heat() + direction * amount * (direction > 0 ? resource.gainMultiplier(this.core()) : 1);
     if (value < 0) {
-      this.error.set('Not enough Heat.');
+      this.error.set(`Not enough ${resource.name}.`);
       return;
     }
-    const cap = this.rules().heatCapacity?.(this.core().level) ?? Infinity;
-    this.patch({ heat: Math.min(cap, value) });
+    const cap = resource.maximum(this.core()) ?? Infinity;
+    this.patch(resource.setCurrent(this.core(), Math.min(cap, value)));
     this.error.set(null);
+  }
+  resetResource(): void {
+    const resource = this.resource();
+    if (resource) this.patch(resource.setCurrent(this.core(), 0));
   }
   fixedHp(): void {
     const die = this.hitDie();
@@ -143,6 +150,7 @@ export class CharacterEditPage {
     this.message.set(null);
     this.dirty.set(false);
     this.leveling.set(false);
+    this.pendingLevelUp.set(false);
     try {
       const record = await this.service.load(this.id());
       if (version !== this.loadVersion) return;
@@ -245,16 +253,27 @@ export class CharacterEditPage {
     this.patch({ abilities: this.core().abilities.filter((ability) => ability.id !== id) });
   }
   beginLevelUp(): void {
-    if (this.disabled() || this.core().level >= (this.rules().maxLevel ?? 20)) return;
+    if (
+      this.disabled() ||
+      this.pendingLevelUp() ||
+      this.core().level >= (this.rules().maxLevel ?? 20)
+    )
+      return;
     this.hpGain.set(0);
     this.newFeature.set('');
     this.allocation.set({});
     this.fixedHp();
     this.leveling.set(true);
   }
-  applyLevelUp(): void {
+  async applyLevelUp(): Promise<void> {
     const core = this.core();
-    if (this.disabled() || !this.leveling() || core.level >= (this.rules().maxLevel ?? 20)) return;
+    if (
+      this.disabled() ||
+      this.pendingLevelUp() ||
+      !this.leveling() ||
+      core.level >= (this.rules().maxLevel ?? 20)
+    )
+      return;
     const feat = this.newFeature().trim();
     let featInstead = false;
     try {
@@ -323,9 +342,11 @@ export class CharacterEditPage {
     };
     next = this.rules().advance?.(next) ?? next;
     this.patch(next);
+    this.pendingLevelUp.set(true);
     this.leveling.set(false);
     this.error.set(null);
-    this.message.set('Level-up applied to your draft. Save the sheet to keep it.');
+    await this.save();
+    if (!this.dirty() && !this.error()) this.message.set('Level-up saved.');
   }
   async save(): Promise<void> {
     const record = this.record();
@@ -342,6 +363,7 @@ export class CharacterEditPage {
       this.name.set(saved.row.name);
       this.core.set(structuredClone(saved.core));
       this.dirty.set(false);
+      this.pendingLevelUp.set(false);
       this.message.set('Character saved.');
     } catch (error) {
       if (version === this.loadVersion)

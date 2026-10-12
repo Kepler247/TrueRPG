@@ -32,7 +32,7 @@ Adapters can replace the skill catalog (using resolveSkills to add/remove/overri
 
 ## Level-up foundation
 
-Level up opens a draft workflow: review the next level's prompts, allocate stat points when required, record feat choices, and choose a fixed or rolled hit die when defined. Applying it increments level and maximum HP, includes retroactive Constitution adjustments, and adds unlocked class references. Proficiency and trained saves/skills recalculate immediately. Save sheet persists the draft. The adapter's maximum level disables advancement.
+Level up opens a choice workflow: review the next level's prompts, allocate stat points when required, record feat choices, and choose a fixed or rolled hit die when defined. Applying it increments level and maximum HP, includes retroactive Constitution adjustments, adds unlocked class references, and saves immediately, including other sheet edits. Proficiency and trained saves/skills recalculate immediately. Failed requests preserve the pending level-up for Save sheet retry and block further advancement until it saves. The adapter's maximum level disables advancement.
 
 Undefined classes retain manual HP increases and generic prompts. Detailed subclass and spell decisions still use the reference and editable ability fields. Directly changing Constitution or Level outside the dedicated level-up workflow does not automatically rewrite manually entered HP.
 
@@ -50,4 +50,8 @@ Automated tests use real embedded PostgreSQL for RLS/constraints and mock the ho
 
 ## Character summary and editing
 
-The default character URL (/characters/:id) is a read-only summary with compact stats, skills, inventory, abilities, and details. Edit character opens /characters/:id/edit. All field changes and campaign carrying-rule controls live on that dedicated edit page. Level up links to the edit page with the level-up workflow open. Unsaved-edit warnings apply when leaving the edit page.
+The default character URL (/characters/:id) shows compact stats, skills, inventory, abilities, and details, plus quick current-HP and Heat controls for authorized editors. These save immediately through the same optimistic-concurrency service. Current HP uses optional `core.hpCurrent` (0 through maximum HP); legacy records without it display their maximum. Tracked current HP is preserved during level-up. Other authorized party members see resource values and can use local dice rolls but cannot save changes.
+
+Tap modifiers, saves, skill totals, initiative, or proficiency to roll the adapter's check die (d20 by default) plus the displayed value. The result shows the die, modifier, and total; it does not mutate the character or infer success/failure. Entry and dice randomness use LAN-compatible `crypto.getRandomValues`.
+
+Edit character opens /characters/:id/edit for general sheet changes and campaign carrying rules. Unsaved-edit warnings still protect failed level-ups and other draft edits when leaving that page.

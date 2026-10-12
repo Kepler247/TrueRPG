@@ -82,7 +82,7 @@ describe('Feature navigation', () => {
     await harness.fixture.whenStable();
     harness.detectChanges();
     expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Courier');
-    expect(harness.routeNativeElement?.querySelector('input')).toBeNull();
+    expect(harness.routeNativeElement?.querySelector('textarea')).toBeNull();
   });
   it('opens the character creator instead of treating new as a character ID', async () => {
     const harness = await RouterTestingHarness.create('/characters/new');

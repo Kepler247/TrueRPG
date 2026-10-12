@@ -63,6 +63,7 @@ export const coreSchema = z
   .object({
     level: z.number().int().min(1).max(20),
     hpMax: z.number().int().min(1).nullable(),
+    hpCurrent: z.number().int().nonnegative().optional(),
     speed: z
       .object({
         distance: z.number().nonnegative(),
@@ -90,6 +91,9 @@ export const coreSchema = z
   })
   .passthrough();
 export type CharacterCore = z.infer<typeof coreSchema>;
+export function currentHitPoints(core: CharacterCore): number | null {
+  return core.hpCurrent ?? core.hpMax;
+}
 export type InventoryEntry = z.infer<typeof inventorySchema>;
 export type CharacterAbility = z.infer<typeof abilitySchema>;
 export type SkillTraining = z.infer<typeof skill>;

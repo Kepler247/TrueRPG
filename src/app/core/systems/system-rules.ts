@@ -1,4 +1,4 @@
-import type { CharacterRuleset } from '../characters/character-ruleset';
+import type { CharacterRuleset, ClassResourceDefinition } from '../characters/character-ruleset';
 import { CharacterCore, StatKey, STATS, BASE_SKILLS } from '../characters/character-core';
 import progressions from './5e-class-progressions.json';
 
@@ -81,6 +81,16 @@ export function currentHeat(core: CharacterCore): number {
   const heat = core['heat'];
   return typeof heat === 'number' && Number.isSafeInteger(heat) && heat >= 0 ? heat : 0;
 }
+const HEAT_RESOURCE: ClassResourceDefinition = {
+  id: 'heat',
+  name: 'Heat',
+  current: currentHeat,
+  setCurrent: (core, value) => ({ ...core, heat: value }),
+  maximum: (core) => heatCapacity(core.level),
+  gainMultiplier: (core) => heatMultiplier(core.level),
+  help: 'Gain 1 base Heat per successful Charisma or Dexterity check/save, pistol hit, or grenade hit (each hit stacks); gain 2 per pistol/grenade kill. Gains double at level 7 and triple at level 12. The GM may award extra Heat.',
+  resetsOnLongRest: true,
+};
 function addFeatures(
   core: CharacterCore,
   features: readonly (readonly [number, string, string])[],
@@ -113,6 +123,7 @@ export function make501Rules(base: CharacterRuleset): CharacterRuleset {
   return {
     ...base,
     maxLevel: 12,
+    classResource: (core) => (core.class === 'Gunslinger' ? HEAT_RESOURCE : null),
     maxScore: undefined,
     improvementMax: null,
     skills: BASE_SKILLS.map((skill) =>
@@ -324,6 +335,15 @@ export function makePlain5eRules(base: CharacterRuleset): CharacterRuleset {
   };
 }
 export function validateSystemCore(core: CharacterCore, rules: CharacterRuleset): void {
+  const resource = rules.classResource?.(core);
+  if (resource) {
+    const current = resource.current(core);
+    const maximum = resource.maximum(core);
+    if (!Number.isSafeInteger(current) || current < 0 || (maximum !== null && current > maximum))
+      throw new Error(`${resource.name} must be a nonnegative whole number within its maximum.`);
+  }
+  if (core.hpCurrent !== undefined && (core.hpMax === null || core.hpCurrent > core.hpMax))
+    throw new Error('Current HP must be between 0 and maximum HP.');
   if (core.level > (rules.maxLevel ?? 20))
     throw new Error(`This system has a maximum level of ${rules.maxLevel ?? 20}.`);
   if (rules.maxScore !== undefined && STATS.some((stat) => core.scores[stat.key] > rules.maxScore!))
