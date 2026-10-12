@@ -10,7 +10,7 @@ Click a character name in the Characters list. Its owner, campaign GM, and super
 
 The sheet includes level, maximum HP, movement distance/unit/basis, description, height and body weight, base scores, save training/adjustments, skill training/adjustments, initiative adjustment, size, carrying capacity override, inventory with quantity and unit weight, and general abilities.
 
-Inventory weight and body weight are in pounds; body weight is not automatically included in carried inventory. Height is in inches. Movement defaults to 30 feet per turn, and can explicitly use meters or per-action movement. Maximum HP remains unset until entered according to the actual class/system; it is not guessed from a fictional class.
+Inventory weight and body weight are in pounds; body weight is not automatically included in carried inventory. Height is in inches. Movement defaults to 30 feet per turn, and can explicitly use meters or per-action movement. Defined class adapters initialize maximum HP; characters without a defined class keep it unset until entered.
 
 Abilities have a name, kind, description, optional maximum uses, and optional spell level (0-9). A kind of spell shows the spell-level field; other kinds can represent perks, talents, or features. This is an ability-record framework, not yet a spellbook with slots, automatic recovery, or class progression.
 
@@ -20,21 +20,21 @@ A GM or super-admin can toggle carrying-capacity enforcement for the entire camp
 
 New character now collects name, description, optional height and weight, system, optional campaign, and interactive point-buy scores. Scores start at 8, top out at 15 during point buy, and use a 27-point budget with nonlinear costs at 14 and 15. A standard-array shortcut assigns 15/14/13/12/10/8; players can adjust that allocation. Unspent points are allowed for draft characters and are visible before creation. Overspending is blocked.
 
-Race and class selectors appear only when the selected ruleset supplies catalogs. Wasteland currently has neither catalog configured; these fields remain null until its document defines applicable choices. Selecting a new system clears old race/class selections. This avoids assuming fantasy races/classes for the first postnuclear system.
+Race and class selectors appear only when the selected ruleset supplies catalogs. 501 Rads supplies Gunslinger and no race catalog yet. Plain 5E supplies the SRD races and twelve classes. Selecting a new system clears old race/class selections. Racial boosts apply after point buy at creation; class HP and saving proficiencies follow the selected adapter.
 
 ## Ruleset boundary
 
-src/app/core/characters/character-ruleset.ts defines CharacterRuleset, BASE_5E_RULES, extendRuleset, and the registry used by creator and sheet. A system's database ruleset_key selects its adapter; both base5e and wasteland currently use the common baseline.
+src/app/core/characters/character-ruleset.ts defines CharacterRuleset, BASE_5E_RULES, extendRuleset, and the registry used by creator and sheet. A system's database ruleset_key selects its adapter. Both 501 Rads and plain 5E extend the common baseline; the legacy wasteland key resolves to the 501 Rads adapter.
 
 Adapters can replace the skill catalog (using resolveSkills to add/remove/override definitions), replace calculation functions, supply race/class catalogs, and supply level-specific prompts. Default saving throws, skill bonuses, and initiative use the active ruleset's modifier/proficiency functions, so changing those inputs propagates consistently. Saved skill training remains intact when a skill is omitted from a catalog.
 
-Actual Wasteland mechanics, validation exceptions beyond the current level 1-20 and score 1-30 baseline, automatic class/race effects, point-buy overrides, item definitions, and class-specific progression will be connected after its rules document is supplied. Rule adapters are currently code-defined, not editable through the Systems page. Lore, item-catalog, theme, and image-upload work remain future features.
+501 Rads overrides the maximum level to 12 and allows scores above 30. Plain 5E retains levels 1-20 and the usual score range. The shared schema permits system-specific higher scores; the selected adapter validates its actual limits on save. Rule adapters are code-defined. Complete searchable documents and themed 501 Rads lore are available in system hubs; dedicated structured item catalogs and image uploads remain future work. See [system implementation](SYSTEMS.md).
 
 ## Level-up foundation
 
-Level up opens a draft workflow: review the next level's prompts, provide the HP increase including Constitution, and optionally record a new feature. Applying it increments level and maximum HP; proficiency and trained saves/skills recalculate immediately. Save sheet persists the draft. Level 20 disables advancement under the base rules.
+Level up opens a draft workflow: review the next level's prompts, allocate stat points when required, record feat choices, and choose a fixed or rolled hit die when defined. Applying it increments level and maximum HP, includes retroactive Constitution adjustments, and adds unlocked class references. Proficiency and trained saves/skills recalculate immediately. Save sheet persists the draft. The adapter's maximum level disables advancement.
 
-The default prompts are generic reviews, not a substitute for class progression. Race/class catalogs and exact level-specific choice/effect rules are needed before we can automatically prompt all subclass, feat, ability-score, spell, or system-specific decisions. HP remains a user-entered increase until hit dice/progression are defined. Directly changing Constitution or Level does not automatically rewrite manually entered HP.
+Undefined classes retain manual HP increases and generic prompts. Detailed subclass and spell decisions still use the reference and editable ability fields. Directly changing Constitution or Level outside the dedicated level-up workflow does not automatically rewrite manually entered HP.
 
 ## Verification and phone checks
 

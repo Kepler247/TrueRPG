@@ -113,6 +113,29 @@
               </mat-select></mat-form-field
             >
           }
+          @if (form.controls.race.value === 'Half-Elf') {
+            <p>Choose two different abilities to receive +1, in addition to +2 Charisma.</p>
+            <mat-form-field
+              ><mat-label>First racial +1</mat-label
+              ><mat-select formControlName="raceBoostOne">
+                @for (stat of raceStats; track stat.key) {
+                  <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+            <mat-form-field
+              ><mat-label>Second racial +1</mat-label
+              ><mat-select formControlName="raceBoostTwo">
+                @for (stat of raceStats; track stat.key) {
+                  <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+          }
+          <p>
+            Point buy sets base scores. The selected race applies its bonuses when you create the
+            character. Review class skill, equipment, and feature choices in the system reference.
+          </p>
           <app-point-buy
             [scores]="pointBuyScores()"
             (scoresChange)="pointBuyScores.set($event)"

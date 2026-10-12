@@ -34,7 +34,7 @@ export const BASE_SKILLS: readonly SkillDefinition[] = [
   { id: 'stealth', name: 'Stealth', stat: 'dex' },
   { id: 'survival', name: 'Survival', stat: 'wis' },
 ];
-const score = z.number().int().min(1).max(30);
+const score = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
 const adjustment = z.number().int();
 const save = z.object({ proficient: z.boolean(), bonus: adjustment }).passthrough();
 const skill = z

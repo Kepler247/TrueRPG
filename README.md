@@ -1,6 +1,6 @@
 # RPG Companion
 
-Angular SPA for managing characters and shared campaigns. Includes responsive navigation, Supabase email/password authentication, and a bootstrap systems catalog. Database migrations and permission tests are included; character/campaign editing UI and game mechanics are not implemented yet.
+Angular SPA for managing characters and shared campaigns. Includes Supabase authentication, usernames, campaign and character creation, read-only character summaries, dedicated sheet editing, point buy, level-up workflows, and searchable system references for 501 Rads and plain 5E (2014).
 
 ## Local development
 
@@ -46,13 +46,13 @@ Supabase's default email sender may restrict delivery to authorized addresses; c
 
 Systems are a shared catalog, independent of users. Each campaign and character has a systemId; characters keep that system even outside a campaign. Users can play across multiple systems. Characters assigned to a campaign must use its system, enforced by database constraints in the foundation migration.
 
-The initial catalog entry is Wasteland (working title), our Fallout-inspired postnuclear system. No mechanics are defined yet. rulesetKey and themeKey reserve independent selectors for future rules engines and themes; they do not currently switch styling or calculate stats. Character data has its own version, leaving ownership and membership consistent across systems.
+The initial Wasteland entry is now named 501 Rads, with its original system ID preserved. Plain 5E (2014) is a separate selectable system and remains the default calculation foundation for other adapters. See [system references and implementation details](SYSTEMS.md) for imported documents, supported mechanics, and revision handling.
 
 ## Next milestones
 
-1. Deploy/verify database migrations, then profile setup and real campaign/character creation.
-2. Define the first system's character data and mechanics.
-3. Character editing, campaign workflows, system selection and themes.
+1. Expand 501 Rads as the author supplies feats, classes, items, and revised rules.
+2. Add richer system-specific choices and resources.
+3. Campaign membership workflows and image uploads.
 4. Cloudflare Pages deployment.
 
 Production output: dist/rpg-companion/browser. No deployment has been configured.
@@ -64,11 +64,11 @@ The Supabase project is connected to Kepler247/TrueRPG with production deploymen
 
 ## Profile setup
 
-Open Account after signing in to choose a unique username and optional display name. Usernames are saved in lowercase and used for ownership labels in upcoming campaign/character screens. The Super master badge is read from the database, not editable profile metadata. Profile save/load failures have retry messages; no migration is needed for this screen.
+Open Account after signing in to choose a unique username and optional display name. Usernames are saved in lowercase and used for ownership labels throughout campaign/character screens. The Super master badge is read from the database, not editable profile metadata. Profile save/load failures have retry messages.
 
 ## Campaign and character creation
 
-Campaigns and Characters now load saved records from Supabase. Use New campaign to choose a name, system, and optional description; you become its GM automatically. Use New character to choose a name and system, optionally selecting a matching campaign where you are a member. Records show username ownership labels, and refresh restores saved lists. Character sheets and membership-management UI are the next feature; new character data starts empty rather than assuming rules.
+Campaigns and Characters load saved records from Supabase. Use New campaign to choose a name, system, and optional description; you become its GM automatically. Use New character to choose a name and system, optionally selecting a matching campaign where you are a member. Records show username ownership labels, and refresh restores saved lists. New characters start with a versioned sheet initialized by their selected ruleset.
 
 If campaign creation fails immediately after updating, check that migration 20261012070000_campaign_owner_visibility.sql deployed. It fixes owner visibility during INSERT RETURNING before automatic membership is added.
 

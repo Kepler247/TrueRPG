@@ -17,7 +17,7 @@
     @if (record.canEdit) {
       <div class="actions">
         <a mat-flat-button [routerLink]="['/characters', record.row.id, 'edit']">Edit character</a>
-        @if (record.core.level < 20) {
+        @if (record.core.level < (rules().maxLevel ?? 20)) {
           <a
             mat-stroked-button
             [routerLink]="['/characters', record.row.id, 'edit']"
@@ -140,6 +140,15 @@
   </section>
   <section class="panel" aria-labelledby="abilities-title">
     <h2 id="abilities-title">Abilities</h2>
+    @if (rules().hasHeat?.(record.core)) {
+      <p>
+        <strong
+          >Heat {{ heat() }} /
+          {{ rules().heatCapacity?.(record.core.level) ?? 'unlimited' }}</strong
+        >
+        &middot; Manage Heat on the edit page.
+      </p>
+    }
     <ul class="entry-list">
       @for (ability of record.core.abilities; track ability.id) {
         <li>

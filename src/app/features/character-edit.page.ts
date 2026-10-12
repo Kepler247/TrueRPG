@@ -1,4 +1,5 @@
 import { RulesetService } from '../core/characters/character-ruleset';
+import { currentHeat, validateSystemCore } from '../core/systems/system-rules';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -79,6 +80,53 @@ export class CharacterEditPage {
   readonly leveling = signal(false);
   readonly hpGain = signal(0);
   readonly newFeature = signal('');
+  readonly allocation = signal<Partial<Record<StatKey, number>>>({});
+  readonly hpDieResult = signal(0);
+  readonly heat = computed(() => currentHeat(this.core()));
+  readonly heatAmount = signal(1);
+  readonly points = computed(
+    () => this.rules().statPoints?.(this.core(), this.core().level + 1) ?? 0,
+  );
+  readonly allocated = computed(() =>
+    Object.values(this.allocation()).reduce((sum, n) => sum + (n ?? 0), 0),
+  );
+  readonly hitDie = computed(() => this.rules().hitDie?.(this.core()) ?? null);
+  allocate(stat: StatKey, value: number): void {
+    this.allocation.update((a) => ({ ...a, [stat]: value }));
+  }
+  changeHeat(direction: number): void {
+    const amount = this.heatAmount();
+    if (!Number.isSafeInteger(amount) || amount < 0) {
+      this.error.set('Enter a nonnegative whole-number Heat amount.');
+      return;
+    }
+    const value =
+      this.heat() +
+      direction *
+        amount *
+        (direction > 0 ? (this.rules().heatGainMultiplier?.(this.core().level) ?? 1) : 1);
+    if (value < 0) {
+      this.error.set('Not enough Heat.');
+      return;
+    }
+    const cap = this.rules().heatCapacity?.(this.core().level) ?? Infinity;
+    this.patch({ heat: Math.min(cap, value) });
+    this.error.set(null);
+  }
+  fixedHp(): void {
+    const die = this.hitDie();
+    if (die) this.hpDieResult.set(die / 2 + 1);
+  }
+  rollHp(): void {
+    const die = this.hitDie();
+    if (!die) return;
+    const bytes = new Uint32Array(1);
+    const limit = Math.floor(0x100000000 / die) * die;
+    do {
+      crypto.getRandomValues(bytes);
+    } while (bytes[0] >= limit);
+    this.hpDieResult.set((bytes[0] % die) + 1);
+  }
 
   constructor() {
     effect(() => {
@@ -197,14 +245,58 @@ export class CharacterEditPage {
     this.patch({ abilities: this.core().abilities.filter((ability) => ability.id !== id) });
   }
   beginLevelUp(): void {
-    if (this.disabled() || this.core().level >= 20) return;
+    if (this.disabled() || this.core().level >= (this.rules().maxLevel ?? 20)) return;
     this.hpGain.set(0);
     this.newFeature.set('');
+    this.allocation.set({});
+    this.fixedHp();
     this.leveling.set(true);
   }
   applyLevelUp(): void {
     const core = this.core();
-    if (this.disabled() || !this.leveling() || core.level >= 20) return;
+    if (this.disabled() || !this.leveling() || core.level >= (this.rules().maxLevel ?? 20)) return;
+    const feat = this.newFeature().trim();
+    let featInstead = false;
+    try {
+      featInstead = this.points() > 0 && (this.rules().featReplacesPoints?.(core, feat) ?? false);
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Invalid feat choice.');
+      return;
+    }
+    if (this.rules().featRequired?.(core.level + 1) && !feat) {
+      this.error.set('Record your shared feat choice for this level.');
+      return;
+    }
+    if (
+      this.allocated() !== (featInstead ? 0 : this.points()) ||
+      Object.values(this.allocation()).some((n) => !Number.isInteger(n) || n! < 0 || n! > 2)
+    ) {
+      this.error.set(`Allocate exactly ${featInstead ? 0 : this.points()} ability-score points.`);
+      return;
+    }
+    const scores = { ...core.scores };
+    for (const stat of STATS) {
+      const gain = this.allocation()[stat.key] ?? 0;
+      const cap = this.rules().improvementMax;
+      if (cap != null && gain && scores[stat.key] + gain > cap) {
+        this.error.set(`Ability-score improvements cannot raise a score above ${cap}.`);
+        return;
+      }
+      scores[stat.key] += gain;
+    }
+    const die = this.hitDie();
+    if (
+      die &&
+      (!Number.isInteger(this.hpDieResult()) || this.hpDieResult() < 1 || this.hpDieResult() > die)
+    ) {
+      this.error.set(`Enter a d${die} result from 1 to ${die}.`);
+      return;
+    }
+    const conDelta = this.modifier(scores.con) - this.modifier(core.scores.con);
+    const hpIncrease = die
+      ? Math.max(1, this.hpDieResult() + this.modifier(scores.con)) +
+        (this.rules().hpPerLevelBonus?.(core) ?? 0)
+      : this.hpGain();
     if (core.hpMax === null || !Number.isInteger(this.hpGain()) || this.hpGain() < 0) {
       this.error.set('Set maximum HP first, then enter a nonnegative whole-number HP increase.');
       return;
@@ -222,7 +314,15 @@ export class CharacterEditPage {
           },
         ]
       : core.abilities;
-    this.patch({ level: core.level + 1, hpMax: core.hpMax + this.hpGain(), abilities });
+    let next: CharacterCore = {
+      ...core,
+      level: core.level + 1,
+      scores,
+      hpMax: core.hpMax + hpIncrease + conDelta * core.level,
+      abilities,
+    };
+    next = this.rules().advance?.(next) ?? next;
+    this.patch(next);
     this.leveling.set(false);
     this.error.set(null);
     this.message.set('Level-up applied to your draft. Save the sheet to keep it.');
@@ -235,6 +335,7 @@ export class CharacterEditPage {
     this.message.set(null);
     const version = this.loadVersion;
     try {
+      validateSystemCore(this.core(), this.rules());
       const saved = await this.service.save(record, this.name(), this.core());
       if (version !== this.loadVersion) return;
       this.record.set(saved);

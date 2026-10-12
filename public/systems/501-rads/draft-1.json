@@ -1,0 +1,1428 @@
+{
+  "title": "501 Rads",
+  "subtitle": "The radioman’s guide to the wasteland",
+  "revision": "draft-1",
+  "sourceFile": "501-rads-draft-1.pdf",
+  "sha256": "9d0152bcac92000127289c7e4e68913b503692c53dcea8cf8ce401e70816a48a",
+  "pageCount": 69,
+  "pages": [
+    {
+      "number": 1,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "501 RADS"
+        },
+        {
+          "kind": "paragraph",
+          "text": "or, the radioman’s guide to the wasteland"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Introduction:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Hello new wastelander! Welcome to the most comprehensive guide to surviving and thriving in the nuclear wasteland that has become of earth! My name is Wacky Jack, and I am the author of this guide! I hope the information within will lead you to many safe adventures. Without further ado, let us break down the past, present, and future of this fine world!"
+        },
+        {
+          "kind": "heading",
+          "text": "The history of our fine earth:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The irradiated hellscape you see around you today is the result of some very poor choices made by our forebearers. In order to understand the current situation of the wasteland, we must first understand its origin! The best place to start must surely be the year of our lord 1945, when “Little Boy” and “Fat Man” took the lives"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "of 200,000 people. Since then, generals and politicians alike just could not quit sending nuclear bombs to places they don’t belong! Not long after, in the year 1968 another unfortunate nuclear incident occurred in Vietnam. Not long after what would be known as the “My Lai Massacre”, where American soldiers massacred a Vietnamese village, a Vietnamese spy and former victim of MK Ultra would smuggle a nuclear weapon into Saigon and end the Vietnam War early. This nuclear detonation broke a 23 year span of nuclear peace, a peace which sadly would never be found again. America immediately blamed the Soviet Union for the detonation, leading to the then most tense moment of the Cold War. Though the world did not end that day, many agree that the destruction of Saigon set off a chain of events that would lead to the world you see today."
+        },
+        {
+          "kind": "paragraph",
+          "text": "That would not be all that happened. Not long after in 1972 the terrorist faction Black September would take Israeli hostages at the"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Munich Olympics, leading to multiple deaths and an increase in hostilities in the middle east. Shortly after, an Israeli spy was arrested in Cairo, seemingly with the intention to assassinate the leader of Egypt, Anwar Sadat. With this crucial arrest, there were no hopes of de-escalating the tensions in the middle east. Tensions in the region would grow, and by 1978 a war would break out, with western powers fighting to defend Israel against its Arab neighbors. The Soviet Union saw an opportunity to weaken western morale and hegemony, and funded and supplied Arab nations in their assault, leading to a sustained war in the late 70’s and 80’s known as the First Sinai War. Some eastern Arab states would eventually join the Soviet Union, including Afghanistan and much later, Iran. The first Sinai War only ended in 1986 when the Chernobyl Disaster greatly weakened the Soviet Union. Despite the best efforts of the USSR, a great amount of radiation entered the groundwater and later the Pripyat River, which eventually feeds into the Dnieper. This led to a"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Europe spanning health crisis where an estimated 20 Million died, from both Soviet Bloc and Western Nations. It was at this time that the Soviet Union committed extensive resources to developing secret weapons and treatment in the Chernobyl zone, making attempts to both immunize their people against the dangers of radiation, and to use it more effectively as a weapon against their enemies. The great crisis that killed so many would come to be known as the “Green Death”. This event would lead to considerable rises in European Anti-Soviet sentiment, leading to a Ukrainian politician assassinating Gorbachev during a press meeting. Though many were glad to hear of the death of the Soviet leader, his replacement was far worse. Boris Lyapunov took office in 1987 and would lead the USSR for many years. Lyapunov sought to relight nationalist pride in the USSR and strengthen its morale, and so Lyapunov arranged the third and final nuclear exchange of the pre-apocalyptic globe. Via propaganda and targeted assassinations, the KGB raised tensions"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "in the Middle East once again, inciting a nuclear exchange between India and Pakistan, as well as an Iranian nuclear bombing of Tel Aviv. While this surely seemed to be the beginning of the end, Lyapunov did not wish to end the world, he merely wished to distract the globe while his nation regained its power. The United States did not strike first, and so neither did the USSR. The death toll from the exchange in southern Asia was immense, and the ensuing Indo-Pakistan War would all but wipe out both sides. Meanwhile, the Second Sinai War began, with a retaliatory invasion of Egypt, Iraq, and Iran by NATO forces. While many suspected it, it was not yet confirmed that the USSR was behind the bombing, so all effort was focused on seizing Tehran and any more nuclear weapons held there."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Meanwhile, the USSR regained its strength, and though some estimates said it may fall by 1991, the nation reached a new peak, both in technological prowess and nationalistic pride. Lyapunov’s investment paid off, and he was able"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "to sell weapons to the Iranians who had become more wealthy under Soviet control, earning needed money for the mainland and draining the already weakened west of its resources. By 1994 Tehran was taken, but this was of no concern to the USSR. They had successfully recovered from the 1986 Chernobyl disaster and reached a new peak of prowess. Around this time the Chinese were coming to power as well, seeking to rival their neighbor Russia as a great Communist state. Despite their shared ideology, the two nations held some hatred for one another. China began to brutally conquer and annex much of Asia during the Indo-Pakistan war, as its only major regional competitor, India, was decimated by the conflict. First, China annexed the Koreas, and despite their pleas, American intervention in the Koreas never came. Japan followed soon after, and though they put up a fight, overwhelming Chinese numbers overcame the island nation. Not long after, the Chinese swept through the rest of Asia and controlled everything from Jakarta to Beijing. India and"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Pakistan would continue to fight to the last man, and when the dust had settled China would claim what little shred of civilization was left there."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The year is now 1995, and The USSR and CCP have reached new heights of global dominance as the west reels from war. The United States, feeling the pressure placed upon them by the eastern nations, begins to expand in turn. The USA would first annex Mexico, who willingly became part of the USA. The USA began a rapid and brutal criminal cleansing of Mexico, oftentimes resulting in huge collateral losses, rapidly losing the trust of the Mexican people. Shortly after, in 1996, the USA would invade Canada, and in three months would force the nation to be subject to American rule. In September of that year the Quebec Massacre saw the deaths of 130 protestors after an experimental crowd control weapon, one of the early Laser weapons, caused much more harm than intended. The USA was now struggling to maintain its control over the two"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "nations it had recently taken over, and the globe had reached levels of tension never seen before. Around this time, western Europe saw a second catastrophe when the Civaux Nuclear Power Plant had a massive failure, resulting in what many called a “Second Chernobyl”. Civaux was positioned near much of France’s fertile farmland, and so a great famine accompanied the disaster, leading to even more death in western Europe. With the West occupied, USA struggling for control, and the East expanding, the final steps towards destruction would commence. In 2001, Saudi Arabian terrorists would fly planes into the World Trade Center, claiming revenge for the destruction wrought during the Sinai Wars, namely the accidental bombing of a refugee camp. For the third time in a century, American troops were sent to the middle east to find and destroy the terrorists, but this time with no help from any other nation. This campaign was a disaster, only increasing the divide between eastern and western power. Around this time, the American government was hurting badly for money,"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "and a number of enterprising businesses fought for government contracts. The government became increasingly reliant on its new corporate backbone, and by 2008 was beginning to lose any hope of recovering. Three major corporations would rise to become household names. DynamoCo, Rothberg, and Nutrocorp. DynamoCo capitalized on new breakthroughs in Nuclear and Laser technology to become the forefront of energy and technology, and their lack of government regulation led to their products being both very fast to develop and rarely safe. Rothberg emerged at the top of the financial food chain, and would rapidly become the holder of almost all wealth in the nation, working closely with the other two corporate giants to maintain domination. Nutrocorp seized all the food and water production of the nation and became the arbiters of nutrition, pumping out inexpensive and unhealthy food en masse. These three corporations would steer the nation through the trying times of the 21st century."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "In 2011, Canadian terrorists bombed the Statue of Liberty, leading to an even more oppressive regime being installed in Canada, attempting to beat the rebellion out of them. All the while the Eastern Nations now thrived, seeming more and more undefeatable. This unbridled progress in the east was riding on top of a terrible truth: the world was running out of oil. Part of how the east and west alike were able to grow despite the turmoil of the world was oil, and it was starting to run dry. Russia would begin to feel the scarcity first, as oil fields across the USSR began to run dry. Not long after, the USA’s oil, supplied partly by its involvement in the middle east and by the Gulf of Mexico, also began to run dry. Following suit, China too began to see its oil start to vanish. For those high ups in the world it was clear to see that something would break soon. The world had survived three nuclear engagements, but only barely. What would happen once the lifeblood of the world stopped flowing? Nations raced to develop alternative solutions, but the more they"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "tried, the more oil seemed like the solution. If only each nation could have all the world’s oil to themselves..."
+        },
+        {
+          "kind": "paragraph",
+          "text": "In 2017 a breakthrough in nuclear power would come in a Chinese lab, when scientists developed a stable, self contained, small sized nuclear energy cell, capable of powering a neighborhood for a year. Spies from the other two nations were rampant in China, as was the case for every nation in the world, and so shortly thereafter the USA and USSR would develop their own prototypes. The miracle technology seemed like it would save the world, but before long the world governments also realized its use in warfare. With these, armies could wage large scale war, but potentially avoid a nuclear exchange. If this didn’t solve the oil crisis directly, then perhaps it could instead solve it indirectly. All three nations developed weapons of war, rather than using the technology to solve the energy problems. In the USSR, the nationalist rhetoric was that war was"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "inevitable, and that the USSR must be strong and ready. In China, the sentiment was much the same. The Chinese were furious that their breakthrough, their chance at an upper hand was stolen, and so they built weapons of their own. The USA, steered by DynamoCo's violent ambitions, developed weapons too, and the final nail in the coffin was hammered in. In 2021, World War Three officially began. China and the USSR immediately began fighting on their shared border, the new laser weaponry being used to terrifying effect. In 2022, a small, localized nuclear weapon was developed and deployed onto battlefields, acting as a bridge between conventional and nuclear explosives. China invaded Alaska not long after the start of the war, as Alaska was the sole remaining source of American Oil. Meanwhile in Europe the last bastions of western power fell as the USSR fought to take the whole continent."
+        },
+        {
+          "kind": "paragraph",
+          "text": "In 2025, all hell broke loose. The USA realized that they had fallen behind. During the late 90s"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "and 2000s, they had finally failed to keep pace with the east. The Rothberg banks were beginning to run low on money, and the nation had to ration electricity in order to save what little energy they had left. In China, an internal Capitalist rebellion against the harsh rule of the CCP led to governmental instability, and in the USSR the assasination of Boris Lyapunov caused a collapse of the power structure. To this day it is unknown who launched the first strike, but on Christmas Eve, 2026, the world underwent a full nuclear exchange. Moscow, Beijing, and DC were decimated, just like every other site of importance anywhere on earth. And just like that, the world as we knew it ended. Today, Christmas is not much of a holiday, and everyone refers to that day as “Christmas Eve”."
+        },
+        {
+          "kind": "heading",
+          "text": "The USA, Today!"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fuck all that gloomy bullshit though! The one good thing that came of all this is true"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "American freedom, like the founding fathers intended! You don’t care about any of that boring history, you care about right here and right now! So, let's talk about the fine folks and weird radioactive quirks that shape our world today!"
+        },
+        {
+          "kind": "heading",
+          "text": "The Radiomen"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Considering you are reading this fine guide then I suppose you have heard of my guild, the Radiomen. We are a collection of sensible folk who communicate over a network of nationwide radio antennae, which is partly how I have amassed so much knowledge! Radiomen across the wasteland are committed to bringing some common sense to the world, by any means possible. We radiomen like to broadcast any news we can, giving reports on local events, playing music, or chatting with other radiomen. Unlike many other factions, we are a rather loose knit bunch, but fiercely loyal nonetheless. If you are"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "ever in danger, find a radio and maybe there will be a radioman on the other end to help you out! We radiomen have developed a number of secret communication tricks to stay in the know with one another. Most importantly, we always sign off with “Over” or “Over and Out.” While it may seem corny, it helps us know when we are talking to a true radioman, or some devilish imposter. Additionally, we use the word “indubitably” to indicate that whatever we are about to say is the opposite of the truth, and some other neat tricks I’ll have to teach you sometime. I can’t put them all in here or my secrets are toast!"
+        },
+        {
+          "kind": "heading",
+          "text": "Raiders and their offshoots..."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The greatest scum in the wasteland are the raiders. These are the antithesis of the Radiomen. Raiders are a catchall term for the many disparate groups of roving murderers who"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "prey upon the good men and women of our fine nation. Raiders in general use brutality and scare tactics to bully people into submission, but are more often than not poorly organized, cowardly, and easy to avoid or scare off. This is not true of some of the larger and more organized raider bands, detailed below. The MP (military police) The MP are a large and well organized raider band consisting of many, you guessed it, former military personnel. While many American soldiers died in the events surrounding Christmas Eve, either directly in the war or in the aftermath, some remained. Some of the more violent and opportunistic veterans would form their own raider band, which they call the Military Police. Their own internal rhetoric preaches that the only way to bring order to the wasteland is through extreme violence, which the faction seems to revere as gospel. The faction is known for its pseudo-militaristic regime, with ‘ranks’ and a coherent power structure. The"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "MP is largely decentralized today, with no true leader or central leadership. Rather, individual chapters will have a General, who serves as a regional leader. Generally, chapters of the MP do not interact much, but when they do they have been known to cooperate. In regions with a large MP presence, the group has been known to enforce protection tax, tolls on well traveled roads, and carry out executions and other mob justice. They are also known to have underlying attachments to pre-war white supremacist racist groups, such as The Base. The modern MP hates mutants of all varieties, and more extreme chapters are known to execute anyone with visible mutation on sight."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Junkie Crews Another vile subsection of the greater raider issue is the Junkie Crews, a loose term for groups of raiders with a specific drive to fuel crippling addictions. The Nutrocorp regime of the late pre-war era had set up a"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "pharmacological empire based upon addicting civilians to drugs. Unlike some of the more obviously harmful drugs of the late 20th century, Nutrocorp took immense care to brand their products as healthy and useful, and also to ensure their products have few to no visible side effects. This insidious model of business left a generation addicted to drugs they didn’t even know they were addicted to. People in the post-war era have more or less figured out that these drugs are harmful, but for many it is too late. Junkie Crews will murder for their drugs, and with Nutrocorp no longer mass producing the drugs, they take to manufacturing their own. Nutrocorp is known to hire, enslave, or train people to cook and manufacture their drugs for them, and some particular organizations have even taken over and restored functionality to medical centers or pharma production centers. They do not do this out of the kindness of their heart, and have been known to play the same game as Nutrocorp, getting wastelanders addicted to their product. These operations have also been"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "known to operate side hustles, including farming human beings and even babies for organs."
+        },
+        {
+          "kind": "paragraph",
+          "text": "For more details on the many drugs fueling the wasteland, see the dedicated section for drugs."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Tech Cults Some raiders have attempted to gain supremacy in the form of technological advancement. Noble, no? Tech Cults take on two major forms, the religious and non-religious. The former consists of those who, to varying extents, lack understanding of their technology to a great enough extent to worship it. Many of these groups are headed by charismatic leaders who know full well that there is no god behind the machine, but spreading the idea to their supporters brings them immense power. Many of the cultists of this variety of tech cult were born post-war, and know no better about what they are seeing. The non-religious cults are no better, as they murder and pillage all the same,"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "technology serving as a stand in for true courage or power."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Tech Cults love military sites, as they often contain the cutting edge tech they seek. Tech cults have been known to train trusted members in surprisingly advanced tech skills, and some are incredible hackers."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Sea-Raiders There is a group of raiders on the east coast of America famous for their large Flotilla cities and their affinity for murdering and robbing people up and down the east coast. They are most prominent in the Northeast, and will use the waterways of the coast, as well as the ocean, to travel a large area of the nation, stealing from as many people as they can. They are rumored to have a capital city floating out in the ocean somewhere. They embrace traditional pirate stereotypes, and like to fancy themselves as post nuclear swashbucklers."
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Dosers The Dosers are without a doubt the most insane of the raider clans. The Dosers have literally become addicted to radiation. The majority of Dosers were regular raiders who survived encounters with extreme radiation and were exiled from their former community. These groups are full of the most horrifically mutated humans who still draw breath, and Dosers have developed a sort of Stockholm Syndrome, where many of them will regularly expose themselves to extreme rads to try to bring about benign mutation. Many of them die very shortly after becoming inducted into the group."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Dosers are also known to kidnap normal people, which they derogatorily refer to as “smoothskins” or “the unenlightened”, and force them to absorb high amounts of radiation. The dosers see this as an act of kindness, as they will either die and be freed from this world, or"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "ascend to a level of divine mutation. Dosers are to be avoided at all costs, for those who wish to stay sane (or alive)."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Caravaners/Nomads While most raider bands like to choose a small region to try to dominate, other packs operate like nomads, wandering around and pillaging regions in a quick strike before disappearing from the area. To the nomads, this has benefits, as they never stick around long enough to be hunted down."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Caravaners are a well organized nomad clan who are known to transport and traffic goods for anyone with money. They are as reliable as you pay them to be, and are known to reliably deliver for individuals who pay upfront and often. They are still brutal, but unlike many other factions, they at least provide a scrap of value to the rest of us. Caravaners are both respected, feared, and targeted for their cargo"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "carrying abilities. If you want to ambush and rob a group of Caravaners, you best not miss."
+        },
+        {
+          "kind": "heading",
+          "text": "Other militant groups"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In addition to the many raider groups, some less useless groups exist. While these groups are still violent and dangerous, some of them are respectable and don’t prey on innocents."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Patriots The patriots are the noble counterpart of the MP, and preach many of the same ideals, but with far less of the private executions. The patriots are also comprised of many ex-military types, but are generally less interested in domination and more interested in keeping everyone alive. While corruption within The Patriots is not unheard of, the group is largely respected by most and is known to defend major settlements in exchange for the respect and support of the"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "locals. Also unlike the MP, the Patriots are a centralized group, and are known to send reinforcements to areas that request assistance. Like their name suggests, the Patriots are headquartered in Massachusetts, and use Gillette Stadium, the home of the New England Patriots, as their base of operations. The Patriots frequently use Radiomen to transmit messages across our secure channels, which we do happily."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Domain of Iron (DOI) The DOI is a post-American military group with mixed reviews. The DOI is incredibly well equipped, and their blurry past raises many suspicions about their origin. The group seems to be headquartered at a series of Oil Rigs in the Gulf of Mexico, and operates a small fleet of naval vessels in those waters. They also control a large amount of land and air vehicles, which generally make up the bulk of their power and strategy. The DOI seem to be few in number, but still powerful via their equipment. They have"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "been known to exhibit supremacist ideals, using enigmatic and specific exams to determine a human’s “Use Factor”, a statistic that was popular under the Rothberg corporate template in the pre-war era to determine the inherent usefulness of a person. In the pre-war era, a high UF could earn you better positions in life, though many of the day claimed the statistic was largely made up and was fabricated by those at the top to maintain power. The DOI now uses this in their own modified way to divide people into three categories. The highest bracket is those who they see fit to join their ranks, which they will often recruit. Below that, is the average man, who is nothing special but still acceptable to them. These people are never permitted to join or serve in any capacity, but will be allowed to go about their day. The lowest bracket is the ‘nonhuman’, who are best fit for slavery or death. Because of this system, many hate the DOI (reasonably so), but they have been known to come to the aid of innocents on many occasions. Rumors have it that after defeating"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "some group (often raiders), the surviving enemy force is forced to take their exams, and any who score high enough are recruited anyways. If this is to be believed, then many DOI soldiers may well be former raiders."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The formation of the DOI is murky, and many have theorized that the DOI might predate the war, and were perhaps formed before the war to provide a sort of new power to the elites of the military and corporations to seize new power in the post-war era once the inevitability of nuclear war became apparent to the elite class. These theories would explain the large resource pool and seemingly serendipitous territory the DOI controls. Their loyalties are to themselves and themselves only, so try to stay out of their way."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The DOI is known to operate mostly in the American south."
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Cybernet A mysterious organization (which may or may not even be real) known as the Cybernet is said to operate nationwide. The group reportedly lives in underground labs, and kidnaps and replaces people with robotic replicas, and then spies on people through the robots."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Little is known about them, and any talk of them is in whispered rumors. If they are even real, they are very secretive."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Firewatch / Ski Patrol Firewatch, and its sister faction Ski Patrol both operate in the mountainous regions of the United States. Firewatch operates largely in Appalachia, and Ski Patrol largely in the Rocky Mountains. Since the devastation brought on by the war caused a nuclear winter, the whole world got a lot colder, including the mountains. As such, the Appalachians and Rockies are snow"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "covered year round. The environment in these places is very rough, and so few live there. Those who do have the benefit of being relatively safe from raiders, as the raiders cannot sustain anything there, but suffer from the general inhospitality of the region. Firewatch and Ski Patrol have no formal connection but operate very similarly. Both provide protection and organization to the communities of the mountainous regions. If you can survive and make it to these communities, and go there with good intentions, these mountain settlements can be a safe haven."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Cartel The cartel is a shady group that operates out of Southern Florida, specifically what remains of Miami. After the annexation of Mexico and the Caribbean, many Cubans and Mexicans moved to Miami and the already Hispanic influenced south of Florida. Post-war, this community coalesced into ‘The Cartel’ which is to some extent a"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "misnomer. The group does produce drugs, but unlike the cartels of the past is relatively nonviolent, and mostly produces useful drugs like radiation medication and similar."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Cartel owns lots of valuable property, and is fiercely territorial over it. While the Cartel Communities get along well with each other, they are hostile to outsiders for the most part. Voodoo Mafia The Voodoo Mafia is a gang somewhere between raiders and vigilantes. The group operates out of the Bayou country in and around Louisiana, and is known to hunt down Raiders and all the other crazy horseshit that goes down in the Bayou. They are also known to conduct crazy rituals involving human sacrifice and have been accused of just about anything reprehensible you can imagine. The group is famously hard to join or even find for that matter, as they value a sense of secrecy and surprise. They clearly are quite powerful, as their control over the Bayou"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "recently led to the major routes through the region becoming safe again, but no one fully understands how. More information about the Bayou can be found in its own section later."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Harlem Communities The Harlem Communities are groups of surviving New Yorkers who converted the gang culture of pre-war New York into a post-war community of tenuous stability. The community lives in the decimated ruins of the Big Apple, and maintains much of the culture it had before the war. There are gangs, such as the Bloods and Crips, who fight over everything, just like they used to. Only now, there is no law enforcement, and the city is in shambles. New York is a hell hole, and these folk are somehow the most civil people there. When they aren't actively in a turf war, these people are quite nice and tight knit within their own gangs."
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Monumentals In the ruins of Washington DC live a very strange and violent group of cultists called the Monumentals. Though few survive encounters with them, reports indicate that the Monumentals in some way ‘worship’ the Washington Monument, claiming that it is a source of great power and deserves great respect. Suspicions around why the Monumentals act the way they do are unclear. Some theorize that they are another example of a charismatic leader abusing a large group of people. Others believe in a pre-war conspiracy theory that says that a government project under MK-Ultra installed mind control tech inside the Washington Monument and other notable buildings or monuments around the country to experiment on the masses with. Neither idea sounds very realistic."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Monumentals are very well equipped, well organized, and seem to be universally enthralled by the Monument and its promises. Steer clear of"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "this faction at all costs, as they are typically hostile on sight."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Evolved In the final days of World War 3 the USSR developed a bio-weapon called Radiovirus Omicron, commonly called RVO. RVO is a highly modified version of the common cold produced by developing a virus that is very resistant to radiation, and then irradiating the virus. The virus then infects a host, and as well as causing normal cold symptoms, exposes the infected person’s DNA to the radioactive viral DNA. In most cases, this kills the victim, but in some rare cases the modified RNA of the virus, combined with the radioactivity, can lead to a rapid ‘evolution’ of the infected. Radioactive RNA and DNA from the virus replace the host’s, resulting in a strange twisting of the human form. Survivors of RVO are called ‘The Evolved’, as they have taken on some extreme changes to their biology as a result of the RVO. Further"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "examples of the common types of Evolved can be found in their own section later on. The evolved are often outcast from society, and develop a supremacist identity, thinking themselves a better, stronger version of humanity. They form insular communities where they kidnap humans to use as slaves, or as food."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Wireminds Wireminds are independent, autonomous, sometimes sentient helper robots that have since gone rogue due to radiation disrupting their central processing. They roam in packs, have a general hatred for their human overlords, take human slaves, and are very resistant to damage. In a few communities, Wireminds have learned to create new generations of robots using factories. In other places, they are unable to reproduce, and thus are insular and avoid conflict."
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Governmental Organizations"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Many regions have had governments or something similar attempt to resettle and revive communities across America. Below is a list of both successful and unsuccessful attempts at forming local governments. The Olympic Commonwealth In the pacific northwest, communities from Oregon and Washington have formed a strong and safe community, free from many of the issues of the rest of the country. The region is cold and wet, and isn’t completely free from raiders, but is generally well policed, and has recently begun collecting tax, holding elections, and started forging the path back to sane civilization. Seattle was leveled in the war, so Portland is the capital of the region. As far as we know,"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "there is no place on earth more civilized than The OC today."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The OC is experiencing some growing pains, however, and the bigger the communities get, the more effort will need to be put to maintain order. If there is any hope for America, it lies in the OC."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The State of Jefferson Literal days after the bombs fell, groups of right wing Californians from the north of California saw their opportunity to create the state they had long desired. Since the 1940s Californians had wanted to form a state in the north of California, which they would call Jefferson. They formed it, and it lasted a whole 3 years before internal struggle and external pressure collapsed the loose confederation of communities. That region is now home to a number of raiders, small redneck gangs, and all manner of horseshit."
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Los Angeles Republic In the former city of Los Angeles and the surrounding region of southern California and parts of Nevada lies the shattered and fragmented Los Angeles Republic. Founded in 2029, the LAR sought to establish a new civilization in the American southwest. By some standards, the LAR is the most successful settlement of all time, but cracks threaten to doom the republic."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The LAR has, much like the United States before it, adopted a two party system. The official titles of the two parties are unimportant, as everyone today knows them as the California Party and the Nevada Party. The California Party has long been the dominant party, but in recent years the Nevada Party has gained notoriety for its promises of a better LAR. The biggest fronts of debate between the parties are the issues of mutants, dealing with raiders, and tax. The"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "California Party has been criticized for its lack of strong policy, with many thinking that the Party is too relaxed on crime, too welcoming of dangerous peoples, and does not enforce enough law over its people. This has led to the Nevada Party forming a populist identity, promising the expulsion of mutants, and the cleansing of the territory of crime. Opponents of the Nevada Party warn that the authoritarian suggestions compromise the founding principles of the LAR and that if the Nevada Party comes to power the LAR will transition to an authoritarian police state. In any case, the LAR is struggling, as years of indecision and infighting have allowed opportunistic raider bands to reap and pillage the relatively rich land. Furthermore, allegations of corruption have been levied at LAR Prime Minister Jose Manchado, some even claiming he is being paid by raider gangs to turn a blind eye to their violence."
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The fate of the LAR hangs in the balance. With level heads and wise choices, the nation could become a great new civilization in the wasteland. With poor direction, it may be a forgotten footnote in the next few years."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The New South The New South isn’t actually a government, but rather a style of living common in the American south. The New South has adopted a very wild western ideology, where people are generally expected to take care of themselves. Southerners will generally be weary of outsiders or unusual folk, but are quick to come to the aid of other reputable southerners. The New South has no government or true laws, but communities have been known to put together and fund local private law enforcement, often referring to them as sheriffs or rangers. The job of a New South is dangerous and risky, but carries respect and honor. In some ways, the sheriffs are ‘lawful raiders’, as much of their livelihood relies on"
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "killing raiders and looting them. The only difference is that the sheriffs protect the innocent (or so they should)."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The largest of the New South communities have small governments or city councils that rarely actually do anything. Dallas, New Orleans, Atlanta, and Houston are the best examples, as they all have somewhat substantial communities that rely on the understated promise of violence if anyone breaks the perceived law."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Mountain Towns As previously detailed, the mountainous regions of the United States are home to a few major settlements that have chosen nature as their enemy instead of raiders. These towns often have city councils of elected leaders, a mayor, and a sheriff. The mountains of the United States are incredibly harsh; the nuclear war made the world’s climate far more extreme. The mountains experience harsh blizzards year round, as well"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "as the same dreaded radstorms the rest of the world faces. Due to the relatively low number of high priority targets in the mountains of America, few nuclear weapons detonated in the mountains. There are two notable exceptions to this, those being the Cheyenne Mountain complex in Colorado Springs, and the Langston Targeting Array near Summersville, West Virginia. These sites were both crucial in the American nuclear program, and received heavy amounts of nuclear bombardment. Other than these sites, the mountains are relatively low in radiation. There are still a number of highly dangerous mutant animals that live in the area, such as the exceptionally dangerous radbears of the rocky mountains, and the wendigo of the Appalachians. These communities are rugged survivalists who rely heavily on well maintained, climate controlled greenhouses. Most labor of the community is centered around ensuring that the farming equipment is not damaged, as growing crops in the harsh snow is impossible without the right tools."
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Toronto Raptors The Toronto Raptors have a long and storied history. Originally, they were a professional basketball (an old American sport akin to polehole) team. When America annexed Canada, they made an effort to destroy all Canadian icons or culture in an attempt to assimilate the Canadian identity into America, and this included the breakdown of their sports teams. Later, a group of Canadian terrorists would begin calling themselves the Raptors, both as an homage to their old sports team, and as a symbol of power and culture. This group would go on to bomb the Statue of Liberty, making a statement about the destruction of liberty in America. When the bombs fell, the organization shifted into a Canadian nationalist group, based out of both Toronto and Quebec. The group is staunchly anti-American, promotes the learning of French instead of English as a language, and is now the primary government in southern Canada. Little"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "more about them is known by us Radiomen, as they are insular and refuse to speak to Americans."
+        },
+        {
+          "kind": "heading",
+          "text": "Creatures, Criminals, and Commoners:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The below section is a detailed compendium of the myriad different people you might meet and enemies you may face!"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Humans Humans come in two varieties: good guy and bad guy. Here is a few examples of how to spot the difference:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rule 1: Good guys and bad guys alike carry weapons. Just because someone has a weapon, does not mean they are dangerous."
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Rule 2: Good guys rarely carry the trophies of dead victims on their person. If the person you are speaking to has human bones, teeth, skulls, etc. on their person, they are probably a bad guy."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rule 3: Bad guys are often addicted to drugs. Look for the tell tale signs, like yellowed teeth, skin, and eyes, as well as collapsed veins in the arms."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rule 4: Bad guys will frequently use hostages, slaves, and other forms of human suffering to their advantage. Look out for this!"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Rule 5: Trust your gut. Better that some random dies than you!"
+        },
+        {
+          "kind": "paragraph",
+          "text": "With these out of the way, we can talk about some common bad guy archetypes"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Raider Capitan Raider captains, as the name suggests, are the leaders of a group of raiders. More often than not they have some unique skill that elevates them to the position of captain, that skill most often being violence. Usually, killing the captain of a raider crew will temporarily scatter them, at least until a new captain makes himself known."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The MP Sergeant An MP sergeant, much like the raider captain, is a specialized MP raider who controls a ‘battalion’ of MP raiders. He is often a self-indulgent military cosplayer with delusions of grandeur and a god complex. They can often be seen barking orders at their soldiers."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Dealer Junkie crews will often have one or multiple ‘dealers’, leaders who control the supply and"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "flow of drugs in the community. In some junkie crews, the dealers are basically worshipped as gods for their ability to supply drugs. Junkie crews are very protective of their dealers, and dealers take extensive measures to keep their recipes and stashes secret so as to not be replaceable. Control over a dealer is control over a large amount of junkies. Some dealers avoid using the drugs they control, others don’t."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Tech Priest The Tech Cults of the wasteland are always led by their Tech Priest. The non-religious tech cults are typically led by the person with the most technical knowledge about technology, which often makes them very dangerous people to mess with. The more religious tech cults are more often led by the most charismatic member of the cult, as opposed to the smartest or strongest. In either case, the tech cult looks to them for direction."
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Mailman The Caravaners often have one or multiple organizers who are known by many as the mailman of that group. They are often not one of the deliverers, but rather are in charge of taking contracts from people and organizing the movement of goods. Mailmen are often hard to buy or bribe, but have on some occasions been known to double cross clients. They rarely tell anyone their real name, and often go by pseudonyms. Mailmen might live in the wasteland as a hermit, or might live in a settlement in secret. They are hard to track down, but can be valuable allies."
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Decoy A famous and favorite tactic among criminals and raiders is the trusty decoy. The decoy, sometimes a raider in disguise and other times a slave or hostage, is placed in a public location to beg for help or act injured. If any kind souls happen by, the decoy lures them into vulnerability and then the nearby raiders ambush"
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "the kind soul. Always be suspicious of “hurt” people who are completely alone in the middle of nowhere."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Creatures Creatures, unlike humans, have no rules. They are cruel survivalists. Since the bombs fell, almost all wildlife that didn’t evolve died off, so expect to see lots of freaks and other crazy stuff."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Danger Level 1 Below is a list of Danger Level 1 creatures documented in my database that might help you survive. This list doesn't contain every animal, just the useful or interesting ones. Feel free to radio me if you think anything needs to be added to the list!"
+        },
+        {
+          "kind": "bullet",
+          "text": "Rad Rabbits"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Cute, Fluffy, Non-hostile. Smell like burnt skin. Their organs can be used to brew anti-rad concoctions"
+        },
+        {
+          "kind": "bullet",
+          "text": "Green Salamanders"
+        },
+        {
+          "kind": "bullet",
+          "text": "Not to be confused with red salamanders, or the salamanders group of mercenaries"
+        },
+        {
+          "kind": "bullet",
+          "text": "Glow bright green in the presence of radiation"
+        },
+        {
+          "kind": "bullet",
+          "text": "Three Eye Possums"
+        },
+        {
+          "kind": "bullet",
+          "text": "Three eye possums have developed a third eye, and the ability to use all three eyes independently, like a chameleon"
+        },
+        {
+          "kind": "bullet",
+          "text": "Like to steal valuables and hoard them in dens. Finding a possum den can lead to treasure"
+        },
+        {
+          "kind": "bullet",
+          "text": "Hard to sneak up on or catch."
+        },
+        {
+          "kind": "bullet",
+          "text": "Skulldeer"
+        },
+        {
+          "kind": "bullet",
+          "text": "Skulldeer are a terrifying deer species who grow no skin. They look decayed and dead at all times, but due to having no skin have become very disease resistant."
+        },
+        {
+          "kind": "bullet",
+          "text": "Their liver can be used to make disease cures"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Ferrobeaver"
+        },
+        {
+          "kind": "bullet",
+          "text": "Ferrobeaver are a beaver species who developed iron teeth and bones as a result of a genetic mutation"
+        },
+        {
+          "kind": "bullet",
+          "text": "They gnaw on rubble and ruins to get iron to make dams. The dams made of iron are less effective at blocking streams."
+        },
+        {
+          "kind": "bullet",
+          "text": "Ferrobeavers make great pets, and can destroy robots effectively by chewing them apart."
+        },
+        {
+          "kind": "bullet",
+          "text": "Radcoon"
+        },
+        {
+          "kind": "bullet",
+          "text": "Not to be confused with the slur used by New Southerners for dosers."
+        },
+        {
+          "kind": "bullet",
+          "text": "Radcoons are irradiated raccoons, and the sworn rivals of three eyed possums. Radcoons can handle radioactive material without issue, and seem to heal wounds when in the presence of rads."
+        },
+        {
+          "kind": "bullet",
+          "text": "They can be followed to sources of radiation, or trained to steal radioactive materials."
+        },
+        {
+          "kind": "bullet",
+          "text": "Armordillo"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Armordillos are a modified species of armadillo which have developed hard calcium carbonate shells which are very heat and damage resistant"
+        },
+        {
+          "kind": "bullet",
+          "text": "If hunted, the shells can be made to make fireproof armor"
+        },
+        {
+          "kind": "bullet",
+          "text": "Radpie"
+        },
+        {
+          "kind": "bullet",
+          "text": "Radpie are a species of magpie which have developed near-perfect and very loud imitation skills. By playing sounds for them, you can train them to make the sound."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Danger Level 2 Here is a list of danger level 2 creatures. These are creatures which can pose a serious threat to humans, but which have known weaknesses."
+        },
+        {
+          "kind": "bullet",
+          "text": "Snake Coyotes"
+        },
+        {
+          "kind": "bullet",
+          "text": "Snake Coyotes are an evolved species of coyote which are also venomous and have long fangs. Their venom can be extracted"
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "to create antivenom, or a potent toxin for offensive uses."
+        },
+        {
+          "kind": "bullet",
+          "text": "Coyote Snakes"
+        },
+        {
+          "kind": "bullet",
+          "text": "Coyote Snakes are an evolved rattlesnake species which has learned to hunt in packs and has a sort of short range hivemind"
+        },
+        {
+          "kind": "bullet",
+          "text": "Have been known to combine into a single large team snake"
+        },
+        {
+          "kind": "bullet",
+          "text": "Murder Turkey"
+        },
+        {
+          "kind": "bullet",
+          "text": "The Murder Turkey is an evolved, aggressive turkey which attacks anything it sees unprovoked"
+        },
+        {
+          "kind": "bullet",
+          "text": "It has developed flight without needing to climb to a high place, and has learned to use its weight as a weapon"
+        },
+        {
+          "kind": "bullet",
+          "text": "Apparently it's still delicious. A delicacy even."
+        },
+        {
+          "kind": "bullet",
+          "text": "Tusker"
+        },
+        {
+          "kind": "bullet",
+          "text": "Tuskers are incredibly big wild hogs. Almost elephant size, they are a huge threat close up, but are incredibly slow"
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "due to their size. They often wade in pools or lakes to cool off."
+        },
+        {
+          "kind": "bullet",
+          "text": "Their hides sell for thousands"
+        },
+        {
+          "kind": "bullet",
+          "text": "Moosemen"
+        },
+        {
+          "kind": "bullet",
+          "text": "Moosemen are an evolved form of Moose that are now bipedal. Standing well over 10 feet tall, the moosemen do not appear to be fully intelligent, and thus should not be mistaken for humans"
+        },
+        {
+          "kind": "bullet",
+          "text": "Prefer night time for some reason"
+        },
+        {
+          "kind": "bullet",
+          "text": "Superspiders"
+        },
+        {
+          "kind": "bullet",
+          "text": "Superspiders, as the name implies, are large evolved spiders. Their webs make for great rope, but their bites make for fatal encounters."
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Danger Level 3 These creatures offer the greatest threat to human life in the wasteland, and travelers rarely survive to tell stories of them"
+        },
+        {
+          "kind": "bullet",
+          "text": "Bubblebear"
+        },
+        {
+          "kind": "bullet",
+          "text": "The bubble bear is an evolved grizzly bear that has large bubble shaped bumps on its back, which occasionally burst to release psychoactive compounds that can cause hallucinations"
+        },
+        {
+          "kind": "bullet",
+          "text": "The chemicals can be refined into brghhh, the wasteland’s rarest and most prized drug. Sells for thousands."
+        },
+        {
+          "kind": "bullet",
+          "text": "Spider Bear"
+        },
+        {
+          "kind": "bullet",
+          "text": "The spider bear is another bear species that evolved 4 extra limbs. Self explanatory. Does not produce webs."
+        },
+        {
+          "kind": "bullet",
+          "text": "Land Shark"
+        },
+        {
+          "kind": "bullet",
+          "text": "Sharks which have evolved the ability to walk and breathe out of water for short periods. Only dangerous near water. Very strong bite force."
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Soup can be made from their flesh."
+        },
+        {
+          "kind": "bullet",
+          "text": "Crocigator"
+        },
+        {
+          "kind": "bullet",
+          "text": "The Crocigator is a horrifying cross between an alligator and crocodile. It has two heads, one crocodile head and one alligator head. Do not get them mixed up, as the brain is in the alligator head and the crocodile head is full of its eggs, which sell for lots of money."
+        },
+        {
+          "kind": "bullet",
+          "text": "The best tip to tell which head is which is to wave raw salmon near it. Only the alligator head likes raw salmon. The crocodile head prefers halibut."
+        },
+        {
+          "kind": "bullet",
+          "text": "Mindwolf"
+        },
+        {
+          "kind": "bullet",
+          "text": "The mindwolf is a mutant wolf which has evolved a strong, mind disrupting magnetic field. Getting too close to a mindwolf causes hallucinations, vomiting, nausea, and sometimes temporary paralysis. The alpha is most dangerous. Danger Level 4 The following creatures are so remarkably dangerous they don’t seem real."
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "The Mothman (men?)"
+        },
+        {
+          "kind": "bullet",
+          "text": "In the rocky mountains, reports of a large moth with massive glowing eyes has been reported picking up and eating moosemen, humans, and sometimes inanimate valuables."
+        },
+        {
+          "kind": "bullet",
+          "text": "Likes to visit libraries? Need to fact check this..."
+        },
+        {
+          "kind": "bullet",
+          "text": "Unclear if there is only one, or multiple"
+        },
+        {
+          "kind": "bullet",
+          "text": "Intelligence and sentience unknown"
+        },
+        {
+          "kind": "bullet",
+          "text": "Nightcrawlers"
+        },
+        {
+          "kind": "bullet",
+          "text": "Nightcrawlers are large, frog-like creatures. They are entirely white, are only spotted at night, and are known to kill people by grabbing them with their long ass tongues."
+        },
+        {
+          "kind": "bullet",
+          "text": "They only have two legs, and no arms."
+        },
+        {
+          "kind": "bullet",
+          "text": "Chupacabra"
+        },
+        {
+          "kind": "bullet",
+          "text": "Unlike the chupacabra of myth, which is kinda small, the real life chupacabra is the size of an adult bear, but way faster and resembles something like a coyote"
+        },
+        {
+          "kind": "bullet",
+          "text": "Eats everything whole. No matter what."
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Wendigo"
+        },
+        {
+          "kind": "bullet",
+          "text": "Wendigo appear at a distance to be skulldeer, but they walk on two legs, and have incredibly long and slender limbs"
+        },
+        {
+          "kind": "bullet",
+          "text": "Reports indicate that rather than killing humans, they will kidnap them and force them to starve to death, even going out of their way to provide water to humans so that they don’t first die of thirst."
+        },
+        {
+          "kind": "bullet",
+          "text": "Demonstrated ability to cloak or otherwise go kinda invisible"
+        },
+        {
+          "kind": "bullet",
+          "text": "Flatwoods Monsters"
+        },
+        {
+          "kind": "bullet",
+          "text": "Flatwoods Monsters look like little aliens, and for all we know, they might be."
+        },
+        {
+          "kind": "bullet",
+          "text": "Incredibly rare, though reports indicate they may have a primitive language, and the ability to give humans suicidal ideations."
+        },
+        {
+          "kind": "bullet",
+          "text": "Not physically very dangerous, but they will try to convince you to kill yourself."
+        },
+        {
+          "kind": "bullet",
+          "text": "Thunderbirds"
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "bullet",
+          "text": "Thunderbirds appear to be massive evolved eagles with abilities similar to electric eels. They are capable of delivering electric shocks, and can even generate such a large charge that they can produce lightning between themselves and the ground"
+        },
+        {
+          "kind": "bullet",
+          "text": "Wooly Throatstabbers"
+        },
+        {
+          "kind": "bullet",
+          "text": "Wooly Throatstabbers are six limbed bipedal monsters which have two special limbs with no fingers, instead having long stabbing talons. They are precise with their stabbings, and have killed several travelers."
+        },
+        {
+          "kind": "heading",
+          "text": "Skills:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Skills are a measure of specific tasks characters are proficient in."
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Skill Ability Modifier"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Acrobatics Dexterity"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Animal Handling Wisdom"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Hacking Intelligence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Athletics Strength"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Deception Charisma"
+        },
+        {
+          "kind": "paragraph",
+          "text": "History Intelligence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Insight Wisdom"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Intimidation Charisma"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Investigation Intelligence"
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Medicine Wisdom"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Nature Intelligence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Perception Wisdom"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Performance Charisma"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Persuasion Charisma"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Religion Intelligence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sleight of Hand Dexterity"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Stealth Dexterity"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Survival Wisdom"
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Classes"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Basic Rules In addition to the written class rules for each class, all classes share a few things:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Every time a character levels up, they gain +1 to any two stats they choose (or +2 to one stat)."
+        },
+        {
+          "kind": "paragraph",
+          "text": "On levels 3, 6, 9 and 12, they gain a Feat"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 12 is the max level"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Gunslinger The gunslinger is the wild, gun toting cowboy of the American wasteland. Quick, both in body and wit, the gunslinger relies on distraction, positioning, and wild antics to survive in the wasteland. Gunslingers specialize in pistols and grenades, as well as in charm and smooth talking."
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Gunslingers are all about hot streaks. They always seem to get lucky, and their luck tends to last."
+        },
+        {
+          "kind": "paragraph",
+          "text": "It is recommended that gunslingers focus stat points into Dex and Cha."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Primary Class Feature: Gunslingers gain access to “heat” points. Gunslingers can earn heat points towards their hot streak, and spend those points to use powerful abilities."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Gunslingers earn a heat point for any of the following, though dungeon masters can award extra points at will: +1 For a successful Charisma check or save +1 For a successful Dexterity check or save +1 For landing a hit with a pistol weapon +1 For landing a hit with a grenade (stacks) +2 For killing an opponent with a pistol or grenade"
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "As the character levels up, they increase their maximum heat, as well as unlock new abilities with that heat. Heat resets after a long rest."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 1: Level 1 gunslingers gain access to the first two heat abilities, and at level 1 have a max heat of 3. Lucky strike; for -1 heat, the user can re-roll any check. They must take the new value."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Stroke of Genius; for -3 heat, the user can roll 3 dice instead of one for any check, and select which dice they wish. (It's like double advantage!)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In addition, gunslingers get +1 to checks and damage rolls done with pistols."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 2: At level 2, gunslingers unlock the following"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fan the Hammer; For -2 luck points, the gunslinger can fire several times in short"
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "succession. The gunslinger's next attack with a pistol has its damage multiplied by 3, but the gunslinger must announce before that attack that this ability is being used. You can still miss!"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 3: Max heat increases from 3 to 5, and the gunslinger unlocks the ability to wield two pistols at once. Both pistols may attack within the same action"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 4: At level 4, the gunslinger unlocks the following:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Distraction: for -2 heat, the gunslinger can choose any target that a teammate has already done damage to since the gunslingers previous turn. That teammate has “distracted” this opponent. For the remainder of this turn, any checks made to harm the target have advantage, and attacks made with pistols are guaranteed to hit. The same target cannot be distracted more than once."
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Pickpocket: for -2 heat, when outside or inside combat, the gunslinger can pickpocket any target. If the target is known to have something on their person, the gunslinger can grab it. Otherwise, they can grab something random from the target. The target rolls a D20 to detect the intrusion, and only is aware if they roll a perfect 20."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 5: at level 5, max heat increases to 7"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Deadeye: for -5 heat, the gunslinger chooses any non-boss target. On the gunslinger's next turn, if both the gunslinger and the target are still alive, and the gunslinger has line of sight to the target, the gunslinger fires a deadly shot. It always kills the target. To activate deadeye, you cannot take any other action, nor can you move. Being moved by any means interrupts the effect, and the heat is not refunded."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 6: At level 6, the gunslinger unlocks the following"
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Shrouded attack: if the gunslinger is not detected by enemies, they gain advantage on checks to harm them"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fantastic Story: for -4 heat, the gunslinger can cobble together a nonsensical story. Despite how crazy it sounds, a portion of it is true. The part of it that is true is at the DM’s discretion, but the effect is always helpful to the gunslinger. Gunslingers can tell fantastic stories to distract, persuade, or intimidate their enemies."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 7: at level 7, max heat increases to 9, and the amount of heat added doubles whenever heat would be added. (i.e. +2 for successful checks, etc)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "No one walks away: for -7 heat, the gunslinger pulls an excellent stunt. For any number of targets that the gunslinger can see, the"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "gunslinger fires twice at them. There is no limit to the number of targets."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 8: at level 8, the following effects are added"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Master Gambler: gunslingers have advantage on any check that involves the gambling of money or property"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Old friend: for -5 heat, the gambler happens upon an old friend. The friend is helpful, knowledgeable, and useful. They always have some favor they owe the gunslinger. The gunslinger has friends everywhere."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 9: At level 9, max heat becomes 11"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Bending Bullets: The gunslinger can now hit targets in cover/they cannot see by accidentally ricocheting shots into them. Attempts to hit in this way incur a -3 to hit penalty."
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Wild Plan: For -8 heat, the gunslinger can devise a wild plan. They alone have final say on that plan. As long as the steps of that plan are followed by the gunslinger and their teammates, any skill checks which follow the steps of the plan or advance the plan in some way have advantage."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 10: At level 10, the following abilities are gained"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Super Deadeye: for -11 heat, any target, including bosses, can be targeted. If a boss is targeted, the effect works the same as normal deadeye. If a non-boss target is chosen, the gunslinger does not have to wait a full turn, the target simply dies."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 11: At level 11, there is no longer a maximum heat value."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Unbelievable luck: For -10 heat, any non-plot item happens to be nearby. It might not be easy"
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "to get, but it will be there. It's almost like you wished it into existence"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Level 12: At level 12, the amount of heat added triples whenever heat would be added. (i.e. +3 for successful checks, etc)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Divine Intervention: for -15 heat the gunslinger can wish for just about anything and somehow it happens. The ultimate stroke of luck. Each time this ability is used, the probability that an unintended consequence occurs increases."
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../core/auth/auth.service';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
 import { RulesetService } from '../core/characters/character-ruleset';
+import { currentHeat } from '../core/systems/system-rules';
 import { inventoryWeight, STATS } from '../core/characters/character-core';
 
 @Component({
@@ -39,6 +40,7 @@ export class CharacterSummaryPage {
   readonly stats = STATS;
   readonly rules = computed(() => this.rulesets.get(this.record()?.rulesetKey));
   readonly skills = computed(() => this.rules().skills);
+  readonly heat = computed(() => (this.record() ? currentHeat(this.record()!.core) : 0));
   constructor() {
     effect(() => {
       this.id();

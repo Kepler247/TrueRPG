@@ -1,4 +1,5 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
+import { make501Rules, makePlain5eRules } from '../systems/system-rules';
 import {
   abilityModifier,
   BASE_SKILLS,
@@ -10,6 +11,22 @@ import {
 } from './character-core';
 
 export interface CharacterRuleset {
+  maxLevel?: number;
+  maxScore?: number;
+  initialize?: (core: CharacterCore) => CharacterCore;
+  advance?: (core: CharacterCore) => CharacterCore;
+  hitDie?: (core: CharacterCore) => number | null;
+  statPoints?: (core: CharacterCore, nextLevel: number) => number;
+  featRequired?: (nextLevel: number) => boolean;
+  heatCapacity?: (level: number) => number | null;
+  heatGainMultiplier?: (level: number) => number;
+  improvementMax?: number | null;
+  hpPerLevelBonus?: (core: CharacterCore) => number;
+  featReplacesPoints?: (core: CharacterCore, name: string) => boolean;
+  featHelp?: string;
+  heatHelp?: string;
+  hasHeat?: (core: CharacterCore) => boolean;
+  testFeatName?: string;
   skills: readonly SkillDefinition[];
   creator: { races: readonly string[]; classes: readonly string[] };
   abilityModifier: (score: number) => number;
@@ -22,6 +39,9 @@ export interface CharacterRuleset {
 }
 
 export const BASE_5E_RULES: CharacterRuleset = {
+  maxLevel: 20,
+  maxScore: 30,
+  improvementMax: 20,
   skills: BASE_SKILLS,
   // These catalogs are supplied by the actual system, rather than assuming fantasy classes/races.
   creator: { races: [], classes: [] },
@@ -58,7 +78,12 @@ export const CHARACTER_RULESETS = new InjectionToken<Readonly<Record<string, Cha
   'Character rulesets',
   {
     providedIn: 'root',
-    factory: () => ({ base5e: BASE_5E_RULES, wasteland: BASE_5E_RULES }),
+    factory: () => ({
+      base5e: BASE_5E_RULES,
+      wasteland: make501Rules(BASE_5E_RULES),
+      '501-rads': make501Rules(BASE_5E_RULES),
+      '5e-2014': makePlain5eRules(BASE_5E_RULES),
+    }),
   },
 );
 @Injectable({ providedIn: 'root' })

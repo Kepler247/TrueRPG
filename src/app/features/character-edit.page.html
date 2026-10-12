@@ -17,7 +17,7 @@
         mat-stroked-button
         type="button"
         (click)="beginLevelUp()"
-        [disabled]="disabled() || core().level >= 20"
+        [disabled]="disabled() || core().level >= (rules().maxLevel ?? 20)"
       >
         Level up
       </button>
@@ -31,22 +31,62 @@
   @if (leveling()) {
     <section class="panel">
       <h2>Advance to level {{ core().level + 1 }}</h2>
-      <p>
-        Review your system or class progression. HP and new features need your input until its
-        progression rules are configured.
-      </p>
+      @if (points()) {
+        <p>Allocate {{ points() }} ability-score points. Allocated: {{ allocated() }}.</p>
+        <div class="field-grid">
+          @for (stat of stats; track stat.key) {
+            <mat-form-field
+              ><mat-label>{{ stat.name }} increase</mat-label
+              ><input
+                matInput
+                type="number"
+                min="0"
+                max="2"
+                step="1"
+                [ngModel]="allocation()[stat.key] ?? 0"
+                (ngModelChange)="allocate(stat.key, $event)"
+            /></mat-form-field>
+          }
+        </div>
+        @if (rules().featHelp) {
+          <p>{{ rules().featHelp }}</p>
+        }
+      }
+      @if (hitDie(); as die) {
+        <p>
+          HP: d{{ die }} plus your new Constitution modifier (minimum 1), including any retroactive
+          Constitution adjustment.
+        </p>
+        <mat-form-field
+          ><mat-label>Hit die result</mat-label
+          ><input
+            matInput
+            type="number"
+            min="1"
+            [max]="die"
+            [ngModel]="hpDieResult()"
+            (ngModelChange)="hpDieResult.set($event)"
+        /></mat-form-field>
+        <button mat-button (click)="fixedHp()">Use fixed {{ die / 2 + 1 }}</button
+        ><button mat-button (click)="rollHp()">Roll d{{ die }}</button>
+      } @else {
+        <mat-form-field appearance="outline"
+          ><mat-label>HP increase (including Constitution)</mat-label
+          ><input
+            matInput
+            type="number"
+            min="0"
+            step="1"
+            [ngModel]="hpGain()"
+            (ngModelChange)="hpGain.set($event)"
+        /></mat-form-field>
+      }
       <mat-form-field appearance="outline"
-        ><mat-label>HP increase (including Constitution)</mat-label
-        ><input
-          matInput
-          type="number"
-          min="0"
-          step="1"
-          [ngModel]="hpGain()"
-          (ngModelChange)="hpGain.set($event)"
-      /></mat-form-field>
-      <mat-form-field appearance="outline"
-        ><mat-label>New feature name (optional)</mat-label
+        ><mat-label>{{
+          rules().featRequired?.(core().level + 1)
+            ? 'Shared feat choice (required)'
+            : 'New feature or feat name (optional)'
+        }}</mat-label
         ><input
           matInput
           [ngModel]="newFeature()"
@@ -54,6 +94,13 @@
           maxlength="150"
       /></mat-form-field>
       <ul>
+        @if (rules().testFeatName && rules().featRequired?.(core().level + 1)) {
+          <li>
+            <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
+              Use test feat (no mechanical effect)
+            </button>
+          </li>
+        }
         @for (prompt of rules().levelUpPrompts(core(), core().level + 1); track $index) {
           <li>{{ prompt }}</li>
         }
@@ -83,7 +130,7 @@
           matInput
           type="number"
           min="1"
-          max="20"
+          [max]="rules().maxLevel ?? 20"
           step="1"
           [ngModel]="core().level"
           (ngModelChange)="patch({ level: $event })"
@@ -176,7 +223,7 @@
               matInput
               type="number"
               min="1"
-              max="30"
+              [attr.max]="rules().maxScore ?? null"
               step="1"
               [ngModel]="core().scores[stat.key]"
               (ngModelChange)="score(stat.key, $event)"
@@ -347,6 +394,28 @@
   </section>
   <section class="panel">
     <h2>Abilities</h2>
+    @if (rules().hasHeat?.(core())) {
+      <h3>Heat: {{ heat() }} / {{ rules().heatCapacity?.(core().level) ?? 'unlimited' }}</h3>
+      <p>{{ rules().heatHelp }}</p>
+      <mat-form-field
+        ><mat-label>Base gain or cost</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          step="1"
+          [ngModel]="heatAmount()"
+          (ngModelChange)="heatAmount.set($event)"
+          [disabled]="disabled()"
+      /></mat-form-field>
+      <div class="actions">
+        <button mat-button (click)="changeHeat(1)" [disabled]="disabled()">Gain Heat</button
+        ><button mat-button (click)="changeHeat(-1)" [disabled]="disabled()">Spend Heat</button
+        ><button mat-button (click)="patch({ heat: 0 })" [disabled]="disabled()">
+          Long rest: reset Heat
+        </button>
+      </div>
+    }
     <p>Record spells, talents, perks, or other features.</p>
     @for (entry of core().abilities; track entry.id) {
       <div class="entry">

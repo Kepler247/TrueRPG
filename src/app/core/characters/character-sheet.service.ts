@@ -2,6 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { SUPABASE } from '../auth/supabase';
 import { AuthService } from '../auth/auth.service';
 import { CHARACTER_DATA_VERSION, CharacterCore, coreSchema, readCore } from './character-core';
+import { RulesetService } from './character-ruleset';
+import { validateSystemCore } from '../systems/system-rules';
 
 export interface SheetRow {
   id: string;
@@ -27,6 +29,7 @@ export interface SheetRecord {
 export class CharacterSheetService {
   private readonly client = inject(SUPABASE);
   private readonly auth = inject(AuthService);
+  private readonly rulesets = inject(RulesetService);
   async load(id: string): Promise<SheetRecord> {
     const { data: row, error } = await this.client
       .from('characters')
@@ -94,6 +97,7 @@ export class CharacterSheetService {
       );
     if (!name.trim() || name.trim().length > 150)
       throw new Error('Enter a character name of 1-150 characters.');
+    validateSystemCore(validated.data, this.rulesets.get(record.rulesetKey));
     const { data: row, error } = await this.client
       .from('characters')
       .update({

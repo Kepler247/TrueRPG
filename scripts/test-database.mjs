@@ -132,7 +132,12 @@ try {
     asUser(
       null,
       async () => {
-        assert.equal(await count('systems'), 2);
+        assert.equal(await count('systems'), 3);
+        const { rows } = await db.query('select name,ruleset_key from public.systems where id=$1', [
+          ids.wasteland,
+        ]);
+        assert.equal(rows[0].name, '501 Rads');
+        assert.equal(rows[0].ruleset_key, '501-rads');
         await denied(() => db.query('select * from public.characters'));
       },
       'anon',

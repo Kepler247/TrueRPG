@@ -1,6 +1,6 @@
 import { RulesetService } from '../core/characters/character-ruleset';
 import { PointBuy, startingScores } from './point-buy';
-import { createCore, pointBuyRemaining } from '../core/characters/character-core';
+import { createCore, pointBuyRemaining, STATS } from '../core/characters/character-core';
 import { RouterLink } from '@angular/router';
 import {
   ChangeDetectionStrategy,
@@ -47,6 +47,7 @@ const emptyContext = (): AdventureContext => ({
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdventureCollection {
+  readonly raceStats = STATS.filter((stat) => stat.key !== 'cha');
   readonly kind = input.required<CollectionKind>();
   readonly auth = inject(AuthService);
   private readonly adventures = inject(AdventureService);
@@ -78,6 +79,8 @@ export class AdventureCollection {
     description: new FormControl('', { nonNullable: true }),
     race: new FormControl('', { nonNullable: true }),
     class: new FormControl('', { nonNullable: true }),
+    raceBoostOne: new FormControl('str', { nonNullable: true }),
+    raceBoostTwo: new FormControl('dex', { nonNullable: true }),
     heightInches: new FormControl<number | null>(null, [Validators.min(0.1)]),
     bodyWeightPounds: new FormControl<number | null>(null, [Validators.min(0.1)]),
   });
@@ -199,7 +202,21 @@ export class AdventureCollection {
           name,
           systemId,
           campaignId || null,
-          {
+          this.rulesets
+            .get(this.context().systems.find((s) => s.id === systemId)?.ruleset_key)
+            .initialize?.({
+              ...createCore(),
+              scores: { ...this.pointBuyScores() },
+              description,
+              heightInches,
+              bodyWeightPounds,
+              race: race || null,
+              class: characterClass || null,
+              raceBoosts: [
+                this.form.controls.raceBoostOne.value,
+                this.form.controls.raceBoostTwo.value,
+              ],
+            }) ?? {
             ...createCore(),
             scores: { ...this.pointBuyScores() },
             description,

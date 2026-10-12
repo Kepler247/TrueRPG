@@ -3,6 +3,11 @@ import type { CharacterEditPage } from './features/character-edit.page';
 import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
+  {
+    path: 'systems/:slug',
+    title: 'System reference | RPG Companion',
+    loadComponent: () => import('./features/system-hub.page').then((m) => m.SystemHubPage),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'characters' },
   {
     path: 'auth',
