@@ -1,3 +1,7 @@
+import { RulesetService } from '../core/characters/character-ruleset';
+import { PointBuy, startingScores } from './point-buy';
+import { createCore, pointBuyRemaining } from '../core/characters/character-core';
+import { RouterLink } from '@angular/router';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30,6 +34,8 @@ const emptyContext = (): AdventureContext => ({
 @Component({
   selector: 'app-adventure-collection',
   imports: [
+    PointBuy,
+    RouterLink,
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -44,6 +50,7 @@ export class AdventureCollection {
   readonly kind = input.required<CollectionKind>();
   readonly auth = inject(AuthService);
   private readonly adventures = inject(AdventureService);
+  private readonly rulesets = inject(RulesetService);
   private readonly userId = computed(() => this.auth.user()?.id ?? null);
   private loadVersion = 0;
   readonly context = signal<AdventureContext>(emptyContext());
@@ -54,6 +61,13 @@ export class AdventureCollection {
   readonly error = signal<string | null>(null);
   readonly message = signal<string | null>(null);
   readonly selectedSystem = signal('');
+  readonly pointBuyScores = signal(startingScores());
+  readonly creatorOptions = computed(
+    () =>
+      this.rulesets.get(
+        this.context().systems.find((system) => system.id === this.selectedSystem())?.ruleset_key,
+      ).creator,
+  );
   readonly form = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
@@ -62,6 +76,10 @@ export class AdventureCollection {
     systemId: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     campaignId: new FormControl('', { nonNullable: true }),
     description: new FormControl('', { nonNullable: true }),
+    race: new FormControl('', { nonNullable: true }),
+    class: new FormControl('', { nonNullable: true }),
+    heightInches: new FormControl<number | null>(null, [Validators.min(0.1)]),
+    bodyWeightPounds: new FormControl<number | null>(null, [Validators.min(0.1)]),
   });
   readonly eligibleCampaigns = computed(() =>
     this.context().campaigns.filter(
@@ -106,6 +124,7 @@ export class AdventureCollection {
   }
   startCreate(): void {
     const systemId = this.context().systems[0]?.id ?? '';
+    this.pointBuyScores.set(startingScores());
     this.form.reset({ name: '', systemId, campaignId: '', description: '' });
     this.selectedSystem.set(systemId);
     this.error.set(null);
@@ -115,6 +134,8 @@ export class AdventureCollection {
   changeSystem(): void {
     this.selectedSystem.set(this.form.controls.systemId.value);
     this.form.controls.campaignId.setValue('');
+    this.form.controls.race.setValue('');
+    this.form.controls.class.setValue('');
   }
   cancelCreate(): void {
     if (this.saving()) return;
@@ -128,7 +149,16 @@ export class AdventureCollection {
       this.form.markAllAsTouched();
       return;
     }
-    const { name, systemId, campaignId, description } = this.form.getRawValue();
+    const {
+      name,
+      systemId,
+      campaignId,
+      description,
+      heightInches,
+      bodyWeightPounds,
+      race,
+      class: characterClass,
+    } = this.form.getRawValue();
     if (!this.context().systems.some((system) => system.id === systemId)) return;
     if (
       this.kind() === 'characters' &&
@@ -136,6 +166,18 @@ export class AdventureCollection {
       !this.eligibleCampaigns().some((campaign) => campaign.id === campaignId)
     ) {
       this.error.set('Choose a campaign you belong to using the same system.');
+      return;
+    }
+    if (this.kind() === 'characters' && pointBuyRemaining(this.pointBuyScores()) < 0) {
+      this.error.set('Use at most 27 points, with scores from 8 to 15.');
+      return;
+    }
+    if (
+      this.kind() === 'characters' &&
+      ((race && !this.creatorOptions().races.includes(race)) ||
+        (characterClass && !this.creatorOptions().classes.includes(characterClass)))
+    ) {
+      this.error.set('Choose race and class from the selected system.');
       return;
     }
     const userId = this.userId();
@@ -153,7 +195,20 @@ export class AdventureCollection {
         }));
         this.message.set('Campaign created. You are its GM.');
       } else {
-        const character = await this.adventures.createCharacter(name, systemId, campaignId || null);
+        const character = await this.adventures.createCharacter(
+          name,
+          systemId,
+          campaignId || null,
+          {
+            ...createCore(),
+            scores: { ...this.pointBuyScores() },
+            description,
+            heightInches,
+            bodyWeightPounds,
+            race: race || null,
+            class: characterClass || null,
+          },
+        );
         if (userId !== this.userId()) return;
         this.context.update((context) => ({
           ...context,

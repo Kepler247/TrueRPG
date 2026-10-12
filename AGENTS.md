@@ -41,3 +41,11 @@ Do not publish or create external resources unless requested.
 - Protect ownership and system columns; assignment uses set_character_campaign RPC.
 - Usernames belong in profiles, not Auth metadata; roles belong in private.super_admins.
 - Planned system hubs: lore, rules references, item catalogs. Planned uploads: profile and character images in Supabase Storage with ownership-aware policies.
+
+## Character rules
+
+- Shared data is versioned under characters.data.core; preserve unknown system data and do not overwrite invalid/newer payloads.
+- Use the active CharacterRuleset adapter for derived calculations; do not hardcode system exceptions in sheet components.
+- Base calculations follow SRD 5.1. Keep rules attribution available. HP, race/class effects, and detailed progression require system definitions.
+- Use optimistic concurrency for sheet saves and preserve unsaved edits on failed requests.
+- Entry IDs must work on LAN HTTP iPhone tests; avoid relying on secure-context-only crypto.randomUUID.

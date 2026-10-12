@@ -71,3 +71,7 @@ Open Account after signing in to choose a unique username and optional display n
 Campaigns and Characters now load saved records from Supabase. Use New campaign to choose a name, system, and optional description; you become its GM automatically. Use New character to choose a name and system, optionally selecting a matching campaign where you are a member. Records show username ownership labels, and refresh restores saved lists. Character sheets and membership-management UI are the next feature; new character data starts empty rather than assuming rules.
 
 If campaign creation fails immediately after updating, check that migration 20261012070000_campaign_owner_visibility.sql deployed. It fixes owner visibility during INSERT RETURNING before automatic membership is added.
+
+## Shared character sheets, creator, and leveling
+
+Click a character name to open its sheet. New character now includes physical details and 27-point ability-score purchase. Sheets include stats/saves, all 18 baseline skills, initiative, inventory, and general abilities. Owners, GMs, and super-admins can save sheets; party members get read-only views. Level up applies a reviewed draft with HP input and optional feature; save to persist. See [character foundation](CHARACTER_FOUNDATION.md) for rules defaults, extensibility, and the system-specific work still pending.

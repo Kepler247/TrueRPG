@@ -1,0 +1,60 @@
+.sheet-heading,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.panel {
+  margin-block: 1.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: #fffef9;
+  border: 1px solid #dddcd5;
+  border-radius: 1rem;
+}
+.field-grid,
+.stat-grid,
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+}
+.stat-card,
+.skill-card,
+.entry {
+  padding: 1rem;
+  border: 1px solid #dddcd5;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  min-width: 0;
+}
+.stat-card mat-form-field,
+.skill-card mat-form-field,
+.full-width {
+  width: 100%;
+}
+h1,
+h2,
+h3 {
+  overflow-wrap: anywhere;
+}
+input,
+textarea {
+  font-size: 16px !important;
+}
+button {
+  min-height: 44px;
+}
+.feedback {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #e6eee5;
+}
+.error {
+  color: #8b2620;
+  background: #fce9e5;
+}
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}

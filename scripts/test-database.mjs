@@ -316,6 +316,29 @@ try {
       );
       assert.equal(result.rows[0].campaign_id, ids.campaign);
     }));
+  await test('only GM/admin can change campaign carrying enforcement', async () => {
+    await asUser(ids.player, async () => {
+      const result = await db.query(
+        'update public.campaigns set enforce_carry_weight=false where id=$1 returning id',
+        [ids.campaign],
+      );
+      assert.equal(result.rows.length, 0);
+    });
+    await asUser(ids.gm, async () => {
+      const result = await db.query(
+        'update public.campaigns set enforce_carry_weight=false where id=$1 returning enforce_carry_weight',
+        [ids.campaign],
+      );
+      assert.equal(result.rows[0].enforce_carry_weight, false);
+    });
+    await asUser(ids.admin, async () => {
+      const result = await db.query(
+        'update public.campaigns set enforce_carry_weight=false where id=$1 returning id',
+        [ids.campaign],
+      );
+      assert.equal(result.rows.length, 1);
+    });
+  });
   await test('GM can add a member', () =>
     asUser(ids.gm, async () => {
       await db.query('insert into public.campaign_members(campaign_id,user_id) values ($1,$2)', [

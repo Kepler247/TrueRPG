@@ -1,3 +1,4 @@
+import { createCore, CHARACTER_DATA_VERSION } from '../characters/character-core';
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
@@ -51,6 +52,8 @@ describe('Adventure persistence', () => {
       owner_id: 'player-id',
       system_id: 'wasteland',
       campaign_id: null,
+      data: { core: createCore() },
+      data_version: CHARACTER_DATA_VERSION,
       name: 'Courier',
     });
   });

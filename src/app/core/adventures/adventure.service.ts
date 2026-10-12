@@ -1,3 +1,9 @@
+import {
+  CHARACTER_DATA_VERSION,
+  CharacterCore,
+  coreSchema,
+  createCore,
+} from '../characters/character-core';
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { SUPABASE } from '../auth/supabase';
@@ -5,6 +11,7 @@ import { Profile } from '../profiles/profile.service';
 
 export type CollectionKind = 'characters' | 'campaigns';
 export interface SystemRow {
+  ruleset_key?: string;
   id: string;
   name: string;
 }
@@ -43,7 +50,11 @@ export class AdventureService {
   async load(kind: CollectionKind): Promise<AdventureContext> {
     const userId = this.userId();
     const [systems, profiles, campaigns, memberships, characters] = await Promise.all([
-      this.client.from('systems').select('id,name').order('name').returns<SystemRow[]>(),
+      this.client
+        .from('systems')
+        .select('id,name,ruleset_key')
+        .order('name')
+        .returns<SystemRow[]>(),
       this.client.from('profiles').select('id,username,display_name').returns<Profile[]>(),
       this.client
         .from('campaigns')
@@ -94,6 +105,7 @@ export class AdventureService {
     name: string,
     systemId: string,
     campaignId: string | null,
+    core: CharacterCore = createCore(),
   ): Promise<CharacterRow> {
     const { data, error } = await this.client
       .from('characters')
@@ -101,6 +113,8 @@ export class AdventureService {
         owner_id: this.userId(),
         system_id: systemId,
         campaign_id: campaignId,
+        data: { core: coreSchema.parse(core) },
+        data_version: CHARACTER_DATA_VERSION,
         name: name.trim(),
       })
       .select('id,owner_id,system_id,campaign_id,name')

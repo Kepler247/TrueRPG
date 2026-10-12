@@ -1,3 +1,9 @@
+import {
+  BASE_5E_RULES,
+  CHARACTER_RULESETS,
+  extendRuleset,
+} from '../core/characters/character-ruleset';
+import { provideRouter } from '@angular/router';
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
@@ -50,6 +56,7 @@ describe('Adventure creation and lists', () => {
     TestBed.configureTestingModule({
       imports: [AdventureCollection],
       providers: [
+        provideRouter([]),
         { provide: AuthService, useValue: { user } },
         { provide: AdventureService, useValue: adventures },
       ],
@@ -88,10 +95,59 @@ describe('Adventure creation and lists', () => {
     page.form.controls.name.setValue('  Courier  ');
     await page.create();
     fixture.detectChanges();
-    expect(adventures.createCharacter).toHaveBeenCalledWith('Courier', 'wasteland', null);
+    expect(adventures.createCharacter).toHaveBeenCalledWith(
+      'Courier',
+      'wasteland',
+      null,
+      expect.objectContaining({ level: 1, inventory: [], abilities: [] }),
+    );
     expect(fixture.nativeElement.textContent).toContain('Courier');
     expect(fixture.nativeElement.textContent).toContain('No campaign');
     expect(page.creating()).toBe(false);
+  });
+  it('stores physical details and point-buy scores in the new sheet', async () => {
+    const fixture = await create();
+    const page = fixture.componentInstance;
+    page.startCreate();
+    page.pointBuyScores.set({ str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 });
+    page.form.patchValue({
+      name: 'Courier',
+      description: 'From the wastes',
+      heightInches: 72,
+      bodyWeightPounds: 180,
+    });
+    await page.create();
+    expect(adventures.createCharacter).toHaveBeenCalledWith(
+      'Courier',
+      'wasteland',
+      null,
+      expect.objectContaining({
+        description: 'From the wastes',
+        heightInches: 72,
+        bodyWeightPounds: 180,
+        scores: { str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 },
+      }),
+    );
+  });
+  it('shows and saves race/class choices only when the system supplies them', async () => {
+    TestBed.overrideProvider(CHARACTER_RULESETS, {
+      useValue: {
+        base5e: extendRuleset(BASE_5E_RULES, { creator: { races: ['Human'], classes: ['Scout'] } }),
+      },
+    });
+    const fixture = await create();
+    const page = fixture.componentInstance;
+    page.startCreate();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Race');
+    page.form.patchValue({ name: 'Courier', race: 'Human', class: 'Scout' });
+    await page.create();
+    expect(adventures.createCharacter).toHaveBeenCalledWith(
+      'Courier',
+      'wasteland',
+      null,
+      expect.objectContaining({ race: 'Human', class: 'Scout' }),
+    );
   });
   it('does not submit whitespace-only names', async () => {
     const fixture = await create();

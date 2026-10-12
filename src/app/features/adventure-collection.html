@@ -47,17 +47,16 @@
           </mat-select>
           <mat-error>Choose a system.</mat-error>
         </mat-form-field>
-        @if (kind() === 'campaigns') {
-          <mat-form-field appearance="outline">
-            <mat-label>Description (optional)</mat-label>
-            <textarea
-              matInput
-              formControlName="description"
-              rows="3"
-              [readonly]="saving()"
-            ></textarea>
-          </mat-form-field>
-        } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Description (optional)</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            rows="3"
+            [readonly]="saving()"
+          ></textarea>
+        </mat-form-field>
+        @if (kind() === 'characters') {
           <mat-form-field appearance="outline">
             <mat-label>Campaign (optional)</mat-label>
             <mat-select formControlName="campaignId" [disabled]="saving()">
@@ -68,6 +67,57 @@
             </mat-select>
             <mat-hint>Campaigns you belong to using the selected system.</mat-hint>
           </mat-form-field>
+        }
+        @if (kind() === 'characters') {
+          <div class="creator-details">
+            <mat-form-field appearance="outline"
+              ><mat-label>Height (inches, optional)</mat-label
+              ><input
+                matInput
+                type="number"
+                formControlName="heightInches"
+                [readonly]="saving()"
+                min="0.1"
+              /><mat-error>Enter a positive height.</mat-error></mat-form-field
+            >
+            <mat-form-field appearance="outline"
+              ><mat-label>Body weight (lb, optional)</mat-label
+              ><input
+                matInput
+                type="number"
+                formControlName="bodyWeightPounds"
+                [readonly]="saving()"
+                min="0.1"
+              /><mat-error>Enter a positive weight.</mat-error></mat-form-field
+            >
+          </div>
+          @if (creatorOptions().races.length) {
+            <mat-form-field appearance="outline"
+              ><mat-label>Race</mat-label
+              ><mat-select formControlName="race" [disabled]="saving()"
+                ><mat-option value="">Not selected</mat-option>
+                @for (race of creatorOptions().races; track race) {
+                  <mat-option [value]="race">{{ race }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+          }
+          @if (creatorOptions().classes.length) {
+            <mat-form-field appearance="outline"
+              ><mat-label>Class</mat-label
+              ><mat-select formControlName="class" [disabled]="saving()"
+                ><mat-option value="">Not selected</mat-option>
+                @for (class of creatorOptions().classes; track class) {
+                  <mat-option [value]="class">{{ class }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+          }
+          <app-point-buy
+            [scores]="pointBuyScores()"
+            (scoresChange)="pointBuyScores.set($event)"
+            [disabled]="saving()"
+          />
         }
         <div class="actions">
           <button mat-flat-button type="submit" [disabled]="saving()">
@@ -96,7 +146,13 @@
       @for (record of rows(); track record.id) {
         <article class="record-card">
           <p class="system-tag">{{ systemLabel(record.system_id) }}</p>
-          <h2>{{ record.name }}</h2>
+          <h2>
+            @if (kind() === 'characters') {
+              <a [routerLink]="['/characters', record.id]">{{ record.name }}</a>
+            } @else {
+              {{ record.name }}
+            }
+          </h2>
           <p>
             Owner: {{ ownerLabel(record.owner_id)
             }}{{ record.owner_id === auth.user()?.id ? ' (you)' : '' }}

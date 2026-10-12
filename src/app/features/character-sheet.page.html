@@ -1,0 +1,438 @@
+<a routerLink="/characters">Back to characters</a>
+@if (loading()) {
+  <h1>Character</h1>
+  <p role="status">Loading sheet...</p>
+} @else if (record(); as record) {
+  <p class="eyebrow">{{ record.systemName }} � {{ record.ownerLabel }}</p>
+  @if (core().race || core().class) {
+    <p>{{ core().race }}{{ core().race && core().class ? ' � ' : '' }}{{ core().class }}</p>
+  }
+  <div class="sheet-heading">
+    <h1>{{ record.row.name }}</h1>
+    @if (record.canEdit) {
+      <button mat-flat-button type="button" (click)="save()" [disabled]="saving() || !dirty()">
+        {{ saving() ? 'Saving...' : 'Save sheet' }}
+      </button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="beginLevelUp()"
+        [disabled]="disabled() || core().level >= 20"
+      >
+        Level up
+      </button>
+    } @else {
+      <p>Read-only party member sheet</p>
+    }
+  </div>
+  @if (dirty()) {
+    <p role="status">Unsaved changes</p>
+  }
+  @if (leveling()) {
+    <section class="panel">
+      <h2>Advance to level {{ core().level + 1 }}</h2>
+      <p>
+        Review your system or class progression. HP and new features need your input until its
+        progression rules are configured.
+      </p>
+      <mat-form-field appearance="outline"
+        ><mat-label>HP increase (including Constitution)</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          step="1"
+          [ngModel]="hpGain()"
+          (ngModelChange)="hpGain.set($event)"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>New feature name (optional)</mat-label
+        ><input
+          matInput
+          [ngModel]="newFeature()"
+          (ngModelChange)="newFeature.set($event)"
+          maxlength="150"
+      /></mat-form-field>
+      <ul>
+        @for (prompt of rules().levelUpPrompts(core(), core().level + 1); track $index) {
+          <li>{{ prompt }}</li>
+        }
+      </ul>
+      <p>Proficiency and trained skill/save bonuses recalculate from the new level.</p>
+      <div class="actions">
+        <button mat-flat-button (click)="applyLevelUp()">Apply to draft</button
+        ><button mat-button (click)="leveling.set(false)">Cancel</button>
+      </div>
+    </section>
+  }
+  <section class="panel">
+    <h2>Details</h2>
+    <div class="field-grid">
+      <mat-form-field appearance="outline"
+        ><mat-label>Name</mat-label
+        ><input
+          matInput
+          [ngModel]="name()"
+          (ngModelChange)="rename($event)"
+          maxlength="150"
+          [disabled]="disabled()"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Level</mat-label
+        ><input
+          matInput
+          type="number"
+          min="1"
+          max="20"
+          step="1"
+          [ngModel]="core().level"
+          (ngModelChange)="patch({ level: $event })"
+          [disabled]="disabled()"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Maximum HP</mat-label
+        ><input
+          matInput
+          type="number"
+          min="1"
+          step="1"
+          [ngModel]="core().hpMax"
+          (ngModelChange)="patch({ hpMax: $event })"
+          [disabled]="disabled()"
+        /><mat-hint>Set according to your class or system.</mat-hint></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Speed</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          [ngModel]="core().speed.distance"
+          (ngModelChange)="speed({ distance: $event })"
+          [disabled]="disabled()"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Speed unit</mat-label
+        ><mat-select
+          [value]="core().speed.unit"
+          (selectionChange)="speed({ unit: $event.value })"
+          [disabled]="disabled()"
+          ><mat-option value="ft">Feet</mat-option
+          ><mat-option value="m">Meters</mat-option></mat-select
+        ></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Movement basis</mat-label
+        ><mat-select
+          [value]="core().speed.per"
+          (selectionChange)="speed({ per: $event.value })"
+          [disabled]="disabled()"
+          ><mat-option value="turn">Per turn (5E default)</mat-option
+          ><mat-option value="action">Per action</mat-option></mat-select
+        ></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Height (inches, optional)</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          [ngModel]="core().heightInches"
+          (ngModelChange)="patch({ heightInches: $event })"
+          [disabled]="disabled()"
+      /></mat-form-field>
+      <mat-form-field appearance="outline"
+        ><mat-label>Body weight (lb, optional)</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          [ngModel]="core().bodyWeightPounds"
+          (ngModelChange)="patch({ bodyWeightPounds: $event })"
+          [disabled]="disabled()"
+      /></mat-form-field>
+    </div>
+    <mat-form-field appearance="outline" class="full-width"
+      ><mat-label>Description</mat-label
+      ><textarea
+        matInput
+        rows="4"
+        [ngModel]="core().description"
+        (ngModelChange)="patch({ description: $event })"
+        [disabled]="disabled()"
+      ></textarea>
+    </mat-form-field>
+  </section>
+  <section class="panel">
+    <h2>Stats and saving throws</h2>
+    <p>Proficiency bonus {{ signed(pb()) }}</p>
+    <div class="stat-grid">
+      @for (stat of stats; track stat.key) {
+        <div class="stat-card">
+          <h3>{{ stat.name }} � {{ signed(modifier(core().scores[stat.key])) }}</h3>
+          <mat-form-field appearance="outline"
+            ><mat-label>{{ stat.name }} score</mat-label
+            ><input
+              matInput
+              type="number"
+              min="1"
+              max="30"
+              step="1"
+              [ngModel]="core().scores[stat.key]"
+              (ngModelChange)="score(stat.key, $event)"
+              [disabled]="disabled()"
+          /></mat-form-field>
+          <mat-checkbox
+            [checked]="core().saves[stat.key].proficient"
+            (change)="saveTraining(stat.key, { proficient: $event.checked })"
+            [disabled]="disabled()"
+            >Save proficiency</mat-checkbox
+          >
+          <mat-form-field appearance="outline"
+            ><mat-label>{{ stat.name }} save adjustment</mat-label
+            ><input
+              matInput
+              type="number"
+              step="1"
+              [ngModel]="core().saves[stat.key].bonus"
+              (ngModelChange)="saveTraining(stat.key, { bonus: $event })"
+              [disabled]="disabled()"
+          /></mat-form-field>
+          <p>Saving throw {{ signed(saveBonus(stat.key)) }}</p>
+        </div>
+      }
+    </div>
+    <h3>Initiative {{ signed(initiative()) }}</h3>
+    <mat-form-field appearance="outline"
+      ><mat-label>Initiative adjustment</mat-label
+      ><input
+        matInput
+        type="number"
+        step="1"
+        [ngModel]="core().initiativeBonus"
+        (ngModelChange)="patch({ initiativeBonus: $event })"
+        [disabled]="disabled()"
+    /></mat-form-field>
+  </section>
+  <section class="panel">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+      @for (skill of skills(); track skill.id; let index = $index) {
+        <div class="skill-card">
+          <h3>
+            {{ skill.name }} � {{ skill.stat.toUpperCase() }} � {{ signed(skillTotal(index)) }}
+          </h3>
+          <mat-form-field appearance="outline"
+            ><mat-label>{{ skill.name }} training</mat-label
+            ><mat-select
+              [value]="core().skills[skill.id]?.proficiency || 'none'"
+              (selectionChange)="skillTraining(skill.id, { proficiency: $event.value })"
+              [disabled]="disabled()"
+              ><mat-option value="none">Untrained</mat-option
+              ><mat-option value="proficient">Proficient</mat-option
+              ><mat-option value="expertise">Expertise</mat-option></mat-select
+            ></mat-form-field
+          >
+          <mat-form-field appearance="outline"
+            ><mat-label>{{ skill.name }} adjustment</mat-label
+            ><input
+              matInput
+              type="number"
+              step="1"
+              [ngModel]="core().skills[skill.id]?.bonus || 0"
+              (ngModelChange)="skillTraining(skill.id, { bonus: $event })"
+              [disabled]="disabled()"
+          /></mat-form-field>
+        </div>
+      }
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Inventory</h2>
+    @if (record.canManageCarryRules) {
+      <mat-checkbox
+        [checked]="record.enforceCarryWeight"
+        [disabled]="changingCarryRule()"
+        (change)="setCarryRule($event.checked, $event.source)"
+        >Enforce carrying capacity for this campaign</mat-checkbox
+      >
+    } @else if (!record.enforceCarryWeight) {
+      <p>Your GM has disabled carrying capacity for this campaign.</p>
+    }
+    <p>Carried {{ weight() }} lb � capacity {{ capacity() }} lb</p>
+    @if (record.enforceCarryWeight && weight() > capacity()) {
+      <p class="feedback error">Over carrying capacity. Check your campaign's carrying rules.</p>
+    }
+    <div class="field-grid">
+      <mat-form-field appearance="outline"
+        ><mat-label>Size</mat-label
+        ><mat-select
+          [value]="core().size"
+          (selectionChange)="patch({ size: $event.value })"
+          [disabled]="disabled()"
+        >
+          @for (size of sizes; track size) {
+            <mat-option [value]="size">{{ size }}</mat-option>
+          }
+        </mat-select></mat-form-field
+      >
+      <mat-form-field appearance="outline"
+        ><mat-label>Capacity override (lb, optional)</mat-label
+        ><input
+          matInput
+          type="number"
+          min="0"
+          [ngModel]="core().carryCapacityOverride"
+          (ngModelChange)="patch({ carryCapacityOverride: $event })"
+          [disabled]="disabled()"
+        /><mat-hint>Blank uses Strength � 15, adjusted for size.</mat-hint></mat-form-field
+      >
+    </div>
+    @for (entry of core().inventory; track entry.id) {
+      <div class="entry">
+        <div class="field-grid">
+          <mat-form-field appearance="outline"
+            ><mat-label>Item name</mat-label
+            ><input
+              matInput
+              [ngModel]="entry.name"
+              (ngModelChange)="item(entry.id, { name: $event })"
+              maxlength="150"
+              [disabled]="disabled()"
+          /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Quantity</mat-label
+            ><input
+              matInput
+              type="number"
+              min="1"
+              step="1"
+              [ngModel]="entry.quantity"
+              (ngModelChange)="item(entry.id, { quantity: $event })"
+              [disabled]="disabled()"
+          /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Weight each (lb)</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              [ngModel]="entry.weight"
+              (ngModelChange)="item(entry.id, { weight: $event })"
+              [disabled]="disabled()"
+          /></mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width"
+          ><mat-label>Item notes</mat-label
+          ><textarea
+            matInput
+            [ngModel]="entry.description"
+            (ngModelChange)="item(entry.id, { description: $event })"
+            [disabled]="disabled()"
+          ></textarea>
+        </mat-form-field>
+        @if (record.canEdit) {
+          <button mat-button (click)="removeItem(entry.id)" [disabled]="saving()">
+            Remove item
+          </button>
+        }
+      </div>
+    } @empty {
+      <p>No inventory items yet.</p>
+    }
+    @if (record.canEdit) {
+      <button mat-stroked-button (click)="addItem()" [disabled]="saving()">Add item</button>
+    }
+  </section>
+  <section class="panel">
+    <h2>Abilities</h2>
+    <p>Record spells, talents, perks, or other features.</p>
+    @for (entry of core().abilities; track entry.id) {
+      <div class="entry">
+        <div class="field-grid">
+          <mat-form-field appearance="outline"
+            ><mat-label>Ability name</mat-label
+            ><input
+              matInput
+              [ngModel]="entry.name"
+              (ngModelChange)="ability(entry.id, { name: $event })"
+              maxlength="150"
+              [disabled]="disabled()"
+          /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Ability kind</mat-label
+            ><input
+              matInput
+              [ngModel]="entry.kind"
+              (ngModelChange)="ability(entry.id, { kind: $event })"
+              [disabled]="disabled()"
+            /><mat-hint>For example: spell, feature, perk.</mat-hint></mat-form-field
+          >
+          @if (entry.kind === 'spell') {
+            <mat-form-field appearance="outline"
+              ><mat-label>Spell level (0 = cantrip)</mat-label
+              ><input
+                matInput
+                type="number"
+                min="0"
+                max="9"
+                step="1"
+                [ngModel]="entry.spellLevel"
+                (ngModelChange)="ability(entry.id, { spellLevel: $event })"
+                [disabled]="disabled()"
+            /></mat-form-field>
+          }
+          <mat-form-field appearance="outline"
+            ><mat-label>Maximum uses (optional)</mat-label
+            ><input
+              matInput
+              type="number"
+              min="0"
+              step="1"
+              [ngModel]="entry.usesMax"
+              (ngModelChange)="ability(entry.id, { usesMax: $event })"
+              [disabled]="disabled()"
+          /></mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width"
+          ><mat-label>Ability description</mat-label
+          ><textarea
+            matInput
+            rows="3"
+            [ngModel]="entry.description"
+            (ngModelChange)="ability(entry.id, { description: $event })"
+            [disabled]="disabled()"
+          ></textarea>
+        </mat-form-field>
+        @if (record.canEdit) {
+          <button mat-button (click)="removeAbility(entry.id)" [disabled]="saving()">
+            Remove ability
+          </button>
+        }
+      </div>
+    } @empty {
+      <p>No abilities yet.</p>
+    }
+    @if (record.canEdit) {
+      <button mat-stroked-button (click)="addAbility()" [disabled]="saving()">Add ability</button>
+    }
+  </section>
+  @if (record.canEdit) {
+    <button mat-flat-button (click)="save()" [disabled]="saving() || !dirty()">Save sheet</button>
+  }
+} @else {
+  <h1>Character unavailable</h1>
+  <button mat-stroked-button (click)="load()">Retry loading</button>
+}
+@if (error(); as problem) {
+  <p class="feedback error" role="alert">{{ problem }}</p>
+}
+@if (message(); as success) {
+  <p class="feedback" role="status">{{ success }}</p>
+}
+<footer>
+  <a href="https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf"
+    >5E rules source</a
+  >
+  � <a href="/rules-attribution.txt">Rules attribution</a>
+</footer>
