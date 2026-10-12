@@ -106,7 +106,7 @@ interface ReferenceDocument {
           </button>
         </nav>
         @if (current(); as page) {
-          <article [class.rads]="system.slug === '501-rads' && page.category === 'lore'">
+          <article [class.rads]="system.slug === '501-rads'">
             @for (block of page.blocks; track $index) {
               @if (block.kind === 'heading') {
                 <h2>{{ block.text }}</h2>
