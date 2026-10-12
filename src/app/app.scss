@@ -1,0 +1,19 @@
+:host { display: block; min-height: 100dvh; }
+.app-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem max(1.25rem, env(safe-area-inset-left)); border-bottom: 1px solid #dddcd5; background: #fffef9; }
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: #243b32; font-weight: 700; }
+.brand-mark { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: .75rem; color: white; background: #245c47; }
+.tagline { color: #61685f; font-size: .875rem; }
+.app-layout { display: grid; grid-template-columns: 13rem minmax(0, 1fr); max-width: 90rem; margin: auto; }
+nav { padding: 2rem 1rem; display: flex; flex-direction: column; gap: .5rem; }
+nav a { min-height: 44px; display: flex; align-items: center; padding: .5rem 1rem; border-radius: .6rem; color: #405047; text-decoration: none; font-weight: 600; }
+nav a.active { background: #dcebe2; color: #164b35; }
+main { min-width: 0; padding: 3rem clamp(1.25rem, 4vw, 4rem); }
+.skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 10; padding: 1rem; background: white; }
+.skip-link:focus { top: 1rem; }
+@media (max-width: 640px) {
+  .tagline { display: none; }
+  .app-layout { display: block; }
+  nav { flex-direction: row; padding: .75rem 1.25rem; border-bottom: 1px solid #dddcd5; }
+  nav a { flex: 1; justify-content: center; }
+  main { padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom)); }
+}
