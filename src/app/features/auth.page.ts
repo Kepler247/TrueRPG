@@ -5,11 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
+import { ProfileEditor } from './profile-editor';
 import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'app-auth',
   imports: [
+    ProfileEditor,
     CdkAutofill,
     ReactiveFormsModule,
     MatButtonModule,

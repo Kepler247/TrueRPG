@@ -61,3 +61,7 @@ See AGENTS.md for domain rules and development conventions.
 ## GitHub database integration
 
 The Supabase project is connected to Kepler247/TrueRPG with production deployment from main and working directory '.' (repository root). Versioned database migrations live in supabase/migrations. This integration deploys database changes; Angular hosting is configured separately. See [database setup and permissions](supabase/README.md). Run npm.cmd run test:db to verify migrations and RLS locally.
+
+## Profile setup
+
+Open Account after signing in to choose a unique username and optional display name. Usernames are saved in lowercase and used for ownership labels in upcoming campaign/character screens. The Super master badge is read from the database, not editable profile metadata. Profile save/load failures have retry messages; no migration is needed for this screen.

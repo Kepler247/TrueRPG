@@ -1,0 +1,33 @@
+section {
+  margin-block: 2rem;
+  padding-block: 1.5rem;
+  border-block: 1px solid #dddcd5;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+input {
+  font-size: 16px !important;
+}
+button {
+  min-height: 44px;
+}
+.role-badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: #dcebe2;
+  color: #164b35;
+  border-radius: 0.5rem;
+  font-weight: 700;
+}
+.feedback {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #e6eee5;
+}
+.error {
+  background: #fce9e5;
+  color: #8b2620;
+}

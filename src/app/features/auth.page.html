@@ -6,6 +6,7 @@
   } @else if (auth.user(); as user) {
     <h1>Your account</h1>
     <p class="intro account-email">Signed in as {{ user.email }}</p>
+    <app-profile-editor />
     <div class="account-actions">
       <a mat-flat-button routerLink="/characters">Go to characters</a>
       <button mat-stroked-button type="button" [disabled]="busy()" (click)="signOut()">

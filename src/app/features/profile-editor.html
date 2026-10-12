@@ -1,0 +1,57 @@
+<section aria-labelledby="profile-title">
+  <h2 id="profile-title">Your profile</h2>
+  @if (loading()) {
+    <p role="status">Loading your profile...</p>
+  } @else if (loaded()) {
+    @if (isSuperAdmin()) {
+      <p class="role-badge">Super master</p>
+    }
+    @if (needsUsername()) {
+      <p>Choose a username so other players know who owns your characters and campaigns.</p>
+    }
+    <form [formGroup]="form" (ngSubmit)="save()" [attr.aria-busy]="saving()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          formControlName="username"
+          name="username"
+          autocomplete="username"
+          autocapitalize="none"
+          spellcheck="false"
+          maxlength="30"
+          [readonly]="saving()"
+          required
+        />
+        <mat-hint
+          >3-30 letters, digits or underscores; start with a letter. Saved in lowercase.</mat-hint
+        >
+        <mat-error>Use 3-30 letters, digits or underscores, starting with a letter.</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Display name (optional)</mat-label>
+        <input
+          matInput
+          formControlName="displayName"
+          name="displayName"
+          autocomplete="nickname"
+          maxlength="100"
+          [readonly]="saving()"
+        />
+        <mat-hint>The name you'd like players to see alongside your username.</mat-hint>
+        <mat-error>Use at most 100 characters.</mat-error>
+      </mat-form-field>
+      <button mat-flat-button type="submit" [disabled]="saving()">
+        {{ saving() ? 'Saving...' : 'Save profile' }}
+      </button>
+    </form>
+  } @else {
+    <button mat-stroked-button type="button" (click)="load()">Retry loading profile</button>
+  }
+  @if (error(); as problem) {
+    <p class="feedback error" role="alert">{{ problem }}</p>
+  }
+  @if (message(); as success) {
+    <p class="feedback" role="status">{{ success }}</p>
+  }
+</section>
