@@ -67,14 +67,14 @@ describe('Feature navigation', () => {
     const harness = await RouterTestingHarness.create('/');
     await harness.fixture.whenStable();
     harness.detectChanges();
-    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Characters');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe('Characters');
   });
 
   it('opens the lazy campaign page', async () => {
     const harness = await RouterTestingHarness.create('/campaigns');
     await harness.fixture.whenStable();
     harness.detectChanges();
-    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Campaigns');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe('Campaigns');
   });
 
   it('opens the read-only summary for the main character URL', async () => {
@@ -83,6 +83,14 @@ describe('Feature navigation', () => {
     harness.detectChanges();
     expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Courier');
     expect(harness.routeNativeElement?.querySelector('input')).toBeNull();
+  });
+  it('opens the character creator instead of treating new as a character ID', async () => {
+    const harness = await RouterTestingHarness.create('/characters/new');
+    await harness.fixture.whenStable();
+    harness.detectChanges();
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe(
+      'Character creator',
+    );
   });
   it('opens controls only on the dedicated edit URL', async () => {
     const harness = await RouterTestingHarness.create('/characters/character/edit');

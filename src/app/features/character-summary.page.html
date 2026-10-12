@@ -76,6 +76,16 @@
     </div>
     <p class="legend">* Proficient saving throw</p>
   </section>
+  @if (rules().characterNotes; as notes) {
+    <section class="panel" aria-labelledby="system-rules-title">
+      <h2 id="system-rules-title">System rules</h2>
+      <ul>
+        @for (note of notes(record.core); track $index) {
+          <li>{{ note }}</li>
+        }
+      </ul>
+    </section>
+  }
   <section class="panel" aria-labelledby="skills-title">
     <h2 id="skills-title">Skills</h2>
     <div class="skills-grid">

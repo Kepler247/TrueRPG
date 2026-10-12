@@ -1,17 +1,30 @@
 <p class="eyebrow">{{ kind() === 'characters' ? 'YOUR ADVENTURERS' : 'SHARED ADVENTURES' }}</p>
+@if (creatorOnly()) {
+  <a routerLink="/characters" class="back-link">Back to characters</a>
+}
 <div class="heading-row">
-  <h1>{{ kind() === 'characters' ? 'Characters' : 'Campaigns' }}</h1>
-  @if (loaded() && !creating()) {
-    <button mat-flat-button (click)="startCreate()" [disabled]="!context().systems.length">
-      {{ kind() === 'characters' ? 'New character' : 'New campaign' }}
-    </button>
+  <h1>
+    {{ creatorOnly() ? 'Character creator' : kind() === 'characters' ? 'Characters' : 'Campaigns' }}
+  </h1>
+  @if (loaded() && !creating() && !creatorOnly()) {
+    @if (kind() === 'characters') {
+      <a mat-flat-button routerLink="/characters/new" [disabled]="!context().systems.length"
+        >Character creator</a
+      >
+    } @else {
+      <button mat-flat-button (click)="startCreate()" [disabled]="!context().systems.length">
+        {{ kind() === 'characters' ? 'New character' : 'New campaign' }}
+      </button>
+    }
   }
 </div>
 <p class="intro">
   {{
-    kind() === 'characters'
-      ? 'Your characters and the party members you share campaigns with.'
-      : 'Campaigns you run or join, each with its own system and shared characters.'
+    creatorOnly()
+      ? 'Choose your system and class, buy your stats, and review your starting sheet.'
+      : kind() === 'characters'
+        ? 'Your characters and the party members you share campaigns with.'
+        : 'Campaigns you run or join, each with its own system and shared characters.'
   }}
 </p>
 @if (loading()) {
@@ -25,7 +38,7 @@
   @if (creating()) {
     <section class="create-panel" aria-labelledby="create-title">
       <h2 id="create-title">
-        {{ kind() === 'characters' ? 'Create character' : 'Create campaign' }}
+        {{ kind() === 'characters' ? 'Build your character' : 'Create campaign' }}
       </h2>
       <form [formGroup]="form" (ngSubmit)="create()" [attr.aria-busy]="saving()">
         <mat-form-field appearance="outline">
@@ -112,12 +125,15 @@
                 }
               </mat-select></mat-form-field
             >
+            @if (creatorOptions().classDescriptions?.[form.controls.class.value]; as description) {
+              <p class="class-description">{{ description }}</p>
+            }
           }
           @if (form.controls.race.value === 'Half-Elf') {
             <p>Choose two different abilities to receive +1, in addition to +2 Charisma.</p>
             <mat-form-field
               ><mat-label>First racial +1</mat-label
-              ><mat-select formControlName="raceBoostOne">
+              ><mat-select formControlName="raceBoostOne" [disabled]="saving()">
                 @for (stat of raceStats; track stat.key) {
                   <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
                 }
@@ -125,13 +141,14 @@
             >
             <mat-form-field
               ><mat-label>Second racial +1</mat-label
-              ><mat-select formControlName="raceBoostTwo">
+              ><mat-select formControlName="raceBoostTwo" [disabled]="saving()">
                 @for (stat of raceStats; track stat.key) {
                   <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
                 }
               </mat-select></mat-form-field
             >
           }
+          <h3>Buy your base stats</h3>
           <p>
             Point buy sets base scores. The selected race applies its bonuses when you create the
             character. Review class skill, equipment, and feature choices in the system reference.
@@ -141,6 +158,86 @@
             (scoresChange)="pointBuyScores.set($event)"
             [disabled]="saving()"
           />
+          @if (creatorOnly()) {
+            <section class="creation-review" aria-labelledby="creation-review-title">
+              <h3 id="creation-review-title">Your starting sheet</h3>
+              @if (preview().core; as core) {
+                <p>
+                  {{ form.controls.name.value || 'Your character' }} &middot;
+                  {{ systemLabel(selectedSystem()) }} &middot; {{ core.class || 'Choose a class' }}
+                </p>
+                <dl class="preview-vitals">
+                  <div>
+                    <dt>Level</dt>
+                    <dd>{{ core.level }} / {{ rules().maxLevel ?? 20 }}</dd>
+                  </div>
+                  <div>
+                    <dt>Maximum HP</dt>
+                    <dd>{{ core.hpMax ?? 'Not set' }}</dd>
+                  </div>
+                  <div>
+                    <dt>Hit die</dt>
+                    <dd>
+                      {{ rules().hitDie?.(core) ? 'd' + rules().hitDie?.(core) : 'Not defined' }}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Initiative</dt>
+                    <dd>{{ signed(rules().initiative(core, rules())) }}</dd>
+                  </div>
+                  <div>
+                    <dt>Speed</dt>
+                    <dd>{{ core.speed.distance }} {{ core.speed.unit }} / {{ core.speed.per }}</dd>
+                  </div>
+                  @if (rules().hasHeat?.(core)) {
+                    <div>
+                      <dt>Starting Heat</dt>
+                      <dd>0 / {{ rules().heatCapacity?.(core.level) ?? 'unlimited' }}</dd>
+                    </div>
+                  }
+                </dl>
+                <div class="preview-stats">
+                  @for (stat of stats; track stat.key) {
+                    <div>
+                      <strong
+                        >{{ stat.key.toUpperCase() }}
+                        {{ signed(rules().abilityModifier(core.scores[stat.key])) }}</strong
+                      ><span>Score {{ core.scores[stat.key] }}</span
+                      ><span>Save {{ signed(rules().savingThrow(core, stat.key, rules())) }}</span>
+                    </div>
+                  }
+                </div>
+                <h4>Skills</h4>
+                <div class="preview-skills">
+                  @for (skill of rules().skills; track skill.id) {
+                    <span
+                      >{{ skill.name }}
+                      <strong>{{ signed(rules().skillBonus(core, skill, rules())) }}</strong></span
+                    >
+                  }
+                </div>
+                @if (rules().characterNotes; as notes) {
+                  <h4>System rules applied</h4>
+                  <ul>
+                    @for (note of notes(core); track $index) {
+                      <li>{{ note }}</li>
+                    }
+                  </ul>
+                }
+                @if (core.abilities.length) {
+                  <h4>Starting abilities</h4>
+                  @for (ability of core.abilities; track ability.id) {
+                    <article>
+                      <strong>{{ ability.name }}</strong>
+                      <p>{{ ability.description }}</p>
+                    </article>
+                  }
+                }
+              } @else {
+                <p role="alert">{{ preview().error }}</p>
+              }
+            </section>
+          }
         }
         <div class="actions">
           <button mat-flat-button type="submit" [disabled]="saving()">
@@ -153,46 +250,48 @@
       </form>
     </section>
   }
-  @if (!rows().length) {
-    <section class="empty-state">
-      <h2>{{ kind() === 'characters' ? 'Your party awaits' : 'Start your next adventure' }}</h2>
-      <p>
-        {{
-          kind() === 'characters'
-            ? 'Create your first character. You can add a campaign now or keep them independent.'
-            : 'Create a campaign to become its GM. Player membership management comes next.'
-        }}
-      </p>
-    </section>
-  } @else {
-    <div class="record-grid">
-      @for (record of rows(); track record.id) {
-        <article class="record-card">
-          <p class="system-tag">{{ systemLabel(record.system_id) }}</p>
-          <h2>
-            @if (kind() === 'characters') {
-              <a [routerLink]="['/characters', record.id]">{{ record.name }}</a>
-            } @else {
-              {{ record.name }}
-            }
-          </h2>
-          <p>
-            Owner: {{ ownerLabel(record.owner_id)
-            }}{{ record.owner_id === auth.user()?.id ? ' (you)' : '' }}
-          </p>
-          @if (kind() === 'characters') {
-            <p class="record-detail">{{ campaignLabel(record.id) }}</p>
-          } @else {
-            @if (campaignDescription(record.id); as description) {
-              <p>{{ description }}</p>
-            }
-            <p class="record-detail">
-              {{ record.owner_id === auth.user()?.id ? 'You are the GM' : 'Shared campaign' }}
+  @if (!creatorOnly()) {
+    @if (!rows().length) {
+      <section class="empty-state">
+        <h2>{{ kind() === 'characters' ? 'Your party awaits' : 'Start your next adventure' }}</h2>
+        <p>
+          {{
+            kind() === 'characters'
+              ? 'Create your first character. You can add a campaign now or keep them independent.'
+              : 'Create a campaign to become its GM. Player membership management comes next.'
+          }}
+        </p>
+      </section>
+    } @else {
+      <div class="record-grid">
+        @for (record of rows(); track record.id) {
+          <article class="record-card">
+            <p class="system-tag">{{ systemLabel(record.system_id) }}</p>
+            <h2>
+              @if (kind() === 'characters') {
+                <a [routerLink]="['/characters', record.id]">{{ record.name }}</a>
+              } @else {
+                {{ record.name }}
+              }
+            </h2>
+            <p>
+              Owner: {{ ownerLabel(record.owner_id)
+              }}{{ record.owner_id === auth.user()?.id ? ' (you)' : '' }}
             </p>
-          }
-        </article>
-      }
-    </div>
+            @if (kind() === 'characters') {
+              <p class="record-detail">{{ campaignLabel(record.id) }}</p>
+            } @else {
+              @if (campaignDescription(record.id); as description) {
+                <p>{{ description }}</p>
+              }
+              <p class="record-detail">
+                {{ record.owner_id === auth.user()?.id ? 'You are the GM' : 'Shared campaign' }}
+              </p>
+            }
+          </article>
+        }
+      </div>
+    }
   }
 }
 @if (error(); as problem) {

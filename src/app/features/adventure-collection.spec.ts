@@ -3,7 +3,7 @@ import {
   CHARACTER_RULESETS,
   extendRuleset,
 } from '../core/characters/character-ruleset';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
@@ -62,9 +62,10 @@ describe('Adventure creation and lists', () => {
       ],
     });
   });
-  async function create(kind: 'campaigns' | 'characters' = 'characters') {
+  async function create(kind: 'campaigns' | 'characters' = 'characters', creatorOnly = false) {
     const fixture = TestBed.createComponent(AdventureCollection);
     fixture.componentRef.setInput('kind', kind);
+    fixture.componentRef.setInput('creatorOnly', creatorOnly);
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
@@ -226,5 +227,62 @@ describe('Adventure creation and lists', () => {
     const fixture = await create();
     expect(fixture.nativeElement.textContent).toContain('Retry loading');
     expect(fixture.componentInstance.loaded()).toBe(false);
+  });
+  it('links the Characters menu to the dedicated creator', async () => {
+    const fixture = await create();
+    expect(fixture.nativeElement.querySelector('a[href="/characters/new"]')?.textContent).toContain(
+      'Character creator',
+    );
+  });
+  it('previews and persists a Gunslinger with the actual 501 Rads rules', async () => {
+    adventures.load.mockResolvedValue({
+      ...context,
+      systems: [{ id: 'wasteland', name: '501 Rads', ruleset_key: '501-rads' }],
+    });
+    const fixture = await create('characters', true);
+    const page = fixture.componentInstance;
+    const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+    expect(page.creating()).toBe(true);
+    expect(page.form.controls.class.value).toBe('Gunslinger');
+    page.form.controls.name.setValue('Jack');
+    page.pointBuyScores.set({ str: 8, dex: 15, con: 14, int: 8, wis: 10, cha: 15 });
+    const preview = page.preview().core!;
+    expect(preview.hpMax).toBe(12);
+    expect(preview['heat']).toBe(0);
+    expect(preview.abilities.map((a) => a.name)).toEqual([
+      'Lucky Strike',
+      'Stroke of Genius',
+      'Pistol Training',
+    ]);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Hacking');
+    expect(fixture.nativeElement.textContent).toContain('System rules applied');
+    expect(fixture.nativeElement.textContent).not.toContain('Arcana +');
+    await page.create();
+    expect(adventures.createCharacter).toHaveBeenCalledWith('Jack', 'wasteland', null, preview);
+    expect(navigate).toHaveBeenCalledWith(['/characters', 'character-id']);
+  });
+  it('applies racial boosts once when saving the preview and updates HP as choices change', async () => {
+    adventures.load.mockResolvedValue({
+      ...context,
+      systems: [{ id: 'fantasy', name: '5E', ruleset_key: '5e-2014' }],
+    });
+    const fixture = await create('characters', true);
+    const page = fixture.componentInstance;
+    vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+    page.form.patchValue({ name: 'Scout', race: 'Human', class: 'Ranger' });
+    page.pointBuyScores.set({ str: 8, dex: 8, con: 14, int: 8, wis: 8, cha: 8 });
+    expect(page.preview().core?.scores.con).toBe(15);
+    expect(page.preview().core?.hpMax).toBe(12);
+    page.form.controls.race.setValue('Hill Dwarf');
+    expect(page.preview().core?.scores.con).toBe(16);
+    expect(page.preview().core?.hpMax).toBe(14);
+    await page.create();
+    expect(adventures.createCharacter).toHaveBeenCalledWith(
+      'Scout',
+      'fantasy',
+      null,
+      expect.objectContaining({ scores: expect.objectContaining({ con: 16 }), hpMax: 14 }),
+    );
   });
 });

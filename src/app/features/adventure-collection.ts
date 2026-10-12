@@ -1,7 +1,14 @@
 import { RulesetService } from '../core/characters/character-ruleset';
 import { PointBuy, startingScores } from './point-buy';
-import { createCore, pointBuyRemaining, STATS } from '../core/characters/character-core';
-import { RouterLink } from '@angular/router';
+import {
+  CharacterCore,
+  createCore,
+  pointBuyRemaining,
+  STATS,
+} from '../core/characters/character-core';
+import { Router, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { validateSystemCore } from '../core/systems/system-rules';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,6 +56,8 @@ const emptyContext = (): AdventureContext => ({
 export class AdventureCollection {
   readonly raceStats = STATS.filter((stat) => stat.key !== 'cha');
   readonly kind = input.required<CollectionKind>();
+  readonly creatorOnly = input(false);
+  private readonly router = inject(Router);
   readonly auth = inject(AuthService);
   private readonly adventures = inject(AdventureService);
   private readonly rulesets = inject(RulesetService);
@@ -63,6 +72,12 @@ export class AdventureCollection {
   readonly message = signal<string | null>(null);
   readonly selectedSystem = signal('');
   readonly pointBuyScores = signal(startingScores());
+  readonly stats = STATS;
+  readonly rules = computed(() =>
+    this.rulesets.get(
+      this.context().systems.find((system) => system.id === this.selectedSystem())?.ruleset_key,
+    ),
+  );
   readonly creatorOptions = computed(
     () =>
       this.rulesets.get(
@@ -84,6 +99,36 @@ export class AdventureCollection {
     heightInches: new FormControl<number | null>(null, [Validators.min(0.1)]),
     bodyWeightPounds: new FormControl<number | null>(null, [Validators.min(0.1)]),
   });
+  private readonly formValue = toSignal(this.form.valueChanges, {
+    initialValue: this.form.getRawValue(),
+  });
+  readonly preview = computed<{ core: CharacterCore | null; error: string | null }>(() => {
+    this.formValue();
+    const value = this.form.getRawValue();
+    const draft: CharacterCore = {
+      ...createCore(),
+      scores: { ...this.pointBuyScores() },
+      description: value.description,
+      heightInches: value.heightInches,
+      bodyWeightPounds: value.bodyWeightPounds,
+      race: value.race || null,
+      class: value.class || null,
+      raceBoosts: [value.raceBoostOne, value.raceBoostTwo],
+    };
+    try {
+      const core = this.rules().initialize?.(draft) ?? draft;
+      validateSystemCore(core, this.rules());
+      return { core, error: null };
+    } catch (error) {
+      return {
+        core: null,
+        error: error instanceof Error ? error.message : 'Review your character choices.',
+      };
+    }
+  });
+  signed(value: number): string {
+    return `${value >= 0 ? '+' : ''}${value}`;
+  }
   readonly eligibleCampaigns = computed(() =>
     this.context().campaigns.filter(
       (campaign) =>
@@ -116,6 +161,7 @@ export class AdventureCollection {
       if (version !== this.loadVersion || userId !== this.userId()) return;
       this.context.set(context);
       this.loaded.set(true);
+      if (this.creatorOnly() && context.systems.length) this.startCreate();
     } catch (error) {
       if (version === this.loadVersion && userId === this.userId())
         this.error.set(
@@ -130,6 +176,8 @@ export class AdventureCollection {
     this.pointBuyScores.set(startingScores());
     this.form.reset({ name: '', systemId, campaignId: '', description: '' });
     this.selectedSystem.set(systemId);
+    if (this.creatorOnly() && this.creatorOptions().classes.length === 1)
+      this.form.controls.class.setValue(this.creatorOptions().classes[0]);
     this.error.set(null);
     this.message.set(null);
     this.creating.set(true);
@@ -139,11 +187,14 @@ export class AdventureCollection {
     this.form.controls.campaignId.setValue('');
     this.form.controls.race.setValue('');
     this.form.controls.class.setValue('');
+    if (this.creatorOnly() && this.creatorOptions().classes.length === 1)
+      this.form.controls.class.setValue(this.creatorOptions().classes[0]);
   }
   cancelCreate(): void {
     if (this.saving()) return;
     this.creating.set(false);
     this.error.set(null);
+    if (this.creatorOnly()) void this.router.navigate(['/characters']);
   }
   async create(): Promise<void> {
     if (this.saving() || !this.loaded()) return;
@@ -157,12 +208,14 @@ export class AdventureCollection {
       systemId,
       campaignId,
       description,
-      heightInches,
-      bodyWeightPounds,
       race,
       class: characterClass,
     } = this.form.getRawValue();
     if (!this.context().systems.some((system) => system.id === systemId)) return;
+    if (this.creatorOnly() && this.creatorOptions().classes.length && !characterClass) {
+      this.error.set('Choose a class to apply its rules to your character.');
+      return;
+    }
     if (
       this.kind() === 'characters' &&
       campaignId &&
@@ -198,33 +251,13 @@ export class AdventureCollection {
         }));
         this.message.set('Campaign created. You are its GM.');
       } else {
+        const preview = this.preview();
+        if (!preview.core) throw new Error(preview.error ?? 'Review your character choices.');
         const character = await this.adventures.createCharacter(
           name,
           systemId,
           campaignId || null,
-          this.rulesets
-            .get(this.context().systems.find((s) => s.id === systemId)?.ruleset_key)
-            .initialize?.({
-              ...createCore(),
-              scores: { ...this.pointBuyScores() },
-              description,
-              heightInches,
-              bodyWeightPounds,
-              race: race || null,
-              class: characterClass || null,
-              raceBoosts: [
-                this.form.controls.raceBoostOne.value,
-                this.form.controls.raceBoostTwo.value,
-              ],
-            }) ?? {
-            ...createCore(),
-            scores: { ...this.pointBuyScores() },
-            description,
-            heightInches,
-            bodyWeightPounds,
-            race: race || null,
-            class: characterClass || null,
-          },
+          preview.core,
         );
         if (userId !== this.userId()) return;
         this.context.update((context) => ({
@@ -234,6 +267,9 @@ export class AdventureCollection {
           ),
         }));
         this.message.set('Character created.');
+        if (this.creatorOnly()) {
+          await this.router.navigate(['/characters', character.id]);
+        }
       }
       this.creating.set(false);
       this.form.reset();

@@ -27,8 +27,13 @@ export interface CharacterRuleset {
   heatHelp?: string;
   hasHeat?: (core: CharacterCore) => boolean;
   testFeatName?: string;
+  characterNotes?: (core: CharacterCore) => readonly string[];
   skills: readonly SkillDefinition[];
-  creator: { races: readonly string[]; classes: readonly string[] };
+  creator: {
+    races: readonly string[];
+    classes: readonly string[];
+    classDescriptions?: Readonly<Record<string, string>>;
+  };
   abilityModifier: (score: number) => number;
   proficiencyBonus: (level: number) => number;
   savingThrow: (core: CharacterCore, stat: StatKey, rules: CharacterRuleset) => number;

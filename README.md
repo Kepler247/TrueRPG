@@ -79,3 +79,9 @@ Click a character name to open its sheet. New character now includes physical de
 ## Character summary and editing
 
 The default character URL (/characters/:id) is a read-only summary with compact stats, skills, inventory, abilities, and details. Edit character opens /characters/:id/edit. All field changes and campaign carrying-rule controls live on that dedicated edit page. Level up links to the edit page with the level-up workflow open. Unsaved-edit warnings apply when leaving the edit page.
+
+## Character creator menu
+
+Characters > Character creator opens `/characters/new`. Choose a system, class, details, and point-buy scores. A live starting-sheet preview shows final scores, modifiers, saves, skills, HP, hit die, initiative, speed, system rules, and starting abilities. The saved character uses that same initialized preview and opens its summary after creation.
+
+For 501 Rads, Gunslinger is selected as its currently defined class. Starting HP is 10 + Constitution, Heat starts at 0 with a maximum of 3, and Lucky Strike, Stroke of Genius, and Pistol Training are included. Hacking replaces Arcana. The character summary also displays the adapter's system rules; level-up and Heat management remain on the edit page.

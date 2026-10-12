@@ -39,6 +39,13 @@ export const routes: Routes = [
     loadComponent: () => import('./features/character-edit.page').then((m) => m.CharacterEditPage),
   },
   {
+    path: 'characters/new',
+    canActivate: [authGuard],
+    title: 'Character creator | RPG Companion',
+    loadComponent: () =>
+      import('./features/character-creator.page').then((m) => m.CharacterCreatorPage),
+  },
+  {
     path: 'characters/:id',
     canActivate: [authGuard],
     title: 'Character summary | RPG Companion',

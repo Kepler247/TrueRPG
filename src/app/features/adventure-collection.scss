@@ -75,3 +75,54 @@ button {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 1rem;
 }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.creation-review {
+  border-top: 1px solid #dddcd5;
+  padding-top: 1rem;
+  overflow-wrap: anywhere;
+}
+.preview-vitals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 1rem;
+}
+.preview-vitals dt {
+  font-size: 0.85rem;
+  color: #5e685f;
+}
+.preview-vitals dd {
+  margin: 0.3rem 0 0;
+  font-weight: 700;
+}
+.preview-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+.preview-stats > div {
+  display: grid;
+  gap: 0.3rem;
+  border: 1px solid #dddcd5;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+}
+.preview-stats span {
+  font-size: 0.85rem;
+}
+.preview-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.5rem 1rem;
+}
+.preview-skills > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.creation-review li {
+  margin-block: 0.5rem;
+}

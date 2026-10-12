@@ -118,7 +118,25 @@ export function make501Rules(base: CharacterRuleset): CharacterRuleset {
     skills: BASE_SKILLS.map((skill) =>
       skill.id === 'arcana' ? { id: 'hacking', name: 'Hacking', stat: 'int' } : skill,
     ),
-    creator: { races: [], classes: ['Gunslinger'] },
+    creator: {
+      races: [],
+      classes: ['Gunslinger'],
+      classDescriptions: {
+        Gunslinger:
+          'A pistol and grenade specialist fueled by Heat. Dexterity and Charisma are recommended.',
+      },
+    },
+    characterNotes: (core) => [
+      'Maximum level 12. Hacking (Intelligence) replaces Arcana.',
+      'Gain two ability-score points at every level-up; scores may exceed 20. Shared feats are chosen at levels 3, 6, 9, and 12.',
+      ...(core.class === 'Gunslinger'
+        ? [
+            `Gunslinger HP uses d10: first-level HP is 10 + Constitution; later increases use 6 or a d10 roll + Constitution.`,
+            'Pistol checks +1; pistol damage rolls +1.',
+            `Heat maximum: ${heatCapacity(core.level) ?? 'unlimited'}. Heat gains: ${heatMultiplier(core.level)} times the base amount. Long rests reset Heat.`,
+          ]
+        : []),
+    ],
     hitDie: (core) => (core.class === 'Gunslinger' ? 10 : null),
     statPoints: () => 2,
     featRequired: (level) => level % 3 === 0,
@@ -219,6 +237,17 @@ export function makePlain5eRules(base: CharacterRuleset): CharacterRuleset {
   return {
     ...base,
     creator: { races: Object.keys(RACES), classes: Object.keys(CLASSES) },
+    characterNotes: (core) => [
+      'Maximum level 20. Ability-score improvements normally cap at 20.',
+      ...(CLASSES[core.class ?? '']
+        ? [
+            `${core.class} uses d${CLASSES[core.class!].die} HP; class saving throw proficiencies apply at creation.`,
+          ]
+        : []),
+      ...(core.race
+        ? ['Racial ability bonuses, speed, size, and defined HP bonuses apply at creation.']
+        : []),
+    ],
     hitDie: (core) => CLASSES[core.class ?? '']?.die ?? null,
     hpPerLevelBonus: (core) => (core.race === 'Hill Dwarf' ? 1 : 0),
     featHelp: 'You may instead choose Grappler (Strength 13+) with zero stat points allocated.',
