@@ -10,12 +10,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { GAME_SYSTEMS } from '../core/models/game-systems';
+import {
+  ReferencePage,
+  ReferenceSection,
+  referenceSections,
+} from '../core/systems/reference-sections';
 
-interface ReferencePage {
-  number: number;
-  category: string;
-  blocks: { kind: string; text: string }[];
-}
 interface ReferenceDocument {
   title: string;
   revision: string;
@@ -56,7 +56,7 @@ interface ReferenceDocument {
           <p>
             Maximum level 12. Gain two stat points every level; scores may exceed 20. Shared feats
             at 3, 6, 9, 12 are awaiting definition. Gunslingers use d10 HP. Fan the Hammer costs 2
-            Heat. The original PDF is preserved below.
+            Heat. The PDF below includes the corrected Heat cost.
           </p>
         </aside>
       } @else {
@@ -83,29 +83,26 @@ interface ReferenceDocument {
       @if (document(); as doc) {
         <p>
           <a [href]="assetRoot() + '/' + doc.sourceFile" target="_blank" rel="noopener"
-            >Open original PDF ({{ doc.pageCount }} pages)</a
+            >Open PDF ({{ doc.pageCount }} pages)</a
           >
-          &middot; {{ matches().length }} matching pages
+          &middot; {{ matches().length }} matching sections
         </p>
         <label class="jump"
-          >Jump to page or section<select
-            [ngModel]="selected()"
-            (ngModelChange)="selected.set(+$event)"
-          >
-            @for (page of matches(); track page.number; let i = $index) {
-              <option [value]="i">{{ pageLabel(page) }}</option>
+          >Jump to heading<select [ngModel]="selected()" (ngModelChange)="selected.set(+$event)">
+            @for (section of matches(); track section.id; let i = $index) {
+              <option [value]="i">{{ section.heading }}</option>
             }
           </select></label
         >
-        <nav aria-label="Reference pages">
+        <nav aria-label="Reference headings">
           <button (click)="selected.set(selected() - 1)" [disabled]="selected() <= 0">
-            Previous</button
-          ><span>Page {{ current()?.number ?? '--' }}</span
+            Previous heading</button
+          ><span>{{ current()?.heading ?? '--' }}</span
           ><button
             (click)="selected.set(selected() + 1)"
             [disabled]="selected() >= matches().length - 1"
           >
-            Next
+            Next heading
           </button>
         </nav>
         @if (current(); as page) {
@@ -119,7 +116,7 @@ interface ReferenceDocument {
             }
           </article>
         } @else {
-          <p>No pages match your search.</p>
+          <p>No sections match your search.</p>
         }
       } @else {
         <p role="status">{{ error() || 'Loading reference...' }}</p>
@@ -145,13 +142,13 @@ export class SystemHubPage {
   );
   readonly matches = computed(
     () =>
-      this.document()?.pages.filter(
+      referenceSections(this.document()?.pages ?? []).filter(
         (p) =>
           (this.category() === 'all' || p.category === this.category()) &&
           p.blocks.some((b) => b.text.toLowerCase().includes(this.query().trim().toLowerCase())),
       ) ?? [],
   );
-  readonly current = computed<ReferencePage | undefined>(() => this.matches()[this.selected()]);
+  readonly current = computed<ReferenceSection | undefined>(() => this.matches()[this.selected()]);
   constructor() {
     effect((onCleanup) => {
       const system = this.system();
@@ -177,8 +174,5 @@ export class SystemHubPage {
             );
         });
     });
-  }
-  pageLabel(page: ReferencePage): string {
-    return `${page.number}: ${page.blocks.find((b) => b.kind === 'heading')?.text ?? page.blocks[0]?.text.slice(0, 60) ?? 'Continued'}`;
   }
 }

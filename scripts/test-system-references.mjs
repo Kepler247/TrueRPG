@@ -23,6 +23,10 @@ for (const [folder, revision, count] of [
   const text = doc.pages.flatMap((p) => p.blocks.map((b) => b.text)).join('\n');
   assert.ok(text.length > count * 100, 'Reference should contain substantive text');
   assert.ok(!text.includes('\ufffd'), 'Reference should not have replacement glyphs');
+  if (folder === '501-rads') {
+    assert.ok(!text.includes('luck points'), 'The author-corrected cost must use Heat');
+    assert.ok(text.includes('Fan the Hammer; For -2 Heat'));
+  }
   for (const expected of folder === '501-rads'
     ? ['Radiomen', 'Gunslinger', 'Hacking', 'Divine Intervention']
     : ['Barbarian', 'Wizard', 'Grappler', 'Fireball'])

@@ -3,7 +3,9 @@ import { createHash } from 'node:crypto';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 const args = process.argv.slice(2);
-const source = args[args.indexOf('--pdf') + 1] || 'R:/Downloads/501Radsdraft1.pdf';
+const source = args.includes('--pdf')
+  ? args[args.indexOf('--pdf') + 1]
+  : 'R:/Downloads/501Radsdraft1.pdf';
 const revision = args.includes('--revision') ? args[args.indexOf('--revision') + 1] : 'draft-1';
 if (!/^[a-z0-9-]+$/.test(revision)) throw new Error('Use a simple lowercase revision slug.');
 const bytes = await readFile(source);
@@ -30,6 +32,7 @@ for (let n = 1; n <= pdf.numPages; n++) {
     current.heading ||= item.fontName.endsWith('_f1');
   }
   const blocks = [];
+  lines.sort((a, b) => b.y - a.y || a.x - b.x);
   let previous = null;
   for (const line of lines) {
     const value = line.text.normalize('NFKC').replace(/\s+/g, ' ').trim();

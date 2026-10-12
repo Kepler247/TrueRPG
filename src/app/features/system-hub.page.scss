@@ -59,6 +59,14 @@ nav {
   gap: 0.5rem;
   margin: 1rem 0;
 }
+nav span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+nav button {
+  flex-shrink: 0;
+}
 article {
   line-height: 1.65;
   overflow-wrap: anywhere;

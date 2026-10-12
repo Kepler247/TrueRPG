@@ -3,7 +3,7 @@
   "subtitle": "The radioman’s guide to the wasteland",
   "revision": "draft-1",
   "sourceFile": "501-rads-draft-1.pdf",
-  "sha256": "9d0152bcac92000127289c7e4e68913b503692c53dcea8cf8ce401e70816a48a",
+  "sha256": "78c036b5c3644daeed3e9d3bc8936f4b6f2d6d48440d32dc9de30d68a96aa986",
   "pageCount": 69,
   "pages": [
     {
@@ -1280,7 +1280,7 @@
         },
         {
           "kind": "paragraph",
-          "text": "Fan the Hammer; For -2 luck points, the gunslinger can fire several times in short"
+          "text": "Fan the Hammer; For -2 Heat, the gunslinger can fire several times in short"
         }
       ]
     },

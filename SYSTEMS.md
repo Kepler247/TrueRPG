@@ -4,7 +4,7 @@
 
 ## 501 Rads draft 1
 
-The system hub contains every page of the 69-page author-provided PDF, searchable as lore or rules, with an original-PDF download. Lore uses the document's Atomic Age headings and VT323 body font, self-hosted with their OFL licenses. Pages 58 onward contain rules. The original document is preserved unchanged; author clarifications are displayed separately.
+The system hub contains every page of the 69-page author-provided PDF, searchable as lore or rules, with a PDF download. Navigation uses headings and displays each section through its next heading, including text continuing onto later pages. Lore uses the document's Atomic Age headings and VT323 body font, self-hosted with their OFL licenses. Pages 58 onward contain rules. At the author's request, the downloadable PDF and readable text now correct Fan the Hammer's “luck points” typo to Heat. Other author clarifications are displayed separately.
 
 Implemented clarifications: maximum level 12; scores may exceed 20; two ability points every level; shared feat choices at levels 3/6/9/12; Gunslinger d10 HP with fixed 6 or a roll plus Constitution; Fan the Hammer costs 2 Heat. Feats are not defined yet. The optional testing placeholder has no mechanical effect and is clearly labeled.
 
@@ -24,7 +24,7 @@ node scripts/import-5e-srd.mjs
 node scripts/import-5e-progression.mjs
 ```
 
-The 501 importer copies the exact source PDF and writes page-based UTF-8 text plus its SHA-256 hash. For a new author revision, import with a new revision identifier; keep previous source files, update the hub's active reference, review mechanic changes in the system adapter, and add a new database migration if catalog metadata changes. Text extraction is a reading aid; the source PDF remains authoritative for formatting, tables, and illustrations. Mechanical definitions are deliberately maintained separately from imported prose.
+The 501 importer copies the exact input PDF and writes page-based UTF-8 text plus its SHA-256 hash. Approved corrections can be applied to the app's PDF before importing it; keep PDF text and readable text synchronized. The one-time `scripts/correct-501-rads-pdf.py` correction uses PyMuPDF and the existing VT323 font, preserves the layout and 69-page count, and requires distinct input/output paths. The author's Downloads file is untouched. For a new author revision, import with a new revision identifier, update the hub's active reference, review mechanic changes in the system adapter, and add a new database migration if catalog metadata changes. Text extraction is a reading aid; the PDF remains authoritative for formatting, tables, and illustrations. Mechanical definitions are deliberately maintained separately from imported prose.
 
 Character core payloads remain version 2, with unknown fields preserved. System-specific Heat uses an additive core field; invalid or newer saved payloads are never replaced on load. Save validation uses the active ruleset's score and level limits. Database RLS remains responsible for ownership and campaign authorization.
 
