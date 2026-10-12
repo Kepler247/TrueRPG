@@ -65,3 +65,9 @@ The Supabase project is connected to Kepler247/TrueRPG with production deploymen
 ## Profile setup
 
 Open Account after signing in to choose a unique username and optional display name. Usernames are saved in lowercase and used for ownership labels in upcoming campaign/character screens. The Super master badge is read from the database, not editable profile metadata. Profile save/load failures have retry messages; no migration is needed for this screen.
+
+## Campaign and character creation
+
+Campaigns and Characters now load saved records from Supabase. Use New campaign to choose a name, system, and optional description; you become its GM automatically. Use New character to choose a name and system, optionally selecting a matching campaign where you are a member. Records show username ownership labels, and refresh restores saved lists. Character sheets and membership-management UI are the next feature; new character data starts empty rather than assuming rules.
+
+If campaign creation fails immediately after updating, check that migration 20261012070000_campaign_owner_visibility.sql deployed. It fixes owner visibility during INSERT RETURNING before automatic membership is added.

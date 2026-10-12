@@ -1,0 +1,72 @@
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.create-panel {
+  padding: 1.5rem;
+  background: #fffef9;
+  border: 1px solid #dddcd5;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 38rem;
+}
+.create-panel h2 {
+  margin-top: 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+input,
+textarea {
+  font-size: 16px !important;
+}
+button {
+  min-height: 44px;
+}
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+.record-card {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid #dddcd5;
+  border-radius: 1rem;
+  background: #fffef9;
+  overflow-wrap: anywhere;
+}
+.record-card h2 {
+  margin-block: 0.5rem 1rem;
+}
+.record-card p {
+  margin-block: 0.5rem;
+}
+.system-tag {
+  font-size: 0.8rem;
+  color: #245c47;
+  font-weight: 700;
+}
+.record-detail {
+  color: #5e685f;
+}
+.feedback {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #e6eee5;
+  overflow-wrap: anywhere;
+}
+.error {
+  background: #fce9e5;
+  color: #8b2620;
+}

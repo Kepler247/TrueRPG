@@ -285,6 +285,37 @@ try {
         ]),
       ),
     ));
+  await test('a player can create a campaign and receive its row with owner membership', () =>
+    asUser(ids.player, async () => {
+      const result = await db.query(
+        'insert into public.campaigns(owner_id,system_id,name) values ($1,$2,$3) returning id',
+        [ids.player, ids.wasteland, 'New campaign'],
+      );
+      assert.equal(result.rows.length, 1);
+      const members = await db.query(
+        'select user_id from public.campaign_members where campaign_id=$1',
+        [result.rows[0].id],
+      );
+      assert.equal(members.rows[0].user_id, ids.player);
+    }));
+  await test('a player creates a campaign-less character with empty versioned data', () =>
+    asUser(ids.player, async () => {
+      const result = await db.query(
+        'insert into public.characters(owner_id,system_id,name) values ($1,$2,$3) returning id,campaign_id,data,data_version',
+        [ids.player, ids.wasteland, 'Independent'],
+      );
+      assert.equal(result.rows[0].campaign_id, null);
+      assert.deepEqual(result.rows[0].data, {});
+      assert.equal(result.rows[0].data_version, 1);
+    }));
+  await test('a member creates a character inside a matching campaign', () =>
+    asUser(ids.player, async () => {
+      const result = await db.query(
+        'insert into public.characters(owner_id,system_id,campaign_id,name) values ($1,$2,$3,$4) returning id,campaign_id',
+        [ids.player, ids.wasteland, ids.campaign, 'Party member'],
+      );
+      assert.equal(result.rows[0].campaign_id, ids.campaign);
+    }));
   await test('GM can add a member', () =>
     asUser(ids.gm, async () => {
       await db.query('insert into public.campaign_members(campaign_id,user_id) values ($1,$2)', [

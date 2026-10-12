@@ -1,0 +1,124 @@
+<p class="eyebrow">{{ kind() === 'characters' ? 'YOUR ADVENTURERS' : 'SHARED ADVENTURES' }}</p>
+<div class="heading-row">
+  <h1>{{ kind() === 'characters' ? 'Characters' : 'Campaigns' }}</h1>
+  @if (loaded() && !creating()) {
+    <button mat-flat-button (click)="startCreate()" [disabled]="!context().systems.length">
+      {{ kind() === 'characters' ? 'New character' : 'New campaign' }}
+    </button>
+  }
+</div>
+<p class="intro">
+  {{
+    kind() === 'characters'
+      ? 'Your characters and the party members you share campaigns with.'
+      : 'Campaigns you run or join, each with its own system and shared characters.'
+  }}
+</p>
+@if (loading()) {
+  <p role="status">Loading {{ kind() }}...</p>
+} @else if (!loaded()) {
+  <button mat-stroked-button (click)="load()">Retry loading</button>
+} @else {
+  @if (!context().systems.length) {
+    <p>No game systems are available yet.</p>
+  }
+  @if (creating()) {
+    <section class="create-panel" aria-labelledby="create-title">
+      <h2 id="create-title">
+        {{ kind() === 'characters' ? 'Create character' : 'Create campaign' }}
+      </h2>
+      <form [formGroup]="form" (ngSubmit)="create()" [attr.aria-busy]="saving()">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" maxlength="150" [readonly]="saving()" required />
+          <mat-error>Enter a name of 1-150 characters.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>System</mat-label>
+          <mat-select
+            formControlName="systemId"
+            (selectionChange)="changeSystem()"
+            [disabled]="saving()"
+            required
+          >
+            @for (system of context().systems; track system.id) {
+              <mat-option [value]="system.id">{{ system.name }}</mat-option>
+            }
+          </mat-select>
+          <mat-error>Choose a system.</mat-error>
+        </mat-form-field>
+        @if (kind() === 'campaigns') {
+          <mat-form-field appearance="outline">
+            <mat-label>Description (optional)</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              rows="3"
+              [readonly]="saving()"
+            ></textarea>
+          </mat-form-field>
+        } @else {
+          <mat-form-field appearance="outline">
+            <mat-label>Campaign (optional)</mat-label>
+            <mat-select formControlName="campaignId" [disabled]="saving()">
+              <mat-option value="">No campaign</mat-option>
+              @for (campaign of eligibleCampaigns(); track campaign.id) {
+                <mat-option [value]="campaign.id">{{ campaign.name }}</mat-option>
+              }
+            </mat-select>
+            <mat-hint>Campaigns you belong to using the selected system.</mat-hint>
+          </mat-form-field>
+        }
+        <div class="actions">
+          <button mat-flat-button type="submit" [disabled]="saving()">
+            {{ saving() ? 'Creating...' : 'Create' }}
+          </button>
+          <button mat-button type="button" [disabled]="saving()" (click)="cancelCreate()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+  @if (!rows().length) {
+    <section class="empty-state">
+      <h2>{{ kind() === 'characters' ? 'Your party awaits' : 'Start your next adventure' }}</h2>
+      <p>
+        {{
+          kind() === 'characters'
+            ? 'Create your first character. You can add a campaign now or keep them independent.'
+            : 'Create a campaign to become its GM. Player membership management comes next.'
+        }}
+      </p>
+    </section>
+  } @else {
+    <div class="record-grid">
+      @for (record of rows(); track record.id) {
+        <article class="record-card">
+          <p class="system-tag">{{ systemLabel(record.system_id) }}</p>
+          <h2>{{ record.name }}</h2>
+          <p>
+            Owner: {{ ownerLabel(record.owner_id)
+            }}{{ record.owner_id === auth.user()?.id ? ' (you)' : '' }}
+          </p>
+          @if (kind() === 'characters') {
+            <p class="record-detail">{{ campaignLabel(record.id) }}</p>
+          } @else {
+            @if (campaignDescription(record.id); as description) {
+              <p>{{ description }}</p>
+            }
+            <p class="record-detail">
+              {{ record.owner_id === auth.user()?.id ? 'You are the GM' : 'Shared campaign' }}
+            </p>
+          }
+        </article>
+      }
+    </div>
+  }
+}
+@if (error(); as problem) {
+  <p class="feedback error" role="alert">{{ problem }}</p>
+}
+@if (message(); as success) {
+  <p class="feedback" role="status">{{ success }}</p>
+}

@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { AuthService } from './core/auth/auth.service';
+import { AdventureService } from './core/adventures/adventure.service';
 import { routes } from './app.routes';
 
 describe('Feature navigation', () => {
@@ -12,6 +13,18 @@ describe('Feature navigation', () => {
     TestBed.configureTestingModule({
       providers: [
         provideRouter(routes),
+        {
+          provide: AdventureService,
+          useValue: {
+            load: async () => ({
+              systems: [],
+              profiles: [],
+              campaigns: [],
+              characters: [],
+              memberCampaignIds: [],
+            }),
+          },
+        },
         {
           provide: AuthService,
           useValue: {

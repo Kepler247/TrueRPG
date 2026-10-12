@@ -5,6 +5,7 @@ import {
   effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +46,7 @@ export class ProfileEditor {
   constructor() {
     effect(() => {
       const userId = this.userId();
-      if (userId) void this.load();
+      if (userId) untracked(() => void this.load());
     });
   }
 
