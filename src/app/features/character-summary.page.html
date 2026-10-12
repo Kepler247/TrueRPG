@@ -79,10 +79,10 @@
   @if (record.canEdit) {
     <section class="panel quick-resources" aria-labelledby="resources-title">
       <h2 id="resources-title">HP{{ resource() ? ' and ' + resource()?.name : '' }}</h2>
-      <p>Resource buttons save the values shown here immediately.</p>
+      <p class="legend">Buttons save immediately.</p>
       @if (record.core.hpMax !== null) {
         <div class="resource-row">
-          <mat-form-field appearance="outline"
+          <mat-form-field appearance="outline" subscriptSizing="dynamic"
             ><mat-label>Current HP</mat-label
             ><input
               matInput
@@ -94,8 +94,8 @@
               (ngModelChange)="hpInput.set($event)"
               [disabled]="saving()"
           /></mat-form-field>
-          <mat-form-field appearance="outline"
-            ><mat-label>Damage / healing amount</mat-label
+          <mat-form-field appearance="outline" subscriptSizing="dynamic"
+            ><mat-label>Damage / heal</mat-label
             ><input
               matInput
               type="number"
@@ -106,8 +106,7 @@
               [disabled]="saving()"
           /></mat-form-field>
           <div class="actions">
-            <button mat-stroked-button (click)="changeHp(-1)" [disabled]="saving()">
-              Take damage</button
+            <button mat-stroked-button (click)="changeHp(-1)" [disabled]="saving()">Damage</button
             ><button mat-stroked-button (click)="changeHp(1)" [disabled]="saving()">Heal</button>
           </div>
         </div>
@@ -116,7 +115,7 @@
       }
       @if (resource(); as resource) {
         <div class="resource-row">
-          <mat-form-field appearance="outline"
+          <mat-form-field appearance="outline" subscriptSizing="dynamic"
             ><mat-label>Current {{ resource.name }}</mat-label
             ><input
               matInput
@@ -128,8 +127,8 @@
               (ngModelChange)="heatInput.set($event)"
               [disabled]="saving()"
           /></mat-form-field>
-          <mat-form-field appearance="outline"
-            ><mat-label>Base {{ resource.name }} gain / cost</mat-label
+          <mat-form-field appearance="outline" subscriptSizing="dynamic"
+            ><mat-label>Base gain / cost</mat-label
             ><input
               matInput
               type="number"
@@ -145,22 +144,32 @@
             ><button mat-stroked-button (click)="changeHeat(-1)" [disabled]="saving()">
               Spend {{ resource.name }}
             </button>
-            @if (resource.resetsOnLongRest) {
-              <button mat-button (click)="saveVitals(undefined, 0)" [disabled]="saving()">
-                Long rest: reset {{ resource.name }}
-              </button>
-            }
           </div>
         </div>
-        <p class="legend">{{ resource.help }}</p>
+        <details class="resource-help">
+          <summary>{{ resource.name }} rules</summary>
+          <p class="legend">{{ resource.help }}</p>
+        </details>
       }
-      <button
-        mat-flat-button
-        (click)="saveVitals()"
-        [disabled]="saving() || (record.core.hpMax === null && !resource())"
-      >
-        {{ saving() ? 'Saving...' : 'Save resources' }}
-      </button>
+      <div class="resource-footer">
+        <button
+          mat-flat-button
+          (click)="saveVitals()"
+          [disabled]="saving() || (record.core.hpMax === null && !resource())"
+        >
+          {{ saving() ? 'Saving...' : 'Save resources' }}
+        </button>
+        @if (resource()?.resetsOnLongRest) {
+          <button
+            mat-button
+            (click)="saveVitals(undefined, 0)"
+            [disabled]="saving()"
+            [attr.aria-label]="'Long rest: reset ' + resource()?.name"
+          >
+            Reset {{ resource()?.name }}
+          </button>
+        }
+      </div>
     </section>
   }
   <section class="panel" aria-labelledby="stats-title">
