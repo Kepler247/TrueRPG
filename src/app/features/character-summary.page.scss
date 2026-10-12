@@ -1,0 +1,173 @@
+﻿.back-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: #245c47;
+}
+.summary-heading,
+.actions,
+.entry-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.summary-heading {
+  margin-bottom: 1.5rem;
+}
+h1,
+h2,
+h3,
+strong,
+.prose {
+  overflow-wrap: anywhere;
+}
+.actions a,
+button {
+  min-height: 44px;
+}
+.vitals,
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 0.75rem;
+}
+.vitals > div {
+  background: #e6eee5;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+dt {
+  color: #5e685f;
+  font-size: 0.8rem;
+}
+dd {
+  margin: 0;
+  font-weight: 700;
+}
+.vitals dd {
+  font-size: 1.15rem;
+}
+.panel {
+  margin-block: 1.25rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: #fffef9;
+  border: 1px solid #dddcd5;
+  border-radius: 1rem;
+}
+.panel h2 {
+  margin-top: 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+  padding: 1rem 0.5rem;
+  border: 1px solid #dddcd5;
+  border-radius: 0.75rem;
+}
+.stat-tile h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.stat-name {
+  color: #5e685f;
+  font-size: 0.7rem;
+}
+.score {
+  font-size: 2rem;
+  line-height: 1.5;
+}
+.modifier,
+.save {
+  font-size: 0.8rem;
+}
+.save {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+.legend,
+.skill-meta {
+  color: #5e685f;
+  font-size: 0.8rem;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1.5rem;
+}
+.skill-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e6e5df;
+}
+.skill-row > div {
+  min-width: 0;
+}
+.skill-meta {
+  display: block;
+}
+.skill-total {
+  font-size: 1.1rem;
+  color: #245c47;
+  flex-shrink: 0;
+}
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.entry-list li + li {
+  border-top: 1px solid #dddcd5;
+}
+.entry-list li {
+  padding-block: 1rem;
+}
+.entry-heading span {
+  color: #5e685f;
+  font-size: 0.875rem;
+}
+.prose {
+  white-space: pre-wrap;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.feedback {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #e6eee5;
+}
+.error {
+  color: #8b2620;
+  background: #fce9e5;
+}
+footer {
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+@media (max-width: 800px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .vitals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

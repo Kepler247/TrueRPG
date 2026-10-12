@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import type { CharacterSheetPage } from './features/character-sheet.page';
+import type { CharacterEditPage } from './features/character-edit.page';
 import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
@@ -27,12 +27,18 @@ export const routes: Routes = [
     loadComponent: () => import('./features/systems.page').then((m) => m.SystemsPage),
   },
   {
+    path: 'characters/:id/edit',
+    canActivate: [authGuard],
+    canDeactivate: [(component: CharacterEditPage) => component.canLeave()],
+    title: 'Edit character | RPG Companion',
+    loadComponent: () => import('./features/character-edit.page').then((m) => m.CharacterEditPage),
+  },
+  {
     path: 'characters/:id',
     canActivate: [authGuard],
-    canDeactivate: [(component: CharacterSheetPage) => component.canLeave()],
-    title: 'Character sheet | RPG Companion',
+    title: 'Character summary | RPG Companion',
     loadComponent: () =>
-      import('./features/character-sheet.page').then((m) => m.CharacterSheetPage),
+      import('./features/character-summary.page').then((m) => m.CharacterSummaryPage),
   },
   { path: '**', redirectTo: 'characters' },
 ];

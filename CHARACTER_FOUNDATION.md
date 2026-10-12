@@ -47,3 +47,7 @@ npm.cmd run test:db
 On iPhone: create a point-buy character; open its name; set maximum HP and training; add an item and an ability; save and refresh. Try Level up and Save sheet. For a campaign character, test the carrying-rule switch as GM/admin. LAN HTTP is supported: entry IDs use crypto.getRandomValues rather than HTTPS-only randomUUID.
 
 Automated tests use real embedded PostgreSQL for RLS/constraints and mock the hosted API for application flows. New sheet/creator layouts still need real iPhone Safari verification.
+
+## Character summary and editing
+
+The default character URL (/characters/:id) is a read-only summary with compact stats, skills, inventory, abilities, and details. Edit character opens /characters/:id/edit. All field changes and campaign carrying-rule controls live on that dedicated edit page. Level up links to the edit page with the level-up workflow open. Unsaved-edit warnings apply when leaving the edit page.

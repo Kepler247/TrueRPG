@@ -1,0 +1,170 @@
+﻿<a routerLink="/characters" class="back-link">Back to characters</a>
+@if (loading()) {
+  <h1>Character</h1>
+  <p role="status">Loading summary...</p>
+} @else if (record(); as record) {
+  <p class="eyebrow">{{ record.systemName }} &middot; {{ record.ownerLabel }}</p>
+  <div class="summary-heading">
+    <div>
+      <h1>{{ record.row.name }}</h1>
+      @if (record.core.race || record.core.class) {
+        <p>
+          {{ record.core.race }}{{ record.core.race && record.core.class ? ' / ' : ''
+          }}{{ record.core.class }}
+        </p>
+      }
+    </div>
+    @if (record.canEdit) {
+      <div class="actions">
+        <a mat-flat-button [routerLink]="['/characters', record.row.id, 'edit']">Edit character</a>
+        @if (record.core.level < 20) {
+          <a
+            mat-stroked-button
+            [routerLink]="['/characters', record.row.id, 'edit']"
+            [queryParams]="{ levelUp: 1 }"
+            >Level up</a
+          >
+        }
+      </div>
+    }
+  </div>
+  <dl class="vitals">
+    <div>
+      <dt>Level</dt>
+      <dd>{{ record.core.level }}</dd>
+    </div>
+    <div>
+      <dt>Maximum HP</dt>
+      <dd>{{ record.core.hpMax ?? 'Not set' }}</dd>
+    </div>
+    <div>
+      <dt>Initiative</dt>
+      <dd>{{ signed(rules().initiative(record.core, rules())) }}</dd>
+    </div>
+    <div>
+      <dt>Proficiency</dt>
+      <dd>{{ signed(rules().proficiencyBonus(record.core.level)) }}</dd>
+    </div>
+    <div>
+      <dt>Speed</dt>
+      <dd>
+        {{ record.core.speed.distance }} {{ record.core.speed.unit }} / {{ record.core.speed.per }}
+      </dd>
+    </div>
+    <div>
+      <dt>Size</dt>
+      <dd class="capitalize">{{ record.core.size }}</dd>
+    </div>
+  </dl>
+  <section class="panel" aria-labelledby="stats-title">
+    <h2 id="stats-title">Core stats</h2>
+    <div class="stats-grid">
+      @for (stat of stats; track stat.key) {
+        <div class="stat-tile">
+          <h3>{{ stat.key.toUpperCase() }}</h3>
+          <span class="stat-name">{{ stat.name }}</span>
+          <strong class="score">{{ record.core.scores[stat.key] }}</strong>
+          <span class="modifier"
+            >{{ signed(rules().abilityModifier(record.core.scores[stat.key])) }} modifier</span
+          >
+          <span class="save"
+            >Save {{ signed(rules().savingThrow(record.core, stat.key, rules()))
+            }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}</span
+          >
+        </div>
+      }
+    </div>
+    <p class="legend">* Proficient saving throw</p>
+  </section>
+  <section class="panel" aria-labelledby="skills-title">
+    <h2 id="skills-title">Skills</h2>
+    <div class="skills-grid">
+      @for (skill of skills(); track skill.id; let index = $index) {
+        <div class="skill-row">
+          <div>
+            <strong>{{ skill.name }}</strong
+            ><span class="skill-meta"
+              >{{ skill.stat.toUpperCase() }} &middot; {{ trainingLabel(skill.id) }}</span
+            >
+          </div>
+          <strong class="skill-total">{{ signed(skillTotal(index)) }}</strong>
+        </div>
+      }
+    </div>
+  </section>
+  <section class="panel" aria-labelledby="description-title">
+    <h2 id="description-title">Description</h2>
+    <p class="prose">{{ record.core.description || 'No description yet.' }}</p>
+    @if (record.core.heightInches !== null || record.core.bodyWeightPounds !== null) {
+      <dl class="details-grid">
+        @if (record.core.heightInches !== null) {
+          <div>
+            <dt>Height</dt>
+            <dd>{{ record.core.heightInches }} in</dd>
+          </div>
+        }
+        @if (record.core.bodyWeightPounds !== null) {
+          <div>
+            <dt>Body weight</dt>
+            <dd>{{ record.core.bodyWeightPounds }} lb</dd>
+          </div>
+        }
+      </dl>
+    }
+  </section>
+  <section class="panel" aria-labelledby="inventory-title">
+    <h2 id="inventory-title">Inventory</h2>
+    <p>
+      {{ weight(record.core) }} lb carried / {{ rules().carryCapacity(record.core) }} lb capacity
+    </p>
+    @if (!record.enforceCarryWeight) {
+      <p class="legend">Carrying capacity is disabled for this campaign.</p>
+    } @else if (weight(record.core) > rules().carryCapacity(record.core)) {
+      <p class="feedback error">Over carrying capacity</p>
+    }
+    <ul class="entry-list">
+      @for (entry of record.core.inventory; track entry.id) {
+        <li>
+          <div class="entry-heading">
+            <strong>{{ entry.name }}</strong
+            ><span>{{ entry.quantity }} x {{ entry.weight }} lb</span>
+          </div>
+          @if (entry.description) {
+            <p class="prose">{{ entry.description }}</p>
+          }
+        </li>
+      } @empty {
+        <li>No inventory items yet.</li>
+      }
+    </ul>
+  </section>
+  <section class="panel" aria-labelledby="abilities-title">
+    <h2 id="abilities-title">Abilities</h2>
+    <ul class="entry-list">
+      @for (ability of record.core.abilities; track ability.id) {
+        <li>
+          <div class="entry-heading">
+            <strong>{{ ability.name }}</strong
+            ><span class="capitalize">{{ ability.kind }}</span>
+          </div>
+          @if (ability.kind === 'spell' && ability.spellLevel !== null) {
+            <p>{{ ability.spellLevel === 0 ? 'Cantrip' : 'Spell level ' + ability.spellLevel }}</p>
+          }
+          @if (ability.usesMax !== null) {
+            <p>Maximum uses: {{ ability.usesMax }}</p>
+          }
+          <p class="prose">{{ ability.description || 'No description yet.' }}</p>
+        </li>
+      } @empty {
+        <li>No abilities yet.</li>
+      }
+    </ul>
+  </section>
+} @else {
+  <h1>Character unavailable</h1>
+  <button mat-stroked-button (click)="load()">Retry loading</button>
+}
+@if (error(); as problem) {
+  <p class="feedback error" role="alert">{{ problem }}</p>
+}
+<footer><a href="/rules-attribution.txt">Rules attribution</a></footer>

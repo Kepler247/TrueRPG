@@ -43,11 +43,11 @@ import {
     MatSelectModule,
     MatCheckboxModule,
   ],
-  templateUrl: './character-sheet.page.html',
-  styleUrl: './character-sheet.page.scss',
+  templateUrl: './character-edit.page.html',
+  styleUrl: './character-edit.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CharacterSheetPage {
+export class CharacterEditPage {
   private readonly service = inject(CharacterSheetService);
   private readonly rulesets = inject(RulesetService);
   private readonly auth = inject(AuthService);
@@ -101,6 +101,8 @@ export class CharacterSheetPage {
       this.record.set(record);
       this.name.set(record.row.name);
       this.core.set(structuredClone(record.core));
+      if (this.route.snapshot.queryParamMap?.get('levelUp') === '1' && record.canEdit)
+        this.beginLevelUp();
     } catch (error) {
       if (version === this.loadVersion)
         this.error.set(error instanceof Error ? error.message : 'Could not load character.');
@@ -149,7 +151,7 @@ export class CharacterSheetPage {
     return this.rules().skillBonus(this.core(), this.skills()[index], this.rules());
   }
   signed(value: number): string {
-    return Number.isFinite(value) ? `${value >= 0 ? '+' : ''}${value}` : '�';
+    return Number.isFinite(value) ? `${value >= 0 ? '+' : ''}${value}` : '--';
   }
   addItem(): void {
     this.patch({

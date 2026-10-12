@@ -49,3 +49,9 @@ Do not publish or create external resources unless requested.
 - Base calculations follow SRD 5.1. Keep rules attribution available. HP, race/class effects, and detailed progression require system definitions.
 - Use optimistic concurrency for sheet saves and preserve unsaved edits on failed requests.
 - Entry IDs must work on LAN HTTP iPhone tests; avoid relying on secure-context-only crypto.randomUUID.
+
+## Character presentation
+
+- Character detail URLs are read-only summaries; keep editing controls on /characters/:id/edit.
+- Summary layouts must remain compact and readable on phones, including skill totals and stat modifiers/saves.
+- Write text assets as UTF-8; use HTML entities or escaped Unicode for symbols when shell encoding could corrupt them.

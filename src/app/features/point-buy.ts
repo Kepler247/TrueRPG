@@ -20,7 +20,7 @@ export const startingScores = (): Record<StatKey, number> => ({
   imports: [MatButtonModule],
   template: `
     <section aria-labelledby="point-buy-title">
-      <h3 id="point-buy-title">Ability scores � point buy</h3>
+      <h3 id="point-buy-title">Ability scores &middot; point buy</h3>
       <p aria-live="polite">{{ remaining() }} of 27 points remaining</p>
       <p>
         Scores start at 8 and can be bought up to 15. Raising 13 to 14 or 14 to 15 costs 2 points.

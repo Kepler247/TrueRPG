@@ -75,3 +75,7 @@ If campaign creation fails immediately after updating, check that migration 2026
 ## Shared character sheets, creator, and leveling
 
 Click a character name to open its sheet. New character now includes physical details and 27-point ability-score purchase. Sheets include stats/saves, all 18 baseline skills, initiative, inventory, and general abilities. Owners, GMs, and super-admins can save sheets; party members get read-only views. Level up applies a reviewed draft with HP input and optional feature; save to persist. See [character foundation](CHARACTER_FOUNDATION.md) for rules defaults, extensibility, and the system-specific work still pending.
+
+## Character summary and editing
+
+The default character URL (/characters/:id) is a read-only summary with compact stats, skills, inventory, abilities, and details. Edit character opens /characters/:id/edit. All field changes and campaign carrying-rule controls live on that dedicated edit page. Level up links to the edit page with the level-up workflow open. Unsaved-edit warnings apply when leaving the edit page.

@@ -6,7 +6,7 @@ import { vi } from 'vitest';
 import { AuthService } from '../core/auth/auth.service';
 import { createCore } from '../core/characters/character-core';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
-import { CharacterSheetPage } from './character-sheet.page';
+import { CharacterEditPage } from './character-edit.page';
 
 const record: SheetRecord = {
   row: {
@@ -32,7 +32,7 @@ describe('Character sheet', () => {
     vi.resetAllMocks();
     service.load.mockResolvedValue(structuredClone(record));
     TestBed.configureTestingModule({
-      imports: [CharacterSheetPage],
+      imports: [CharacterEditPage],
       providers: [
         provideRouter([]),
         { provide: AuthService, useValue: { user: signal({ id: 'player' }) } },
@@ -48,7 +48,7 @@ describe('Character sheet', () => {
     });
   });
   async function create() {
-    const fixture = TestBed.createComponent(CharacterSheetPage);
+    const fixture = TestBed.createComponent(CharacterEditPage);
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();

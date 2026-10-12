@@ -1,14 +1,14 @@
-<a routerLink="/characters">Back to characters</a>
+<a [routerLink]="['/characters', record()?.row?.id || '']">Back to character summary</a>
 @if (loading()) {
   <h1>Character</h1>
   <p role="status">Loading sheet...</p>
 } @else if (record(); as record) {
-  <p class="eyebrow">{{ record.systemName }} � {{ record.ownerLabel }}</p>
+  <p class="eyebrow">{{ record.systemName }} &middot; {{ record.ownerLabel }}</p>
   @if (core().race || core().class) {
-    <p>{{ core().race }}{{ core().race && core().class ? ' � ' : '' }}{{ core().class }}</p>
+    <p>{{ core().race }}{{ core().race && core().class ? ' &middot; ' : '' }}{{ core().class }}</p>
   }
   <div class="sheet-heading">
-    <h1>{{ record.row.name }}</h1>
+    <h1>Edit {{ record.row.name }}</h1>
     @if (record.canEdit) {
       <button mat-flat-button type="button" (click)="save()" [disabled]="saving() || !dirty()">
         {{ saving() ? 'Saving...' : 'Save sheet' }}
@@ -169,7 +169,7 @@
     <div class="stat-grid">
       @for (stat of stats; track stat.key) {
         <div class="stat-card">
-          <h3>{{ stat.name }} � {{ signed(modifier(core().scores[stat.key])) }}</h3>
+          <h3>{{ stat.name }} &middot; {{ signed(modifier(core().scores[stat.key])) }}</h3>
           <mat-form-field appearance="outline"
             ><mat-label>{{ stat.name }} score</mat-label
             ><input
@@ -220,7 +220,8 @@
       @for (skill of skills(); track skill.id; let index = $index) {
         <div class="skill-card">
           <h3>
-            {{ skill.name }} � {{ skill.stat.toUpperCase() }} � {{ signed(skillTotal(index)) }}
+            {{ skill.name }} &middot; {{ skill.stat.toUpperCase() }} &middot;
+            {{ signed(skillTotal(index)) }}
           </h3>
           <mat-form-field appearance="outline"
             ><mat-label>{{ skill.name }} training</mat-label
@@ -259,7 +260,7 @@
     } @else if (!record.enforceCarryWeight) {
       <p>Your GM has disabled carrying capacity for this campaign.</p>
     }
-    <p>Carried {{ weight() }} lb � capacity {{ capacity() }} lb</p>
+    <p>Carried {{ weight() }} lb &middot; capacity {{ capacity() }} lb</p>
     @if (record.enforceCarryWeight && weight() > capacity()) {
       <p class="feedback error">Over carrying capacity. Check your campaign's carrying rules.</p>
     }
@@ -285,7 +286,7 @@
           [ngModel]="core().carryCapacityOverride"
           (ngModelChange)="patch({ carryCapacityOverride: $event })"
           [disabled]="disabled()"
-        /><mat-hint>Blank uses Strength � 15, adjusted for size.</mat-hint></mat-form-field
+        /><mat-hint>Blank uses Strength &times; 15, adjusted for size.</mat-hint></mat-form-field
       >
     </div>
     @for (entry of core().inventory; track entry.id) {
@@ -434,5 +435,5 @@
   <a href="https://media.dndbeyond.com/compendium-images/srd/5.1/SRD_CC_v5.1.pdf"
     >5E rules source</a
   >
-  � <a href="/rules-attribution.txt">Rules attribution</a>
+  &middot; <a href="/rules-attribution.txt">Rules attribution</a>
 </footer>
