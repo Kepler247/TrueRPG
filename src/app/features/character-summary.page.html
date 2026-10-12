@@ -1,4 +1,4 @@
-﻿<a routerLink="/characters" class="back-link">Back to characters</a>
+<a routerLink="/characters" class="back-link">Back to characters</a>
 @if (loading()) {
   <h1>Character</h1>
   <p role="status">Loading summary...</p>
@@ -63,10 +63,10 @@
         <div class="stat-tile">
           <h3>{{ stat.key.toUpperCase() }}</h3>
           <span class="stat-name">{{ stat.name }}</span>
-          <strong class="score">{{ record.core.scores[stat.key] }}</strong>
-          <span class="modifier"
-            >{{ signed(rules().abilityModifier(record.core.scores[stat.key])) }} modifier</span
-          >
+          <strong class="modifier">{{
+            signed(rules().abilityModifier(record.core.scores[stat.key]))
+          }}</strong>
+          <span class="score">Score {{ record.core.scores[stat.key] }}</span>
           <span class="save"
             >Save {{ signed(rules().savingThrow(record.core, stat.key, rules()))
             }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}</span
