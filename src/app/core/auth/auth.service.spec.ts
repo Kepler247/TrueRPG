@@ -46,6 +46,27 @@ describe('Auth session lifecycle', () => {
     expect(service.initializing()).toBe(false);
     expect(service.initializationError()).toContain('Could not restore');
   });
+  it('restores the stored user before ready without waiting for INITIAL_SESSION', async () => {
+    auth.getSession.mockResolvedValue({ data: { session: restored }, error: null });
+    const service = TestBed.inject(AuthService);
+    await service.ready;
+    expect(service.user()?.id).toBe('player-id');
+    expect(service.initializing()).toBe(false);
+  });
+  it('does not overwrite a sign-out event with an older restoration result', async () => {
+    let resolve!: (value: unknown) => void;
+    auth.getSession.mockImplementation(
+      () =>
+        new Promise((done) => {
+          resolve = done;
+        }),
+    );
+    const service = TestBed.inject(AuthService);
+    listener('SIGNED_OUT', null);
+    resolve({ data: { session: restored }, error: null });
+    await service.ready;
+    expect(service.user()).toBeNull();
+  });
 
   it('keeps the session if sign-out fails', async () => {
     auth.signOut.mockResolvedValue({ error: new Error('Network failure') });

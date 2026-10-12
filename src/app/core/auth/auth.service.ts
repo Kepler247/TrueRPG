@@ -10,10 +10,12 @@ export class AuthService {
   readonly initializing = signal(true);
   readonly initializationError = signal<string | null>(null);
   readonly ready: Promise<void>;
+  private sessionRevision = 0;
 
   constructor() {
     const { data } = this.client.auth.onAuthStateChange((_event, session) => {
       // Keep this callback synchronous: awaiting auth calls here can deadlock.
+      this.sessionRevision++;
       this.currentSession.set(session);
     });
     inject(DestroyRef).onDestroy(() => data.subscription.unsubscribe());
@@ -21,9 +23,13 @@ export class AuthService {
   }
 
   private async restoreSession(): Promise<void> {
+    const revision = this.sessionRevision;
     try {
-      const { error } = await this.client.auth.getSession();
+      const { data, error } = await this.client.auth.getSession();
       if (error) this.initializationError.set(error.message);
+      // Guards await ready: restore before they run, even if INITIAL_SESSION is delayed.
+      // An auth event during this request takes precedence over its older snapshot.
+      else if (revision === this.sessionRevision) this.currentSession.set(data.session);
     } catch {
       this.initializationError.set('Could not restore your session. Please try signing in again.');
     } finally {
