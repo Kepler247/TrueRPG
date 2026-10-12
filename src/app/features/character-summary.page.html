@@ -4,6 +4,13 @@
   <p role="status">Loading summary...</p>
 } @else if (record(); as record) {
   <p class="eyebrow">{{ record.systemName }} &middot; {{ record.ownerLabel }}</p>
+  @if (record.row.portrait_path) {
+    <app-image-upload
+      kind="characters"
+      [entityId]="record.row.id"
+      [path]="record.row.portrait_path"
+    />
+  }
   <div class="summary-heading">
     <div>
       <h1>{{ record.row.name }}</h1>
@@ -277,6 +284,9 @@
             <strong>{{ entry.name }}</strong
             ><span>{{ entry.quantity }} x {{ entry.weight }} lb</span>
           </div>
+          @if (entry['isMock']) {
+            <p class="legend">MOCK / TEST &middot; Example weight</p>
+          }
           @if (entry.description) {
             <p class="prose">{{ entry.description }}</p>
           }
@@ -310,6 +320,23 @@
             <p>Maximum uses: {{ ability.usesMax }}</p>
           }
           <p class="prose">{{ ability.description || 'No description yet.' }}</p>
+          @if (ability['isMock']) {
+            <p class="legend">MOCK / TEST</p>
+          }
+          @if (record.canEdit && abilityAction(ability.id); as action) {
+            <button
+              mat-stroked-button
+              (click)="useAbility(ability.id)"
+              [disabled]="
+                saving() || preparedTriple() || rollChoices().length > 0 || heat() < action.cost
+              "
+            >
+              Use &middot; {{ action.cost }} {{ resource()?.name }}
+            </button>
+            @if (record.core.abilityUses?.[ability.id]; as uses) {
+              <span class="legend"> Used {{ uses }} times</span>
+            }
+          }
         </li>
       } @empty {
         <li>No abilities yet.</li>
@@ -327,6 +354,25 @@
   <p class="feedback" role="status">{{ success }}</p>
 }
 <footer><a href="/rules-attribution.txt">Rules attribution</a></footer>
+@if (preparedTriple()) {
+  <p class="feedback" role="status">
+    Stroke of Genius prepared: tap a check modifier to roll three dice.
+  </p>
+}
+@if (rollChoices().length) {
+  <aside class="roll-result" role="status">
+    <div>
+      <strong>{{ rollChoices()[0]?.label }}: choose any result</strong>
+      <div class="actions">
+        @for (choice of rollChoices(); track $index) {
+          <button mat-stroked-button (click)="chooseRoll($index)">
+            {{ choice.die }} {{ signed(choice.modifier) }} = {{ choice.total }}
+          </button>
+        }
+      </div>
+    </div>
+  </aside>
+}
 @if (lastRoll(); as result) {
   <aside class="roll-result" role="status" aria-live="polite" aria-atomic="true">
     <div>

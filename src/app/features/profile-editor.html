@@ -3,6 +3,16 @@
   @if (loading()) {
     <p role="status">Loading your profile...</p>
   } @else if (loaded()) {
+    @if (userId(); as id) {
+      <app-image-upload
+        kind="profiles"
+        [entityId]="id"
+        [path]="avatarPath()"
+        [stamp]="profileStamp()"
+        [canEdit]="!saving()"
+        (changed)="imageChanged($event)"
+      />
+    }
     @if (isSuperAdmin()) {
       <p class="role-badge">Super master</p>
     }

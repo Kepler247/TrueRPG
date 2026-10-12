@@ -273,7 +273,7 @@
               @if (kind() === 'characters') {
                 <a [routerLink]="['/characters', record.id]">{{ record.name }}</a>
               } @else {
-                {{ record.name }}
+                <a [routerLink]="['/campaigns', record.id]">{{ record.name }}</a>
               }
             </h2>
             <p>

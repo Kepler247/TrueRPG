@@ -6,6 +6,7 @@ import { RulesetService } from './character-ruleset';
 import { validateSystemCore } from '../systems/system-rules';
 
 export interface SheetRow {
+  portrait_path?: string | null;
   id: string;
   name: string;
   owner_id: string;
@@ -16,6 +17,7 @@ export interface SheetRow {
   updated_at: string;
 }
 export interface SheetRecord {
+  canAssign?: boolean;
   row: SheetRow;
   core: CharacterCore;
   canEdit: boolean;
@@ -66,6 +68,7 @@ export class CharacterSheetService {
       canEdit:
         !!userId &&
         (row.owner_id === userId || campaign.data?.owner_id === userId || role.data === true),
+      canAssign: !!userId && (row.owner_id === userId || role.data === true),
       canManageCarryRules:
         !!row.campaign_id && !!userId && (campaign.data?.owner_id === userId || role.data === true),
       enforceCarryWeight: campaign.data?.enforce_carry_weight ?? true,
@@ -87,6 +90,47 @@ export class CharacterSheetService {
       .maybeSingle<{ enforce_carry_weight: boolean }>();
     if (error || !data) throw new Error('Could not change the campaign rule. Please retry.');
     return data.enforce_carry_weight;
+  }
+  async assignmentOptions(
+    record: SheetRecord,
+  ): Promise<{ id: string; name: string; owner_id: string; enforce_carry_weight: boolean }[]> {
+    if (!record.canAssign) return [];
+    const { data: members, error } = await this.client
+      .from('campaign_members')
+      .select('campaign_id')
+      .eq('user_id', record.row.owner_id);
+    if (error) throw new Error('Could not load matching campaigns.');
+    const ids = (members ?? []).map((member) => member.campaign_id);
+    if (!ids.length) return [];
+    const campaigns = await this.client
+      .from('campaigns')
+      .select('id,name,owner_id,enforce_carry_weight')
+      .eq('system_id', record.row.system_id)
+      .in('id', ids)
+      .order('name');
+    if (campaigns.error) throw new Error('Could not load matching campaigns.');
+    return campaigns.data ?? [];
+  }
+  async assign(record: SheetRecord, campaignId: string | null): Promise<SheetRecord> {
+    if (!record.canAssign) throw new Error('Only the owner or admin can assign this character.');
+    const { data, error } = await this.client.rpc('set_character_campaign_checked', {
+      character_id: record.row.id,
+      target_campaign_id: campaignId,
+      expected_updated_at: record.row.updated_at,
+    });
+    if (error || !data) throw new Error(error?.message ?? 'Could not assign character.');
+    const { row, enforceCarryWeight, canManageCarryRules } = data as {
+      row: SheetRow;
+      enforceCarryWeight: boolean;
+      canManageCarryRules: boolean;
+    };
+    return {
+      ...record,
+      row,
+      core: readCore(row.data, row.data_version),
+      canManageCarryRules,
+      enforceCarryWeight,
+    };
   }
   async save(record: SheetRecord, name: string, core: CharacterCore): Promise<SheetRecord> {
     if (!this.auth.user() || !record.canEdit) throw new Error('This character is read-only.');

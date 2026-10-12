@@ -88,6 +88,7 @@ export const coreSchema = z
     class: z.string().nullable(),
     inventory: z.array(inventorySchema),
     abilities: z.array(abilitySchema),
+    abilityUses: z.record(z.string(), z.number().int().nonnegative()).optional(),
   })
   .passthrough();
 export type CharacterCore = z.infer<typeof coreSchema>;

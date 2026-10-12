@@ -31,6 +31,9 @@ interface ReferenceDocument {
     <h1>{{ system()?.name ?? 'System not found' }}</h1>
     <p>{{ system()?.description }}</p>
     @if (system(); as system) {
+      <a [routerLink]="['/systems', system.slug, 'catalog']">Items and shared feats</a>
+    }
+    @if (system(); as system) {
       <div class="tools">
         <label
           >Search reference<input

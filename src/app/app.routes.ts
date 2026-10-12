@@ -4,6 +4,18 @@ import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
   {
+    path: 'campaigns/:id',
+    canActivate: [authGuard],
+    title: 'Campaign | RPG Companion',
+    loadComponent: () =>
+      import('./features/campaign-detail.page').then((m) => m.CampaignDetailPage),
+  },
+  {
+    path: 'systems/:slug/catalog',
+    title: 'System catalog | RPG Companion',
+    loadComponent: () => import('./features/system-catalog.page').then((m) => m.SystemCatalogPage),
+  },
+  {
     path: 'systems/:slug',
     title: 'System reference | RPG Companion',
     loadComponent: () => import('./features/system-hub.page').then((m) => m.SystemHubPage),

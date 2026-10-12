@@ -7,6 +7,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { createCore } from '../core/characters/character-core';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
 import { CharacterEditPage } from './character-edit.page';
+import { ImageService } from '../core/images/image.service';
 
 const record: SheetRecord = {
   row: {
@@ -41,6 +42,7 @@ describe('Character sheet', () => {
     TestBed.configureTestingModule({
       imports: [CharacterEditPage],
       providers: [
+        { provide: ImageService, useValue: { url: async () => '' } },
         provideRouter([]),
         { provide: AuthService, useValue: { user: signal({ id: 'player' }) } },
         { provide: CharacterSheetService, useValue: service },
@@ -178,5 +180,14 @@ describe('Character sheet', () => {
     expect(page.core().level).toBe(2);
     expect(page.core().hpMax).toBe(25);
     expect(page.pendingLevelUp()).toBe(false);
+  });
+  it('imports mock catalog equipment into the draft without inventing combat stats', async () => {
+    const page = (await create()).componentInstance;
+    page.selectedCatalogItem.set('test-pistol');
+    page.importCatalogItem();
+    expect(page.core().inventory[0].name).toBe('Test pistol');
+    expect(page.core().inventory[0]['isMock']).toBe(true);
+    expect(page.core().inventory[0]['damage']).toBeUndefined();
+    expect(page.dirty()).toBe(true);
   });
 });

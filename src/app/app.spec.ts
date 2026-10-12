@@ -7,6 +7,8 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { AuthService } from './core/auth/auth.service';
 import { AdventureService } from './core/adventures/adventure.service';
 import { routes } from './app.routes';
+import { CampaignService } from './core/campaigns/campaign.service';
+import { ImageService } from './core/images/image.service';
 
 describe('Feature navigation', () => {
   const user = signal<{ email: string } | null>(null);
@@ -14,6 +16,8 @@ describe('Feature navigation', () => {
     user.set({ email: 'player@example.com' });
     TestBed.configureTestingModule({
       providers: [
+        { provide: CampaignService, useValue: { invitations: async () => [] } },
+        { provide: ImageService, useValue: { url: async () => '' } },
         provideRouter(routes),
         {
           provide: CharacterSheetService,

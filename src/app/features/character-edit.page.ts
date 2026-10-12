@@ -1,4 +1,7 @@
 import { RulesetService } from '../core/characters/character-ruleset';
+import { ImageUpload } from './image-upload';
+import { ImageChange } from '../core/images/image.service';
+import { catalogInventory, systemCatalog } from '../core/systems/system-catalog';
 import { validateSystemCore } from '../core/systems/system-rules';
 import {
   ChangeDetectionStrategy,
@@ -37,6 +40,7 @@ import {
 @Component({
   selector: 'app-character-sheet',
   imports: [
+    ImageUpload,
     FormsModule,
     RouterLink,
     MatButtonModule,
@@ -61,6 +65,16 @@ export class CharacterEditPage {
   private readonly userId = computed(() => this.auth.user()?.id ?? null);
   private loadVersion = 0;
   readonly record = signal<SheetRecord | null>(null);
+  imageChanged(change: ImageChange): void {
+    this.record.update((record) =>
+      record
+        ? {
+            ...record,
+            row: { ...record.row, portrait_path: change.path, updated_at: change.updated_at },
+          }
+        : null,
+    );
+  }
   readonly core = signal<CharacterCore>(createCore());
   readonly name = signal('');
   readonly loading = signal(true);
@@ -72,13 +86,52 @@ export class CharacterEditPage {
   readonly stats = STATS;
   readonly rules = computed(() => this.rulesets.get(this.record()?.rulesetKey));
   readonly skills = computed(() => this.rules().skills);
+  readonly catalogItems = computed(() =>
+    systemCatalog(this.record()?.rulesetKey).filter((entry) => entry.category !== 'feat'),
+  );
+  readonly catalogFeats = computed(() =>
+    systemCatalog(this.record()?.rulesetKey).filter((entry) => entry.category === 'feat'),
+  );
+  readonly selectedCatalogItem = signal('');
+  readonly campaignChoices = signal<{ id: string; name: string }[]>([]);
+  readonly selectedCampaign = signal('');
+  readonly assigning = signal(false);
+  async assignCampaign(): Promise<void> {
+    const record = this.record();
+    if (!record?.canAssign || this.assigning() || this.saving()) return;
+    const version = this.loadVersion;
+    this.assigning.set(true);
+    this.error.set(null);
+    try {
+      const saved = await this.service.assign(record, this.selectedCampaign() || null);
+      if (version === this.loadVersion) {
+        this.record.set(saved);
+        this.message.set('Campaign assignment saved.');
+      }
+    } catch (error) {
+      if (version === this.loadVersion)
+        this.error.set(error instanceof Error ? error.message : 'Could not assign character.');
+    } finally {
+      this.assigning.set(false);
+    }
+  }
+  importCatalogItem(): void {
+    const entry = this.catalogItems().find((entry) => entry.id === this.selectedCatalogItem());
+    if (entry)
+      this.patch({
+        inventory: [
+          ...this.core().inventory,
+          catalogInventory(entry, this.record()?.rulesetKey ?? 'base5e'),
+        ],
+      });
+  }
   readonly sizes = ['tiny', 'small', 'medium', 'large', 'huge', 'gargantuan'];
   readonly pb = computed(() => this.rules().proficiencyBonus(this.core().level));
   readonly initiative = computed(() => this.rules().initiative(this.core(), this.rules()));
   readonly capacity = computed(() => this.rules().carryCapacity(this.core()));
   readonly weight = computed(() => inventoryWeight(this.core()));
   readonly currentHp = computed(() => currentHitPoints(this.core()));
-  readonly disabled = computed(() => !this.record()?.canEdit || this.saving());
+  readonly disabled = computed(() => !this.record()?.canEdit || this.saving() || this.assigning());
   readonly leveling = signal(false);
   readonly pendingLevelUp = signal(false);
   readonly hpGain = signal(0);
@@ -155,6 +208,18 @@ export class CharacterEditPage {
       const record = await this.service.load(this.id());
       if (version !== this.loadVersion) return;
       this.record.set(record);
+      this.selectedCampaign.set(record.row.campaign_id ?? '');
+      this.campaignChoices.set([]);
+      if (record.canAssign) {
+        void this.service
+          .assignmentOptions(record)
+          .then((choices) => {
+            if (version === this.loadVersion) this.campaignChoices.set(choices);
+          })
+          .catch(() => {
+            if (version === this.loadVersion) this.error.set('Could not load matching campaigns.');
+          });
+      }
       this.name.set(record.row.name);
       this.core.set(structuredClone(record.core));
       if (this.route.snapshot.queryParamMap?.get('levelUp') === '1' && record.canEdit)
@@ -320,16 +385,20 @@ export class CharacterEditPage {
       this.error.set('Set maximum HP first, then enter a nonnegative whole-number HP increase.');
       return;
     }
+    const selectedFeat = this.catalogFeats().find(
+      (entry) => entry.name === this.newFeature().trim(),
+    );
     const abilities = this.newFeature().trim()
       ? [
           ...core.abilities,
           {
             id: createEntryId(),
             name: this.newFeature().trim(),
-            kind: 'feature',
-            description: `Gained at level ${core.level + 1}.`,
+            kind: selectedFeat ? 'feat' : 'feature',
+            description: selectedFeat?.description ?? `Gained at level ${core.level + 1}.`,
             spellLevel: null,
             usesMax: null,
+            ...(selectedFeat ? { isMock: selectedFeat.isMock, catalogId: selectedFeat.id } : {}),
           },
         ]
       : core.abilities;

@@ -31,7 +31,7 @@ Do not publish or create external resources unless requested.
 - Campaigns and characters require systemId; campaign-less characters still have a system.
 - A character can only join a campaign with the same systemId; enforce this in the eventual database schema.
 - Keep rules engines, versioned character data, and theme selection separate from shared auth/campaign infrastructure.
-- Do not invent game mechanics before the user defines them.
+- Do not invent game mechanics before the user defines them. The user authorizes clearly labeled mock items and shared feats for testing; fixture values must not be presented as official rules.
 
 ## Database
 
@@ -40,7 +40,7 @@ Do not publish or create external resources unless requested.
 - GMs manage membership; deleting campaigns/removing members detaches characters. Character deletion is owner/admin only.
 - Protect ownership and system columns; assignment uses set_character_campaign RPC.
 - Usernames belong in profiles, not Auth metadata; roles belong in private.super_admins.
-- Planned system hubs: lore, rules references, item catalogs. Planned uploads: profile and character images in Supabase Storage with ownership-aware policies.
+- System hubs contain lore, references, and test catalogs. Private Supabase Storage uploads use entity-scoped image policies; profiles store avatar_path and characters store portrait_path. In-app campaign invitations require the intended player's acceptance.
 
 ## Character rules
 

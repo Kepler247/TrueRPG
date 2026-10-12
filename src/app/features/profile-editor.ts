@@ -13,10 +13,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../core/auth/auth.service';
 import { ProfileService } from '../core/profiles/profile.service';
+import { ImageUpload } from './image-upload';
+import { ImageChange } from '../core/images/image.service';
 
 @Component({
   selector: 'app-profile-editor',
-  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, ImageUpload],
   templateUrl: './profile-editor.html',
   styleUrl: './profile-editor.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +26,13 @@ import { ProfileService } from '../core/profiles/profile.service';
 export class ProfileEditor {
   private readonly auth = inject(AuthService);
   private readonly profiles = inject(ProfileService);
-  private readonly userId = computed(() => this.auth.user()?.id ?? null);
+  readonly userId = computed(() => this.auth.user()?.id ?? null);
+  readonly avatarPath = signal<string | null>(null);
+  readonly profileStamp = signal<string | undefined>(undefined);
+  imageChanged(change: ImageChange): void {
+    this.avatarPath.set(change.path);
+    this.profileStamp.set(change.updated_at);
+  }
   readonly loading = signal(true);
   readonly saving = signal(false);
   readonly loaded = signal(false);
@@ -66,6 +74,8 @@ export class ProfileEditor {
         displayName: result.profile.display_name,
       });
       this.needsUsername.set(!result.profile.username);
+      this.avatarPath.set(result.profile.avatar_path ?? null);
+      this.profileStamp.set(result.profile.updated_at);
       this.isSuperAdmin.set(result.isSuperAdmin);
       this.loaded.set(true);
     } catch (error) {
@@ -95,6 +105,8 @@ export class ProfileEditor {
       if (this.userId() !== userId) return;
       this.form.reset({ username: profile.username ?? '', displayName: profile.display_name });
       this.needsUsername.set(false);
+      this.avatarPath.set(profile.avatar_path ?? null);
+      this.profileStamp.set(profile.updated_at);
       this.message.set('Profile saved.');
     } catch (error) {
       if (this.userId() === userId)

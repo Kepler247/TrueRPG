@@ -15,7 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from '../core/auth/auth.service';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
-import { RulesetService } from '../core/characters/character-ruleset';
+import { AbilityActionDefinition, RulesetService } from '../core/characters/character-ruleset';
+import { ImageUpload } from './image-upload';
 import { DiceRoll, rollWithModifier } from '../core/characters/dice';
 import { validateSystemCore } from '../core/systems/system-rules';
 import {
@@ -27,7 +28,14 @@ import {
 
 @Component({
   selector: 'app-character-summary',
-  imports: [RouterLink, MatButtonModule, FormsModule, MatInputModule, MatFormFieldModule],
+  imports: [
+    RouterLink,
+    MatButtonModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ImageUpload,
+  ],
   templateUrl: './character-summary.page.html',
   styleUrl: './character-summary.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +58,109 @@ export class CharacterSummaryPage {
   readonly message = signal<string | null>(null);
   readonly lastRoll = signal<DiceRoll | null>(null);
   readonly rollCount = signal(0);
+  readonly preparedTriple = signal(false);
+  readonly rollChoices = signal<DiceRoll[]>([]);
+  abilityAction(id: string): AbilityActionDefinition | undefined {
+    return this.record()
+      ? this.rules()
+          .abilityActions?.(this.record()!.core)
+          .find((action) => action.abilityId === id)
+      : undefined;
+  }
+  chooseRoll(index: number): void {
+    const roll = this.rollChoices()[index];
+    if (roll) {
+      this.lastRoll.set(roll);
+      this.rollChoices.set([]);
+      this.rollCount.update((n) => n + 1);
+    }
+  }
+  async useAbility(id: string): Promise<void> {
+    const record = this.record();
+    const resource = this.resource();
+    const action = this.abilityAction(id);
+    if (
+      !record?.canEdit ||
+      !resource ||
+      !action ||
+      this.saving() ||
+      this.preparedTriple() ||
+      this.rollChoices().length ||
+      !record.core.abilities.some((ability) => ability.id === id)
+    )
+      return;
+    if (
+      this.hpInput() !== currentHitPoints(record.core) ||
+      this.heatInput() !== resource.current(record.core)
+    ) {
+      this.error.set('Save resource changes before using an ability.');
+      return;
+    }
+    if (resource.current(record.core) < action.cost) {
+      this.error.set(`Not enough ${resource.name}.`);
+      return;
+    }
+    const previousRoll = this.lastRoll();
+    if (action.rollMode === 'reroll' && !previousRoll) {
+      this.error.set('Roll a check first, then use this reroll ability.');
+      return;
+    }
+    const next = resource.setCurrent(
+      {
+        ...record.core,
+        abilityUses: { ...record.core.abilityUses, [id]: (record.core.abilityUses?.[id] ?? 0) + 1 },
+      },
+      resource.current(record.core) - action.cost,
+    );
+    const version = this.loadVersion;
+    this.saving.set(true);
+    this.error.set(null);
+    this.message.set(null);
+    try {
+      const saved = await this.service.save(record, record.row.name, next);
+      if (version !== this.loadVersion) return;
+      this.record.set(saved);
+      this.hpInput.set(currentHitPoints(saved.core));
+      this.heatInput.set(resource.current(saved.core));
+      if (action.rollMode === 'reroll' && previousRoll) {
+        this.lastRoll.set(
+          rollWithModifier(previousRoll.label, previousRoll.modifier, previousRoll.sides),
+        );
+        this.rollCount.update((n) => n + 1);
+      }
+      if (action.rollMode === 'choose-three') this.preparedTriple.set(true);
+      this.message.set(
+        action.rollMode === 'choose-three'
+          ? 'Tap a check modifier to roll three dice and choose any result.'
+          : `Ability used; ${action.cost} ${resource.name} spent. Resolve its effect using the feature text.`,
+      );
+    } catch (error) {
+      if (version === this.loadVersion)
+        this.error.set(
+          error instanceof Error
+            ? error.message
+            : 'Ability could not be saved. No roll was applied.',
+        );
+    } finally {
+      this.saving.set(false);
+    }
+  }
   roll(label: string, modifier: number): void {
+    if (this.saving()) return;
+    if (this.rollChoices().length) {
+      this.error.set('Choose one of the three results first.');
+      return;
+    }
+    if (this.preparedTriple()) {
+      this.lastRoll.set(null);
+      this.rollChoices.set(
+        Array.from({ length: 3 }, () =>
+          rollWithModifier(label, modifier, this.rules().checkDie ?? 20),
+        ),
+      );
+      this.preparedTriple.set(false);
+      return;
+    }
     this.lastRoll.set(rollWithModifier(label, modifier, this.rules().checkDie ?? 20));
     this.rollCount.update((n) => n + 1);
   }
@@ -82,6 +192,8 @@ export class CharacterSummaryPage {
     this.error.set(null);
     this.message.set(null);
     this.lastRoll.set(null);
+    this.preparedTriple.set(false);
+    this.rollChoices.set([]);
     try {
       const record = await this.service.load(this.id());
       if (version === this.loadVersion) {

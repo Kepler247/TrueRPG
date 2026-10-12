@@ -3,6 +3,8 @@ import { AuthService } from '../auth/auth.service';
 import { SUPABASE } from '../auth/supabase';
 
 export interface Profile {
+  avatar_path?: string | null;
+  updated_at?: string;
   id: string;
   username: string | null;
   display_name: string;
@@ -24,7 +26,7 @@ export class ProfileService {
     const [profile, role] = await Promise.all([
       this.client
         .from('profiles')
-        .select('id,username,display_name')
+        .select('id,username,display_name,avatar_path,updated_at')
         .eq('id', id)
         .single<Profile>(),
       this.client.rpc('is_super_admin'),
@@ -40,7 +42,7 @@ export class ProfileService {
       .from('profiles')
       .update({ username: username.trim().toLowerCase(), display_name: displayName.trim() })
       .eq('id', id)
-      .select('id,username,display_name')
+      .select('id,username,display_name,avatar_path,updated_at')
       .single<Profile>();
     if (error?.code === '23505') throw new Error('That username is taken. Choose another one.');
     if (error) throw new Error('Could not save your profile. Please retry.');

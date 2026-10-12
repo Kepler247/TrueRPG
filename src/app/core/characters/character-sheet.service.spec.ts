@@ -90,4 +90,22 @@ describe('Sheet persistence and permissions', () => {
     data['characters'] = null;
     await expect(service.save(record, 'Courier', createCore())).rejects.toThrow('changed');
   });
+  it('assigns through the checked RPC and keeps its atomic snapshot for the next sheet save', async () => {
+    const service = TestBed.inject(CharacterSheetService);
+    const record = await service.load('character');
+    const assigned = { ...row, campaign_id: 'new-campaign', updated_at: 'new-stamp' };
+    client.rpc.mockResolvedValue({
+      data: { row: assigned, enforceCarryWeight: false, canManageCarryRules: false },
+      error: null,
+    });
+    const saved = await service.assign(record, 'new-campaign');
+    expect(client.rpc).toHaveBeenCalledWith('set_character_campaign_checked', {
+      character_id: row.id,
+      target_campaign_id: 'new-campaign',
+      expected_updated_at: row.updated_at,
+    });
+    expect(saved.row.updated_at).toBe('new-stamp');
+    expect(saved.enforceCarryWeight).toBe(false);
+    expect(saved.row.data).toEqual(row.data);
+  });
 });

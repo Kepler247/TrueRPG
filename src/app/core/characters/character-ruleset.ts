@@ -21,6 +21,7 @@ export interface ClassResourceDefinition {
   resetsOnLongRest?: boolean;
 }
 export interface CharacterRuleset {
+  abilityActions?: (core: CharacterCore) => readonly AbilityActionDefinition[];
   classResource?: (core: CharacterCore) => ClassResourceDefinition | null;
   maxLevel?: number;
   maxScore?: number;
@@ -53,6 +54,11 @@ export interface CharacterRuleset {
   initiative: (core: CharacterCore, rules: CharacterRuleset) => number;
   carryCapacity: (core: CharacterCore) => number;
   levelUpPrompts: (core: CharacterCore, nextLevel: number) => readonly string[];
+}
+export interface AbilityActionDefinition {
+  abilityId: string;
+  cost: number;
+  rollMode?: 'reroll' | 'choose-three';
 }
 
 export const BASE_5E_RULES: CharacterRuleset = {

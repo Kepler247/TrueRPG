@@ -122,6 +122,40 @@ export function make501Rules(base: CharacterRuleset): CharacterRuleset {
   };
   return {
     ...base,
+    abilityActions: (core) =>
+      core.class !== 'Gunslinger'
+        ? []
+        : GUNSLINGER_FEATURES.filter((feature) => feature[0] <= core.level).flatMap((feature) => {
+            const costs: Record<string, number> = {
+              'Lucky Strike': 1,
+              'Stroke of Genius': 3,
+              'Fan the Hammer': 2,
+              Distraction: 2,
+              Pickpocket: 2,
+              Deadeye: 5,
+              'Fantastic Story': 4,
+              'No One Walks Away': 7,
+              'Old Friend': 5,
+              'Wild Plan': 8,
+              'Super Deadeye': 11,
+              'Unbelievable Luck': 10,
+              'Divine Intervention': 15,
+            };
+            const cost = costs[feature[1]];
+            return cost === undefined
+              ? []
+              : [
+                  {
+                    abilityId: `501-gunslinger-${feature[0]}-${feature[1].toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+                    cost,
+                    ...(feature[1] === 'Lucky Strike'
+                      ? { rollMode: 'reroll' as const }
+                      : feature[1] === 'Stroke of Genius'
+                        ? { rollMode: 'choose-three' as const }
+                        : {}),
+                  },
+                ];
+          }),
     maxLevel: 12,
     classResource: (core) => (core.class === 'Gunslinger' ? HEAT_RESOURCE : null),
     maxScore: undefined,

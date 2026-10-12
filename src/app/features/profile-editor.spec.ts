@@ -4,6 +4,7 @@ import { vi } from 'vitest';
 import { AuthService } from '../core/auth/auth.service';
 import { ProfileService } from '../core/profiles/profile.service';
 import { ProfileEditor } from './profile-editor';
+import { ImageService } from '../core/images/image.service';
 
 const account = { id: 'player-id', email: 'player@example.com' };
 const saved = { id: account.id, username: 'vault_dweller', display_name: 'Vault Dweller' };
@@ -17,6 +18,7 @@ describe('Profile editor', () => {
     TestBed.configureTestingModule({
       imports: [ProfileEditor],
       providers: [
+        { provide: ImageService, useValue: { url: async () => '' } },
         { provide: AuthService, useValue: { user } },
         { provide: ProfileService, useValue: profiles },
       ],

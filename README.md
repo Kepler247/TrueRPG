@@ -51,8 +51,8 @@ The initial Wasteland entry is now named 501 Rads, with its original system ID p
 ## Next milestones
 
 1. Expand 501 Rads as the author supplies feats, classes, items, and revised rules.
-2. Add richer system-specific choices and resources.
-3. Campaign membership workflows and image uploads.
+2. Expand structured equipment and class mechanics as author definitions arrive.
+3. Improve play workflows based on phone testing.
 4. Cloudflare Pages deployment.
 
 Production output: dist/rpg-companion/browser. No deployment has been configured.
@@ -86,4 +86,10 @@ Tap ability modifiers, saving throws, skill totals, initiative, or the proficien
 
 Characters > Character creator opens `/characters/new`. Choose a system, class, details, and point-buy scores. A live starting-sheet preview shows final scores, modifiers, saves, skills, HP, hit die, initiative, speed, system rules, and starting abilities. The saved character uses that same initialized preview and opens its summary after creation.
 
-For 501 Rads, Gunslinger is selected as its currently defined class. Starting HP is 10 + Constitution, Heat starts at 0 with a maximum of 3, and Lucky Strike, Stroke of Genius, and Pistol Training are included. Hacking replaces Arcana. The character summary also displays the adapter's system rules; level-up and Heat management remain on the edit page.
+For 501 Rads, Gunslinger is selected as its currently defined class. Starting HP is 10 + Constitution, Heat starts at 0 with a maximum of 3, and Lucky Strike, Stroke of Genius, and Pistol Training are included. Hacking replaces Arcana. The character summary displays system rules and quick resource/ability actions; level-up choices open the edit page and save immediately when applied.
+
+## Catalogs, ability actions, pictures, and campaigns
+
+See [play components](PLAY_COMPONENTS.md) for testing and implementation details. Systems now have searchable item/shared-feat catalogs with labeled mock fixtures. Import items from a character's Inventory editor; select shared feats during level-up. Gunslinger paid abilities spend Heat directly from the summary, with Lucky Strike rerolls and Stroke of Genius three-die choices.
+
+Upload a profile picture from Account or a portrait from character Edit. Open campaign names for party HP/resource overviews, username invitations, and member management. Players accept invitations from Campaigns. Character owners/admins can assign existing characters to matching-system campaigns from Edit. Pictures and invitations require migration `20261013000000_images_and_campaign_invitations.sql` to deploy.

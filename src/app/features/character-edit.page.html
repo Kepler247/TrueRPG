@@ -10,7 +10,7 @@
   <div class="sheet-heading">
     <h1>Edit {{ record.row.name }}</h1>
     @if (record.canEdit) {
-      <button mat-flat-button type="button" (click)="save()" [disabled]="saving() || !dirty()">
+      <button mat-flat-button type="button" (click)="save()" [disabled]="disabled() || !dirty()">
         {{ saving() ? 'Saving...' : 'Save sheet' }}
       </button>
       <button
@@ -98,6 +98,24 @@
           maxlength="150"
       /></mat-form-field>
       <ul>
+        @if (rules().featRequired?.(core().level + 1) || points()) {
+          <li>
+            <mat-form-field
+              ><mat-label>Shared feat catalog</mat-label
+              ><mat-select
+                [ngModel]="newFeature()"
+                (ngModelChange)="newFeature.set($event)"
+                [disabled]="saving()"
+              >
+                @for (feat of catalogFeats(); track feat.id) {
+                  <mat-option [value]="feat.name"
+                    >{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</mat-option
+                  >
+                }
+              </mat-select></mat-form-field
+            >
+          </li>
+        }
         @if (rules().testFeatName && rules().featRequired?.(core().level + 1)) {
           <li>
             <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
@@ -119,6 +137,32 @@
   }
   <section class="panel">
     <h2>Details</h2>
+    @if (record.canAssign) {
+      <div class="actions">
+        <mat-form-field
+          ><mat-label>Campaign assignment</mat-label
+          ><mat-select
+            [ngModel]="selectedCampaign()"
+            (ngModelChange)="selectedCampaign.set($event)"
+            [disabled]="saving() || assigning()"
+            ><mat-option value="">No campaign</mat-option>
+            @for (campaign of campaignChoices(); track campaign.id) {
+              <mat-option [value]="campaign.id">{{ campaign.name }}</mat-option>
+            }
+          </mat-select></mat-form-field
+        ><button mat-stroked-button (click)="assignCampaign()" [disabled]="saving() || assigning()">
+          Save assignment
+        </button>
+      </div>
+    }
+    <app-image-upload
+      kind="characters"
+      [entityId]="record.row.id"
+      [path]="record.row.portrait_path ?? null"
+      [stamp]="record.row.updated_at"
+      [canEdit]="!disabled()"
+      (changed)="imageChanged($event)"
+    />
     <div class="field-grid">
       <mat-form-field appearance="outline"
         ><mat-label>Name</mat-label
@@ -314,6 +358,26 @@
   </section>
   <section class="panel">
     <h2>Inventory</h2>
+    <div class="actions">
+      <mat-form-field
+        ><mat-label>System item catalog</mat-label
+        ><mat-select
+          [ngModel]="selectedCatalogItem()"
+          (ngModelChange)="selectedCatalogItem.set($event)"
+          [disabled]="disabled()"
+        >
+          @for (item of catalogItems(); track item.id) {
+            <mat-option [value]="item.id">{{ item.name }} (mock)</mat-option>
+          }
+        </mat-select></mat-form-field
+      ><button
+        mat-stroked-button
+        (click)="importCatalogItem()"
+        [disabled]="disabled() || !selectedCatalogItem()"
+      >
+        Add catalog item
+      </button>
+    </div>
     @if (record.canManageCarryRules) {
       <mat-checkbox
         [checked]="record.enforceCarryWeight"
@@ -510,7 +574,7 @@
     }
   </section>
   @if (record.canEdit) {
-    <button mat-flat-button (click)="save()" [disabled]="saving() || !dirty()">Save sheet</button>
+    <button mat-flat-button (click)="save()" [disabled]="disabled() || !dirty()">Save sheet</button>
   }
 } @else {
   <h1>Character unavailable</h1>

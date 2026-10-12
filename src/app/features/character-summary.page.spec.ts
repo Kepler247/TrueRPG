@@ -7,6 +7,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { createCore } from '../core/characters/character-core';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
 import { CharacterSummaryPage } from './character-summary.page';
+import { make501Rules } from '../core/systems/system-rules';
 import { BASE_5E_RULES, CHARACTER_RULESETS } from '../core/characters/character-ruleset';
 
 const core = createCore();
@@ -241,5 +242,50 @@ describe('Read-only character summary', () => {
     expect(page.record()?.core['heat']).toBeUndefined();
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Gain Focus');
+  });
+  it('charges Lucky Strike once and replaces the previous check with its reroll', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
+    const page = (await create()).componentInstance;
+    page.roll('Dexterity', 2);
+    const id = page.record()!.core.abilities.find((ability) => ability.name === 'Lucky Strike')!.id;
+    await page.useAbility(id);
+    expect(page.heat()).toBe(2);
+    expect(page.record()?.core.abilityUses?.[id]).toBe(1);
+    expect(page.lastRoll()?.label).toBe('Dexterity');
+    expect(service.save).toHaveBeenCalledTimes(1);
+  });
+  it('offers three results for Stroke of Genius without charging again when chosen', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
+    const page = (await create()).componentInstance;
+    const id = page
+      .record()!
+      .core.abilities.find((ability) => ability.name === 'Stroke of Genius')!.id;
+    await page.useAbility(id);
+    page.roll('Charisma', 4);
+    expect(page.rollChoices()).toHaveLength(3);
+    expect(page.heat()).toBe(0);
+    const chosen = page.rollChoices()[1];
+    page.chooseRoll(1);
+    expect(page.lastRoll()).toEqual(chosen);
+    expect(service.save).toHaveBeenCalledTimes(1);
+  });
+  it('does not spend resources or apply an ability roll after a failed save', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
+    const page = (await create()).componentInstance;
+    page.roll('Dexterity', 2);
+    const previous = page.lastRoll();
+    service.save.mockRejectedValueOnce(new Error('Conflict'));
+    await page.useAbility(
+      page.record()!.core.abilities.find((ability) => ability.name === 'Lucky Strike')!.id,
+    );
+    expect(page.heat()).toBe(3);
+    expect(page.lastRoll()).toEqual(previous);
+    expect(page.error()).toBe('Conflict');
   });
 });
