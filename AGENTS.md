@@ -1,6 +1,7 @@
 # RPG Companion
 
 ## Stack and conventions
+
 - Angular 21 standalone components, strict TypeScript, SCSS, Angular Material.
 - Supabase Auth and PostgreSQL; authorization belongs in database RLS.
 - Client-rendered SPA, intended for Cloudflare Pages.
@@ -10,6 +11,7 @@
 - Use npm.cmd/npx.cmd in Windows PowerShell when script execution blocks npm.ps1.
 
 ## Domain
+
 - Users own multiple characters and can join/own multiple campaigns.
 - Each character has exactly one owner and zero or one campaign.
 - Character owners always view/edit their characters.
@@ -19,5 +21,23 @@
 - Never place a Supabase service-role key in browser code.
 
 ## Verification
+
 Run npm.cmd run build and npm.cmd test -- --watch=false after functional changes.
 Do not publish or create external resources unless requested.
+
+## Systems
+
+- Systems define rulesets and may select themes. First system: Wasteland (working title), a Fallout-inspired postnuclear RPG.
+- Campaigns and characters require systemId; campaign-less characters still have a system.
+- A character can only join a campaign with the same systemId; enforce this in the eventual database schema.
+- Keep rules engines, versioned character data, and theme selection separate from shared auth/campaign infrastructure.
+- Do not invent game mechanics before the user defines them.
+
+## Database
+
+- Run npm.cmd run test:db after schema or policy changes; tests execute exact migrations in real embedded PostgreSQL with stubbed Auth objects.
+- Never edit applied migrations; add new versioned migrations.
+- GMs manage membership; deleting campaigns/removing members detaches characters. Character deletion is owner/admin only.
+- Protect ownership and system columns; assignment uses set_character_campaign RPC.
+- Usernames belong in profiles, not Auth metadata; roles belong in private.super_admins.
+- Planned system hubs: lore, rules references, item catalogs. Planned uploads: profile and character images in Supabase Storage with ownership-aware policies.

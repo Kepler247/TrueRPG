@@ -1,0 +1,95 @@
+<div class="auth-container">
+  <p class="eyebrow">WELCOME TO YOUR TABLE</p>
+  @if (auth.initializing()) {
+    <h1>Getting ready</h1>
+    <p role="status">Restoring your session...</p>
+  } @else if (auth.user(); as user) {
+    <h1>Your account</h1>
+    <p class="intro account-email">Signed in as {{ user.email }}</p>
+    <div class="account-actions">
+      <a mat-flat-button routerLink="/characters">Go to characters</a>
+      <button mat-stroked-button type="button" [disabled]="busy()" (click)="signOut()">
+        {{ busy() ? 'Signing out...' : 'Sign out' }}
+      </button>
+    </div>
+  } @else {
+    <h1>{{ mode() === 'signin' ? 'Welcome back' : 'Join the adventure' }}</h1>
+    <p class="intro">
+      {{
+        mode() === 'signin'
+          ? 'Sign in to manage your characters and campaigns.'
+          : 'Create an account to keep your characters together.'
+      }}
+    </p>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit(emailInput, passwordInput)"
+      [attr.aria-busy]="busy()"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          #emailInput
+          id="account-email"
+          name="email"
+          formControlName="email"
+          (input)="syncInput('email', emailInput)"
+          (change)="syncInput('email', emailInput)"
+          (blur)="syncInput('email', emailInput)"
+          (cdkAutofill)="syncAutofill('email', $event)"
+          autocomplete="email"
+          inputmode="email"
+          autocapitalize="none"
+          spellcheck="false"
+          required
+        />
+        @if (form.controls.email.invalid) {
+          <mat-error>Enter a valid email address.</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          #passwordInput
+          id="account-password"
+          name="password"
+          formControlName="password"
+          autocapitalize="none"
+          spellcheck="false"
+          (input)="syncInput('password', passwordInput)"
+          (change)="syncInput('password', passwordInput)"
+          (blur)="syncInput('password', passwordInput)"
+          (cdkAutofill)="syncAutofill('password', $event)"
+          [attr.autocomplete]="mode() === 'signup' ? 'new-password' : 'current-password'"
+          required
+        />
+        @if (mode() === 'signup') {
+          <mat-hint>Use at least 8 characters.</mat-hint>
+        }
+        @if (form.controls.password.invalid) {
+          <mat-error>{{
+            mode() === 'signup' ? 'Use at least 8 characters.' : 'Enter your password.'
+          }}</mat-error>
+        }
+      </mat-form-field>
+      <button mat-flat-button type="submit" [disabled]="busy()">
+        {{ busy() ? 'Please wait...' : mode() === 'signin' ? 'Sign in' : 'Create account' }}
+      </button>
+      <button mat-button type="button" [disabled]="busy()" (click)="toggleMode()">
+        {{
+          mode() === 'signin' ? 'New here? Create an account' : 'Already have an account? Sign in'
+        }}
+      </button>
+    </form>
+  }
+  @if (error() || auth.initializationError(); as problem) {
+    <p class="feedback error" role="alert">{{ problem }}</p>
+  }
+  @if (message(); as message) {
+    <p class="feedback" role="status">{{ message }}</p>
+  }
+</div>

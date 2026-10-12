@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <section class="empty-state" aria-labelledby="empty-title">
       <span class="emblem" aria-hidden="true">&#9876;</span>
       <h2 id="empty-title">Your party awaits</h2>
-      <p>Your characters will appear here once account sign-in and character creation are available.</p>
+      <p>Your characters will appear here once character creation is available.</p>
     </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

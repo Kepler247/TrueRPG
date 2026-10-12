@@ -1,12 +1,19 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="app-header">
-  <a class="brand" routerLink="/characters"><span class="brand-mark" aria-hidden="true">R</span> RPG Companion</a>
-  <span class="tagline">Your next adventure starts here.</span>
+  <a class="brand" routerLink="/characters"
+    ><span class="brand-mark" aria-hidden="true">R</span> RPG Companion</a
+  >
+  <a class="account-link" routerLink="/auth">{{
+    auth.initializing() ? 'Checking session...' : auth.user() ? 'Account' : 'Sign in'
+  }}</a>
 </header>
 <div class="app-layout">
   <nav aria-label="Main navigation">
-    <a routerLink="/characters" routerLinkActive="active" ariaCurrentWhenActive="page">Characters</a>
+    <a routerLink="/characters" routerLinkActive="active" ariaCurrentWhenActive="page"
+      >Characters</a
+    >
     <a routerLink="/campaigns" routerLinkActive="active" ariaCurrentWhenActive="page">Campaigns</a>
+    <a routerLink="/systems" routerLinkActive="active" ariaCurrentWhenActive="page">Systems</a>
   </nav>
   <main id="main" tabindex="-1"><router-outlet /></main>
 </div>

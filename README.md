@@ -1,6 +1,6 @@
 # RPG Companion
 
-Angular SPA for managing characters and shared campaigns. This foundation includes responsive navigation and lazy feature routes. Authentication and persistence are not implemented yet.
+Angular SPA for managing characters and shared campaigns. Includes responsive navigation, Supabase email/password authentication, and a bootstrap systems catalog. Database migrations and permission tests are included; character/campaign editing UI and game mechanics are not implemented yet.
 
 ## Local development
 
@@ -11,20 +11,53 @@ npx.cmd --yes npm@11.21.0 ci
 npm.cmd start
 ```
 
-Open http://localhost:4200. Use Chrome device emulation for initial layout checks; test real iPhone Safari before deployment.
+Open http://localhost:4200.
 
 ```powershell
 npm.cmd run build
 npm.cmd test -- --watch=false
 ```
 
+For iPhone testing on the same LAN:
+
+```powershell
+npm.cmd start -- --host 0.0.0.0
+```
+
+Open http://192.168.0.141:4200 on the phone (use your current PC IP). The Windows Private-network inbound TCP 4200 rule allows this subnet. Initial real iPhone layout testing passed; recheck the new account form and keyboard behavior.
+
+## Supabase authentication setup
+
+Public browser configuration lives in src/app/core/auth/supabase.config.ts. The publishable key is intentionally public; database access must be enforced by RLS. Never put secret or service-role keys in this app.
+
+In Supabase Authentication > URL Configuration:
+
+- Site URL: http://localhost:4200
+- Add redirect URLs: http://localhost:4200/auth and http://192.168.0.141:4200/auth
+- Update the LAN redirect when your PC's address changes.
+
+Keep email/password sign-in enabled. With email confirmation enabled, sign-up shows a check-email message. The confirmation link returns to /auth on the origin where registration started. Open it on a device that can reach that address (localhost only works on the PC). If confirmation is disabled, registration signs in immediately.
+
+Smoke test: create an account, confirm email if required, sign in, reload to verify persistence, open Account and sign out. Test invalid passwords and phone inputs too. Automated checks mock Supabase and do not create live users.
+
+Supabase's default email sender may restrict delivery to authorized addresses; configure custom SMTP before inviting other players. See https://supabase.com/docs/guides/auth/auth-smtp.
+
+## Systems and domain
+
+Systems are a shared catalog, independent of users. Each campaign and character has a systemId; characters keep that system even outside a campaign. Users can play across multiple systems. Characters assigned to a campaign must use its system, enforced by database constraints in the foundation migration.
+
+The initial catalog entry is Wasteland (working title), our Fallout-inspired postnuclear system. No mechanics are defined yet. rulesetKey and themeKey reserve independent selectors for future rules engines and themes; they do not currently switch styling or calculate stats. Character data has its own version, leaving ownership and membership consistent across systems.
+
 ## Next milestones
 
-1. Supabase project configuration and authentication.
-2. Profiles, campaigns, memberships, characters, and database RLS.
-3. Character editing and campaign membership workflows.
-4. iPhone Safari verification and Cloudflare Pages deployment.
+1. Deploy/verify database migrations, then profile setup and real campaign/character creation.
+2. Define the first system's character data and mechanics.
+3. Character editing, campaign workflows, system selection and themes.
+4. Cloudflare Pages deployment.
 
-Production output: `dist/rpg-companion/browser`. No deployment has been configured.
+Production output: dist/rpg-companion/browser. No deployment has been configured.
 See AGENTS.md for domain rules and development conventions.
 
+## GitHub database integration
+
+The Supabase project is connected to Kepler247/TrueRPG with production deployment from main and working directory '.' (repository root). Versioned database migrations live in supabase/migrations. This integration deploys database changes; Angular hosting is configured separately. See [database setup and permissions](supabase/README.md). Run npm.cmd run test:db to verify migrations and RLS locally.
