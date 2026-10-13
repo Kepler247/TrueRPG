@@ -85,44 +85,42 @@
             (ngModelChange)="hpGain.set($event)"
         /></mat-form-field>
       }
-      <mat-form-field appearance="outline"
-        ><mat-label>{{
-          rules().featRequired?.(core().level + 1)
-            ? 'Shared feat choice (required)'
-            : 'New feature or feat name (optional)'
-        }}</mat-label
-        ><input
-          matInput
-          [ngModel]="newFeature()"
-          (ngModelChange)="newFeature.set($event)"
-          maxlength="150"
-      /></mat-form-field>
-      <ul>
+      <div class="level-up-feats">
+        <mat-form-field appearance="outline" class="full-width"
+          ><mat-label>{{
+            rules().featRequired?.(core().level + 1)
+              ? 'Shared feat choice (required)'
+              : 'New feature or feat name (optional)'
+          }}</mat-label
+          ><input
+            matInput
+            [ngModel]="newFeature()"
+            (ngModelChange)="newFeature.set($event)"
+            maxlength="150"
+        /></mat-form-field>
         @if (rules().featRequired?.(core().level + 1) || points()) {
-          <li>
-            <mat-form-field
-              ><mat-label>Shared feat catalog</mat-label
-              ><mat-select
-                [ngModel]="newFeature()"
-                (ngModelChange)="newFeature.set($event)"
-                [disabled]="saving()"
-              >
-                @for (feat of catalogFeats(); track feat.id) {
-                  <mat-option [value]="feat.name"
-                    >{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</mat-option
-                  >
-                }
-              </mat-select></mat-form-field
+          <mat-form-field appearance="outline" class="full-width"
+            ><mat-label>Shared feat catalog</mat-label
+            ><mat-select
+              [ngModel]="newFeature()"
+              (ngModelChange)="newFeature.set($event)"
+              [disabled]="saving()"
             >
-          </li>
+              @for (feat of catalogFeats(); track feat.id) {
+                <mat-option [value]="feat.name"
+                  >{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</mat-option
+                >
+              }
+            </mat-select></mat-form-field
+          >
         }
         @if (rules().testFeatName && rules().featRequired?.(core().level + 1)) {
-          <li>
-            <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
-              Use test feat (no mechanical effect)
-            </button>
-          </li>
+          <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
+            Use test feat (no mechanical effect)
+          </button>
         }
+      </div>
+      <ul>
         @for (prompt of rules().levelUpPrompts(core(), core().level + 1); track $index) {
           <li>{{ prompt }}</li>
         }

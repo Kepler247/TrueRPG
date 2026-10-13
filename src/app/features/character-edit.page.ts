@@ -14,7 +14,7 @@ import {
   untracked,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -58,6 +58,7 @@ export class CharacterEditPage {
   private readonly rulesets = inject(RulesetService);
   private readonly auth = inject(AuthService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly params = toSignal(this.route.paramMap, {
     initialValue: this.route.snapshot.paramMap,
   });
@@ -427,6 +428,7 @@ export class CharacterEditPage {
     this.error.set(null);
     this.message.set(null);
     const version = this.loadVersion;
+    const completingLevelUp = this.pendingLevelUp();
     try {
       validateSystemCore(this.core(), this.rules());
       const saved = await this.service.save(record, this.name(), this.core());
@@ -437,6 +439,7 @@ export class CharacterEditPage {
       this.dirty.set(false);
       this.pendingLevelUp.set(false);
       this.message.set('Character saved.');
+      if (completingLevelUp) await this.router.navigate(['/characters', saved.row.id]);
     } catch (error) {
       if (version === this.loadVersion)
         this.error.set(error instanceof Error ? error.message : 'Could not save character.');

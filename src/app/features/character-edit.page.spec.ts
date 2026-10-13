@@ -1,6 +1,6 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, ActivatedRoute, convertToParamMap } from '@angular/router';
+import { Router, provideRouter, ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { vi } from 'vitest';
 import { AuthService } from '../core/auth/auth.service';
@@ -57,6 +57,7 @@ describe('Character sheet', () => {
     });
   });
   async function create() {
+    vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
     const fixture = TestBed.createComponent(CharacterEditPage);
     fixture.detectChanges();
     await fixture.whenStable();
@@ -110,6 +111,7 @@ describe('Character sheet', () => {
     expect(page.core().abilities[0].name).toBe('New perk');
     expect(page.dirty()).toBe(false);
     expect(service.save).toHaveBeenCalledTimes(1);
+    expect(TestBed.inject(Router).navigate).toHaveBeenCalledWith(['/characters', 'character']);
   });
   it('preserves edits when saving fails', async () => {
     const fixture = await create();
@@ -174,12 +176,14 @@ describe('Character sheet', () => {
     expect(page.core().level).toBe(2);
     expect(page.dirty()).toBe(true);
     expect(page.pendingLevelUp()).toBe(true);
+    expect(TestBed.inject(Router).navigate).not.toHaveBeenCalled();
     page.beginLevelUp();
     expect(page.leveling()).toBe(false);
     await page.save();
     expect(page.core().level).toBe(2);
     expect(page.core().hpMax).toBe(25);
     expect(page.pendingLevelUp()).toBe(false);
+    expect(TestBed.inject(Router).navigate).toHaveBeenCalledWith(['/characters', 'character']);
   });
   it('imports mock catalog equipment into the draft without inventing combat stats', async () => {
     const page = (await create()).componentInstance;

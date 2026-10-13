@@ -403,6 +403,30 @@
         >
       </p>
     }
+    @if (record.canEdit && resource(); as resource) {
+      <div class="ability-resource-editor">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic"
+          ><mat-label>Current {{ resource.name }}</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="1"
+            [attr.max]="resource.maximum(record.core)"
+            [ngModel]="heatInput()"
+            (ngModelChange)="heatInput.set($event)"
+            [disabled]="saving() || !!pendingAction()"
+          />
+        </mat-form-field>
+        <button
+          mat-stroked-button
+          (click)="saveVitals()"
+          [disabled]="saving() || !!pendingAction()"
+        >
+          Save {{ resource.name }}
+        </button>
+      </div>
+    }
     <ul class="entry-list">
       @for (ability of record.core.abilities; track ability.id) {
         <li>
