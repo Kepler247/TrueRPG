@@ -59,4 +59,47 @@ describe('System reference hub', () => {
       '/systems/501-rads/501-rads-draft-1.pdf',
     );
   });
+  it('loads D&DS and leaves ship sections available only through the PDF', async () => {
+    const params = convertToParamMap({ slug: 'dnds' });
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        title: 'D&DS',
+        revision: 'original',
+        sourceFile: 'dnds-original.pdf',
+        pageCount: 85,
+        pages: [
+          { number: 2, category: 'lore', blocks: [{ kind: 'heading', text: 'Civilizations' }] },
+          {
+            number: 30,
+            category: 'ship-reference',
+            blocks: [{ kind: 'heading', text: 'Ship combat' }],
+          },
+          { number: 56, category: 'rules', blocks: [{ kind: 'heading', text: 'Firearms' }] },
+        ],
+      }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    TestBed.configureTestingModule({
+      imports: [SystemHubPage],
+      providers: [
+        provideRouter([]),
+        {
+          provide: ActivatedRoute,
+          useValue: { paramMap: of(params), snapshot: { paramMap: params } },
+        },
+      ],
+    });
+    const fixture = TestBed.createComponent(SystemHubPage);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const page = fixture.componentInstance;
+    await vi.waitFor(() => expect(page.document()).not.toBeNull());
+    fixture.detectChanges();
+    expect(fetchMock).toHaveBeenCalledWith('/systems/dnds/original.json', expect.any(Object));
+    expect(page.matches().map((s) => s.heading)).toEqual(['Civilizations', 'Firearms']);
+    expect(fixture.nativeElement.querySelector('a[target="_blank"]').getAttribute('href')).toBe(
+      '/systems/dnds/dnds-original.pdf',
+    );
+  });
 });

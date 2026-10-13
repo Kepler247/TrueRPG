@@ -84,3 +84,63 @@ h2 {
     scroll-behavior: auto !important;
   }
 }
+
+app-character-summary .weapon-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+app-character-summary .weapon-fields label {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+  min-height: 44px;
+}
+app-character-summary .weapon-fields input,
+app-character-summary .weapon-fields select {
+  font-size: 16px;
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+app-character-summary .weapon-fields input[type='checkbox'] {
+  width: 24px;
+}
+app-character-summary .weapon-controls summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+app-character-summary .combat-result {
+  position: fixed;
+  z-index: 20;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  left: 1rem;
+  right: 1rem;
+  max-width: 40rem;
+  margin: auto;
+  background: #102434;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px #0005;
+}
+app-character-summary .combat-result p {
+  margin: 0 0 0.5rem;
+}
+app-character-summary .combat-result button {
+  color: #b5edf4;
+}
+
+app-character-summary .ability-resource-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+app-character-summary .ability-resource-editor mat-form-field {
+  flex: 1 1 9rem;
+  max-width: 16rem;
+  min-width: 0;
+}

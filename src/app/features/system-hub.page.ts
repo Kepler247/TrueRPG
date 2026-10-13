@@ -62,6 +62,15 @@ interface ReferenceDocument {
             Heat. The PDF below includes the corrected Heat cost.
           </p>
         </aside>
+      } @else if (system.slug === 'dnds') {
+        <aside>
+          <strong>Dogfights and Deep Space</strong>
+          <p>
+            2014 5E is the foundation, maximum level 20. Technology replaces Arcana. Equipment
+            estimates are labeled. Ship combat is available in the original PDF only.
+          </p>
+          <a routerLink="/systems/5e">Shared 5E rules and attribution</a>
+        </aside>
       } @else {
         <aside>
           <strong>Plain 5E &middot; 2014 SRD 5.1</strong>
@@ -109,7 +118,7 @@ interface ReferenceDocument {
           </button>
         </nav>
         @if (current(); as page) {
-          <article [class.rads]="system.slug === '501-rads'">
+          <article [class.rads]="system.slug === '501-rads'" [class.space]="system.slug === 'dnds'">
             @for (block of page.blocks; track $index) {
               @if (block.kind === 'heading') {
                 <h2>{{ block.text }}</h2>
@@ -141,12 +150,14 @@ export class SystemHubPage {
   readonly category = signal('all');
   readonly selected = signal(0);
   readonly assetRoot = computed(
-    () => `/systems/${this.system()?.slug === '501-rads' ? '501-rads' : '5e'}`,
+    () =>
+      `/systems/${this.system()?.slug === '501-rads' ? '501-rads' : this.system()?.slug === 'dnds' ? 'dnds' : '5e'}`,
   );
   readonly matches = computed(
     () =>
       referenceSections(this.document()?.pages ?? []).filter(
         (p) =>
+          p.category !== 'ship-reference' &&
           (this.category() === 'all' || p.category === this.category()) &&
           p.blocks.some((b) => b.text.toLowerCase().includes(this.query().trim().toLowerCase())),
       ) ?? [],
@@ -162,9 +173,12 @@ export class SystemHubPage {
       if (!system) return;
       const controller = new AbortController();
       onCleanup(() => controller.abort());
-      void fetch(`${root}/${system.slug === '501-rads' ? 'draft-1' : 'srd-5-1'}.json`, {
-        signal: controller.signal,
-      })
+      void fetch(
+        `${root}/${system.slug === '501-rads' ? 'draft-1' : system.slug === 'dnds' ? 'original' : 'srd-5-1'}.json`,
+        {
+          signal: controller.signal,
+        },
+      )
         .then(async (response) => {
           if (!response.ok) throw new Error('Reference could not be loaded. Please retry.');
           const doc = (await response.json()) as ReferenceDocument;

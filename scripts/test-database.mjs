@@ -138,7 +138,7 @@ try {
     asUser(
       null,
       async () => {
-        assert.equal(await count('systems'), 3);
+        assert.equal(await count('systems'), 4);
         const { rows } = await db.query('select name,ruleset_key from public.systems where id=$1', [
           ids.wasteland,
         ]);
@@ -622,6 +622,30 @@ try {
       assert.equal(rows[0].character.row.owner_id, ids.player);
       assert.equal(rows[0].character.enforceCarryWeight, true);
       assert.equal(rows[0].character.canManageCarryRules, false);
+    }));
+  await test('D&DS is selectable and retains campaign system boundaries', () =>
+    asUser(ids.player, async () => {
+      const system = (
+        await db.query("select id, ruleset_key from public.systems where slug='dnds'")
+      ).rows[0];
+      assert.equal(system.ruleset_key, 'dnds');
+      const campaign = (
+        await db.query(
+          "insert into public.campaigns(owner_id,system_id,name) values ($1,$2,'Space testing') returning id",
+          [ids.player, system.id],
+        )
+      ).rows[0];
+      const character = (
+        await db.query(
+          "insert into public.characters(owner_id,system_id,name) values ($1,$2,'Space traveler') returning id",
+          [ids.player, system.id],
+        )
+      ).rows[0];
+      await db.query('select public.set_character_campaign($1,$2)', [character.id, campaign.id]);
+      await denied(
+        () => db.query('select public.set_character_campaign($1,$2)', [character.id, ids.campaign]),
+        '23503',
+      );
     }));
   console.log(`\n${passed} database checks passed. No remote data was touched.`);
 } finally {

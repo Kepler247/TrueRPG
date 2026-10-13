@@ -1,4 +1,6 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
+import type { WeaponAttackInput, PlayActionResult } from '../systems/dnds-combat';
+import { makeDndsRules } from '../systems/dnds-rules';
 import { make501Rules, makePlain5eRules } from '../systems/system-rules';
 import {
   abilityModifier,
@@ -21,6 +23,20 @@ export interface ClassResourceDefinition {
   resetsOnLongRest?: boolean;
 }
 export interface CharacterRuleset {
+  extraProficiencies?: {
+    names: readonly string[];
+    current: (core: CharacterCore) => readonly string[];
+    set: (core: CharacterCore, names: readonly string[]) => CharacterCore;
+  };
+  armorSummary?: (core: CharacterCore, rules: CharacterRuleset) => string;
+  validate?: (core: CharacterCore) => void;
+  weaponAttack?: (
+    core: CharacterCore,
+    id: string,
+    input: WeaponAttackInput,
+    rules: CharacterRuleset,
+  ) => PlayActionResult;
+  reloadWeapon?: (core: CharacterCore, id: string, ammoId?: string) => PlayActionResult;
   rest?: { shortHours: number; longHours: number; recoverHitDice: (level: number) => number };
   abilityActions?: (core: CharacterCore) => readonly AbilityActionDefinition[];
   classResource?: (core: CharacterCore) => ClassResourceDefinition | null;
@@ -109,6 +125,7 @@ export const CHARACTER_RULESETS = new InjectionToken<Readonly<Record<string, Cha
   {
     providedIn: 'root',
     factory: () => ({
+      dnds: makeDndsRules(BASE_5E_RULES),
       base5e: BASE_5E_RULES,
       wasteland: make501Rules(BASE_5E_RULES),
       '501-rads': make501Rules(BASE_5E_RULES),

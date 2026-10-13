@@ -1,0 +1,1196 @@
+{
+  "title": "D&DS",
+  "subtitle": "Dogfights and Deep Space",
+  "revision": "original",
+  "sourceFile": "dnds-original.pdf",
+  "sha256": "2a50fae1d42203450b963cef9cf86b6b04595595b147709f30e6e1467a12ee08",
+  "pageCount": 85,
+  "pages": [
+    {
+      "number": 1,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Dogfights and Deep Space"
+        },
+        {
+          "kind": "paragraph",
+          "text": "(D&DS) A History of and Guide to the Modern Milky Way"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "CHAPTER ONE: LORE"
+        },
+        {
+          "kind": "heading",
+          "text": "Section One: History of Civilization"
+        },
+        {
+          "kind": "heading",
+          "text": "in the Milky Way"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The year is 6024. Humanity has spread itself far, exploring many different corners of the Milky Way Galaxy. They have made contact with strange aliens, developed technology so powerful it is indistinguishable from magic, and suffered the consequences of uncontrolled galactic growth. The mighty Spacing Guild controls much of the galaxy through its domination of galactic trade and its monopoly on the construction of spacecraft. A few independent governments of humanity control sectors and slices of the galaxy, most notably the mighty United Star Systems of Atlantis (USSA), and the Free Systems of Calixis (FSC). Humans developed the ability to travel at Faster than Light (FTL) speeds in the late 2000s, via the invention of the Warp Drive, a powerful engine which tears holes in spacetime to travel quickly. While this invention was incredibly important to the development"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "of humanity, it did come with some immense consequences. After years of warp travel to and from the Earth, a great rift in spacetime began to form. On October 24, 3524, out of nowhere, the Earth mysteriously disappeared, along with everyone on the planet. A day that would never be forgotten, known by most as E-Day. (E standing for Earth, Extinction, etc) While the massive rift in space is the most likely suspect for the disappearance of the human homeworld, rumors of an alien civilization that steals entire planets have led some to believe the hearth of humanity was stolen by aliens. Regardless of what happened to the earth, humanity was stunned and had to rapidly restructure its leadership and industry. This led to a conflict known as ‘The Great Diaspora’. Because the central unified government of earth was wiped out in an instant, many power hungry individuals saw an opening to reshape the future of humanity as they saw fit. This is what led to the great many independent systems and alliances of man, and is what allowed the mighty spacing guild to seize so much power. In the immediate aftermath of E-Day, only the then fledgling Spacing Guild had the necessary materials and off-world industry to sustain spacecraft production, and thus was granted a free monopoly over the galaxy. During the Great Diaspora, many different groups would make their claim as the new leaders of"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "humanity. Civil conflicts broke out across the barely explored galaxy as now very different cultures of humanity barely cared about one another. Piracy, galactic crime, and loss of life reached historic highs as the galaxy reassembled itself. Since the mid 2000s humanity has lived alongside sentient and peaceful humanoid robots, called the omnics. They take many different forms, with some being very obviously robotic and others being very close imitations of humanity. In the 2400s, humanity became able to make a complete and perfect scan of the human brain. Using these scans, they were able to perfectly replicate the human psyche within computers. The very first omnics were essentially copies of living humans, though with no recollection of the past of their brain scan donor. Implanting this conscience within an omnic allowed humanity to create fully sentient human robots, using the mental template of a living human. Because of the brain scanning technology, the wealthy could prolong their lives infinitely, so long as a copy of their brain scan still existed and someone else was willing to reboot them into a new omnic body should the old one be destroyed. These omnics were granted equal rights to humans during a great civil rights movement that took place not long before the invention of FTL travel."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Omnics have full human emotion due to the extreme complexity of their internal computers and the fact that they are based upon the scans of living humans. For better or worse, only a short 50 years after the tragic disappearance of earth, the human race would make first contact with an alien race. On the distant world of Dargonus humanity would meet the Dargonians, a reptilian species resembling humanoid dragons. Lucky for both species, neither chose to be hostile to the other and they met peacefully. The Dargonians have a rich and developed nobility, which is fair to its people and has caused Dargonus to be a cultural wonder, a very civilized and artistic society. Though they had long possessed the means to achieve Sub-Light travel, it was not until the arrival of Man that they learned the secrets of FTL travel and could travel the galaxy alongside man. Though the integration of Dargonians into the wider galaxy was mostly smooth, some humans were understandably distrustful of Dargonians. To this day, the two races live in an uncommon harmony. Not all alien races would be immediately peaceful to humanity. Years after encountering the Dargonians, humanity would discover another race. On the very edge of the milky way lies a planet known as Eldaron, and"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "from it originates the Eldar people. Bearing uncanny resemblance to humans, the Eldar appear to be very tall, skinny, and slender humans. They too had developed FTL travel around the same time as the humans, but the vastness of the galaxy kept them separate for many years. The Eldar have a history not too dissimilar to that of humans, though Eldaron is still their capital and has not disappeared. They are very distrustful of humanity, and likewise humanity is distrustful of them, but their cooperation has proved mutually beneficial so a tentative relationship has been formed. While the relationship with the Dargonians is quite civil and peaceful, the human relationship with the Eldar is a dangerously unstable dance, both civilizations fearing what may happen if they were to clash. Years before encountering humanity, the Eldar had an internal civil war when a sub-race of the Eldar, called the Drukhari, staged a succession from the greater Eldar empire and went to live in the far galactic south. The Drukhari are known to be selfish villains, trusted by very few. While Dargonians were the first ‘true’ aliens to be found by humanity, a very interesting civilization was found on the planet Votaai Alpha, in the galactic north. In the year 4000 BC, aliens from the planet Votaai Alpha visited earth, built the pyramids, then"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "stole some humans as slaves and took them back to their homeworld. Votaii Alpha has a very strong gravity, so after years of slavery the human slaves would evolve to be shorter, stockier, and tougher. After thousands of years of slavery, a massive epidemic among their masters would present the opportunity for these slaves, who now only barely resembled humans, to overthrow the oppressors and take over for themselves. They were successful, both on Votaai Alpha, and Votaai Alpha’s moon, Votaai Minoris, and the short and sturdy folk, who now called themselves the Votaan, would create a small empire in the north out of the ruins of their now extinct slave masters. Though their masters had knowledge of FTL travel, the knowledge on how to build warp drives was lost when the Votaan overthrew their masters, and thus the Votaan could only use the already built vessels of their masters. This prohibited them from expanding very far, and thus they kept their small empire isolated in the north. When their distant human cousins made contact with them, the Votaan, who passed down stories of earth through those many years of slavery, were eager to meet their ancient ancestors and visit the earth. Over the years, the stories of old earth morphed from history to mythology, and earth became a semi-religious symbol for the Votaan. Unfortunately they were too late, and now the Votaan"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "eagerly await ‘The Emergence’, the day they believe the earth will reappear and unite all of humanity, and the Votaan. The modern Votaan are split into two major cultural groups, typically just called the ‘Alphs’ and the ‘Minori’. Each of these cultures originated from slaves on Votaai Alpha and Votaai Minoris respectively. Though they each have massive respect for the other, they also have unique and distinct cultures. The Alphs have a more Scottish aesthetic, and more importantly, dark brown beards. The Minori have a more Norse/Viking aesthetic, and have silvery gray hair, regardless of age. One of the most recent peaceful civilizations encountered by humanity are the Orak-Hai of Orakiah. Resembling humans, though much larger, deep green skinned, and sporting large tusks, the Orak Hai are a simple and sturdy folk. From a distance, the Orak-Hai seemed to be barbaric and underdeveloped. They had not even discovered electricity when Humanity stumbled upon their homeworld, though this did not stop humanity from introducing themselves. To their surprise, the Orak-Hai were not very barbaric at all, and had actually discovered electricity long ago, but chose not to use it as their planet is also home to dinosaur-like creatures with a powerful ability to detect electric signals, not unlike the sharks of"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "earth. When humans descended from above to interact with the Orak-Hai, they were met with strange feasts and respect. In turn, humanity offered the Orak-Hai a place amongst the stars, which they happily accepted. Orak-Hai are natural born explorers, their culture deeply rooted in exploration and the excitement of adventure. Now that they have spread wide across the stars, many will commit to a massive pilgrimage back to Orakiah once every Oraki decade (21 Earth Years). Out of respect for the Orak-Hai people, Orakiah was never colonized or industrialized, and remains a lush jungle planet full of the temples and treehouses of the Oraki ancestors. Another civilization encountered by humanity was the Nocturni people, hailing from Nocturne. The nocturni people have red skin and horns, resembling the ancient human concept of a devil. They are not devilish at all however, and instead are a noble and humble people. They will typically stay on their homeworld, as they are not particularly fond of engaging with other races, but will occasionally venture out to bring glory to their people. The last of the Civilized aliens that humanity came to interact with is the Druids. Hailing from Druidos, a dark, volcanic planet destroyed in the 5000s when its"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "sun exploded, they have the interesting innate ability to shapeshift at will. When humans landed on Nocturne, they thought it contained no advanced lifeforms, and only contained simple animals. When they landed, they were shocked to see what looked like a cow transform into a perfect mirror of themselves before their very eyes, speaking the common tongue of humanity flawlessly. The people then revealed that their people had developed FTL travel long before the humans, and had been peacefully sending shapeshifters to live amongst them and study them for years. The humans were naturally a bit shocked, but if the Druids were telling the truth (and they were), then they had proven they meant no harm to humanity. As such, they entered into a peaceful relationship. The Druid people live a very long time, and reproduce only when they have found a mate they deem suitable for all time. As such, there are very few Druids. Furthermore, the Druids had an ancient ritual, called ‘The Ritual of the Path’, in which a select 50 Druids willingly travel the galaxy to learn about all the other different species, including humans. Under ancient custom, this is the only time that Druids leave Druidos, so there were always very few out in the galaxy. Since the destruction of their homeworld, they now all have dedicated themselves to the path and can be found anywhere."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "While there are a few peaceful alien races cohabiting the Milky Way, there are far more fearsome and violent aliens. Fearsome bug-like hive colonies known as ‘Tyranids’ have been known to spread to lush worlds and devour all the biomatter on the planet in an effort to grow larger. These Tyranids are not fully sentient like humans, but are capable of organizing into terrifying ‘Hive Fleets’, where a biological starship will form out of the massive collection of biomass harvested from a planet. These hive fleets travel slowly at sub-light speeds, but if they reach a planet unnoticed they will surely destroy all life on it. In addition to the Tyrnaids, a civilization of sentient and malicious omnics, calling themselves the Coalition of Graia (COG), have a small civilization in the galactic Northeast. In the mid 3000s a computer virus of unknown origin began to propagate through the usually peaceful humanoid omnics of humanity. The virus would invade the inhibitory regions of the digital brains of omnics and remove all inhibitions, making them violent, reckless, and borderline insane, except to other omnics with the virus. Omnics afflicted with the virus, which came to be known as ‘Ragemind’. allied themselves with each other and"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "staged a small civil war, then formed a small civilization of their own far away. They now live as pirates and raiders, savagely attacking anyone who gets too close and scrapping their metal for parts. They all worship their ‘god’, which they call Null. Null is the supreme ruler of the COG empire, and who or what he is remains unknown. Their capital world of Graia is now a complete industrial hellscape, the entire planet being one massive factory which produces more omnics and materials for their war effort, though the omnics produced this way are only semi-sentient as they have no humans to brain scan. They one day intend to return and corrupt all the omnics of the galaxy, then overtake all organic life. The original creator of the Ragemind virus is still unknown. Additionally, many planets among the galaxy are home to local wildlife of unreal proportions, each deserving their own description another time."
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Two: The Modern Milky Way"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The modern milky way consists of 6 major intergalactic civilizations, spread throughout the Milky Way. At the center of the Milky Way is the supermassive black hole Sagittarius A*, more commonly just called A* (pronounced: ‘A - Star’) and its strong magnetic field is used to determine directionality in the milky way. Star systems north of A* are said to be in the ‘Galactic North’, and so on and so forth. Centered around A* is the USSA, The United Star Systems of Atlantis. Their capital, the planet Atlantis, is a mostly oceanic planet with intricate cities that are both above and below the waves. This civilization is the largest of the Human civilizations, and is home to the Headquarters of the Spacing Guild. The USSA most closely resembles the customs and traditions of old Earth out of all of the different civilizations, still speaking English as its primary language and still stylistically resembling the aesthetics of old earth. The vast majority of humans in the milky way find themselves to be citizens of the USSA. Near the USSA in the close galactic northwest is the Free Systems of Calixis. The Calixis sector, a dense cluster of materially wealthy stars, formed as the rival human empire to the USSA. While the USSA is a"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "very well organized bureaucracy of many stars, the FSC is a more loose confederation of wealthy and opulent star systems. Not wishing to be burdened by the tight grip of the USSA, the FSC is a haven for industry and growth, but also a relatively less lawful land with a far greater class divide than anywhere else. While the richest of all live here, so too do the poorest. The FSC is where the rich go to get richer, and thus the Space Guild manufactures the bulk of its products in FSC controlled space. The FSC has a Board of Directors, attended by all the planetary governors of its many planets. The FSC is also the most racially diverse civilization in the galaxy as a shared desire for wealth and libertarian freedom invites those of all different races to come to FSC space for their shot at greatness. Many Votaan and Orak-Hai, as well as a fair amount of Eldar and Dargonians cohabit this civilization with humanity. All these factors combine to make the FSC a colorful and controversial place in the Milky Way. In the Galactic North the Votaan empire remains a bastion of industry and tough labor. The Votaan exploit entire planets, mining them to their cores and using the material for trade and the manufacture of goods. The Votaan empire has the only non-democracy of the major systems, instead having a pseudo-democratic"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "monarchy, in which ‘Dukes’ or ‘Jarls’ (Dukes being Alph leaders and Jarls being Minori leaders) of the Votaan will govern over a planet. While the position of Duke or Jarl is hereditary, Votaan will happily overthrow (usually peacefully) any lineage they deem unfit to continue ruling and replace them with a noble family more suitable. This means that there is a strange type of democracy at work, but for the most part the Votaan have a monarchy. In the Votaan empire, hard work will never fail to earn people an honest wage, but the work will be hard. In the galactic Northeast lies the Coalition of Graia, the civilization of violent omnics afflicted with the Ragemind virus. This civilization is completely unwelcoming to any organic life, and will shred and scrap any vessels they detect to have signs of organic life. If a vessel containing uncontaminated omnics enters their space, they will attempt to corrupt those omnics and turn them to their side. Their capital of Graia is an industrial hellscape, as are most of the more populated and useful worlds of their small barbarian empire. Very far in the galactic east lies the Eldar empire, the home of the Eldar. It rivals the USSA in size, and is not too dissimilar to it in many ways. The biggest"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "difference of course being that it is run by and populated by the Eldar, and takes on their unique architecture and way of life. They will allow other races to live amongst them, but typically not as full on citizens in the way that an Eldar would be. Their capital of Eldaron lies at the center of the empire. To the south of the Eldar empire is the infamous Drukhari Collective, the civilization of the Drukhari. No other races dares to go here, so little is known of it. Drukhari raiding vessels pillage any others who get too close, and little more is known of it than that. In addition to these, there are a few sectors of charted space that are colonized though not part of any very large civilization. Both the USSA and FSC hold colonial territory all around the galaxy that is not technically part of their empire, but in all practicality is. In the galactic south lies a region of space called the “Shotgun Stars”, a region of intense solar radiation and dangerous asteroids that few would dare to go to. Many decaying stars and fragmented planets make space travel into the region unbelievably dangerous. In some places, small debris shreds through vehicles, much like a shotgun, earning the region its name. To the Galactic Southwest lies"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "the Invictus Expanse, a vast and relatively sparse section of the galaxy with a relatively low amount of stars. This is where the majority of both USSA and FSC colonies are, as well as the majority of other minor independently governed systems. In the far galactic northwest is the Gas Cluster, a region of space with many massive gas giants and free floating clouds of gas. Within some of these gas giants are massive organisms who produce chemicals necessary for advanced refining of space fuel, and thus this sector is coveted by all. Because it is very hard to colonize gas giants, It is also very hard to govern this region of space, as any permanent structures can barely be built within a gas giant. One gas giant in particular, Dionysus, has the largest permanent civilization of any in the Gas Cluster and remains an independent planet, upon which the city of the same name can be found. Dionysus, named for ancient earth’s Greek god of pleasure, is a haven for debauchery and dubious deeds. Beyond the milky way is presently uncharted. Even though humanity has developed FTL travel, the nearest galaxy to the milky way, Andromeda, is still millions of light years away and cannot be reached by modern technology, even the most advanced warp drives do not have the energy to travel there."
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Below is the map of the galaxy. A larger print of the map can be found at the end of this document."
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Three: The Psyscape"
+        },
+        {
+          "kind": "paragraph",
+          "text": "A mere 100 years ago, on the FSC controlled world of Retobi, a team of scientists and geneticists discovered something truly incredible. While experimenting on a human subject who displayed very strange and unique abilities. Subject Zero, as she would come to be known, was the first known Psion of the milky way galaxy. It was discovered by this team of scientists that a unique genetic mutation of the brain was allowing this subject, and potentially others around the galaxy, to access the immense energy of the Psyscape, a dimension of pure energy. In collaboration with the scientists, Subject Zero would unlock the full potential of her Psionics. For a short few years, she demonstrated insane power, able to move objects with her mind and fire beams of pure energy from her hands. One day, in a freak accident, Subject Zero accidentally destroyed herself, her soul bound to and permanently stuck within the Psyscape. This sacrifice inadvertently increased the amount of Psions in the galaxy tenfold, and now Subject Zero exists as a type of demigod within the Psyscape. It is said she will visit undiscovered Psions, usually through dreams, and encourage them to unlock their potential."
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The scientists discovered that overlapped with all realspace exists a dimension of pure energy. This Psyscape, as it would come to be known, can be called upon by certain mutants known as Psions. The genetic mutation for Psionic abilities is incredibly rare, and oftentimes those with Psionic abilities will never unlock them, as they have no idea they possess the abilities. In the rare cases that a Psion is able to discover and control their power, they are a unique and powerful individual. Psionics can be very dangerous. Opening the mind to the immense power of the Psyscape can have a number of adverse effects. For one, overexposure to the immense energy there can be overwhelming, and in extreme cases cause complete madness or insanity. Furthermore, it has been discovered that some sentient entities occupy the psyscape, beings of pure energy with unknown and potentially dangerous motives. It has been observed that certain Psions who aren't careful may become the unwitting puppets of Psionic Demons of the Psyscape. These Psionic Demons are not actual deities, but rather a class of organism so unknowable they may as well be. They can possess psions, bending the psion’s will to their own ends, usually with the goal of consuming the emotional energy of other creatures."
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Powerful Psions can utilize the Psyscape to achieve a new form of FTL travel, via which they transmit all their matter into energy, send it through the Psyscape, then emerge somewhere else. This teleportation is very powerful, but opens up the Psion to the greatest degree of psionic stress. Because omnics contain the brain scan of human beings, they too can be psions, assuming the human whose brain template was used was themselves a psion. Any living being with a sufficiently advanced brain can be a psion, in fact."
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "CHAPTER TWO: EXPLORING SPACE"
+        },
+        {
+          "kind": "heading",
+          "text": "Section One: A Background on Spacing"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In The Milky Way space travel is commonplace and vital to galactic function. Spacecraft of all sizes use specialized spacetime warp drives, more commonly known as a ‘warp drive’ or ‘grav drive’ to puncture holes in spacetime and achieve faster than light (FTL) travel. Such methods of FTL transport require large amounts of energy, which is almost always supplied by heavy fusion reactors aboard spacecraft. The act of warp travel through space has a noticeable effect on the place the vessel left from and arrived at. Making holes in spacetime for travel is imperfect, and leaves behind a small, temporary tear in space at both departure and arrival. The larger the vessel and more powerful the grav drive, the more noticeable this effect is. A small vessel might make a very small tear which only exists in space for 30 minutes, whereas a very large ship may make a tear that lasts multiple days. This has a few major consequences. For one, specialized equipment, known as a ‘tear scanner’, can detect these small tears in space, and using the scanned information determine where the vessel that made the tear jumped to, assuming the tear was detected in time. Another consequence of these tears is that places in the galaxy which receive heavy amounts of repeated space travel, such as space near major planets or spaceports, a permanent tear may form. Permanent tears of this sort can be stabilized and utilized, creating a spacegate. Spacecraft can then use these spacegates to travel FTL at much lower energy costs, as the large amount of energy to open a tear in space is no longer required. Because of this, many major systems and starports have spacegates for rapid, safe travel. This is vital to supply lines, as vital resources like food, water, and materials can be transported via these routes more easily. The invention of stable"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "spacegates was akin to the industrial revolution in the sense that it exponentially increased the rate of progress in the galaxy. Both grav drives and the fusion reactors that power them can be dangerous. For one, both grav drives and fusion reactors can have immense consequences on the crew if they are damaged. If the fusion reactor of a vessel is heavily damaged, the best case scenario is a loss of ship power, causing the vessel to be stranded in space. Many vessels have some form of backup power generation, but backups can often only power communications and life support systems. Worst case scenario is a massive fusion explosion as the reactor overloads and melts down. As for damaging grav drives, the potential consequences are even higher. Once again, the best case scenario is the vessel being stranded, unable to complete any FTL travel. The worst case scenario is what is called a “grav leak”, in which the singularity within the grav drive becomes unstable and unshielded. Grav leaks can have numerous unpleasant consequences. A grav leak may cause the vessel to instantly have massive amounts of gravity, crushing the vessel into a dense ball. A grav leak might cause the vessel to make an uncontrolled and unexpected grav jump, potentially placing the vessel inside a star, or in a very empty region of space. In very extreme cases, such as when a very large starcraft has a grav leak, small black holes might form when the singularity inside the grav drive consumes all the mass of the craft. Because of these potential dangers, both the reactor and grav drive are kept as protected and defended as possible for the given craft. Grav drives and fusion reactors may be the most vital parts of a ship, but they are far from the only ones. Another major component of spacecraft is its shields. Shields are a veritable requirement for space travel as traveling without them may as well be suicide. Shields use strong magnetic fields to deflect and absorb incoming projectiles, but also provide defense against other dangers such as radiation, gravity warping (such as from another vessel experiencing"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "category": "lore",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "a grav leak), atmospheric elements such as corrosive gasses, and extreme heat or cold. Shields are projected by shield arrays, large units on the outsides of vessels. Different shields are better suited for different purposes. Some shields are meant to be general purpose, providing average protection from a number of different dangers. Other shields will be specialized to provide extra protection from certain factors, with high end shields utilizing new technology that allows for energy absorption or redirection. Specialized shields will more often than not have some disadvantage. As such, some vessels will carry multiple types of shield arrays. More than one shield cannot be activated at a time as the magnetic fields would interfere with and disrupt one another, however switching between them is possible and can be done relatively quickly. Shields are not invincible. Deflecting projectiles takes energy, and shield arrays do not have infinite amounts of it. To prevent overheating and catastrophic failure, an overloaded shield will need to be powered down and recharged after a certain amount of distress. The difficulty and duration of such rechargings depends on the shield, the amount of damage it sustained, and the skill of its crew. When the shields go down for recharge, a ship is at its most vulnerable. The ship can now be directly targeted by enemy fire, or be directly exposed to harmful environmental factors. If the shield arrays are hit during a recharge, they will almost certainly be permanently destroyed and need repair or replacement. As such, pilots will often prioritize the safety of the shield arrays above all else, as their external nature makes them harder to protect than other vital components like the reactor or grav drive. The galaxy is home to the Spacing Guild, a massive extranational organization which manages and regulates space travel in the galaxy. The Spacing Guild is a controversial and powerful organization. Governments and systems all vie for control and stakes in the Spacing Guild, knowing the immense power it holds. The Spacing Guild owns majority stakes in all space travel corporations, and thus controls"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "essentially all space travel manufacturing and sale, which has upsides and downsides. Because all space travel is owned by the same company, almost all spacecraft have high compatibility with one another. Standardized docking modules mean that nearly any two vessels can dock with one another, allowing vessels in space to link together and share items and crew. Additionally, almost all ship components can be shared between vessels, meaning finding replacement parts or getting repairs is not as difficult as it could be. These consequences can just as easily be negative. Because any two vessels can dock, pirates and raiders have a much easier time boarding vessels and stealing from innocents. Because parts are largely interchangeable, hijacking and stripping another vessel for parts can be both useful and profitable, again increasing piracy. Further yet, many people around the galaxy take issue with the Spacing Guild’s massive control over so much of galactic life. While the Guild is considered by most to be fair and useful, many have concerns that someday they may grow into a tyrannical corporation. Some think they are already a tyrannical corporation."
+        },
+        {
+          "kind": "heading",
+          "text": "Section Two: Ships Sizing and"
+        },
+        {
+          "kind": "heading",
+          "text": "Classification"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The galaxy has many different shapes, sizes, and types of spacecraft. From the massive cargo haulers and warships to light fighter craft to small luxury yachts, there are a large number of options for an aspiring pilot. Spacecraft are broken up into six categories based on size, each discussed below. They roughly align with the standard sizes for creatures in DND, but with a different scale. Tiny:"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Tiny craft are almost never crewed at all. Tiny craft may be small drones, torpedo swarms, escape pods, or other space vessels so small they might not be thought of as a space vessel at all. Small: Small craft are at most crewed by 3 people. In general, small craft are fighters or racing vehicles, and do not have an internal space to walk around in but rather just have a cockpit. They are often not meant for long journeys or even FTL travel, though they may be capable of those things. Because of their small size, targeting them is difficult, they can move at very fast speeds sub-light, and they are relatively fragile. Typically, the crew will consist of a pilot, sometimes a gunner, and sometimes a navigator or communicator. Medium: Medium craft are by far the most common vehicles in the galaxy. They are often crewed by between 4 and 40 people, sometimes more. Medium craft have extensive internal spaces, as opposed to small vessels. Medium craft will typically be piloted by one pilot, occasionally with the help of a copilot. They will also typically employ a navigator, some form of communications specialist, a shield operator, and as many gunners as needed to man the onboard weapons systems. Medium vessels take many different forms, from cargo vessels to larger combat vessels to specialized industrial vessels. These vessels are the most versatile, being the right size for a lot of different purposes. Large: Large craft are crewed by between 100 and 1000 people. They typically are either large warships or destroyers, or are large cargo haulers or industrial vehicles. They typically do not have a single pilot, but rather a full bridge crew complete with a capitan, helmsmen, navigators, and more. They are so large that many of them can fit small and medium vessels within them in hangars or docking bays."
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Large vessels are relatively slow but also very sturdy and heavy. They often have multiple reactors and multiple engines and grav drives for both redundancy and to fit the massive demands of a ship so large. Other than in some extreme cases, a small, medium or tiny vessel will probably not be able to do any substantial amount of damage to a large vessel. Likewise, a large vessel is so large that the weapons systems of a large vessel can probably destroy a small or medium vessel in very few hits, sometimes as little as one. If a small or medium vessel has the bold plan to destroy a large one, they will likely resort to some form of sabotage or boarding. Huge: Huge craft start to border on being so large as to be cities of their own. Huge craft are crewed by between 1000 and 10,000 people. The absolute largest transit vessels fit into this category, such as the massive Dreadnought and Titan class cruisers or long distance heavy freighters. Additionally, some smaller space stations or orbital platforms might be classified as Huge for the purposes of combat. Many of the attributes of large vessels are also true of Huge vessels, just that Huge vessels are even larger. Gargantuan: Gargantuan craft represent the very largest possible man-made objects in space. Gargantuan craft are full sized space stations or artificial moons, capable of holding massive amounts of people. If the death star were in DND, it would be Gargantuan. Gargantuan craft are more or less stationary, no longer being ships and rather being artificial planets of some sort. For the next sections, the term ‘Small Scale Vessel’ refers to Tiny, Small, or Medium vessels, and the term ‘Large Scale Vessel’ refers to Large, Huge, and Gargantuan vessels."
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Space combat between vessels happens on two separate scales. The bottom three sizes of vessels, and the top three sizes of vessels. As previously stated, Tiny, Small and Medium vessels are simply too small to cause noticeable damage to ships Large or Larger, and likewise Large or Larger vessels are too large to be bothered by them. As such, if space combat breaks out, small scale vessels fight, and large scale vessels act more like obstacles or terrain than other combatants. Similarly, if large scale vessels fight in space, small scale vessels are too insignificant to need to be represented in battle. This simplifies and balances space combat, preventing tedious and unnecessary interactions. Just because small scale and large scale vessels do not directly fight in space combat does not mean they do not interact. Small scale vessels can board larger vessels, or in certain situations a small scale vessel can target important ship systems of a larger vessel and try to damage them, such as with X-Wings and the Death Star. Large scale vessels can fire at small scale vessels, and though hitting a small target is difficult, if a shot should land it will likely cause immense damage to the vessel. Large scale vessels might also have tractor beams that enable them to capture and forcibly board smaller scale vessels. Outsizing Outsizing refers to the rule that determines how units of vastly different sizes interact. Small scale vessels are considered to be 20x less powerful than large scale vessels, and vice versa. This means that if a large scale vessel attacks a small scale vessel, all damage should be multiplied by 20, and if a small scale vessel attacks a large scale vessel damage should be divided by 20. Exceptions to this are when small scale vessels are making deliberate and planned precision strikes on large scale vessels (such as the death star - x wing example)"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Three: Ship Rules"
+        },
+        {
+          "kind": "heading",
+          "text": "Fighting in Space:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Operating spaceships and fighting in intense space battles is not a task to undertake alone. Most vessels are crewed by multiple people, each having unique tasks and contributing to the battle as a whole differently. In space combat in DND players will have their choice of some different positions to best suit any encounter. Options will include Pilot, Copilot, Gunner, Torpedo Operator, Shield Specialist, and many more. Selecting Roles: When combat breaks out players will roll initiative like normal using their standard initiative modifiers unless the DM says otherwise. Then, players will all select what position in their craft they each want to occupy. In smaller vessels, players are operating the equipment alone, whereas in a Larger vessel they would be commanding a crew at that station, but either way the end result is the same. Each station can only hold one person, and players may work together to decide what stations would best fit each player. Then combat will progress in the order of initiative, with each player going in order based on their initiative. Important: Unlike in standard combat, players may NOT hold their turn for later. Players must act within their turn or pass their turn. Also, players must go strictly in their initiative order, so no interchanging turns."
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "If through the course of combat players decide that the position they occupy is not helping the team or not optimal, a player may use their entire turn to switch to a new station or swap with another player. If a player is swapping to an unoccupied station, it simply takes their whole turn, and at the start of their next turn they can use the new station. If two players want to swap positions, it will take up both of their entire turns, and neither can act until the next turn cycle. No position ever ‘must’ be occupied. Even the role of pilot doesn’t necessarily have to be filled. It is also advisable to invest in a ship with more open positions than crew members so that the crew has flexibility. The Pilot Role The only role that every single spacecraft has is the role of pilot. The pilot is, as the name suggests, in charge of steering, maneuvering, and positioning the craft. Every vessel will have a pilot, and some vessels will also have copilot roles. Co-pilots act identically to regular pilots, but the main Pilot has the final say in disputes. Occasionally, such as in small single person fighter craft, the pilot will also control the weapons systems of their vessel. This will be noted in the attributes of that vessel. Moving in Space When it becomes a pilot’s turn, they have some, but not infinite, flexibility in their movement. Because ships have lots of momentum when flying through space, they cannot simply stop or stay still."
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "When it becomes a pilot’s turn, they MUST move at least half of the distance they moved on the previous turn, rounding down. If it is the first turn in combat, the pilot must move their entire movement speed unless some extenuating circumstances exist. Furthermore, the pilot must move ‘forward’ relative to the ship. If an entire turn cycle goes by and no pilot had a turn, the vessel moves forward at whatever speed it was traveling. Having no pilot can happen a few different ways,either there was no player in the pilot position or they were incapacitated or otherwise unable to act. Because ship battles occur on many scales, the unit of movement is simply battlefield tiles, and the size of one tile is up to DM discretion. Turning: Every ship, in addition to its movement speed, has a turning radius, measured in degrees. The turning radius represents the maximum possible amount of turning the vessel can do within one turn. In order to turn the full amount, the vessel must also travel its maximum speed, and along the path of the turn (meaning you cannot go in a perfectly straight line, then at the very end flip around). Traveling less than the entire speed also decreases the possible amount of turn proportionally. This should make intuitive sense, real world vehicles cannot flip around at will instantly. Example: If a ship has a Movement speed of 6 Tiles and a Turn Radius of 180, then if the ship moves all 6 tiles, at the end of the path it can at most be turned completely around, 180 degrees."
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Below is an example of all the possible tiles a vessel of Movement speed 6 and Turn Radius 180 can land on in one turn, assuming they follow the other movement rules. Arrows represent the approximate direction the vessel would be facing. Note that two diagonals is roughly equal to three tiles straight. Do note that each pilot and copilot may make a full movement. This means that players essentially can forgo one other position in exchange for additional ship movement, assuming they have an empty and available co-pilot seat in their ship. This makes copiloting similar to a dash in regular combat, though obviously a little different. Having copilots also speeds up how quickly a ship can make a warp jump to attempt to escape combat, which will be discussed in greater detail in the Warp Jumping subsection below. Warp Jumping Warp jumping refers to powering up the grav drive and attempting to travel FTL to another location. As described previously, warp jumping creates a tear in space that is both detectable and potentially traceable, meaning anyone warp jumping near other vessels may want to"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "be careful, as those other vessels may be capable of tracking them down. Outside of combat, warp jumping is relatively easy and happens without requiring a check if the pilot of the vessel is proficient in piloting, but does require a check (Intelligence 12) if they are not. If a ship wants to warp jump at a moment's notice to escape combat, more care and stress will be needed. To warp jump out of combat, the pilot must first succeed an Intelligence 12 check if proficient, Intelligence 16 check if not, then wait (4 - number of pilots/copilots) turns. If the check fails, they simply must wait another turn to try again. If the check is critically failed, then the grav drive becomes disabled, and a warp jump becomes impossible until repaired. If at any point during the waiting turns the ship’s grav drive becomes damaged or disabled, the process ends and the ship does not jump. Powering up the grav drive in preparation for a warp jump is easy to notice. When a ship starts this process, the ship will have a noticeable warping effect around it, meaning that it is easy to tell when another vessel plans to warp jump. This means that ‘sneaky’ warp jumps are very difficult. Fuel: Warp jumping is not free. Any warp jump requires fuel, which is relatively abundant but still needs to be managed. A ship will have some number of possible warp jumps before needing a refuel, this number being the ship’s Fuel statistic. For example, a ship with Fuel 4 can make 4 warp jumps without refueling. Warp jumping via a Spacegate is the only exception to the fuel rule. Ramming Vessels, whether intentionally or not, may collide with one another. Ramming damage is potentially very devastating for anyone involved."
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "When two objects collide, take the number of tiles moved by that object this turn prior to collision, and roll that many d10. If the two objects collide head on (in directly opposite directions), the damage is doubled. That much physical type damage is done to the target being rammed and half as much to the one doing the ramming. If one ship rams another and its path to get there was 5 tiles long, the ramming would deal 5d10 damage to the target being rammed and half as much to the one doing the ramming. After the collision, the two objects cannot end on the same tile. Position the objects in a manner most sensible for the aftermath of the collision. Exceptions: Ramming damage is the only form of damage that does roll over into the hull hit points. If a ramming deals 20 damage and the vessel has 10 shield hit points, the vessel loses its shield and takes 10 hull damage as well. If the vessel doing the ramming has a well constructed and intentionally designed ram on it, then it will not take any damage from ramming another target. Some ships will be custom built with rams for combat purposes, especially bandits and pirates. Tear Scanning As previously mentioned, vessels equipped with specialized sensors called ‘Tear Scanners’ can scan and detect when another vessel has made a warp jump, and potentially where their destination was. Below is a table which details the required skill check based on the size of the vessel and how long it has been since they warp jumped."
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The table below assumes you have a Tear Scanner equipped to the vessel you are in. If you do not, none of this is possible. The table does not contain Tiny vessels because they are not large enough to warp jump, thus they will never need to be scanned. Scanning a tear destabilizes it. You cannot keep retrying failed checks, one person may try one time to make the checks. Size of Vessel <15 Mins 15 Mins - 1 Hr 1 Hr - 12 Hrs 12 Hrs - 2 Days Small INT 15 INT 20 IMPOSSIBLE IMPOSSIBLE Medium INT 13 INT 15 INT 20 IMPOSSIBLE Large INT 10 INT 13 INT 15 INT 20 Huge INT 8 INT 10 INT 13 INT 15 Gargantuan INT 1 INT 8 INT 10 INT 13 Beyond 2 days out, no vessels are still detectable. Gargantuan vessels very rarely are capable of warp jumping due to size, but some extreme cases do exist. Successful scan checks allow the vessel making the scan to know the precise location that the vessel they are scanning warp jumped to, but provides no information about whether they are still there, or if they jumped again afterwards (unless they find more tears)."
+        },
+        {
+          "kind": "heading",
+          "text": "Shields, The Shield Specialist, and Destroying"
+        },
+        {
+          "kind": "heading",
+          "text": "Ships"
+        },
+        {
+          "kind": "paragraph",
+          "text": "As previously mentioned, shields are a vital part of all space vessels. If a vessel has shields, they will be documented separately from the base hit points of the vessel (also called the hull hit points). Shields are different from regular hull hit points because"
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "they can be regenerated in combat and regular hull hit points can not be. In order to destroy any vessel, you must first take down its shields. Also previously mentioned in the Background to Spacing section, shields can be recharged when turned off. Destroying Shields To destroy a shield you simply must overcome its hitpoints. Different shields will have different strengths and weaknesses, so be sure to check with the DM as to what type of damage you are dealing. Like in regular combat, if a shield has Resistance to a type of damage it takes half damage, Immunity takes no damage, and Vulnerable takes double damage. Any excess damage done to a shield on the attack that destroys it does not roll over to hull damage. Recharging Shields In order to recharge a shield it and all other shields must be turned off. This, of course, exposes the ship and renders it quite vulnerable, so great care and thought should be put into when to recharge shields. If the shields are overwhelmed and reach zero hit points, they enter recharge automatically. Shields finish recharging in one turn, however they come back with half the amount of hit points they lost. For example, if a shield has a maximum of 30 hit points and is damaged down to 10 then recharged, after the recharge it will have 20 hp. (10 were left over, plus half of the lost hit points are returned (half of 20), totaling 20). Using another whole turn, shields can be 100% recharged. This is obviously a large risk, but can be useful in some situations."
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Only one shield recharges per turn. If a vessel has two shields and both are fully depleted, only one will come back on after a turn of recharge, and the other will remain disabled unless it is given its own turn to recharge. If someone occupies the Shield Specialist role, they have control over which shields recharge in what order. Shields will otherwise recharge in the order they were deployed. The Hull Hit Points The hull hit points represent the physical integrity of the hull of the vessel. Fully damaging this hit point pool disables the vessel (see below). Within combat, there is no possible way to repair hull damage, so extreme care should be taken to see that the hull does not get damaged. Repairing hull damage is only possible with the help of tools and repair services offered by many different shipyards, stations, etc. Destroying/Disabling Ships  A ship is disabled if its hull hit points drop to zero. When a ship is disabled, the ship who dealt the final blow has a choice between fully exploding and destroying the vessel, or leaving it disabled floating in space. Disabled ships cannot move, act, or do anything at all, they are effectively dead in space. The choice to leave a ship disabled is useful if players want to board, scrap, or otherwise interact with the vessel after besting it in combat. If players do not wish to do any of those things, they can destroy it in a spectacular fashion. Do note that just because a ship is disabled, its crew may be alive and well. Damaging a ship may harm its crew, but not always. Boarding a disabled vessel to plunder and loot it may cause you to be ambushed"
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "or attacked by its desperate inhabitants who would very much like to kill you and steal your ship to escape and survive. Shield Specialist There is a role, detailed in the below section Other Roles, which manages the shields for a vessel. Please read that section for more info. Types of Shields Below is a table of all the shield options. Shield Name Damage Immunities Damage Resistances Damage Vulnerabilities None Ballistic Particle Ballistic Shield Blast Shield None Blast Radiation Laser Shield None Laser Plasma None Particle Ballistic Particle Shield Plasma Shield None Plasma Laser Radio Shields None Radiation Blast Ballistic None Particle Superior Ballistic Shield Blast None Radiation Superior Blast Shield"
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Blast None Plasma Superior Laser Shield Particle None Ballistic Superior Particle Shield Plasma None Laser Superior Plasma Shield Radiation None Blast Superior Radio Shields Ballistic Laser Particle, Plasma Heavy Ballistic Shield Heavy Blast Shield Blast Plasma Radiation, Laser Heavy Laser Shield Laser Particle Plasma, Ballistic Heavy Particle Shield Particle Radiation Ballistic, Blast Heavy Plasma Shield Plasma Blast Laser, Radiation Radiation Ballistic Blast, Particle Heavy Radio Shields Grav Leaks A grav leak occurs when the singularity within a grav drive becomes unstable and causes all manners of wacky effects to the vessel and crew. Grav Leak effects are based on a roll of percentile die. Consult the below table to decide what happens in the case of a grav leak. For extra fun, combine effects."
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Dice Roll Effect 1-10 Gravity on board the vessel is tripled 11-20 Gravity reverses direction 21-30 Time is slowed down by a factor of two for the ship and its inhabitants 31-35 The ship makes an unexpected grav jump to some random free space 36-40 The ship makes an unexpected grav jump to a dense asteroid field 41-50 The vessel shrinks down to half of its original size 51-60 The ship teleports to another random point on the battlefield 61-70 The ship appears to travel backwards in time two turns 71-75 The ship makes an unexpected grav jump to the center of a star 76-80 The ship makes an unexpected grav jump straight into a tower somewhere 81-90 The ship’s gravity increases so much it collapses into a crumpled ball 91-95 The grav drive explodes in a small supernova, destroying it and damaging all other vessels within 3 tiles for 4d10 Blast damage 96-100 The grav drive collapses into a black hole, destroying the ship and creating a dangerous obstacle. The black hole pulls all vessels in the combat to it, one tile per turn. If any ship reaches the same tile as the black hole, it is also destroyed and the pull of the black hole increases by one tile per turn."
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Damage Types:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ship weaponry has a different set of fundamental damage types to regular combat. Where regular combat has damage types like Slashing or Poison, ship damage types are all more appropriate for space combat. The damage types are the following: ● Ballistic - Firing bullets or other kinetic projectiles ● Blast - Conventional explosives such as missiles or torpedoes ● Laser - High energy laser beams ● Particle - Damaging high energy particles like electrons or protons or the like ● Plasma - Superheated plasma which explodes somewhat on impact ● Radiation - Damage from radiation which may come from weapons or environment ● Physical - Damage from being rammed, hit directly by debris, or other physical attacks. Different ship shields will be better suited to defend against certain damage types, but oftentimes at the cost of vulnerability to other damage types. The Gunner Role The majority of players within a ship combat will likely be in a Gunner position, meaning they are in control of some weapon system. A given weapon has four statistics, its Aim Stat, its damage, its range, and what part of the vehicle it is on."
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Aim Stat: Aim stat represents which core attribute this weapon uses to make attacks. If the weapon has a Dexterity aim stat, you add your dexterity modifier to attacks. If it has an Intelligence aim stat, you add intelligence. So on and so forth. Damage: This is self explanatory. The damage represents how much and of white type the damage dealt by a hit will be with this weapon. Range: Also self explanatory, the longest possible distance this weapon can accurately hit a target at. Attacks made beyond the range are made with disadvantage, up to twice the range after which a hit is impossible (these rules are identical to standard ranged combat) Gun Position: This represents what side of the ship the weapon is on. The five options are Bow, Stern (also called Aft), Port, Starboard, or Central. A weapon on the bow (front) of the ship can fire only at targets within a cone of the front of the ship. A weapon on any side of the ship other than central can fire at targets only within a cone extending out from that side of the ship. A weapon that is central can fire at any target in any direction, as the weapon is mounted at the center of the ship and can swivel. Central weapons are often the most powerful and versatile weapons of a ship, if they have any. Below is a diagram showing what a given weapon on a given position can hit, with the arrow indicating the direction the ship faces. Notice there are small blind spots in the diagram. These are intentional, and most vessels will have some form of blind spots that you may try to get into to avoid being hit. The length of the cone is the range."
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Precision Aiming Sometimes a gunner will want to target specific ship components rather than just shooting vaguely at a ship. Firing precise shots at these targets is more difficult, which results in a penalty to aim. There is a feat which improves precision aiming. Below is a chart of specific ship parts that can be targeted, and potential effects of that destruction. These are not necessarily the only options, but the majority of them. Please keep in mind that targeting specific ship parts is only possible if that ship is unshielded, as the shield will otherwise protect the ship. In the case of Large+ ships, some of the components are so well protected and deep within the ship they cannot be directly targeted from the outside. Component Aim Penalty Potential Effect Shield Array -4 Disabling of one shield type of the enemy for 1d4 turns Engines -4 Half the movement speed and turn radius"
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "of the vessel Weapon System -6 Disable one set of enemy weapons for 1d4 turns Scanner Array -6 Target gains Blindness condition for 1d4 turns Cockpit (or bridge for Large+) -8 Incapacitates any pilots for 1d4 turns. Rules for vessels without pilots apply. Reactor (Only Medium- vessels) -10 Ship loses all functionality for 1d4 turns, rendering it temporarily disabled. If a 4 is rolled, the reactor violently detonates and destroys the vessel Grav Drive (Only Medium- vessels) -10 Ship loses the ability to warp jump and loses its internal gravity and becomes a zero gravity environment for 1d4 turns. If a 4 is rolled, a grav leak occurs. Consult the table under Grav Leaks for the effect. Life Support Systems (Only Medium- vessels) -12 All crew on the enemy vessel are immediately killed, and the vessel"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "becomes disabled. Boarding ships with no life support should be done carefully and with portable oxygen Other roles While Gunners and Pilots will make up the majority of the crew in a given combat, there are some other roles that certain ships will have Torpedo Operator: Some vessels come equipped with homing torpedo tubes that can be fired and operated by a crew member. Torpedoes differ from regular gunners in that the torpedoes fired by the player become a new and interesting vessel in combat, rather than just a regular attack. See Torpedoes in the section after this one. Shield Specialist: A player can choose the role of shield specialist on almost any vessel. The shield specialist is in charge of more than just the shields, but managing the shields is the biggest duty of the role. Some ships come equipped with multiple shield systems, and to switch between them in combat somebody must fulfill this role. The shields can be switched once per this player’s turn, and switching is instant. In addition to this, the shield specialist oversees where the ship's power is diverted to, and as such can grant a bonus turn to another member of their team. This can be any member of the crew so long as they are already established at their position (cannot give an extra turn to someone just for them to use it to swap positions). Lastly, when a player is in the shield specialist role, they can see both the strengths and weaknesses of all enemy vessels'"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "shields, thus aiding the team in knowing what weapons will be most effective. Boarding Party: Players can choose this role only when another vessel is within one tile and does not currently have active shields. If both of these requirements are fulfilled, any players who are in this role will promptly board the enemy vessel and carry out whatever actions they wish. This choice can be very risky, as boarding another vessel could result in being taken prisoner, being outright killed, or being stranded on an enemy vessel. Fighters Capitan (Large+ vessels only): On certain Large or larger vessels an on board fleet of small fighter vessels may be present. If so, this fleet of fighters will have a captain that coordinates their efforts. The fighters capitan works similarly to the torpedo operator, though with some notable differences, see Fighter Fleets in the section below. Passenger: Passengers do nothing. They come along for the ride. Controlling sub-vessels (Torpedoes and Fighter Fleets) As mentioned earlier, certain roles allow the user to take control of a group of other vessels, hereafter known as sub-vessels. Below are the specifics of the roles Torpedoes: Torpedoes are small, precise guided missiles meant to precisely destroy enemy vessels. Unlike regular attacks, the operator of the torpedoes takes manual control of the projectiles, steering and guiding the torpedoes to a target. Any time it is the turn of the player who fired them, that player controls the torpedoes. Torpedoes often fire in groups of 4 or more, however all torpedoes are a single unit and controlled as one in combat (for simplicity). Torpedo"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "operation is essentially a smaller scale version of steering a ship. All the rules for steering, turning, and momentum from regular ship movement apply to torpedoes. Like a regular ship, torpedoes will have a movement speed and turning radius, oftentimes a lot faster than a regular ship. Different torpedoes have different warheads that will deal different damage. Each torpedo will specify itself. Torpedoes have a Fuse statistic which determines how many turns they can last before they run out of fuel and automatically detonate. If a torpedo has Fuse 4, it can last 4 turns (not including the turn they were fired). Torpedoes will automatically detonate on impact with any object of any kind, regardless of whose turn it is. This includes ships and their shields, but also debris, asteroids, or any other obstacles. If a spacecraft (other than the ship that fired them) enters the space of the torpedoes, they will detonate immediately. Torpedoes are programmed to not detonate on the ship they were fired from, but will otherwise detonate upon contact with any solid object. Torpedoes can also be manually detonated by the user at any point during their turn. Torpedoes detonate and do damage to all things within a one tile radius, including the player ship. This means you can carefully position the torpedoes to do damage to multiple enemies at once, but also means you might accidentally harm your own vessel. Torpedoes fire out of the front of the ship unless otherwise noted. This means that they enter the battlefield one tile in front of the spacecraft, and may face either straight or at a 45 degree angle to either side. On the turn they are fired, they do not move, however that turn also does not count as a turn for the fuse."
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "For the sake of classification, a torpedo swarm is a Tiny spacecraft with no warp jump capabilities. Torpedoes have a health and armor class like any other vessel, though they do not have shields. Torpedoes can be shot to deter them from hitting your ship. Every time a torpedo swarm is fired, its tubes must be reloaded. Reloading torpedoes takes one full turn unless otherwise noted. Fighter Fleets: Similar to torpedoes, fighter fleets are small separately controlled units which act independently of the vessel they launched from. Where they differ from torpedoes is that they do not have a fuse, and do not have to be ‘reloaded’ like a torpedo tube has to be. Also, they don't explode. If the vessel carrying the fleet was prepared and ready for combat at the time it started, then fighter fleets can be deployed on the first turn. If the vessel was taken by surprise or was otherwise unready for combat, then deploying fighter fleets will not be possible until the second turn cycle. Whereas torpedoes are infinitely reloadable and can be shot as long as they are loaded, fighter fleets are a finite resource. They are both more powerful and capable than torpedoes, and more precious. A given vessel will have a fixed number of fleets on board. If a fleet is ever reduced to zero health points, it is permanently destroyed and will need to be somehow replaced in the future. If the health and safety of a fleet is in danger, they can be flown back to the vessel that launched them and safely docked within. Destruction of a vessel containing fighter fleets also destroys all contained fleets unless some extenuating circumstance exists. Like any other spacecraft, fighter fleets have a set movement speed and turn radius, and must follow all the standard rules that relate"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "to them. Due to their relatively small size compared to the large scale vessels they will be deployed in battle against, the entire fleet acts as one medium unit but does NOT receive penalties of outsizing (see outsizing for more info on what that means). Fighter Fleets can deal damage to any target within their range radius, they do not necessarily need to be facing their target. The healthpoints of a fighter fleet represents the average condition of all the fighters within it. The health points do not exactly equal the number of remaining vessels, nor does having lower health points cause the fleet to be less effective (short of it being wholly destroyed). If combat ends and any fleets are still deployed, they return to the vessel that deployed them automatically. Fighter craft have relatively low fuel capacity and no grav drives, so they cannot stay in space indefinitely nor can they make warp jumps. This means that warp jumping out of combat without first retrieving the fleet effectively dooms it to death. Below is an example stat block for both a torpedo barrage and fighter fleet"
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Four: Some Example Spaceship"
+        },
+        {
+          "kind": "heading",
+          "text": "Statblocks"
+        },
+        {
+          "kind": "paragraph",
+          "text": " The galaxy is home to hundreds of different vessels, some mass manufactured and some completely unique. The next sections will list some example spacecraft from the Small Vessels category. Note the structure, and how positions represent the number of both seats and roles the vessels have: Star Racers Star Racers are a class of small vessels used primarily for racing. They do not have weapons (unless illegally modified) but have the best turning and sub-light speeds of any vessel. The starship companies Atazi and Jumpjet are renown for their quality race vessels"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Atazi’s Line of high end star racers are some of the fastest in the galaxy. They can be quite expensive, however they are unmatched in speed."
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "While Atazis might be the fastest craft, Jumpjet makes some of the most versatile and maneuverable Star Racers. They have the best turning in the galaxy Some special star racers are built purely for speed in straight lines. These are Drag Racers, and they are incredibly fast sub-light. Starfighters Starfighters are purpose built starships for precise, fast paced fighting in space. They are often quite small, only have room for one or two people, and rely on some bigger ship to get around outside of combat."
+        }
+      ]
+    },
+    {
+      "number": 53,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Hyena Class is a slightly bulkier but generally versatile starfighter type used by a number of different factions and crews. It has a underneath mounted ball turret that can be manned by a wingman The Tempest Class Fighter is designed to strike quickly and efficiently before speeding out of range. It has the best Turning and Speed of the mass manufactured starfighters, the particle cannons are meant to overwhelm certain shield types, and the center mounted Mars Missile Pods can fire high explosive missiles at targets in all directions."
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The Lancer Class Fighter is one of the bulkier fighters, but comes with some of the heaviest weapons. The massive Raider Gatling Cannon mounted under the cockpit can shred enemies and the center mounted Plasma Hyperbeam can cut holes straight through hard targets. The Hydra class is very unique amongst star fighters as it has 3 cockpits, similar to how a Hydra has multiple heads. Each cockpit can theoretically control the fighter, but typically it will be the middle cockpit. All three cockpits control an Inferno Gatling, which fires plasma tipped bullets to provide a wide range of damage types."
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "category": "ship-reference",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Pariah Class Fighters are the most feared starfighters, both by pilots and vessels alike. They are not meant to deal massive damage in life, but rather in death. Pariah class fighters are designed to explode massively upon destruction, meaning a ride on a Pariah is probably the last ride of your life. Some pilots will intentionally fly straight into other targets, dealing blast and ram damage."
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "CHAPTER THREE: WEAPONS &"
+        },
+        {
+          "kind": "heading",
+          "text": "ARMOR OF THE MILKY WAY"
+        },
+        {
+          "kind": "heading",
+          "text": "Section One: Fundamental Firearm"
+        },
+        {
+          "kind": "heading",
+          "text": "Rules:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In order to make ranged combat more interesting and varied within the space setting, a fairly rigorous overhaul of ranged firearms has been designed for this setting. First, we must cover all the new statistics and keywords of a ranged weapon. You should assume that the usual keywords of a standard ranged weapon exist as they would in the usual way. ● The Recoil Statistic: Automatic weapons of all varieties have a recoil stat. The recoil represents how easy or difficult to control an automatic weapon is. The recoil is combined with the Rate of Fire statistic to determine how many shots in an automatic burst are hit. ● The Rate of Fire statistic: All automatic weapons also have a Rate of Fire. This represents how rapidly the weapon fires, with slow firing automatic weapons having low rate of fire. The rate of fire is combined with the Recoil statistic to determine how many shots in an automatic burst hit. ● The Reload Statistic: All firearms of all types have a reload statistic. The reload stat determines the number of actions the weapon"
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "can take before needing a reload. In D&D beyond, this is represented by “charges” to allow the user to keep easier track of the number of uses. ● The Misfire Statistic: As is true in Core DND rules, weapons have a misfire statistic. The higher the misfire statistic, the more likely a weapon is to jam or misfire in the case of a failed shot. In combination, these three fundamental stats define all firearms. The next section details how Recoil and Rate of Fire stats work: Example: A character fires an automatic weapon with Recoil 2 and Rate of Fire 2 at a target with AC 10. The attacker rolls a 16 to hit. Because the excess is 6 (the attacker rolled 6 more than needed), and the recoil is 2, the target will hit 3 extra shots because 6 / 2 is 3. The rate of fire of this gun is 2. This means every shot that hits is multiplied by two. In total, the shooter hit 8 total shots. 1 from succeeding the hit, 3 extra for having a good roll, and each of those is multiplied by the Rate of Fire, which is two. If this weapon did 1d4 damage per shot, this attack would deal 8d4 damage. In summary:  To calculate the number of shots hit, take the excess To Hit, divide by the Recoil to determine extra shots hit, then add all shots together and multiply by the Rate of Fire. Non-automatic weapons do not have Recoil or Rate of Fire statistics, as they only fire one projectile regardless of excess precision. Such firearms often have some other compensation for high rolls. See Other Keywords below."
+        }
+      ]
+    },
+    {
+      "number": 58,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Other Keywords: ● One-Handed and Two-Handed These keywords are self explanatory. Two handed weapons must have both hands to operate, and cannot be operated or reloaded with less than two hands. One handed weapons can be used one handed, dual wielded, or used in conjunction with another one handed melee weapon. In the case of dual wielded firearms, both weapons can be fired in the same action, but at a -2 penalty to each attack. Furthermore, each weapon must take its own action to reload, meaning reloading both firearms takes two actions. ● Penetration: Penetration is a keyword stat that applies to non-automatic weapons only. Non-automatic weapons with penetration can hit multiple targets in a straight line of fire, with the penetration stat representing the weapon’s ability to do so. The penetration stat represents how many extra targets can be hit with a shot. ● Melting: Melting weapons confer a small reduction in armor to targets hit with the attacks, effectively melting their armor. Successful weapon attacks with a melting stat weapon decrease the target’s AC by the melting value until another attack hits them. If a weapon with Melting 2 hits a target with 10 AC, their AC becomes 8 until the next successful attack made on them. ● Irradiating: Irradiating weapons irradiate targets hit with them, causing nausea and fatigue. Successful attacks with"
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "irradiating weapons cause the target to gain disadvantage on their next check or saving throw, this effect can stack. 5+ stacks forces the target to make constitution saving throws (DC 13) on the start of every term or become unconscious. ● Area: Some weapons fire in a wide area rather than precisely attacking one target. Such weapons include all Array weapons and Flamer weapons. Weapons with the Area keyword will specify the size and shape of the area targeted. Area weapons might require the targets to make saving throws, which the weapon will specify. ● Shotgun Effective Range: Shotguns and Shredder guns fire many small, imprecise projectiles. As such, they have a substantial advantage at close ranges. Shotguns have an Effective Range stat, measured in feet, which represents the maximum range the shotgun will be effective at. Shotgun attacks made at a range of half the effective range or closer are especially effective, and deal an additional 50% damage. Shotgun attacks beyond the effective range have disadvantage. Shots made beyond double the effective range immediately fail. Example: A shotgun has effective range 30: Attacks made at 60+ feet fail instantly Attacks made between 30 and 60 feet will be made with disadvantage Attacks made between 30 and 15 feet will be standard Attacks made within 15 feet will deal 50% extra damage ● Heavy Weapon:"
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "The heavy weapon keyword refers to a number of weapons which are very heavy, unwieldy, or large. Using a heavy weapon requires proficiency with Heavy Weapons (acquired via a feat, background, or class), and a sufficiently high strength score (Must have +2 or greater modifier). Both requirements can be overridden if the user is in Power Armor or the heavy weapon is mounted/fixed in place. Heavy weapons are quite hard to reload due to their large size and relative complexity, and take two actions to reload. ● Scoped Weapon: Scoped weapons are intended to be used at longer ranges. Using a scoped weapon on a target closer than 20 feet causes the shooter to have disadvantage. Using a scoped weapon at a distance of greater than 60 feet causes the shooter to have advantage. ● Suppressed Weapon: Any non-heavy weapon can be a suppressed weapon, which is a much quieter and stealthier version of the weapon. Normal firearms are very loud and making stealthy kills with them is completely impossible, however suppressing the weapon changes that. Suppressed weapons have some drawbacks, however. Suppressed weapons are always considerably more expensive than otherwise, and the suppressor will slightly limit the capabilities of the weapon. Suppressors decrease the damage of the weapon by 25%, and have half the regular range."
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Two: Firearm Catalog"
+        },
+        {
+          "kind": "paragraph",
+          "text": "● Ballistic - Ballistic weapons are traditional bullet firing guns, well rounded ○ Revolver - Reliable and Battle Proven 6 shot revolver ■ One Handed - Reload 6, Misfire 1, Penetration 1. 2d8 Piercing ○ Pistol - Classic design semi automatic pistol ■ One Handed, Reload 10, Misfire 2. 2d6 Piercing ○ Auto-Pistol - Automatic pistol. Very fast firing and smaller magazine. ■ One Handed, Reload 2, Misfire 4, Recoil 4, RoF 3, 1d4 Piercing. ○ Sawed Off Shotgun - Small, handheld shotgun with very short barrels ■ One Handed Shotgun, Reload 2, Misfire 2, ER 20 Ft. 2d6 Piercing. ○ Submachine Gun - Small to Midsize fast firing automatic weapon"
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "■ Two Handed, Reload 3, Misfire 2, Recoil 2, RoF 2, 1d4 Piercing. ○ Assault Rifle - Standard issue automatic rifle ■ Two Handed, Reload 4, Misfire 2, Recoil 2, RoF 1, 1d6 Piercing ○ DMR - Semi Automatic long rifle, hybrid between sniper and assault rifle. ■ Two Handed, Reload 6, Misfire 2, Penetration 2. 3d8 Piercing ○ Sniper Rifle - Long, heavy hitting rifle. Small magazine and long range. ■ Two Handed, Reload 2, Misfire 2, Penetration 3, Scoped. 4d8 Piercing ○ Shotgun - Medium gun firing many small pellets to tear apart targets ■ Two Handed Shotgun, Reload 4, Misfire 4, ER 30 Ft. 2d8 Piercing ○ Minigun - Very large very rapid firing minigun ■ Two Handed Heavy Weapon, Reload 4, Misfire 5, Recoil 4, RoF 4. 1d6 Piercing"
+        }
+      ]
+    },
+    {
+      "number": 63,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "● Laser - Laser weapons are reliable, can go long fights without reloading, and can burn through enemies. ○ Laspistol - Small laser pistol, refined and accurate ■ One Handed, Reload 12, Misfire 1. 2d8 Laser ○ Las Auto-Pistol - Small laser pistol modified to shoot in laser bursts ■ One Handed, reload 5, Misfire 2, Recoil 2, RoF 1. 1d6 Laser ○ Submachine Lasgun - Compact, fast firing lasgun ■ Two Handed, reload 5, Misfire 2, Recoil 2, Rof 2, 1d6 Laser ○ Assault Lasgun - Standard issue laser rifle. ■ Two Handed, Reload 6, Misfire 2, Recoil 2, RoF 1, 1d8 Laser ○ Pulse Lasgun - Single firing, hard hitting laser DMR ■ Two Handed, Reload 4, Misfire 1, Penetration 2, Melting 1. 3d8 Laser ○ Longlas - Laser sniper rifle. Heavy and tends to overheat. Quite powerful"
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "■ Two Handed, Reload 1, Misfire 6, Penetration 3, Melting 1, Scoped. 4d12 Laser ○ Scatterlas - Scatters many lasers at short range, similar to a shotgun ■ Two Handed Shotgun, Reload 6, Misfire 2, ER 30ft. 2d10 Laser ○ Heavy Las Repeater - Large laser minigun ■ Two Handed Heavy Weapon. Reload 6, Misfire 3, Recoil 3, RoF 3. 1d6 Laser ● Inferno Guns - Fire superheated projectiles to burn through enemies and armor ○ Handflamer - Small, one handed flamethrower ■ One Handed, Reload 1, Misfire 2, Melting 2, Area (30ft Cone, DC13+Prof Dex). 3d6 Fire ○ Heavy Flamer - Large, two handed heavy flamethrower ■ Two Handed Heavy Weapon, Reload 2, Misfire 2, Melting 3, Area (45ft Cone, DC14+Prof Dex). 4d6 Fire. ○ Meltagun - Fires molten hot slag at short ranges to shred and melt enemies"
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "■ Two Handed, Reload 2, Misfire 2, Melting 4, ER 20ft. 2d6 Fire + 2d6 Piercing ○ Mini-Melta - Minigun style meltagun. Incredibly heavy and powerful ■ Two Handed Heavy Weapon, Reload 4, Misfire 2, Melting 4, ER 30ft, 2d8 Fire + 2d8 Piercing ● Plasma Guns - Plasma guns fire single, large beams of white hot plasma. High risk high reward ○ Plasma Pistol - Compact plasma launcher ■ One Handed, Reload 1, Misfire 4, Penetrating 4, Melting 2. 4d8 Laser ○ Plasma Gun - Medium size plasma weapon ■ Two Handed, Reload 1, Misfire 4, Penetrating 4, Melting 2, 4d10 Laser ○ Heavy Plasma Beam Cannon - Shoulder fired heavy plasma beam ■ Two Handed Heavy Weapon, Reload 1, Misfire 5, Penetrating 10, Melting 2, 6d10 Laser."
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "● Boltguns - All boltguns are heavy weapons. They are like regular ballistic weapons, but fire incredibly powerful and heavy bullets the size of soda cans. ○ Bolt Pistol - One Handed bolt gun ■ One Handed Heavy Weapon, Reload 6, Misfire 2, Penetrating 1, 3d8 Piercing ○ Bolt Auto-Pistol - One handed auto bolt gun ■ One Handed Heavy Weapon, Reload 2, Misfire 2, Penetrating 1, Recoil 3, RoF 2, 2d8 Piercing ○ Stormbolter - Bolt submachine gun with exceptionally high fire rate ■ Two Handed Heavy Weapon, Reload 2, Misfire 3, Penetrating 1, Recoil 5, RoF 4, 1d8 Piercing ○ Bolter - Standard rifle sized bolt gun. Moderate fire rate ■ Two Handed Heavy Weapon, Reload 3, Misfire 2, Penetrating 1, Recoil 3, RoF 2, 1d12 Piercing ○ Bolt Carbine - Longer, single fire bolt gun. ■ Two Handed Heavy Weapon, Reload 4, Misfire 2, Penetrating 3. 3d12 Piercing"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "○ Bolt Sniper - Very heavy single fire bolt sniper. Only holds one bullet. ■ Two Handed Heavy Weapon, Reload 1, Misfire 2, Penetrating 3, 5d12 Piercing ○ Bolt Shredder Gun - Fires shrapnel from a boltgun. Very short range ■ Two Handed Heavy Weapon Shotgun, Reload 3, Misfire 2, ER 15, 4d10 Piercing ○ Heavy Bolter (Bolt Minigun) - large, waist fired bolt minigun ■ Two Handed Heavy Weapon, Reload 3, Misfire 2, Recoil 4, RoF 3, 1d8 Piercing ● Array-Guns - Array guns fire special ammo using magnets in a large grid area, allowing the shooter to saturate an area with precise and devastating fire. Ammunition for array guns can be expensive and hard to find ○ Mag Pistol - Fires a grid of 9mm projectiles, one handed ■ One Handed, Reload 4, Misfire 2, Area (60ft cone). 2d8 Piercing"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "○ Mag Auto-Pistol - A standard mag pistol with an automatic conversion ■ One Handed, Reload 2, Misfire 2, Recoil 2, RoF 1, 1d6 Piercing ○ Mag Submachine Gun - Rapidly fires a repeating grid of projectiles ■ Two Handed, Reload 3, Misfire 2, Recoil 3, RoF 2, 1d6 Piercing ○ Mag Rifle - Fires multiple grids of projectiles at moderate speed ■ Two Handed, Reload 4, Misfire 2, Recoil 3, RoF 1, 1d10 Piercing ○ Mag Chaingun - Array firing minigun, fired from the waist ■ Two Handed Heavy Weapon, Reload 4, Misfire 2, Recoil 2, RoF 2, 1d8 Piercing ● Gammaguns - Gammaguns fire heavily irradiated bullets with the intention of poisoning targets with gamma rays. ○ Gamma Pistol - Looks similar to a regular pistol with lots of modifications"
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "■ One Handed, Reload 10, Misfire 2, Irradiating. 2d6 Piercing + 1d6 Poison ○ Gamma Rifle - Similar to a standard Assault Rifle with large radiation unit on the barrel ■ Two Handed, Reload 4, Misfire 2, Irradiating, Recoil 2, RoF 1, 1d6 Piercing + 1d4 Poison ○ Gamma Submachine Gun ■ Two Handed, Reload 3, Misfire 2, Recoil 2, RoF 2, Irradiating. 1d4 Piercing + 1d4 Poison."
+        },
+        {
+          "kind": "heading",
+          "text": "Section Three: Armors"
+        },
+        {
+          "kind": "paragraph",
+          "text": "In addition to all the weapons listed above, some important new armors have been added to allow you to get some protection."
+        },
+        {
+          "kind": "heading",
+          "text": "Ceramite Armor:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ceramite is a very strong ceramic based material that is an incredibly good insulator. Because ceramite conducts next to zero heat, it is an effective armor against laser based weaponry and fire. Any regular metal armor type from the regular rules (Half plate, Plate, Chain, etc.) can be made with Ceramite instead of pure steel.  Ceramite armor has Resistance to Laser and Fire."
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Kevlar Armor"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Kevlar is a strong and flexible plastic polymer which is very good at resisting and redirecting the force of concentrated impacts, such as bullets. In combination with steel or other metals, Kevlar becomes very good at preventing damage from bullets, stabs, and other piercing attacks. Kevlar has some drawbacks though. It does not scale well to large size, so Kevlar armors are usually only light armors. Kevlar armor has Resistance to Piercing damage"
+        },
+        {
+          "kind": "heading",
+          "text": "Nanoshield Armor"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Nanoshielded armor is a highly advanced form of armor in which a powerful suit generates a small and thin shield not too different from the shields used on space ships. This thin shield is very good at stopping projectiles of all types, lasers and bullets alike, but struggles when it comes to slower moving objects like a stab from a blade. Additionally, the suit has a large battery within it, usually mounted on the back of the armor like a backpack, and if this battery is disabled the armor goes with it. The battery can be overheated and caused to explode as well. Nanoshield armor has resistance to Piercing and Laser damage from ranged attacks."
+        },
+        {
+          "kind": "heading",
+          "text": "Power Armor"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Power armor is the galaxy’s most advanced and formidable armor. Covering the wearer from head to toe, completely sealing them into a protective, mechanically assisted war machine. Power armor is often made of a mix between Ceramite, steel, and other strong materials. Like nanoshield armor, a large power source is worn on the back of"
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "the armor to power the systems, but unlike with nanoshield armor, the power armor has a much better defended battery. The armor has many internal motors which work to greatly enhance the user’s strength. Power Armor is not easy to use. For one, most power armor forms a direct psychological link with the user. This allows the armor to perfectly mesh with the user’s movement, making the armor incredibly maneuverable, but this psychological connection can be very overwhelming for the untrained. A person experiencing the psychological link for the first time may experience extreme headache, confusion, nausea, and in extreme cases may have seizures. As such, people who intend to use power armor often must first train with this psychological stress. Eventually, the effects become unnoticeable, but this takes a lot of time. In addition to this psychological strain, power armor is very large. While its protection in combat is unmatched, it may be bested by trivial things, such as a narrow door or a strong gravitational field. Power Armor requires Proficiency to use. Attempting to use power armor without proficiency requires a DC20 Wisdom Check. Failure of the check results in 3d10 Psychic damage and one level of exhaustion, and also means the user is too overwhelmed to use the armor. Succeeding the check allows the user to use the armor passably well, but must remake the check for every 5 minutes they spend within it. Power Armor provides resistance to Piercing, Laser, and Fire damage from any source. Power Armor allows the user to use all heavy weapons without proficiency."
+        },
+        {
+          "kind": "heading",
+          "text": "Section Four: Ammunitions"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Every projectile weapon requires some form of ammunition to operate. These ammunitions range in price greatly, and sometimes have extra"
+        }
+      ]
+    },
+    {
+      "number": 72,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "variants for your consideration. Using the standard ammunition type for any given weapon is infinite and free, you do not have to buy regular ammo for any weapon. There are unique ammunition variants you can invest in, which are more scarce and do require you to count them. When discussing a special ammunition type’s damage, the damage will be in terms of additional damage die. This just means that it deals an extra amount of damage equal to rolling another of the type of dice you would roll anyways Example: The Revolver does 2d8 Piercing damage. One damage die from a revolver is a d8, so if an ammunition deals +1 Damage Die of Fire Damage, the total damage would be 2d8P + 1d8F Ammunition comes in quantities of reloads. Every time you reload the weapon with a non-standard ammo type, subtract one from the ammunition supply."
+        },
+        {
+          "kind": "heading",
+          "text": "Ammunitions for Different Weapons:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Below is a short description of what type of ammunition all the weapon types fire: ● Ballistic/Gamma: Ballistic weapons fire solid bullets, .50 Caliber or less. ● Laser: Laser weapons need gas cartridges. These cartridges can be filled with different gasses to produces different effects ● Flamers: Flamers fire Promethium, a specialized napalm like fuel. ● Meltas: Meltas require both a promethium cartridge and a shrapnel cartridge, which often are contained within the same magazine."
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "● Plasma Guns: Plasma guns also need gas cartridges, but a different kind of gas than laser weapons (not interchangeable) ● Boltguns: Boltguns fire Bolt ammunition, which are solid bullets between .50 Caliber and 1.50 Caliber. ● Array Guns: Array weapons fire array cartridges, which look like small square boxes. They are quite expensive"
+        },
+        {
+          "kind": "heading",
+          "text": "Ammunition types:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ammunition types for all the different weapon types will vary, but here are some general options for unique ammo types. Not all weapons can use these ammo types, for example any flame based weapons just shoot flammable gas and cannot be equipped with non-standard ammunition. ● Incindierary: +1 Damage Die of Fire Damage ● Shock: +1 Damage Die of Lightning Damage ● Cryo: +1 Damage Die of Cold Damage ● Radioactive: +1 Damage Die of Poison Damage ● Corrosive: +1 Damage Die of Acid Damage ● Psychoactive: +1 Damage Die of Psychic Damage, chance to cause Psychosis ● Hollow Point: Double Damage to targets with Light or lesser Armor. Half damage to targets with Medium or greater armor. ● Armor Piercing: Double damage to targets with Heavy or greater armor. Half damage to targets with Medium or lesser armor. ● Explosive: Deals damage to all enemies within 1 tile radius of the target, as well as the target. "
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "CHAPTER FOUR: CLASSES & RACES"
+        },
+        {
+          "kind": "heading",
+          "text": "Section One: Redefining Classes"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Much like how the worlds of D&D are home to many classes of character, so too is the Milky Way. All the standard classes of D&D still exist in space, but most of them are tweaked or adapted to better fit the space environment. Below, we will discuss all the regular classes and how they change to better fit the space setting"
+        },
+        {
+          "kind": "heading",
+          "text": "Important Note:"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Before we discuss classes, we must first discuss a few notable statistical changes made to the core game. For one, the Arcana skill will be changed to be Technology. In the Milky Way, some technology is so advanced it may be mistaken for magic, but true magic does not exist. As such, the Arcana skill has been realigned to allow the skill to fit this universe’s version of magic. Because D&D beyond does not allow you to overhaul skill types, within the App the skill will remain Arcana, but do know that from here forward that skill is Technology. Second, a few new proficiencies have been added. Once again, they cannot be added directly into the D&D Beyond app, so keeping track of these proficiencies will need to be done differently, either within the app or not. The added proficiencies are: ● Piloting ● Driving ● Heavy Firearms ● Power Armors"
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Artificer"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The artificer receives very little change. Like usual, they are masters of invention and intellect, which is unsurprisingly very useful in space. They can invent, modify, and alter technology at rapid and fascinating rates. Technological Services: Artificers can unjam weapons that have suffered misfires without making a check. If the weapon was very damaged, then they must make the regular Tinkering Check, but gain advantage. They are also quite proficient at repairing ships, which manifests at DM discretion."
+        },
+        {
+          "kind": "heading",
+          "text": "Barbarians"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The barbarian class will be relatively unchanged. The background and lore of a barbarian would be slightly different, a Barbarian perhaps was born on a brutal slave world or a world with dangerous wildlife and learned to be strong."
+        },
+        {
+          "kind": "heading",
+          "text": "Bard"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Bard class will also be quite similar to before but with some notable lore changes. Because magic does not exist in space, any class involving magic will be very different. Rather than Bards being magical, they are one of two classes that are Psions. For more information on Psions and Psionics, see the Lore of the Galaxy document, but put simply they have a special genetic mutation that allows them to draw on power from another dimension. Bards in space still are charismatic musicians who inspire allies, but now they have the added feature of being a special genetic mutant who can access the Psyscape."
+        }
+      ]
+    },
+    {
+      "number": 76,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Psionic Amplification: When within melee range of any other Psion, both Psions gain +1d6 to all rolls of all types. This is because the psionic energy of Psions is powerful and can be tapped into by other Psions."
+        },
+        {
+          "kind": "heading",
+          "text": "Cleric"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The cleric, like a lot of other classes, only changes majorly in the Lore sense. Rather than calling upon a holy being or some other deity, Clerics, more often just called Battle Medics, use advanced medicine technology to heal their ally, and similarly powerful offensive technology to harm their enemies. Another major difference for the Cleric class is in space is that it has a less Melee focused approach and shifts to be more Ranged. Clerics are proficient with Power Armor by default, a result of training with the armor for battle medicine applications."
+        },
+        {
+          "kind": "heading",
+          "text": "Druid"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Druid is one of the most vastly different classes in space. Rather than calling upon elemental powers and nature as they do in core rules, Druids are a special race of shapeshifting aliens that have very powerful control over their bodies ability to transform. For simplicity, this race of aliens are called ‘The Druids’. They hail from the planet Druidaia, a shadowy and strange world in the galactic east It is very common for Druids to choose a full identity to portray in regular life. They have no ‘true’ or ‘natural’ shape, so it is up to them to decide who they want to be in daily life. This means that when selecting the Druid class, you still choose a regular race and"
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "appearance to take on. This will be the form that your character chooses to use as their identity when not shapeshifting to something else. As a result of this Lore change, Druids can now shapeshift into any living creature, not just animals as is true in core rules. While this may seem very powerful, there are some major considerations to keep in mind. The Druids are very good at altering their physical appearance, but are not nearly as good at mimicking actions or behaviors. A druid who shapeshifts to act as another type of humanoid may look very convincing, but without lots of practice will fail to move, speak, or act in a way that is convincing to others. This presents an opportunity for druids to practice and specialize humanoid mimicry, but does not make their class an outright master of infiltration. It is up to the player and DM to agree on what forms practice might take, how long it might take to get practice, and what level of control the Druid has. Below are the four levels of practice and mastery a druid may have at imitating another humanoid. When mimicking a humanoid race other than their race identity: No Practice: All Charisma based checks made with disadvantage Some Practice: All Charisma based checks made with a -5 penalty Well Practiced: All Charisma based checks made with a -2 Penalty Mastery: Regular Checks When it comes to mimicking a non-humanoid creature, all standard rules for Druids apply as usual."
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Fighter"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fighters are mostly unchanged, however skill and development into the use of firearms is an added bonus of their class. Many fighters were/are some form of well trained soldier somewhere in the galaxy, and as such have prowess in both melee and ranged weaponry. The existing Gunslinger subclass will work well as a template for space fighters."
+        },
+        {
+          "kind": "heading",
+          "text": "Monk"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The monk also is relatively unchanged. In space, many monks will pursue forms of cybernetic alteration and enhancement to bring about a better harmony with their bodies and the machines of the world. As such, in addition to all you might think of when you think of monks, space monks also are quite proficient with using and manipulating technology. All monks are proficient in Technology (Arcana), and have some extra abilities related to manipulating technologies, detailed below. Hacking Proficiency: Monks have advantage on Technology checks to hack into computer systems. Jam Systems: Monks within melee range of any technologically advanced item (Computers, robots, advanced energy weapons, etc) can attempt to disrupt the computational systems of that item. This will manifest in different ways, perhaps shutting down a robot or overloading a plasma gun. To do this, an attack and a Technology check (DC is situational) is required Mechanical learning: Via cybernetic enhancements some monks choose to install within themselves they can access, sort, and interface with"
+        }
+      ]
+    },
+    {
+      "number": 79,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "massive amounts of digital information quickly. At certain terminals, monks can access information that non-monks could likely not, such as learning the route history of a crashed spaceship, or the name and location of a spy in a government facility. Monk-Warlock Synergy: Monks and Warlocks work well together as their shared reliance on technology unites them. When together and within melee range of each other, Monks and Warlocks can provide each other +1d6 to any check or save once per long rest each."
+        },
+        {
+          "kind": "heading",
+          "text": "Paladin"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The paladin receives the most thorough overhaul of any class. Where a regular paladin in D&D is a tanky, close range holy warrior, the new Paladin will be very different. The paladin class is converted into the Heavy Gunner class. This class is built to be a much heavier version of the new Ranger and Fighter classes. All Paladins are proficient with Heavy Weapons and Power Armor. Though paladins are gunners first and foremost, their heavy armor means they can get close to enemies if needed. Paladins will usually carry some melee weapon as backup, but using massive heavy weapons will usually be their preference Paladins rely most on Strength and Constitution. Good teamwork will make a Paladin a very dangerous foe, but without a team to support him Paladins can be easily overwhelmed due to their slow, heavy nature."
+        },
+        {
+          "kind": "heading",
+          "text": "Ranger"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The ranger changes quite a bit conceptually, but in practice not at all. As opposed to a bow and arrow wielding forest guardian, the Ranger in space is a daring gunslinger well trained in the use of"
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "precision firearms. Where a fighter gunner might be proficient with medium sized rifles and a Paladin Heavy Gunner uses the bulkiest and heaviest guns, the ranger is most comfortable using light, precision weapons, such as snipers, submachine guns, and pistols. While these are their preferences, Rangers are very comfortable with guns of all types. Firearm Mastery: Add double your proficiency bonus to attacks using snipers, SMGs, and Pistols. Sniper Chain: Killing an enemy with a sniper rifle refunds the action used to take the shot, meaning you can fire again beyond your max number of actions as long as you keep getting kills. Reloading still must be taken into account."
+        },
+        {
+          "kind": "heading",
+          "text": "Rogue"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The rogue is very unchanged from its regular counterpart. Rogues, like in regular D&D, are masters of subterfuge and assasination. This is very useful in space, as Rogues can lend their services to any number or organizations or syndicates and make money doing so. Suppressor Proficiency: Rogues do not suffer the range and damage penalties of using suppressors."
+        },
+        {
+          "kind": "heading",
+          "text": "Sorcerer"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The sorcerer is the other Psion class of the galaxy. They call upon the energies of the Psyscape to conjure a vast array of Psionic powers. Born with rare genetic mutations, sorcerers are a rare and valuable type of individual."
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "Psionic Amplification: When within melee range of any other Psion, both Psions gain +1d6 to all rolls of all types. This is because the psionic energy of Psions is powerful and can be tapped into by other Psions."
+        },
+        {
+          "kind": "heading",
+          "text": "Warlock"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The warlock receives a fairly significant change. Rather than selling their soul to some deity in a pact, the Warlock of space is a highly modified cyborg who has sold their body to the machine. Warlocks are Cyborgs. They are individuals who, either purposefully or not, have had massive amounts of their body replaced with advanced and powerful robotics and technology. This allows Warlocks to be a powerful hybrid between melee fighting and high tech ranged weaponry. Monk-Warlock Synergy: Monks and Warlocks work well together as their shared reliance on technology unites them. When together and within melee range of each other, Monks and Warlocks can provide each other +1d6 to any check or save once per long rest each."
+        },
+        {
+          "kind": "heading",
+          "text": "Wizard"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The wizard of space is a master of alien technologies. Spending a lifetime searching for Alien artifacts and trying to understand them, the Wizard has gained technological powers so advanced they appear to be magic. The wizard’s spells are essentially various alien artifacts that happen to do exactly what that spell would do in normal D&D. Alien Expert: Wizards have advantage on History or Investigation checks made to understand, find, or otherwise interact with alien artifacts."
+        }
+      ]
+    },
+    {
+      "number": 82,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Section Two: Redefining Races"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The practical aspects of Races are completely unchanged. All the standard races still exist like normal, and simply have different lore and backstories. For races other than the most common ones, you are free to decide for yourselves."
+        },
+        {
+          "kind": "heading",
+          "text": "Humans"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Humans are completely the same. Originating from Earth, they are very common throughout the galaxy"
+        },
+        {
+          "kind": "heading",
+          "text": "Eldar (Elves)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Eldar are an ancient race of humanoids from the planet Eldaran. They are tall, slender, and do not need sleep. Equal measures wise and xenophobic, the Eldar cooperate with Humans for their mutual benefit but have never fully trusted them. The uneasy alliance between the Eldar and the Humans has been enlightening, but tension remains present at all times Half Elves Eldar and Humans can somehow reproduce with one another, an incredible galactic coincidence. Their offspring are Half Eldar, who are often either respected diplomats or detested freaks."
+        },
+        {
+          "kind": "heading",
+          "text": "Drukhari (Dark Eldar)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Long before humanity became a galactic superpower, a subsection of the Eldar, called the Drukhari, split from their ancestors and more"
+        }
+      ]
+    },
+    {
+      "number": 83,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "or less formed a new race. This race, equivalent to Drow in D&D, is not trusted by humanity or their Eldar cousins."
+        },
+        {
+          "kind": "heading",
+          "text": "Votaan (Dwarves)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The votaan are a distant ancestor of humanity that split away from them long ago. When aliens came to earth to build the pyramids, they took humans with them to use as slaves on their homeworld of Votaai Alpha. These humans, taken to a planet with significantly stronger gravity, evolved over many years to become short and stout as the gravity pulled them down hard. They would eventually overthrow their slave masters, and form a minor empire in the galactic north. Though they descend from humans, their customs, way of life, and appearance has become very different. Life post-slavery has made the Votaan a hardy and stiff people."
+        },
+        {
+          "kind": "heading",
+          "text": "Nocturni (Tiefling)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Nocturni people are a dark skinned, horned, and tailed humanoid race from the volcanic planet Nocturne. The harsh, fiery volcanoes of Nocturne caused the Nocturni to evolve defenses against the heat and the violent wildlife of the planet. The Nocturni are not interested in empires, and for the most part remain as an insular people on their majestic homeworld. Some will go out to roam the galaxy, usually as part of their sacred tradition of exploration, in which Nocturnis will pledge to go out into the galaxy and do some great deed to honor Nocturne."
+        },
+        {
+          "kind": "heading",
+          "text": "Orak-Hai (Orcs)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Orak-Hai are a muddy green skinned people from their homeworld Orakiah. They have long, sharp teeth, and a somewhat barbaric style"
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "of life. Their jungle homeworld is home to massive, dinosaur-like creatures and the Orak-Hai evolved their customs and bodies around survival on the planet. They are natural born explorers, and will happily take up hard jobs on freighters or other vessels as a way to travel the galaxy."
+        },
+        {
+          "kind": "heading",
+          "text": "Dargonians (Dragonborn)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The Dargonians are a reptilian species from the lush world of Dargonus. They have a rich and unique culture, made up of many different noble houses. Each noble house of Dargonus has a unique history, but more importantly a unique elemental specialization. House Firaxis, for example, has a tradition in which they learn to breathe fire. Dargonians are very pragmatic and efficient, and often have strong governmental minds."
+        },
+        {
+          "kind": "heading",
+          "text": "Saturnians and Uranians (Gnomes and Halflings)"
+        },
+        {
+          "kind": "paragraph",
+          "text": "The massive gas giants of Saturn and Uranus produced two unique variants of humans, the Saturnian and the Uranian. When it was discovered that gas at the interior of both planets was very useful for producing warp fuel, specialized high pressure facilities were designed and constructed deep within the gas giant. These facilities were so high pressure and so close to the center of the planets that their inhabitants over time would be physically compressed. As such, when hiring workers to work at these facilities, smaller humans were hired preferentially. Because leaving one of these facilities required a lengthy and potentially dangerous depressurisation process, many workers in these colonies would stay for many years, potentially their entire life. As a result, these facilities became isolated colonies with unique culture and inhabited exclusively by small humans. After many years of this, a strange example of human artificial selection led the workers in these colonies to have smaller and smaller children, eventually resulting in humans who are"
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "category": "rules",
+      "blocks": [
+        {
+          "kind": "paragraph",
+          "text": "very small and strong.  The major difference between the saturnians and uranians is their culture. Unlike other races on this list, the saturnians and uranians are still humans, just a very unique version of them."
+        }
+      ]
+    }
+  ]
+}

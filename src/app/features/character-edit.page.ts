@@ -290,6 +290,35 @@ export class CharacterEditPage {
       ),
     });
   }
+  equipmentValue(id: string, group: 'weapon' | 'armor', key: string): number {
+    const item = this.core().inventory.find((e) => e.id === id);
+    const data = item?.[group];
+    return data && typeof data === 'object'
+      ? Number(
+          (data as Record<string, unknown>)[key] ??
+            (group === 'armor' && key === 'dexCap' ? 99 : 0),
+        )
+      : 0;
+  }
+  equipmentField(id: string, group: 'weapon' | 'armor', key: string, value: number): void {
+    const entry = this.core().inventory.find((e) => e.id === id);
+    if (entry)
+      this.item(id, { [group]: { ...(entry[group] as Record<string, unknown>), [key]: value } });
+  }
+  setExtraProficiency(name: string, checked: boolean): void {
+    const definition = this.rules().extraProficiencies;
+    if (!definition) return;
+    const existing = definition.current(this.core());
+    this.patch(
+      definition.set(
+        this.core(),
+        checked ? [...new Set([...existing, name])] : existing.filter((p) => p !== name),
+      ),
+    );
+  }
+  hasExtraProficiency(name: string): boolean {
+    return this.rules().extraProficiencies?.current(this.core()).includes(name) ?? false;
+  }
   removeItem(id: string): void {
     this.patch({ inventory: this.core().inventory.filter((item) => item.id !== id) });
   }

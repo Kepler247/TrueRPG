@@ -11,8 +11,8 @@ import { systemCatalog } from '../core/systems/system-catalog';
   template: `<a [routerLink]="['/systems', system()?.slug]">Back to system reference</a>
     <h1>{{ system()?.name }} catalog</h1>
     <p>
-      Mock entries are labeled for testing. Their example weights and descriptions can be replaced
-      as the ruleset develops.
+      Mock entries are labeled for testing. Missing D&DS equipment values are labeled estimates and
+      can be replaced as the ruleset develops.
     </p>
     <div class="filters">
       <label
@@ -36,10 +36,16 @@ import { systemCatalog } from '../core/systems/system-catalog';
           <span class="badge">{{ entry.isMock ? 'MOCK / TEST' : 'RULESET' }}</span>
           <h2>{{ entry.name }}</h2>
           <p>{{ entry.description }}</p>
+          @if (entry.weapon) {
+            <p>Price: {{ entry.weapon.price }} credits (estimate)</p>
+          }
+          @if (entry.armor) {
+            <p>AC {{ entry.armor.ac }}; price {{ entry.armor.price }} credits (estimates)</p>
+          }
           <p>
             {{ entry.category
             }}{{
-              entry.category === 'feat' ? ' · Any class' : ' · ' + entry.weight + ' lb (example)'
+              entry.category === 'feat' ? ' / Any class' : ' / ' + entry.weight + ' lb (estimate)'
             }}
           </p>
         </article>

@@ -96,3 +96,6 @@ Upload a profile picture from Account or a portrait from character Edit. Open ca
 
 
 Character summaries include confirmed short/long rests, persisted Hit Dice, equipped inventory and quantity/consumption actions. Limited-use abilities can specify short-rest, long-rest or manual recovery on the edit page. Failed play actions retain the exact result for retry. See [PLAY_COMPONENTS.md](PLAY_COMPONENTS.md) for recovery details and current manual mechanics.
+
+
+D&DS (Dogfights and Deep Space) is available as a third system, with its original PDF, searchable lore/rules, setting character options and personal equipment. See [DNDS.md](DNDS.md) for automated rules, author-authorized estimates and reference-based mechanics. Ship combat remains PDF-only.

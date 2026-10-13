@@ -337,6 +337,9 @@
   </section>
   <section class="panel" aria-labelledby="inventory-title">
     <h2 id="inventory-title">Inventory</h2>
+    @if (rules().armorSummary) {
+      <p>{{ rules().armorSummary!(record.core, rules()) }}</p>
+    }
     <p>
       {{ weight(record.core) }} lb carried / {{ rules().carryCapacity(record.core) }} lb capacity
     </p>
@@ -344,6 +347,67 @@
       <p class="legend">Carrying capacity is disabled for this campaign.</p>
     } @else if (weight(record.core) > rules().carryCapacity(record.core)) {
       <p class="feedback error">Over carrying capacity</p>
+    }
+    @if (record.canEdit && rules().weaponAttack) {
+      <details class="weapon-controls">
+        <summary>Weapon attack settings</summary>
+        <div class="weapon-fields">
+          <label
+            >Target AC<input
+              type="number"
+              min="0"
+              [ngModel]="targetAC()"
+              (ngModelChange)="targetAC.set($event)"
+          /></label>
+          <label
+            >Distance (ft)<input
+              type="number"
+              min="0"
+              [ngModel]="targetDistance()"
+              (ngModelChange)="targetDistance.set($event)"
+          /></label>
+          <label
+            >Roll mode<select [ngModel]="attackMode()" (ngModelChange)="attackMode.set($event)">
+              <option value="normal">Normal</option>
+              <option value="advantage">Advantage</option>
+              <option value="disadvantage">Disadvantage</option>
+            </select></label
+          >
+          <label
+            >Reload ammunition<select
+              [ngModel]="selectedAmmo()"
+              (ngModelChange)="selectedAmmo.set($event)"
+            >
+              <option value="">Standard (free)</option>
+              @for (ammo of record.core.inventory; track ammo.id) {
+                @if (ammo['ammoType']) {
+                  <option [value]="ammo.id">{{ ammo.name }} ({{ ammo.quantity }})</option>
+                }
+              }
+            </select></label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [ngModel]="weaponProficient()"
+              (ngModelChange)="weaponProficient.set($event)"
+            />
+            Proficient with this weapon</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [ngModel]="dualWield()"
+              (ngModelChange)="dualWield.set($event)"
+            />
+            Dual wield (-2 each)</label
+          >
+          <label
+            ><input type="checkbox" [ngModel]="mounted()" (ngModelChange)="mounted.set($event)" />
+            Mounted heavy weapon</label
+          >
+        </div>
+      </details>
     }
     <ul class="entry-list">
       @for (entry of record.core.inventory; track entry.id) {
@@ -354,6 +418,29 @@
           </div>
           @if (entry['isMock']) {
             <p class="legend">MOCK / TEST &middot; Example weight</p>
+          }
+          @if (entry['weapon']) {
+            <p class="legend">
+              Firing actions left: {{ entry['chargesRemaining'] }} &middot; Ammo:
+              {{ entry['loadedAmmo'] || 'Standard' }}
+            </p>
+            @if (record.canEdit && rules().weaponAttack) {
+              <div class="actions">
+                <button
+                  mat-flat-button
+                  (click)="attackWeapon(entry.id)"
+                  [disabled]="saving() || !!pendingAction() || !entry.equipped"
+                >
+                  Attack</button
+                ><button
+                  mat-stroked-button
+                  (click)="reloadWeapon(entry.id)"
+                  [disabled]="saving() || !!pendingAction()"
+                >
+                  Reload
+                </button>
+              </div>
+            }
           }
           @if (entry.equipped) {
             <p class="legend">Equipped</p>
@@ -522,5 +609,12 @@
     <button mat-button (click)="lastRoll.set(null)" aria-label="Dismiss roll result">
       Dismiss
     </button>
+  </aside>
+}
+
+@if (combatMessage(); as result) {
+  <aside class="combat-result" role="status" aria-live="polite">
+    <p>{{ result }}</p>
+    <button mat-button (click)="combatMessage.set(null)">Dismiss</button>
   </aside>
 }

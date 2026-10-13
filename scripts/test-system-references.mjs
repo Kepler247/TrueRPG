@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 for (const [folder, revision, count] of [
   ['501-rads', 'draft-1', 69],
   ['5e', 'srd-5-1', 403],
+  ['dnds', 'original', 85],
 ]) {
   const root = new URL(`../public/systems/${folder}/`, import.meta.url);
   const doc = JSON.parse(await readFile(new URL(`${revision}.json`, root), 'utf8'));
@@ -29,7 +30,9 @@ for (const [folder, revision, count] of [
   }
   for (const expected of folder === '501-rads'
     ? ['Radiomen', 'Gunslinger', 'Hacking', 'Divine Intervention']
-    : ['Barbarian', 'Wizard', 'Grappler', 'Fireball'])
+    : folder === 'dnds'
+      ? ['Psyscape', 'Recoil', 'Firearm Mastery', 'Power Armor']
+      : ['Barbarian', 'Wizard', 'Grappler', 'Fireball'])
     assert.ok(text.includes(expected), `Missing ${expected}`);
   console.log(`PASS ${folder}: all ${count} pages present; original PDF hash verified`);
 }

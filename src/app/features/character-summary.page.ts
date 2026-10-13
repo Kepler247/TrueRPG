@@ -166,6 +166,50 @@ export class CharacterSummaryPage {
     this.lastRoll.set(rollWithModifier(label, modifier, this.rules().checkDie ?? 20));
     this.rollCount.update((n) => n + 1);
   }
+  readonly combatMessage = signal<string | null>(null);
+  readonly targetAC = signal(10);
+  readonly targetDistance = signal(30);
+  readonly weaponProficient = signal(true);
+  readonly attackMode = signal<'normal' | 'advantage' | 'disadvantage'>('normal');
+  readonly dualWield = signal(false);
+  readonly mounted = signal(false);
+  readonly selectedAmmo = signal('');
+  async attackWeapon(id: string): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().weaponAttack)
+      return;
+    try {
+      const action = this.rules().weaponAttack!(
+        record.core,
+        id,
+        {
+          targetAC: this.targetAC(),
+          distance: this.targetDistance(),
+          proficient: this.weaponProficient(),
+          advantage: this.attackMode(),
+          dualWield: this.dualWield(),
+          mounted: this.mounted(),
+        },
+        this.rules(),
+      );
+      await this.savePlayAction(action.core, action.message);
+      if (!this.pendingAction() && this.message() === action.message)
+        this.combatMessage.set(action.message);
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Attack could not be resolved.');
+    }
+  }
+  async reloadWeapon(id: string): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().reloadWeapon)
+      return;
+    try {
+      const action = this.rules().reloadWeapon!(record.core, id, this.selectedAmmo() || undefined);
+      await this.savePlayAction(action.core, action.message);
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Reload could not be completed.');
+    }
+  }
   readonly restConfirmed = signal(false);
   readonly pendingAction = signal<{ core: CharacterCore; message: string } | null>(null);
   readonly hitDiceAvailable = computed(() =>
@@ -216,6 +260,7 @@ export class CharacterSummaryPage {
       this.heatInput.set(this.resource()?.current(saved.core) ?? 0);
       this.pendingAction.set(null);
       this.message.set(message);
+      if (this.rules().weaponAttack) this.combatMessage.set(message);
       this.restConfirmed.set(false);
       this.preparedTriple.set(false);
       this.rollChoices.set([]);
@@ -276,6 +321,7 @@ export class CharacterSummaryPage {
     this.restConfirmed.set(false);
     this.error.set(null);
     this.message.set(null);
+    this.combatMessage.set(null);
     this.lastRoll.set(null);
     this.preparedTriple.set(false);
     this.rollChoices.set([]);

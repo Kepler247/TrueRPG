@@ -449,6 +449,58 @@
               [disabled]="disabled()"
           /></mat-form-field>
         </div>
+        @if (entry['weapon']) {
+          <div class="field-grid">
+            @for (key of ['range', 'longRange', 'reload', 'misfire', 'price']; track key) {
+              <mat-form-field appearance="outline"
+                ><mat-label>{{ key }}</mat-label
+                ><input
+                  matInput
+                  type="number"
+                  min="0"
+                  [ngModel]="equipmentValue(entry.id, 'weapon', key)"
+                  (ngModelChange)="equipmentField(entry.id, 'weapon', key, $event)"
+                  [disabled]="disabled()"
+              /></mat-form-field>
+            }
+            <mat-form-field appearance="outline"
+              ><mat-label>Firing actions remaining</mat-label
+              ><input
+                matInput
+                type="number"
+                min="0"
+                [ngModel]="entry['chargesRemaining']"
+                (ngModelChange)="item(entry.id, { chargesRemaining: $event })"
+                [disabled]="disabled()"
+            /></mat-form-field>
+            <mat-checkbox
+              [ngModel]="entry['suppressed'] || false"
+              (ngModelChange)="item(entry.id, { suppressed: $event })"
+              [disabled]="disabled()"
+              >Suppressed</mat-checkbox
+            >
+          </div>
+        }
+        @if (entry['armor']) {
+          <div class="field-grid">
+            @for (key of ['ac', 'dexCap', 'price']; track key) {
+              <mat-form-field appearance="outline"
+                ><mat-label>Armor {{ key }}</mat-label
+                ><input
+                  matInput
+                  type="number"
+                  min="0"
+                  [ngModel]="equipmentValue(entry.id, 'armor', key)"
+                  (ngModelChange)="equipmentField(entry.id, 'armor', key, $event)"
+                  [disabled]="disabled()"
+              /></mat-form-field>
+            }
+          </div>
+          <p class="legend">
+            Set a Dexterity cap of 99 for unrestricted Dexterity. Companion estimates can be
+            replaced with your preferred base armor.
+          </p>
+        }
         <mat-form-field appearance="outline" class="full-width"
           ><mat-label>Item notes</mat-label
           ><textarea
@@ -473,6 +525,20 @@
   </section>
   <section class="panel">
     <h2>Abilities</h2>
+    @if (rules().extraProficiencies) {
+      <h3>Additional proficiencies</h3>
+      <div class="field-grid">
+        @for (name of rules().extraProficiencies!.names; track name) {
+          <mat-checkbox
+            [ngModel]="hasExtraProficiency(name)"
+            (ngModelChange)="setExtraProficiency(name, $event)"
+            [disabled]="disabled()"
+            >{{ name }}</mat-checkbox
+          >
+        }
+      </div>
+    }
+
     @if (resource(); as resource) {
       <h3>{{ resource.name }}: {{ heat() }} / {{ resource.maximum(core()) ?? 'unlimited' }}</h3>
       <p>{{ resource.help }}</p>

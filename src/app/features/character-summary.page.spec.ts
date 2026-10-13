@@ -7,6 +7,8 @@ import { AuthService } from '../core/auth/auth.service';
 import { createCore } from '../core/characters/character-core';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
 import { CharacterSummaryPage } from './character-summary.page';
+import { DNDS_CATALOG } from '../core/systems/dnds-catalog';
+import { catalogInventory } from '../core/systems/system-catalog';
 import { make501Rules } from '../core/systems/system-rules';
 import { BASE_5E_RULES, CHARACTER_RULESETS } from '../core/characters/character-ruleset';
 
@@ -316,5 +318,27 @@ describe('Read-only character summary', () => {
     expect(page.heat()).toBe(3);
     expect(page.lastRoll()).toEqual(previous);
     expect(page.error()).toBe('Conflict');
+  });
+  it('preserves a failed firearm action and saves its exact charge/roll result on retry', async () => {
+    const weapon = catalogInventory(
+      DNDS_CATALOG.find((e) => e.name === 'Pistol')!,
+      'dnds',
+    );
+    weapon.equipped = true;
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: 'dnds',
+      core: { ...structuredClone(core), inventory: [weapon] },
+    });
+    const page = (await create()).componentInstance;
+    service.save.mockRejectedValueOnce(new Error('Offline'));
+    await page.attackWeapon(weapon.id);
+    const pending = page.pendingAction()!;
+    expect(pending.core.inventory[0]['chargesRemaining']).toBe(9);
+    expect(page.record()!.core.inventory[0]['chargesRemaining']).toBe(10);
+    await page.retryAction();
+    expect(service.save.mock.calls[1][2]).toBe(pending.core);
+    expect(page.message()).toBe(pending.message);
+    expect(page.record()!.core.inventory[0]['chargesRemaining']).toBe(9);
   });
 });

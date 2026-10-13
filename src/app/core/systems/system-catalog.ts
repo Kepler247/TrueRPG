@@ -1,3 +1,4 @@
+import { DNDS_CATALOG, DndsWeapon } from './dnds-catalog';
 import { CharacterAbility, createEntryId, InventoryEntry } from '../characters/character-core';
 export interface CatalogEntry {
   id: string;
@@ -6,6 +7,16 @@ export interface CatalogEntry {
   description: string;
   weight: number;
   isMock: boolean;
+  weapon?: DndsWeapon;
+  armor?: {
+    ac: number;
+    dexCap: number | null;
+    resistances: string[];
+    powerArmor: boolean;
+    estimated: string[];
+    price: number;
+  };
+  ammoType?: string;
 }
 // Author-approved fixtures. Values exercise the UI; they are not published rules.
 const MOCK_ITEMS: readonly CatalogEntry[] = [
@@ -53,6 +64,11 @@ const MOCK_FEATS: readonly CatalogEntry[] = ['Survivor', 'Marksman', 'Scholar'].
   isMock: true,
 }));
 export function systemCatalog(key: string | undefined): readonly CatalogEntry[] {
+  if (key === 'dnds')
+    return [
+      ...DNDS_CATALOG,
+      ...systemCatalog('5e-2014').filter((entry) => entry.category === 'feat' && !entry.isMock),
+    ];
   return ['501-rads', 'wasteland', '5e-2014', 'base5e'].includes(key ?? 'base5e')
     ? [
         ...MOCK_ITEMS,
@@ -82,6 +98,9 @@ export function catalogInventory(entry: CatalogEntry, rulesetKey: string): Inven
     weight: entry.weight,
     description: entry.description,
     category: entry.category,
+    ...(entry.weapon ? { weapon: entry.weapon, chargesRemaining: entry.weapon.reload } : {}),
+    ...(entry.armor ? { armor: entry.armor } : {}),
+    ...(entry.ammoType ? { ammoType: entry.ammoType } : {}),
     catalogId: entry.id,
     catalogRuleset: rulesetKey,
     isMock: entry.isMock,
