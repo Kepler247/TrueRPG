@@ -89,12 +89,41 @@ describe('Read-only character summary', () => {
         'textarea,select,mat-select,mat-checkbox,[contenteditable]',
       ).length,
     ).toBe(0);
-    expect(fixture.nativeElement.querySelectorAll('input').length).toBe(2);
+    expect(fixture.nativeElement.querySelectorAll('input').length).toBe(3);
     expect(fixture.nativeElement.querySelectorAll('.stat-tile').length).toBe(6);
     expect(fixture.nativeElement.querySelectorAll('.skill-row').length).toBe(18);
     expect(fixture.nativeElement.textContent).toContain('Courier');
     expect(fixture.nativeElement.textContent).toContain('Water');
     expect(fixture.nativeElement.textContent).toContain('Scavenger');
+    expect(service.save).not.toHaveBeenCalled();
+  });
+  it('retains a failed rest result for retry and prevents intervening inventory writes', async () => {
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: '501-rads',
+      core: { ...structuredClone(core), class: 'Gunslinger', hpCurrent: 5 },
+    });
+    const fixture = await create();
+    const page = fixture.componentInstance;
+    page.restConfirmed.set(true);
+    service.save.mockRejectedValueOnce(new Error('Offline'));
+    await page.rest('short', true);
+    const pending = page.pendingAction()!.core;
+    expect(pending.hitDiceSpent).toBe(1);
+    await page.inventoryAction('item', 'add');
+    expect(service.save).toHaveBeenCalledTimes(1);
+    await page.retryAction();
+    expect(service.save.mock.calls[1][2]).toBe(pending);
+    expect(page.pendingAction()).toBeNull();
+    expect(page.record()!.core.hpCurrent).toBe(pending.hpCurrent);
+  });
+  it('prevents viewers from resting or changing inventory', async () => {
+    service.load.mockResolvedValue({ ...structuredClone(record), canEdit: false });
+    const fixture = await create();
+    const page = fixture.componentInstance;
+    page.restConfirmed.set(true);
+    await page.rest('long');
+    await page.inventoryAction('item', 'remove');
     expect(service.save).not.toHaveBeenCalled();
   });
   it('links edit and level-up actions to the dedicated edit route', async () => {

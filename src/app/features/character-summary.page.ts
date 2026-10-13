@@ -17,6 +17,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
 import { AbilityActionDefinition, RulesetService } from '../core/characters/character-ruleset';
 import { ImageUpload } from './image-upload';
+import { availableHitDice, completeRest, inventoryAction } from '../core/characters/play-actions';
 import { DiceRoll, rollWithModifier } from '../core/characters/dice';
 import { validateSystemCore } from '../core/systems/system-rules';
 import {
@@ -84,6 +85,7 @@ export class CharacterSummaryPage {
       !resource ||
       !action ||
       this.saving() ||
+      this.pendingAction() ||
       this.preparedTriple() ||
       this.rollChoices().length ||
       !record.core.abilities.some((ability) => ability.id === id)
@@ -164,6 +166,87 @@ export class CharacterSummaryPage {
     this.lastRoll.set(rollWithModifier(label, modifier, this.rules().checkDie ?? 20));
     this.rollCount.update((n) => n + 1);
   }
+  readonly restConfirmed = signal(false);
+  readonly pendingAction = signal<{ core: CharacterCore; message: string } | null>(null);
+  readonly hitDiceAvailable = computed(() =>
+    this.record() ? availableHitDice(this.record()!.core) : 0,
+  );
+  async rest(kind: 'short' | 'long', spend = false): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction()) return;
+    if (!this.restConfirmed()) {
+      this.error.set('Confirm the rest conditions first.');
+      return;
+    }
+    try {
+      const core = completeRest(record.core, this.rules(), kind, spend);
+      await this.savePlayAction(
+        core,
+        `${kind === 'short' ? 'Short' : 'Long'} rest saved; ${core.lastRest!.healing} HP recovered.`,
+      );
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Rest could not be completed.');
+    }
+  }
+  async inventoryAction(id: string, action: 'equip' | 'add' | 'remove'): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction()) return;
+    await this.savePlayAction(inventoryAction(record.core, id, action), 'Inventory saved.');
+  }
+  async savePlayAction(core: CharacterCore, message: string): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving()) return;
+    if (
+      this.hpInput() !== currentHitPoints(record.core) ||
+      this.heatInput() !== (this.resource()?.current(record.core) ?? 0)
+    ) {
+      this.error.set('Save HP and resource changes first.');
+      return;
+    }
+    const version = this.loadVersion;
+    this.pendingAction.set({ core, message });
+    this.saving.set(true);
+    this.error.set(null);
+    this.message.set(null);
+    try {
+      const saved = await this.service.save(record, record.row.name, core);
+      if (version !== this.loadVersion) return;
+      this.record.set(saved);
+      this.hpInput.set(currentHitPoints(saved.core));
+      this.heatInput.set(this.resource()?.current(saved.core) ?? 0);
+      this.pendingAction.set(null);
+      this.message.set(message);
+      this.restConfirmed.set(false);
+      this.preparedTriple.set(false);
+      this.rollChoices.set([]);
+    } catch (error) {
+      if (version === this.loadVersion)
+        this.error.set(
+          error instanceof Error ? error.message : 'Save failed. Retry keeps the same result.',
+        );
+    } finally {
+      if (version === this.loadVersion) this.saving.set(false);
+    }
+  }
+  async useLimitedAbility(id: string): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction()) return;
+    const ability = record.core.abilities.find((entry) => entry.id === id);
+    if (!ability || ability.usesMax === null || this.abilityAction(id)) return;
+    const used = record.core.abilityUses?.[id] ?? 0;
+    if (used >= ability.usesMax) {
+      this.error.set('No uses remaining.');
+      return;
+    }
+    await this.savePlayAction(
+      { ...record.core, abilityUses: { ...record.core.abilityUses, [id]: used + 1 } },
+      'Ability use saved. Resolve its effect using the feature text.',
+    );
+  }
+  async retryAction(): Promise<void> {
+    const pending = this.pendingAction();
+    if (pending) await this.savePlayAction(pending.core, pending.message);
+  }
   readonly hpInput = signal<number | null>(null);
   readonly heatInput = signal(0);
   readonly hpAmount = signal(1);
@@ -189,6 +272,8 @@ export class CharacterSummaryPage {
     const version = ++this.loadVersion;
     this.loading.set(true);
     this.record.set(null);
+    this.pendingAction.set(null);
+    this.restConfirmed.set(false);
     this.error.set(null);
     this.message.set(null);
     this.lastRoll.set(null);
@@ -213,7 +298,7 @@ export class CharacterSummaryPage {
   }
   async saveVitals(patch?: Partial<CharacterCore>, resourceValue?: number): Promise<void> {
     const record = this.record();
-    if (!record?.canEdit || this.saving()) return;
+    if (!record?.canEdit || this.saving() || this.pendingAction()) return;
     let next: CharacterCore = {
       ...record.core,
       ...(this.hpInput() !== null ? { hpCurrent: this.hpInput()! } : {}),

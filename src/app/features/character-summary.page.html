@@ -179,6 +179,74 @@
       </div>
     </section>
   }
+  @if (record.canEdit && rules().rest; as restRules) {
+    <section class="panel" aria-labelledby="rest-title">
+      <h2 id="rest-title">Rest</h2>
+      <p>
+        Hit Dice: {{ hitDiceAvailable() }} / {{ record.core.level }} available
+        @if (rules().hitDie?.(record.core); as die) {
+          (d{{ die }})
+        }
+      </p>
+      <p class="legend">
+        Short rest: {{ restRules.shortHours }} hour of downtime. Spend one die at a time to heal
+        with Constitution. Long rest: {{ restRules.longHours }} hours, including 6 hours of sleep;
+        restore HP and recover {{ restRules.recoverHitDice(record.core.level) }} Hit Dice. Defined
+        long-rest resources also reset.
+      </p>
+      <label class="rest-confirm"
+        ><input
+          type="checkbox"
+          [ngModel]="restConfirmed()"
+          (ngModelChange)="restConfirmed.set($event)"
+          [disabled]="saving() || !!pendingAction()"
+        />
+        Rest conditions met (long rest: started above 0 HP, no other long-rest benefit in the past
+        24 game hours).</label
+      >
+      <div class="actions">
+        <button
+          mat-stroked-button
+          (click)="rest('short')"
+          [disabled]="saving() || !!pendingAction() || !restConfirmed()"
+        >
+          Short rest
+        </button>
+        <button
+          mat-stroked-button
+          (click)="rest('short', true)"
+          [disabled]="
+            saving() ||
+            !!pendingAction() ||
+            !restConfirmed() ||
+            !hitDiceAvailable() ||
+            !rules().hitDie?.(record.core)
+          "
+        >
+          Spend Hit Die
+        </button>
+        <button
+          mat-flat-button
+          (click)="rest('long')"
+          [disabled]="saving() || !!pendingAction() || !restConfirmed()"
+        >
+          Long rest
+        </button>
+      </div>
+      @if (record.core.lastRest; as last) {
+        <p class="legend">Last recorded: {{ last.kind }} rest; {{ last.healing }} HP recovered.</p>
+      }
+    </section>
+  }
+  @if (pendingAction()) {
+    <section class="panel" role="status">
+      <p>Action has not saved. Retry preserves the rolled result.</p>
+      <button mat-flat-button (click)="retryAction()" [disabled]="saving()">Retry save</button
+      ><button mat-button (click)="pendingAction.set(null)" [disabled]="saving()">
+        Discard action
+      </button>
+    </section>
+  }
   <section class="panel" aria-labelledby="stats-title">
     <h2 id="stats-title">Core stats</h2>
     <p class="legend">
@@ -287,6 +355,35 @@
           @if (entry['isMock']) {
             <p class="legend">MOCK / TEST &middot; Example weight</p>
           }
+          @if (entry.equipped) {
+            <p class="legend">Equipped</p>
+          }
+          @if (record.canEdit) {
+            <div class="actions">
+              <button
+                mat-stroked-button
+                (click)="inventoryAction(entry.id, 'equip')"
+                [disabled]="saving() || !!pendingAction()"
+              >
+                {{ entry.equipped ? 'Unequip' : 'Equip' }}
+              </button>
+              <button
+                mat-button
+                (click)="inventoryAction(entry.id, 'add')"
+                [disabled]="saving() || !!pendingAction()"
+                [attr.aria-label]="'Add one ' + entry.name"
+              >
+                +1
+              </button>
+              <button
+                mat-button
+                (click)="inventoryAction(entry.id, 'remove')"
+                [disabled]="saving() || !!pendingAction()"
+              >
+                {{ entry.category === 'consumable' ? 'Consume one' : 'Remove one' }}
+              </button>
+            </div>
+          }
           @if (entry.description) {
             <p class="prose">{{ entry.description }}</p>
           }
@@ -317,7 +414,23 @@
             <p>{{ ability.spellLevel === 0 ? 'Cantrip' : 'Spell level ' + ability.spellLevel }}</p>
           }
           @if (ability.usesMax !== null) {
-            <p>Maximum uses: {{ ability.usesMax }}</p>
+            <p>
+              Uses remaining: {{ ability.usesMax - (record.core.abilityUses?.[ability.id] ?? 0) }} /
+              {{ ability.usesMax }} &middot; Recovery: {{ ability.recharge ?? 'manual' }}
+            </p>
+            @if (record.canEdit && !abilityAction(ability.id)) {
+              <button
+                mat-stroked-button
+                (click)="useLimitedAbility(ability.id)"
+                [disabled]="
+                  saving() ||
+                  !!pendingAction() ||
+                  (record.core.abilityUses?.[ability.id] ?? 0) >= ability.usesMax
+                "
+              >
+                Use ability
+              </button>
+            }
           }
           <p class="prose">{{ ability.description || 'No description yet.' }}</p>
           @if (ability['isMock']) {

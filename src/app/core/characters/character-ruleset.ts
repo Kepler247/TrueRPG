@@ -21,6 +21,7 @@ export interface ClassResourceDefinition {
   resetsOnLongRest?: boolean;
 }
 export interface CharacterRuleset {
+  rest?: { shortHours: number; longHours: number; recoverHitDice: (level: number) => number };
   abilityActions?: (core: CharacterCore) => readonly AbilityActionDefinition[];
   classResource?: (core: CharacterCore) => ClassResourceDefinition | null;
   maxLevel?: number;
@@ -62,6 +63,11 @@ export interface AbilityActionDefinition {
 }
 
 export const BASE_5E_RULES: CharacterRuleset = {
+  rest: {
+    shortHours: 1,
+    longHours: 8,
+    recoverHitDice: (level) => Math.max(1, Math.floor(level / 2)),
+  },
   maxLevel: 20,
   maxScore: 30,
   checkDie: 20,

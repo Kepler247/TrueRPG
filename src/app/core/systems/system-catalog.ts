@@ -81,6 +81,7 @@ export function catalogInventory(entry: CatalogEntry, rulesetKey: string): Inven
     quantity: 1,
     weight: entry.weight,
     description: entry.description,
+    category: entry.category,
     catalogId: entry.id,
     catalogRuleset: rulesetKey,
     isMock: entry.isMock,

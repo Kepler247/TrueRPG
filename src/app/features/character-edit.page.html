@@ -549,6 +549,23 @@
               (ngModelChange)="ability(entry.id, { usesMax: $event })"
               [disabled]="disabled()"
           /></mat-form-field>
+          <mat-form-field appearance="outline"
+            ><mat-label>Use recovery</mat-label>
+            <mat-select
+              [ngModel]="entry.recharge ?? 'manual'"
+              (ngModelChange)="ability(entry.id, { recharge: $event })"
+              [disabled]="disabled()"
+            >
+              <mat-option value="manual">Manual</mat-option
+              ><mat-option value="short-rest">Short or long rest</mat-option
+              ><mat-option value="long-rest">Long rest</mat-option>
+            </mat-select>
+          </mat-form-field>
+          @if (entry.usesMax !== null) {
+            <button mat-button (click)="resetAbilityUses(entry.id)" [disabled]="disabled()">
+              Reset uses (save draft)
+            </button>
+          }
         </div>
         <mat-form-field appearance="outline" class="full-width"
           ><mat-label>Ability description</mat-label

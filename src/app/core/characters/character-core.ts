@@ -47,6 +47,8 @@ export const inventorySchema = z
     quantity: z.number().int().min(1),
     weight: z.number().nonnegative(),
     description: z.string(),
+    equipped: z.boolean().optional(),
+    category: z.enum(['weapon', 'gear', 'consumable']).optional(),
   })
   .passthrough();
 export const abilitySchema = z
@@ -57,6 +59,7 @@ export const abilitySchema = z
     description: z.string(),
     spellLevel: z.number().int().min(0).max(9).nullable(),
     usesMax: z.number().int().nonnegative().nullable(),
+    recharge: z.enum(['short-rest', 'long-rest', 'manual']).optional(),
   })
   .passthrough();
 export const coreSchema = z
@@ -64,6 +67,15 @@ export const coreSchema = z
     level: z.number().int().min(1).max(20),
     hpMax: z.number().int().min(1).nullable(),
     hpCurrent: z.number().int().nonnegative().optional(),
+    hitDiceSpent: z.number().int().nonnegative().optional(),
+    lastRest: z
+      .object({
+        kind: z.enum(['short', 'long']),
+        recordedAt: z.string(),
+        healing: z.number().int().nonnegative(),
+      })
+      .passthrough()
+      .optional(),
     speed: z
       .object({
         distance: z.number().nonnegative(),

@@ -277,3 +277,16 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.rest-confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  margin-block: 1rem;
+  font-size: 1rem;
+}
+.rest-confirm input {
+  min-width: 24px;
+  min-height: 24px;
+}

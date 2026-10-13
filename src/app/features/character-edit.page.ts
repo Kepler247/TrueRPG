@@ -307,6 +307,9 @@ export class CharacterEditPage {
       ],
     });
   }
+  resetAbilityUses(id: string): void {
+    this.patch({ abilityUses: { ...this.core().abilityUses, [id]: 0 } });
+  }
   ability(id: string, patch: Partial<CharacterAbility>): void {
     this.patch({
       abilities: this.core().abilities.map((ability) =>

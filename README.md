@@ -93,3 +93,6 @@ For 501 Rads, Gunslinger is selected as its currently defined class. Starting HP
 See [play components](PLAY_COMPONENTS.md) for testing and implementation details. Systems now have searchable item/shared-feat catalogs with labeled mock fixtures. Import items from a character's Inventory editor; select shared feats during level-up. Gunslinger paid abilities spend Heat directly from the summary, with Lucky Strike rerolls and Stroke of Genius three-die choices.
 
 Upload a profile picture from Account or a portrait from character Edit. Open campaign names for party HP/resource overviews, username invitations, and member management. Players accept invitations from Campaigns. Character owners/admins can assign existing characters to matching-system campaigns from Edit. Pictures and invitations require migration `20261013000000_images_and_campaign_invitations.sql` to deploy.
+
+
+Character summaries include confirmed short/long rests, persisted Hit Dice, equipped inventory and quantity/consumption actions. Limited-use abilities can specify short-rest, long-rest or manual recovery on the edit page. Failed play actions retain the exact result for retry. See [PLAY_COMPONENTS.md](PLAY_COMPONENTS.md) for recovery details and current manual mechanics.

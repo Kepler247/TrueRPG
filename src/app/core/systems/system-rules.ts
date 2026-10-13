@@ -369,6 +369,8 @@ export function makePlain5eRules(base: CharacterRuleset): CharacterRuleset {
   };
 }
 export function validateSystemCore(core: CharacterCore, rules: CharacterRuleset): void {
+  if ((core.hitDiceSpent ?? 0) > core.level)
+    throw new Error('Spent Hit Dice cannot exceed character level.');
   const resource = rules.classResource?.(core);
   if (resource) {
     const current = resource.current(core);

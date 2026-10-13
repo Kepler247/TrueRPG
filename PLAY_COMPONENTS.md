@@ -31,3 +31,14 @@ GM/admin member removal detaches that player's campaign characters and preserves
 ## Validation
 
 Run `npm.cmd run build`, `npm.cmd test -- --watch=false`, and `npm.cmd run test:db`. The database runner applies exact migrations in PostgreSQL with the managed Auth/Storage metadata tables stubbed; it tests RLS and RPC behavior, not live binary upload transport. App tests mock hosted services. Recheck actual image picking/uploading and invitations with two accounts on iPhone Safari after deployment.
+
+
+## Rest and equipment tracking
+
+Summary pages support confirmed short and long rests using the system adapter's SRD 5.1 defaults: one hour short rest, eight hours long rest (six asleep), one Hit Die per character level, Constitution added to each healing roll with minimum zero healing. Spend dice one at a time; long rests restore HP and recover half total Hit Dice rounded down, minimum one. 501 Rads inherits these base rules and resets Heat on a long rest. Players confirm in-game duration, interruption conditions, starting HP and the once-per-24-game-hours limit; browser elapsed time is not game time. Racial exceptions and class-specific rest features remain manual.
+
+Spent dice are stored in optional `core.hitDiceSpent`, so old characters begin with all dice available and leveling increases the available pool. Rest records store kind, recording time and HP recovery. Abilities recharge only when explicitly configured on the edit page; unspecified counters (including lifetime Gunslinger uses) are preserved. Limited-use ability buttons spend one use and save. Spell slots and class-specific recovery are not inferred from feature prose.
+
+Inventory entries support equipped status, +1 quantity, and removing/consuming one unit; the final unit removes the entry. Equipped status is descriptive: slots, armor bonuses, damage, ammo and proficiency await rules definitions. Catalog consumables carry a category so their action reads Consume one. No automatic effects are invented. Unknown fields and item provenance survive these updates.
+
+Failed play-action saves retain their exact result for Retry save; other play writes are blocked until retry or discard. Concurrency conflicts require reloading and reconciling with the newer sheet. No database migration is needed for these additive validated core fields.
