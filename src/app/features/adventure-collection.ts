@@ -1,3 +1,8 @@
+import {
+  AdventureHistory,
+  AdventureSort,
+  sortAdventures,
+} from '../core/adventures/adventure-history';
 import { RulesetService } from '../core/characters/character-ruleset';
 import { PointBuy, startingScores } from './point-buy';
 import {
@@ -136,9 +141,22 @@ export class AdventureCollection {
         this.context().memberCampaignIds.includes(campaign.id),
     ),
   );
-  readonly rows = computed(() =>
-    this.kind() === 'characters' ? this.context().characters : this.context().campaigns,
-  );
+  private readonly history = inject(AdventureHistory);
+  readonly sortOrder = computed(() => this.history.sort(this.kind()));
+  setSort(value: string): void {
+    this.history.setSort(this.kind(), value as AdventureSort);
+  }
+  readonly rows = computed(() => {
+    this.userId();
+    return sortAdventures<
+      AdventureContext['characters'][number] | AdventureContext['campaigns'][number]
+    >(
+      this.kind() === 'characters' ? this.context().characters : this.context().campaigns,
+      this.sortOrder(),
+      (id) => this.systemLabel(id),
+      (id) => this.history.opened(this.kind(), id),
+    );
+  });
 
   constructor() {
     effect(() => {
@@ -226,6 +244,10 @@ export class AdventureCollection {
     }
     if (this.kind() === 'characters' && pointBuyRemaining(this.pointBuyScores()) < 0) {
       this.error.set('Use at most 27 points, with scores from 8 to 15.');
+      return;
+    }
+    if (this.kind() === 'characters' && this.creatorOptions().races.length && !race) {
+      this.error.set('Choose a race for this system.');
       return;
     }
     if (

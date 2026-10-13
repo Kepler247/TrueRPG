@@ -1,3 +1,4 @@
+import { AdventureHistory } from '../core/adventures/adventure-history';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -157,6 +158,7 @@ import { AuthService } from '../core/auth/auth.service';
   `,
 })
 export class CampaignDetailPage {
+  private readonly history = inject(AdventureHistory);
   private readonly service = inject(CampaignService);
   private readonly auth = inject(AuthService);
   private readonly userId = computed(() => this.auth.user()?.id ?? null);
@@ -188,7 +190,10 @@ export class CampaignDetailPage {
     this.error.set('');
     try {
       const detail = await this.service.load(id);
-      if (version === this.version) this.detail.set(detail);
+      if (version === this.version) {
+        this.detail.set(detail);
+        this.history.open('campaigns', id);
+      }
     } catch (error) {
       if (version === this.version)
         this.error.set(error instanceof Error ? error.message : 'Could not load campaign.');

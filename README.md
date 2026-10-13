@@ -99,3 +99,6 @@ Character summaries include confirmed short/long rests, persisted Hit Dice, equi
 
 
 D&DS (Dogfights and Deep Space) is available as a third system, with its original PDF, searchable lore/rules, setting character options and personal equipment. See [DNDS.md](DNDS.md) for automated rules, author-authorized estimates and reference-based mechanics. Ship combat remains PDF-only.
+
+
+Race selection is required when a system offers races (5E and D&DS). Existing sheets can select a missing race on the edit page without automatically reapplying creation bonuses. Character/campaign lists support alphabetical, system and recently-opened sorting; sort preferences and opened history are per-account on the current browser, not synced between devices.

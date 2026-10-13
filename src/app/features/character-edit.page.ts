@@ -1,3 +1,4 @@
+import { AdventureHistory } from '../core/adventures/adventure-history';
 import { RulesetService } from '../core/characters/character-ruleset';
 import { ImageUpload } from './image-upload';
 import { ImageChange } from '../core/images/image.service';
@@ -54,6 +55,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterEditPage {
+  private readonly history = inject(AdventureHistory);
   private readonly service = inject(CharacterSheetService);
   private readonly rulesets = inject(RulesetService);
   private readonly auth = inject(AuthService);
@@ -209,6 +211,7 @@ export class CharacterEditPage {
       const record = await this.service.load(this.id());
       if (version !== this.loadVersion) return;
       this.record.set(record);
+      this.history.open('characters', record.row.id);
       this.selectedCampaign.set(record.row.campaign_id ?? '');
       this.campaignChoices.set([]);
       if (record.canAssign) {

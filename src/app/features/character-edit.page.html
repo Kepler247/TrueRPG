@@ -135,6 +135,26 @@
   }
   <section class="panel">
     <h2>Details</h2>
+    @if (rules().creator.races.length) {
+      <mat-form-field appearance="outline" class="full-width"
+        ><mat-label>Race (required)</mat-label>
+        <mat-select
+          required
+          [ngModel]="core().race"
+          (ngModelChange)="patch({ race: $event })"
+          [disabled]="disabled()"
+        >
+          @for (race of rules().creator.races; track race) {
+            <mat-option [value]="race">{{ race }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint
+          >Race bonuses apply at creation. For existing characters, review scores and traits
+          manually when changing race.</mat-hint
+        >
+      </mat-form-field>
+    }
+
     @if (record.canAssign) {
       <div class="actions">
         <mat-form-field

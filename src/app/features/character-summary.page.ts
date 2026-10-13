@@ -1,4 +1,5 @@
-﻿import {
+import { AdventureHistory } from '../core/adventures/adventure-history';
+import {
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -42,6 +43,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterSummaryPage {
+  private readonly history = inject(AdventureHistory);
   private readonly service = inject(CharacterSheetService);
   private readonly rulesets = inject(RulesetService);
   private readonly auth = inject(AuthService);
@@ -329,6 +331,7 @@ export class CharacterSummaryPage {
       const record = await this.service.load(this.id());
       if (version === this.loadVersion) {
         this.record.set(record);
+        this.history.open('characters', record.row.id);
         this.hpInput.set(currentHitPoints(record.core));
         this.heatInput.set(this.resource()?.current(record.core) ?? 0);
       }

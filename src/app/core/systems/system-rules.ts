@@ -369,6 +369,8 @@ export function makePlain5eRules(base: CharacterRuleset): CharacterRuleset {
   };
 }
 export function validateSystemCore(core: CharacterCore, rules: CharacterRuleset): void {
+  if (rules.creator.races.length && (!core.race || !rules.creator.races.includes(core.race)))
+    throw new Error('Choose a race from this system before saving the character.');
   rules.validate?.(core);
   if ((core.hitDiceSpent ?? 0) > core.level)
     throw new Error('Spent Hit Dice cannot exceed character level.');

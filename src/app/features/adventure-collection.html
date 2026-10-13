@@ -106,8 +106,8 @@
           </div>
           @if (creatorOptions().races.length) {
             <mat-form-field appearance="outline"
-              ><mat-label>Race</mat-label
-              ><mat-select formControlName="race" [disabled]="saving()"
+              ><mat-label>Race (required)</mat-label
+              ><mat-select required formControlName="race" [disabled]="saving()"
                 ><mat-option value="">Not selected</mat-option>
                 @for (race of creatorOptions().races; track race) {
                   <mat-option [value]="race">{{ race }}</mat-option>
@@ -268,6 +268,15 @@
         </p>
       </section>
     } @else {
+      <label class="collection-sort"
+        >Sort by
+        <select [value]="sortOrder()" (change)="setSort($any($event.target).value)">
+          <option value="name">Name A-Z</option>
+          <option value="name-desc">Name Z-A</option>
+          <option value="system">System, then name</option>
+          <option value="recent">Recently opened</option>
+        </select>
+      </label>
       <div class="record-grid">
         @for (record of rows(); track record.id) {
           <article class="record-card">

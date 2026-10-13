@@ -153,4 +153,12 @@ describe('Plain 5E SRD foundation', () => {
     expect(next.hpMax).toBe(260);
     expect(rules.advance!(next)).toEqual(next);
   });
+  it('requires a supported race when the system has race choices', () => {
+    expect(() => validateSystemCore(createCore(), rules)).toThrow('Choose a race');
+    expect(() => validateSystemCore({ ...createCore(), race: 'Unknown' }, rules)).toThrow(
+      'Choose a race',
+    );
+    expect(() => validateSystemCore({ ...createCore(), race: 'Human' }, rules)).not.toThrow();
+    expect(() => validateSystemCore(createCore(), make501Rules(BASE_5E_RULES))).not.toThrow();
+  });
 });
