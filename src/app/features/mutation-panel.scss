@@ -1,0 +1,137 @@
+﻿:host {
+  display: block;
+}
+.mutation-panel {
+  border: 1px solid #c7cfb5;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-block: 1.5rem;
+  background: #f5f7eb;
+}
+.heading,
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+h2 span {
+  font-size: 0.85rem;
+  background: #dee7cc;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+}
+.hint {
+  font-size: 0.875rem;
+}
+.mutation-menu {
+  display: grid;
+  gap: 0.5rem;
+  max-height: 28rem;
+  overflow: auto;
+}
+details {
+  border-top: 1px solid #d3dac7;
+}
+summary,
+button {
+  min-height: 44px;
+}
+summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+summary:focus-visible,
+button:focus-visible {
+  outline: 3px solid #426d27;
+  outline-offset: 3px;
+}
+p {
+  line-height: 1.6;
+}
+.polarity {
+  color: #3b631d;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.polarity.negative {
+  color: #a33d28;
+}
+.recovery {
+  padding: 1rem;
+  background: #fbeadd;
+  border-radius: 0.5rem;
+  margin-block: 1rem;
+}
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 16px;
+}
+input {
+  width: 24px;
+  height: 24px;
+}
+.mutation-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #050c07dd;
+  display: grid;
+  place-items: center;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+}
+.mutation-reveal {
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow: auto;
+  width: min(100%, 36rem);
+  padding: clamp(1rem, 5vw, 2.5rem);
+  border: 2px solid #9ab659;
+  background: #111e12;
+  color: #e3efd5;
+  border-radius: 1rem;
+  box-shadow: 0 0 60px #8dbe4433;
+}
+.mutation-reveal .polarity {
+  color: #b2df71;
+}
+.mutation-reveal .negative {
+  color: #ffb07b;
+}
+.eyebrow {
+  letter-spacing: 0.12em;
+  font-family: monospace;
+}
+.dna {
+  padding: 2rem 0;
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  text-align: center;
+  font-family: monospace;
+  color: #b2df71;
+  animation: genome 600ms ease-in-out infinite alternate;
+}
+@keyframes genome {
+  from {
+    opacity: 0.25;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dna {
+    animation: none;
+  }
+}

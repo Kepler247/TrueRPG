@@ -1,3 +1,4 @@
+import type { MutationRules } from '../systems/rads-mutations';
 import { inject, Injectable, InjectionToken } from '@angular/core';
 import type { WeaponAttackInput, PlayActionResult } from '../systems/dnds-combat';
 import { makeDndsRules } from '../systems/dnds-rules';
@@ -23,6 +24,7 @@ export interface ClassResourceDefinition {
   resetsOnLongRest?: boolean;
 }
 export interface CharacterRuleset {
+  mutations?: MutationRules;
   extraProficiencies?: {
     names: readonly string[];
     current: (core: CharacterCore) => readonly string[];

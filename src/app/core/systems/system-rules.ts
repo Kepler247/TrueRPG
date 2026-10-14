@@ -1,3 +1,4 @@
+import { RADS_MUTATION_RULES, validateMutations } from './rads-mutations';
 import type { CharacterRuleset, ClassResourceDefinition } from '../characters/character-ruleset';
 import { CharacterCore, StatKey, STATS, BASE_SKILLS } from '../characters/character-core';
 import progressions from './5e-class-progressions.json';
@@ -122,6 +123,8 @@ export function make501Rules(base: CharacterRuleset): CharacterRuleset {
   };
   return {
     ...base,
+    mutations: RADS_MUTATION_RULES,
+    validate: validateMutations,
     abilityActions: (core) =>
       core.class !== 'Gunslinger'
         ? []

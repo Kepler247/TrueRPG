@@ -341,4 +341,23 @@ describe('Read-only character summary', () => {
     expect(page.message()).toBe(pending.message);
     expect(page.record()!.core.inventory[0]['chargesRemaining']).toBe(9);
   });
+  it('retains a death mutation on failed save and returns at 1 HP only after recovery', async () => {
+    service.load.mockResolvedValue({ ...structuredClone(record), rulesetKey: '501-rads' });
+    const page = (await create()).componentInstance;
+    const rules = page.rules().mutations!,
+      mutation = rules.draw(page.record()!.core, 'negative');
+    const death = rules.award(page.record()!.core, mutation, true);
+    service.save.mockRejectedValueOnce(new Error('Offline'));
+    await page.savePlayAction(death, 'Reconstituting');
+    expect(page.pendingAction()!.core).toBe(death);
+    expect(page.record()!.core.hpCurrent).toBeUndefined();
+    await page.retryAction();
+    expect(page.record()!.core.hpCurrent).toBe(0);
+    expect(page.recovering()).toBe(true);
+    expect(rules.acquired(page.record()!.core)).toHaveLength(1);
+    await page.savePlayAction(rules.finishRecovery(page.record()!.core), 'Returned');
+    expect(page.record()!.core.hpCurrent).toBe(1);
+    expect(page.recovering()).toBe(false);
+    expect(rules.acquired(page.record()!.core)[0].id).toBe(mutation.id);
+  });
 });

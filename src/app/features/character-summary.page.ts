@@ -1,3 +1,4 @@
+import { MutationPanel } from './mutation-panel';
 import { AdventureHistory } from '../core/adventures/adventure-history';
 import {
   ChangeDetectionStrategy,
@@ -37,6 +38,7 @@ import {
     MatInputModule,
     MatFormFieldModule,
     ImageUpload,
+    MutationPanel,
   ],
   templateUrl: './character-summary.page.html',
   styleUrl: './character-summary.page.scss',
@@ -220,6 +222,10 @@ export class CharacterSummaryPage {
   async rest(kind: 'short' | 'long', spend = false): Promise<void> {
     const record = this.record();
     if (!record?.canEdit || this.saving() || this.pendingAction()) return;
+    if (this.recovering()) {
+      this.error.set('Finish the 30-minute reconstitution before resting.');
+      return;
+    }
     if (!this.restConfirmed()) {
       this.error.set('Confirm the rest conditions first.');
       return;
@@ -294,6 +300,17 @@ export class CharacterSummaryPage {
     const pending = this.pendingAction();
     if (pending) await this.savePlayAction(pending.core, pending.message);
   }
+  readonly recovering = computed(
+    () => !!this.record() && (this.rules().mutations?.recovering(this.record()!.core) ?? false),
+  );
+  readonly playReady = computed(() => {
+    const record = this.record();
+    return (
+      !!record &&
+      this.hpInput() === currentHitPoints(record.core) &&
+      this.heatInput() === (this.resource()?.current(record.core) ?? 0)
+    );
+  });
   readonly hpInput = signal<number | null>(null);
   readonly heatInput = signal(0);
   readonly hpAmount = signal(1);

@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 
 for (const [folder, revision, count] of [
   ['501-rads', 'draft-1', 69],
+  ['501-rads', 'mutations-1', 125],
   ['5e', 'srd-5-1', 403],
   ['dnds', 'original', 85],
 ]) {
@@ -26,7 +27,12 @@ for (const [folder, revision, count] of [
   assert.ok(!text.includes('\ufffd'), 'Reference should not have replacement glyphs');
   if (folder === '501-rads') {
     assert.ok(!text.includes('luck points'), 'The author-corrected cost must use Heat');
-    assert.ok(text.includes('Fan the Hammer; For -2 Heat'));
+    assert.ok(
+      revision === 'draft-1'
+        ? text.includes('Fan the Hammer; For -2 Heat')
+        : text.includes('Fan the Hammer; For -2 heat points'),
+    );
+    if (revision === 'mutations-1') assert.ok(text.includes('The Ultimate Misfortune'));
   }
   for (const expected of folder === '501-rads'
     ? ['Radiomen', 'Gunslinger', 'Hacking', 'Divine Intervention']

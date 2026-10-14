@@ -102,3 +102,6 @@ D&DS (Dogfights and Deep Space) is available as a third system, with its origina
 
 
 Race selection is required when a system offers races (5E and D&DS). Existing sheets can select a missing race on the edit page without automatically reapplying creation bonuses. Character/campaign lists support alphabetical, system and recently-opened sorting; sort preferences and opened history are per-account on the current browser, not synced between devices.
+
+
+501 Rads now includes the 125-page mutation revision and a character mutation menu with a dramatic random reveal. Positive rewards/treatments draw from the positive table; death reconstitution draws a negative mutation, holds HP at zero for 30 game minutes and returns at 1 HP after explicit confirmation. No duplicate mutations and no arbitrary count limit; exhausted tables report no eligible result. Failed saves keep the same draw for retry.

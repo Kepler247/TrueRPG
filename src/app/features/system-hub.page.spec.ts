@@ -45,7 +45,10 @@ describe('System reference hub', () => {
     fixture.detectChanges();
     const page = fixture.componentInstance;
     await vi.waitFor(() => expect(page.document()).not.toBeNull());
-    expect(fetchMock).toHaveBeenCalledWith('/systems/501-rads/draft-1.json', expect.any(Object));
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/systems/501-rads/mutations-1.json',
+      expect.any(Object),
+    );
     expect(page.matches()).toHaveLength(2);
     page.category.set('lore');
     expect(page.matches()).toHaveLength(1);

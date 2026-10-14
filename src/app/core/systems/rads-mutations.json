@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "rads-positive-001",
+    "number": 1,
+    "polarity": "positive",
+    "name": "A Face for Radio",
+    "description": "Your vocal cords have developed an extraordinary range. You can perfectly imitate any voice you have heard for at least one minute, including its accent and mannerisms. Unfortunately, this does not grant you knowledge of what that person would actually say."
+  },
+  {
+    "id": "rads-positive-002",
+    "number": 2,
+    "polarity": "positive",
+    "name": "The Human Compass",
+    "description": "You always know which direction is north, even underground, underwater, or while unconscious. If someone spins you around while you're sleeping, you'll wake up furious and facing north."
+  },
+  {
+    "id": "rads-positive-003",
+    "number": 3,
+    "polarity": "positive",
+    "name": "A Gut Feeling",
+    "description": "Your stomach has developed a rudimentary sense of danger. It growls loudly whenever someone nearby is deliberately lying to you. It cannot distinguish between a harmless lie and an important one, and does not tell you who is lying."
+  },
+  {
+    "id": "rads-positive-004",
+    "number": 4,
+    "polarity": "positive",
+    "name": "The Third Nostril",
+    "description": "A fully functional nostril has appeared somewhere inconvenient on your body. It can detect radioactive substances through thin barriers, and you can reliably distinguish different sources of radiation by smell. Nobody knows why uranium smells like cinnamon."
+  },
+  {
+    "id": "rads-positive-005",
+    "number": 5,
+    "polarity": "positive",
+    "name": "The People's Elbow",
+    "description": "Your elbows have become capable of bending in any direction without injury. You can contort your arms into remarkably small spaces, reach awkward mechanisms, and escape ordinary restraints. Your handshake is profoundly unsettling."
+  },
+  {
+    "id": "rads-positive-006",
+    "number": 6,
+    "polarity": "positive",
+    "name": "Unreasonable Charisma",
+    "description": "Small domesticated animals find you irresistibly charming. Cats, dogs, chickens, and similar creatures will generally approach you peacefully and may follow simple instructions. This does not extend to humans, despite your insistence otherwise."
+  },
+  {
+    "id": "rads-positive-007",
+    "number": 7,
+    "polarity": "positive",
+    "name": "The Human Tape Recorder",
+    "description": "You can perfectly recall and reproduce any sound you have heard within the past seven days. Conversations, passwords spoken aloud, melodies, and mechanical noises are all fair game. Your memory for visual information remains completely ordinary."
+  },
+  {
+    "id": "rads-positive-008",
+    "number": 8,
+    "polarity": "positive",
+    "name": "Photosynthesis, Sort Of",
+    "description": "Your skin can extract a modest amount of nourishment from sunlight. A full day outdoors provides enough energy to replace one ordinary meal. You also become slightly greener after prolonged exposure, which is apparently unrelated."
+  },
+  {
+    "id": "rads-positive-009",
+    "number": 9,
+    "polarity": "positive",
+    "name": "The World's Greatest Poker Face",
+    "description": "Your facial muscles have become entirely voluntary. You can suppress all involuntary facial expressions and convincingly imitate nearly any emotion. Your face does not betray fear, pain, surprise, or deception unless you want it to."
+  },
+  {
+    "id": "rads-positive-010",
+    "number": 10,
+    "polarity": "positive",
+    "name": "Pocket Dimension?",
+    "description": "A small cavity has developed beneath the skin of your abdomen. It can safely store an object about the size of a grapefruit without discomfort. Objects stored inside do not decay any faster than normal. Please do not put anything sharp in there."
+  },
+  {
+    "id": "rads-positive-011",
+    "number": 11,
+    "polarity": "positive",
+    "name": "The Living Antenna",
+    "description": "Your nervous system can receive ordinary radio transmissions without equipment. You can mentally tune to different frequencies, provided the signal is strong enough. You cannot transmit, but you can listen without anyone knowing."
+  },
+  {
+    "id": "rads-positive-012",
+    "number": 12,
+    "polarity": "positive",
+    "name": "A Very Thick Skull",
+    "description": "Your skull has become extraordinarily dense. You are highly resistant to head injuries and can safely headbutt fragile barriers. Unfortunately, your head is noticeably heavier, which makes sleeping on cheap pillows difficult."
+  },
+  {
+    "id": "rads-positive-013",
+    "number": 13,
+    "polarity": "positive",
+    "name": "The Gift of Gab",
+    "description": "You can understand the emotional intent of speech in any human language, even one you have never heard. You cannot understand the actual words, but can distinguish threats, affection, sarcasm, fear, and sincerity with remarkable accuracy."
+  },
+  {
+    "id": "rads-positive-014",
+    "number": 14,
+    "polarity": "positive",
+    "name": "The Backup Set",
+    "description": "Whenever you lose a tooth, a new one grows in within twenty-four hours. Your teeth can also gradually replace damaged fillings and repair minor fractures. Dentists hate this one simple trick."
+  },
+  {
+    "id": "rads-positive-015",
+    "number": 15,
+    "polarity": "positive",
+    "name": "The Long Arm of the Law",
+    "description": "Your arms can stretch to approximately twice their normal length without injury. They retain their usual strength and dexterity, allowing you to retrieve distant objects, reach through gaps, or deliver a truly spectacular handshake."
+  },
+  {
+    "id": "rads-positive-016",
+    "number": 16,
+    "polarity": "positive",
+    "name": "Unnatural Luck",
+    "description": "Once per session, when a purely coincidental event could plausibly help you, you may ask the GM whether that coincidence happens. The GM decides its exact form. Lost keys, convenient strangers, and improbable timing are fair game; miracles are not."
+  },
+  {
+    "id": "rads-positive-017",
+    "number": 17,
+    "polarity": "positive",
+    "name": "The Universal Blood Donor",
+    "description": "Your blood is biologically compatible with every human blood type and can temporarily stabilize many common illnesses when used in a transfusion. Your body replenishes donated blood unusually quickly. Medical professionals will be very interested in you."
+  },
+  {
+    "id": "rads-positive-018",
+    "number": 18,
+    "polarity": "positive",
+    "name": "The Human Lie Detector",
+    "description": "You can hear subtle changes in another person's heartbeat when standing close to them. This allows you to recognize fear, excitement, and unusual stress, but not necessarily dishonesty. You are also exceptionally good at finding people hiding behind thin walls."
+  },
+  {
+    "id": "rads-positive-019",
+    "number": 19,
+    "polarity": "positive",
+    "name": "The Second Brain",
+    "description": "A small auxiliary brain has developed somewhere inside your torso. You can consciously focus on two unrelated mental tasks at once, such as reading while maintaining a conversation, or monitoring two separate information feeds. Both tasks receive your full attention."
+  },
+  {
+    "id": "rads-positive-020",
+    "number": 20,
+    "polarity": "positive",
+    "name": "The Last Laugh",
+    "description": "Your body has developed an extraordinary capacity for surviving otherwise fatal injuries. Once per session, when you would die from an injury that leaves recoverable remains, you instead survive in a critically wounded state. This does not prevent other consequences of the injury."
+  },
+  {
+    "id": "rads-positive-021",
+    "number": 21,
+    "polarity": "positive",
+    "name": "The Human Shovel",
+    "description": "Your fingernails have hardened into extraordinarily durable digging implements. You can excavate ordinary soil almost as quickly as someone using a shovel, and can scrape through soft stone given enough time. Your hands remain perfectly capable of delicate work."
+  },
+  {
+    "id": "rads-positive-022",
+    "number": 22,
+    "polarity": "positive",
+    "name": "Familiar Faces",
+    "description": "Your brain has become exceptionally good at recognizing faces. You never forget a face you have clearly seen, even decades later or after significant changes in appearance. Disguises that rely only on clothing or hairstyles are ineffective against you."
+  },
+  {
+    "id": "rads-positive-023",
+    "number": 23,
+    "polarity": "positive",
+    "name": "The Perfect Palate",
+    "description": "Your tongue can identify individual ingredients in anything you taste, including trace quantities of drugs, poisons, and contaminants. You cannot identify substances you have never encountered, but can remember and recognize their flavors indefinitely."
+  },
+  {
+    "id": "rads-positive-024",
+    "number": 24,
+    "polarity": "positive",
+    "name": "Sticky Fingers",
+    "description": "Your fingertips produce a harmless adhesive secretion. You can cling to walls and ceilings capable of supporting your weight, climb smooth surfaces, and hold small objects without gripping them. The secretion leaves no visible residue."
+  },
+  {
+    "id": "rads-positive-025",
+    "number": 25,
+    "polarity": "positive",
+    "name": "The Human Thermos",
+    "description": "Your digestive system can store consumed liquids at their original temperature for up to twelve hours. You can voluntarily regurgitate them without discomfort or contamination. You can carry approximately two liters this way. An absolutely disgusting way to serve coffee."
+  },
+  {
+    "id": "rads-positive-026",
+    "number": 26,
+    "polarity": "positive",
+    "name": "The Skeleton Key",
+    "description": "Your fingertips contain unusually sensitive nerves capable of detecting the internal movement of mechanical locks. When using improvised lockpicking tools, you can feel the positions of pins and tumblers as though you were looking directly at them."
+  },
+  {
+    "id": "rads-positive-027",
+    "number": 27,
+    "polarity": "positive",
+    "name": "The Nose Knows",
+    "description": "Your sense of smell has become sophisticated enough to recognize individual humans by scent. You can follow a fresh scent trail under reasonable conditions and recognize someone even when their appearance or voice has changed."
+  },
+  {
+    "id": "rads-positive-028",
+    "number": 28,
+    "polarity": "positive",
+    "name": "The Human Bubble Level",
+    "description": "Your inner ear has developed a perfect sense of orientation. You always know whether a surface is level, can accurately estimate slopes, and rarely lose your balance. Ordinary dizziness and motion sickness no longer affect you."
+  },
+  {
+    "id": "rads-positive-029",
+    "number": 29,
+    "polarity": "positive",
+    "name": "Bone China",
+    "description": "Your bones have become remarkably flexible without sacrificing strength. You can squeeze through openings barely wider than your skull, provided your internal organs can fit. Your body returns to its original shape afterward."
+  },
+  {
+    "id": "rads-positive-030",
+    "number": 30,
+    "polarity": "positive",
+    "name": "The Walking Library",
+    "description": "Your brain perfectly retains anything you have read, although you cannot necessarily understand it. You can reproduce written passages from memory, including diagrams and unfamiliar symbols. You still have to actually read the material first."
+  },
+  {
+    "id": "rads-positive-031",
+    "number": 31,
+    "polarity": "positive",
+    "name": "Rainmaker",
+    "description": "Your sweat glands have developed the ability to extract moisture directly from humid air. In sufficiently humid environments, you can collect a small but useful quantity of clean drinking water from your skin over several hours."
+  },
+  {
+    "id": "rads-positive-032",
+    "number": 32,
+    "polarity": "positive",
+    "name": "The Human Photocopier",
+    "description": "Your skin can temporarily reproduce patterns placed against it. Pressing your hand against writing, fingerprints, or a textured surface creates a detailed impression that remains visible for approximately one hour. Particularly useful for copying keys, documents, and embarrassing tattoos."
+  },
+  {
+    "id": "rads-positive-033",
+    "number": 33,
+    "polarity": "positive",
+    "name": "Cold-Blooded Capitalist",
+    "description": "Your body can enter a low-energy state in which your metabolism slows dramatically. While resting, you require very little food, water, or oxygen and can survive extreme cold far better than ordinary humans. You remain conscious but move very slowly."
+  },
+  {
+    "id": "rads-positive-034",
+    "number": 34,
+    "polarity": "positive",
+    "name": "The World's Smallest Orchestra",
+    "description": "Your vocal anatomy can produce several independent tones simultaneously. You can imitate simple musical instruments, generate convincing mechanical noises, and perform harmonies entirely by yourself. This is technically impressive and extremely annoying."
+  },
+  {
+    "id": "rads-positive-035",
+    "number": 35,
+    "polarity": "positive",
+    "name": "Four Eyes Are Better Than Two",
+    "description": "A second pair of eyes has developed beneath your original pair. These eyes can independently focus on nearby objects, allowing you to examine tiny details while maintaining normal vision. You can also read two separate pages simultaneously."
+  },
+  {
+    "id": "rads-positive-036",
+    "number": 36,
+    "polarity": "positive",
+    "name": "The Human Seismograph",
+    "description": "Your feet can detect subtle vibrations traveling through solid ground. You can sense approaching vehicles, large creatures, and nearby digging activity before they become audible. Soft ground and thick footwear reduce the effect."
+  },
+  {
+    "id": "rads-positive-037",
+    "number": 37,
+    "polarity": "positive",
+    "name": "A Heart of Gold",
+    "description": "Your body has developed an extraordinary resistance to common poisons, recreational drugs, and chemical contaminants. Most substances that would intoxicate or poison an ordinary human have little effect on you. This also makes getting drunk rather difficult."
+  },
+  {
+    "id": "rads-positive-038",
+    "number": 38,
+    "polarity": "positive",
+    "name": "The Human Inkjet",
+    "description": "Specialized glands beneath your fingernails produce a dark, permanent pigment. You can write or draw directly with your fingertips on most surfaces. The pigment is waterproof once dry and can be produced in several colors."
+  },
+  {
+    "id": "rads-positive-039",
+    "number": 39,
+    "polarity": "positive",
+    "name": "The Whispering Ear",
+    "description": "Your ears can independently rotate and focus on specific directions. You can isolate quiet conversations from background noise, detect subtle mechanical sounds, and determine the direction of a noise with remarkable accuracy."
+  },
+  {
+    "id": "rads-positive-040",
+    "number": 40,
+    "polarity": "positive",
+    "name": "The Great Escape",
+    "description": "Your joints can voluntarily dislocate and relocate without injury. You can escape ordinary handcuffs, ropes, and similarly restrictive bindings, provided there is enough room to maneuver. The process looks considerably more painful than it is."
+  },
+  {
+    "id": "rads-positive-041",
+    "number": 41,
+    "polarity": "positive",
+    "name": "The Human Calendar",
+    "description": "Your body maintains a perfect awareness of elapsed time. You always know the date, approximate local time, and how long you have been awake. You can also wake yourself at a predetermined time without an alarm."
+  },
+  {
+    "id": "rads-positive-042",
+    "number": 42,
+    "polarity": "positive",
+    "name": "The Glow Worm",
+    "description": "Your skin can emit a soft, controllable bioluminescent glow in several colors. The light is sufficient to illuminate a small room, and you can extinguish it completely. You have become the world's least convenient flashlight."
+  },
+  {
+    "id": "rads-positive-043",
+    "number": 43,
+    "polarity": "positive",
+    "name": "The Great Communicator",
+    "description": "Your nervous system can detect the emotional state of nearby mammals through subtle chemical signals. You can recognize fear, aggression, curiosity, and affection in animals, although you cannot directly communicate with them."
+  },
+  {
+    "id": "rads-positive-044",
+    "number": 44,
+    "polarity": "positive",
+    "name": "The Human Can Opener",
+    "description": "Your front teeth have become extraordinarily strong and sharp. You can bite through thin sheet metal, plastic, rope, and similar materials without damaging your teeth. Your jaw remains otherwise normal."
+  },
+  {
+    "id": "rads-positive-045",
+    "number": 45,
+    "polarity": "positive",
+    "name": "Nature's Umbrella",
+    "description": "Your hair has become completely waterproof and can spread outward into a broad, rigid canopy when exposed to rain. It can keep your head and shoulders dry during ordinary rainfall. You look ridiculous, but comfortably ridiculous."
+  },
+  {
+    "id": "rads-positive-046",
+    "number": 46,
+    "polarity": "positive",
+    "name": "The Human Encyclopedia of Filth",
+    "description": "Your immune system can identify and neutralize most common bacterial and fungal infections before symptoms develop. You can safely handle spoiled food, contaminated surfaces, and unsanitary environments without becoming ill from ordinary pathogens."
+  },
+  {
+    "id": "rads-positive-047",
+    "number": 47,
+    "polarity": "positive",
+    "name": "The Invisible Handshake",
+    "description": "Your skin can temporarily alter its texture and coloration to match surfaces you touch. When remaining motionless against a wall, floor, or similar background, you become remarkably difficult to notice. Movement immediately disrupts the camouflage."
+  },
+  {
+    "id": "rads-positive-048",
+    "number": 48,
+    "polarity": "positive",
+    "name": "The Human Grappling Hook",
+    "description": "Your tendons have become extraordinarily elastic. You can jump approximately three times farther than an ordinary human and safely absorb falls that would normally cause serious injury. Your legs make an unpleasant spring-like noise when you land."
+  },
+  {
+    "id": "rads-positive-049",
+    "number": 49,
+    "polarity": "positive",
+    "name": "The World's Best Babysitter",
+    "description": "Human infants and young children instinctively find your presence calming. Crying babies often quiet when you hold them, frightened children are more willing to trust you, and ordinary childhood tantrums become easier to manage."
+  },
+  {
+    "id": "rads-positive-050",
+    "number": 50,
+    "polarity": "positive",
+    "name": "The Human Metal Detector",
+    "description": "Your tongue can sense nearby conductive metals through a peculiar electrical sensation. You can detect concealed metallic objects within approximately two meters and roughly distinguish their size. Gold tastes like disappointment."
+  },
+  {
+    "id": "rads-positive-051",
+    "number": 51,
+    "polarity": "positive",
+    "name": "The Regifting Organ",
+    "description": "Your body can temporarily grow a replacement for a missing minor organ or gland, provided its original function is understood by your biology. Removed tonsils, damaged glands, and similar structures gradually regenerate over several days."
+  },
+  {
+    "id": "rads-positive-052",
+    "number": 52,
+    "polarity": "positive",
+    "name": "The Human Weather Station",
+    "description": "Changes in atmospheric pressure produce distinct sensations in your sinuses. You can predict approaching storms, major temperature changes, and significant shifts in weather several hours before they become obvious."
+  },
+  {
+    "id": "rads-positive-053",
+    "number": 53,
+    "polarity": "positive",
+    "name": "The Perfect Pitch",
+    "description": "Your auditory system can identify exact musical frequencies without reference. You can recognize altered recordings, detect subtle changes in machinery by sound, and determine whether two apparently identical noises differ."
+  },
+  {
+    "id": "rads-positive-054",
+    "number": 54,
+    "polarity": "positive",
+    "name": "The Human Filter",
+    "description": "Your kidneys and liver have become extraordinarily efficient. You can safely drink moderately contaminated water that would make ordinary humans ill, although highly toxic chemicals and extreme radiation remain dangerous."
+  },
+  {
+    "id": "rads-positive-055",
+    "number": 55,
+    "polarity": "positive",
+    "name": "The Human Thermostat",
+    "description": "Your body can maintain a comfortable internal temperature across an unusually wide range of environmental conditions. Ordinary desert heat and freezing weather cause you little discomfort, although extreme conditions can still injure you."
+  },
+  {
+    "id": "rads-positive-056",
+    "number": 56,
+    "polarity": "positive",
+    "name": "The Living Ruler",
+    "description": "Your eyes can estimate distances, dimensions, and angles with extraordinary accuracy. You can reliably judge whether an object will fit through an opening, estimate the height of a building, or measure a room without tools."
+  },
+  {
+    "id": "rads-positive-057",
+    "number": 57,
+    "polarity": "positive",
+    "name": "The Human Printer",
+    "description": "Your fingernails grow in thin, detachable sheets that can be peeled away without pain. By concentrating on a pattern, you can produce small embossed symbols or simple images on these sheets. They're surprisingly useful for making identification tags."
+  },
+  {
+    "id": "rads-positive-058",
+    "number": 58,
+    "polarity": "positive",
+    "name": "The Borrowed Face",
+    "description": "Your facial muscles and soft tissues can gradually reshape themselves to resemble another human whose appearance you know well. The transformation takes approximately ten minutes and cannot substantially change your height or body type. Your voice remains unchanged."
+  },
+  {
+    "id": "rads-positive-059",
+    "number": 59,
+    "polarity": "positive",
+    "name": "The Human Root Cellar",
+    "description": "Your stomach contains a separate biological storage pouch capable of preserving small quantities of food for several weeks without spoilage. You can retrieve the contents voluntarily. This is extremely useful and absolutely revolting."
+  },
+  {
+    "id": "rads-positive-060",
+    "number": 60,
+    "polarity": "positive",
+    "name": "The Human Periscope",
+    "description": "Your neck can extend up to one additional meter without injury. You can peer over walls, around obstacles, and through elevated windows. Your neck returns to its normal length whenever you relax."
+  },
+  {
+    "id": "rads-positive-061",
+    "number": 61,
+    "polarity": "positive",
+    "name": "The Walking Campfire",
+    "description": "Your skin produces a steady, harmless warmth that can be increased slightly through concentration. You can keep nearby companions warm, dry damp clothing, and prevent small containers of water from freezing. You cannot generate enough heat to ignite materials."
+  },
+  {
+    "id": "rads-positive-062",
+    "number": 62,
+    "polarity": "positive",
+    "name": "The Human Polygraph",
+    "description": "Your body can recognize when your own memories are being altered or manipulated. You immediately notice contradictions introduced by drugs, hypnosis, or similar mental interference, although you may not know which memories are genuine."
+  },
+  {
+    "id": "rads-positive-063",
+    "number": 63,
+    "polarity": "positive",
+    "name": "The Universal Translator, Almost",
+    "description": "Your tongue and ears have developed an instinctive understanding of basic human vocal patterns. After listening to an unfamiliar spoken language for several minutes, you can communicate simple concepts such as hunger, danger, directions, and trade without knowing its vocabulary."
+  },
+  {
+    "id": "rads-positive-064",
+    "number": 64,
+    "polarity": "positive",
+    "name": "The Human Velcro",
+    "description": "Your skin can produce microscopic hooks that adhere to cloth, rope, and other fibrous materials. You can grip fabric securely without using your hands, climb suitable surfaces, and prevent objects from slipping from your grasp."
+  },
+  {
+    "id": "rads-positive-065",
+    "number": 65,
+    "polarity": "positive",
+    "name": "The Human Lighthouse",
+    "description": "Your eyes can emit narrow beams of visible light, bright enough to illuminate objects several meters away. You can adjust their intensity and direction independently. Looking directly into a mirror is a regrettable experience."
+  },
+  {
+    "id": "rads-positive-066",
+    "number": 66,
+    "polarity": "positive",
+    "name": "The Great Listener",
+    "description": "Your brain has developed an extraordinary ability to remember conversations. You can recall not only what someone said, but their precise tone, pauses, and emotional mannerisms. You are exceptionally difficult to misquote."
+  },
+  {
+    "id": "rads-positive-067",
+    "number": 67,
+    "polarity": "positive",
+    "name": "The Human Fire Extinguisher",
+    "description": "Your lungs can produce a dense, non-toxic gas that displaces oxygen in a small area. You can extinguish small fires by exhaling directly onto them. The gas dissipates quickly and cannot be produced in sufficient quantities to suffocate a person."
+  },
+  {
+    "id": "rads-positive-068",
+    "number": 68,
+    "polarity": "positive",
+    "name": "The Human Lie of Omission",
+    "description": "Your body produces no involuntary physical indicators of stress. Your pulse remains steady, your hands never tremble, and you do not sweat from nervousness. Conventional physiological lie detection is almost entirely ineffective against you."
+  },
+  {
+    "id": "rads-positive-069",
+    "number": 69,
+    "polarity": "positive",
+    "name": "The Living Map",
+    "description": "Your brain automatically constructs a detailed mental map of places you physically explore. You can retrace complicated routes, remember intersections, and navigate familiar buildings in darkness without becoming lost."
+  },
+  {
+    "id": "rads-positive-070",
+    "number": 70,
+    "polarity": "positive",
+    "name": "The Human Fishing Rod",
+    "description": "Your tongue can extend several meters and retract with considerable precision. It is strong enough to retrieve small objects, manipulate light switches, or catch insects. Speaking while your tongue is extended is understandably difficult."
+  },
+  {
+    "id": "rads-positive-071",
+    "number": 71,
+    "polarity": "positive",
+    "name": "The Human Smoke Detector",
+    "description": "Your respiratory system can detect combustion products at extraordinarily low concentrations. You can identify nearby fires, distinguish burning materials by smell, and recognize when a room has recently contained smoke."
+  },
+  {
+    "id": "rads-positive-072",
+    "number": 72,
+    "polarity": "positive",
+    "name": "The Human Archive",
+    "description": "Your brain can voluntarily preserve a single sensory experience in perfect detail. You can revisit the sights, sounds, smells, and physical sensations of that moment whenever you wish. You may replace the preserved memory with a new one at any time."
+  },
+  {
+    "id": "rads-positive-073",
+    "number": 73,
+    "polarity": "positive",
+    "name": "The Human Welding Torch",
+    "description": "Your saliva contains a chemical that rapidly hardens when exposed to air. You can use it to seal small leaks, repair cracks, and temporarily bond lightweight materials. The substance is harmless inside your mouth and dissolves after several days."
+  },
+  {
+    "id": "rads-positive-074",
+    "number": 74,
+    "polarity": "positive",
+    "name": "The Human Plumb Bob",
+    "description": "Your body instinctively recognizes structural stress in buildings and machinery through subtle vibrations. You can identify dangerously weakened supports, unstable floors, and components approaching mechanical failure through physical contact."
+  },
+  {
+    "id": "rads-positive-075",
+    "number": 75,
+    "polarity": "positive",
+    "name": "The Human Compass Rose",
+    "description": "Your eyes can perceive polarized light and subtle magnetic-field effects. You can navigate using the sky even under heavy cloud cover and recognize disturbances caused by large electrical installations."
+  },
+  {
+    "id": "rads-positive-076",
+    "number": 76,
+    "polarity": "positive",
+    "name": "The Human Bloodhound",
+    "description": "Your sense of smell can detect trace chemical signatures left by human emotions. You can recognize whether a location recently contained someone experiencing intense fear, anger, or excitement, provided the trail is reasonably fresh."
+  },
+  {
+    "id": "rads-positive-077",
+    "number": 77,
+    "polarity": "positive",
+    "name": "The Living Bandage",
+    "description": "Your skin produces a sterile, adhesive film over minor wounds. Cuts and abrasions seal almost immediately, preventing ordinary bleeding and infection. More serious injuries still require medical attention."
+  },
+  {
+    "id": "rads-positive-078",
+    "number": 78,
+    "polarity": "positive",
+    "name": "The Human Chameleon",
+    "description": "Your hair can change color at will across the visible spectrum. You can produce elaborate patterns, imitate natural hair colors, or make your head look like a particularly unfortunate tropical bird."
+  },
+  {
+    "id": "rads-positive-079",
+    "number": 79,
+    "polarity": "positive",
+    "name": "The Human Vacuum Cleaner",
+    "description": "Your lungs can generate unusually powerful suction without injury. You can inhale small lightweight objects from several feet away and expel them safely. You cannot inhale objects larger than your airway."
+  },
+  {
+    "id": "rads-positive-080",
+    "number": 80,
+    "polarity": "positive",
+    "name": "The Human Safe",
+    "description": "Your body can temporarily harden the skin over a chosen area into a tough, leathery shell. The effect provides substantial protection against ordinary cuts, scrapes, and blunt impacts. The hardened skin remains flexible enough for normal movement."
+  },
+  {
+    "id": "rads-positive-081",
+    "number": 81,
+    "polarity": "positive",
+    "name": "The Human Calculator",
+    "description": "Your brain can perform arithmetic calculations with extraordinary speed and accuracy. You can mentally handle complicated financial transactions, estimate probabilities, and detect numerical inconsistencies. This does not make you better at abstract reasoning."
+  },
+  {
+    "id": "rads-positive-082",
+    "number": 82,
+    "polarity": "positive",
+    "name": "The Human Barometer",
+    "description": "Your body can detect extremely small changes in ambient radiation. You can distinguish ordinary background radiation from dangerous exposure and sense whether a radioactive source is approaching or receding."
+  },
+  {
+    "id": "rads-positive-083",
+    "number": 83,
+    "polarity": "positive",
+    "name": "The Human Locksmith",
+    "description": "Your fingernails can temporarily reshape into simple rigid tools, including picks, wedges, screwdrivers, and narrow probes. They are durable enough for delicate mechanical work but cannot replace heavy equipment."
+  },
+  {
+    "id": "rads-positive-084",
+    "number": 84,
+    "polarity": "positive",
+    "name": "The Human Mirror",
+    "description": "Your skin can become highly reflective, resembling polished silver. You can reflect light into dark spaces, signal distant observers, and confuse optical devices that rely on ordinary surface reflections. You remain otherwise completely visible."
+  },
+  {
+    "id": "rads-positive-085",
+    "number": 85,
+    "polarity": "positive",
+    "name": "The Human Icebox",
+    "description": "Your body can safely lower the temperature of objects held against your skin. You can preserve small quantities of perishable food, cool drinks, and reduce swelling from minor injuries. You cannot freeze large objects or produce extreme cold."
+  },
+  {
+    "id": "rads-positive-086",
+    "number": 86,
+    "polarity": "positive",
+    "name": "The Human Spiderweb",
+    "description": "Your fingertips can produce thin strands of extraordinarily strong biological fiber. The strands can be woven into rope, nets, or temporary bindings. Producing large quantities requires substantial food and time."
+  },
+  {
+    "id": "rads-positive-087",
+    "number": 87,
+    "polarity": "positive",
+    "name": "The Human Earthquake Detector",
+    "description": "Your bones resonate faintly in response to distant seismic activity. You can detect earthquakes, underground explosions, and major structural collapses before their effects reach your location."
+  },
+  {
+    "id": "rads-positive-088",
+    "number": 88,
+    "polarity": "positive",
+    "name": "The Human Mirrorball",
+    "description": "Your eyes can independently rotate through a full circle within their sockets. You can inspect nearly every direction without moving your head. Your eyelids still function normally, although spectators tend to wish they didn't."
+  },
+  {
+    "id": "rads-positive-089",
+    "number": 89,
+    "polarity": "positive",
+    "name": "The Human Locksmith's Nightmare",
+    "description": "Your skin can temporarily become as slippery as lubricated glass. You can escape ordinary grapples, slide through narrow passages, and prevent adhesives from sticking to you. Clothing is unaffected."
+  },
+  {
+    "id": "rads-positive-090",
+    "number": 90,
+    "polarity": "positive",
+    "name": "The Human Orchestra Conductor",
+    "description": "Your nervous system can perceive subtle rhythmic patterns in machinery and biological movement. You can synchronize your actions with moving mechanisms, recognize irregular heartbeats, and detect when a machine is operating outside its normal rhythm."
+  },
+  {
+    "id": "rads-positive-091",
+    "number": 91,
+    "polarity": "positive",
+    "name": "The Human Seed Bank",
+    "description": "Your digestive system can preserve swallowed seeds without damaging them. You can store seeds internally for months and retrieve them intact. Seeds exposed to your digestive fluids often germinate unusually quickly afterward."
+  },
+  {
+    "id": "rads-positive-092",
+    "number": 92,
+    "polarity": "positive",
+    "name": "The Human Weatherproofing",
+    "description": "Your skin produces a thin protective coating that resists ordinary acids, alkalis, and corrosive environmental contaminants. You can safely handle many substances that would irritate or burn normal skin, although industrial-strength chemicals remain dangerous."
+  },
+  {
+    "id": "rads-positive-093",
+    "number": 93,
+    "polarity": "positive",
+    "name": "The Human Searchlight",
+    "description": "Your pupils can expand far beyond ordinary human limits. You can see clearly in extremely dim light, including moonless nights and poorly illuminated interiors. Complete darkness remains complete darkness."
+  },
+  {
+    "id": "rads-positive-094",
+    "number": 94,
+    "polarity": "positive",
+    "name": "The Human Locksmith's Friend",
+    "description": "Your fingertips can detect residual heat patterns left on surfaces. You can determine which buttons were recently pressed, which objects were recently handled, and whether machinery was operating within the past several minutes."
+  },
+  {
+    "id": "rads-positive-095",
+    "number": 95,
+    "polarity": "positive",
+    "name": "The Human Orchestra Pit",
+    "description": "Your chest cavity contains a harmless resonating chamber capable of amplifying your voice. You can project speech across large distances without shouting and produce remarkably convincing echoes."
+  },
+  {
+    "id": "rads-positive-096",
+    "number": 96,
+    "polarity": "positive",
+    "name": "The Human Time Capsule",
+    "description": "Your body can temporarily suspend the decay of a small organic object held beneath your skin. A flower, biological sample, or piece of food can remain fresh for weeks. The object must fit comfortably beneath a fold of skin."
+  },
+  {
+    "id": "rads-positive-097",
+    "number": 97,
+    "polarity": "positive",
+    "name": "The Human Lightning Rod",
+    "description": "Your nervous system can safely conduct and disperse moderate electrical currents. Ordinary electrical shocks cause little harm, and you can sometimes complete simple electrical circuits by touching exposed contacts. Extremely high voltages remain dangerous."
+  },
+  {
+    "id": "rads-positive-098",
+    "number": 98,
+    "polarity": "positive",
+    "name": "The Human Truth Serum",
+    "description": "Your body produces a faint chemical signal that encourages nearby people to relax and speak more openly. It does not compel honesty or override conscious decisions, but ordinary strangers often find themselves unusually comfortable confiding in you."
+  },
+  {
+    "id": "rads-positive-099",
+    "number": 99,
+    "polarity": "positive",
+    "name": "The Human Miracle Worker",
+    "description": "Your blood contains extraordinary regenerative compounds. When applied to a fresh wound, it dramatically accelerates natural healing and can prevent otherwise serious tissue damage. It cannot restore missing limbs or reverse death, and producing large quantities weakens you."
+  },
+  {
+    "id": "rads-positive-100",
+    "number": 100,
+    "polarity": "positive",
+    "name": "The Ultimate Adaptation",
+    "description": "Your body has developed a remarkable ability to survive environmental extremes. You can endure brief exposure to conditions that would ordinarily kill a human, including severe cold, intense heat, low oxygen, and moderate radiation. You are not invulnerable, but your body is astonishingly reluctant to give up."
+  },
+  {
+    "id": "rads-negative-001",
+    "number": 1,
+    "polarity": "negative",
+    "name": "The Honesty Gland",
+    "description": "A new gland in your throat releases a pungent chemical whenever you knowingly tell a lie. The smell is unmistakable, extraordinarily unpleasant, and persists for several minutes. Technically, you can still lie. Practically, good luck."
+  },
+  {
+    "id": "rads-negative-002",
+    "number": 2,
+    "polarity": "negative",
+    "name": "Loose Lips",
+    "description": "Your mouth occasionally repeats the last sentence you heard, in the original speaker's voice. This occurs at the GM's discretion, especially during moments when silence would be preferable. You have no conscious control over the repetition."
+  },
+  {
+    "id": "rads-negative-003",
+    "number": 3,
+    "polarity": "negative",
+    "name": "The Human Thermometer",
+    "description": "Your body temperature fluctuates dramatically with your emotions. Anger makes you uncomfortably hot, fear makes you cold, and embarrassment can produce visible steam. The effect is harmless to you but difficult to conceal."
+  },
+  {
+    "id": "rads-negative-004",
+    "number": 4,
+    "polarity": "negative",
+    "name": "The Squeaky Wheel",
+    "description": "One of your joints produces a loud rubber-duck squeak whenever you move it. The joint works perfectly well, but the sound makes stealth considerably more difficult. Lubricants do not help. Actual rubber ducks become strangely quiet around you."
+  },
+  {
+    "id": "rads-negative-005",
+    "number": 5,
+    "polarity": "negative",
+    "name": "The Sweet Tooth",
+    "description": "Your saliva has become extremely sugary. Insects are attracted to you, and any food you lick becomes noticeably sweeter. You also experience an insatiable craving for sugar, and ordinary food tastes increasingly bland."
+  },
+  {
+    "id": "rads-negative-006",
+    "number": 6,
+    "polarity": "negative",
+    "name": "An Eye for an Eye",
+    "description": "You have developed a second pair of fully functional eyes on the back of your head. You can see in both directions simultaneously. Unfortunately, your brain cannot selectively ignore either view, making crowded spaces disorienting and sleep difficult without covering both pairs."
+  },
+  {
+    "id": "rads-negative-007",
+    "number": 7,
+    "polarity": "negative",
+    "name": "Glowboy",
+    "description": "Your skin emits a faint green glow that becomes brighter when you are frightened. The light is sufficient to read by in total darkness. Unfortunately, it makes hiding nearly impossible whenever you are scared, which is generally when you most want to hide."
+  },
+  {
+    "id": "rads-negative-008",
+    "number": 8,
+    "polarity": "negative",
+    "name": "The Bottomless Pit",
+    "description": "Your stomach can digest almost any organic material without illness, including rotten food and many common toxins. Unfortunately, your metabolism is so aggressive that you require approximately four times the normal amount of food to remain healthy."
+  },
+  {
+    "id": "rads-negative-009",
+    "number": 9,
+    "polarity": "negative",
+    "name": "Unfortunate Magnetism",
+    "description": "Your body generates a weak but persistent magnetic field. Small metal objects occasionally stick to your skin, compasses become unreliable near you, and delicate electronics may malfunction after prolonged contact. You are particularly unpopular with mechanics."
+  },
+  {
+    "id": "rads-negative-010",
+    "number": 10,
+    "polarity": "negative",
+    "name": "The Human Alarm Clock",
+    "description": "Your body has developed a flawless internal clock. You always know the precise time, even without sunlight or a working watch. Unfortunately, every morning at exactly 6:00 AM, you involuntarily scream at the top of your lungs for three seconds."
+  },
+  {
+    "id": "rads-negative-011",
+    "number": 11,
+    "polarity": "negative",
+    "name": "The Unblinking",
+    "description": "Your eyes no longer require blinking and are immune to ordinary dust and dryness. Unfortunately, you cannot close them voluntarily. You must cover your eyes to sleep, and people find prolonged conversations with you deeply uncomfortable."
+  },
+  {
+    "id": "rads-negative-012",
+    "number": 12,
+    "polarity": "negative",
+    "name": "The Wrong Voice",
+    "description": "Your vocal cords occasionally switch between wildly different pitches and accents without warning. This does not affect your ability to speak, but it can make impersonation, public speaking, and delicate negotiations exceptionally difficult."
+  },
+  {
+    "id": "rads-negative-013",
+    "number": 13,
+    "polarity": "negative",
+    "name": "The Human Weather Vane",
+    "description": "Your hair grows rapidly and always points in the direction of the prevailing wind. Indoors, it points toward the nearest draft. Cutting it only works for a few hours before it regrows. Your barber has stopped returning your calls."
+  },
+  {
+    "id": "rads-negative-014",
+    "number": 14,
+    "polarity": "negative",
+    "name": "A Taste for Metal",
+    "description": "You experience an overwhelming urge to lick exposed metal surfaces. Doing so provides a brief sense of satisfaction. Resisting the urge for long periods makes you irritable and distracted. Rust tastes particularly good, for reasons best left unexplored."
+  },
+  {
+    "id": "rads-negative-015",
+    "number": 15,
+    "polarity": "negative",
+    "name": "The Echo Chamber",
+    "description": "Your internal organs have developed an unusual resonance. Every time you speak, a faint echo of your own voice follows approximately two seconds later. It is audible to anyone nearby and cannot be suppressed. Whispering helps, but not much."
+  },
+  {
+    "id": "rads-negative-016",
+    "number": 16,
+    "polarity": "negative",
+    "name": "The World's Worst Poker Face",
+    "description": "Your facial muscles involuntarily exaggerate whatever emotion you are feeling. Fear produces a cartoonish expression of terror, suspicion makes you squint dramatically, and attraction causes an unmistakably stupid grin. You cannot suppress these expressions."
+  },
+  {
+    "id": "rads-negative-017",
+    "number": 17,
+    "polarity": "negative",
+    "name": "The Human Geiger Counter",
+    "description": "Your teeth chatter in the presence of radiation, increasing in intensity as radiation levels rise. This makes you an excellent radiation detector. Unfortunately, prolonged exposure causes the chattering to become painfully loud, and you cannot stop it."
+  },
+  {
+    "id": "rads-negative-018",
+    "number": 18,
+    "polarity": "negative",
+    "name": "The Reverse Midas Touch",
+    "description": "Your sweat is mildly corrosive to common metals. Prolonged contact can damage tools, weapons, door handles, and other equipment. Your own skin is unaffected. Gloves help, until you sweat through them."
+  },
+  {
+    "id": "rads-negative-019",
+    "number": 19,
+    "polarity": "negative",
+    "name": "The Second Opinion",
+    "description": "A small, partially formed mouth has developed somewhere on your body. It occasionally offers unsolicited opinions about your decisions, usually in a voice resembling your own. It knows nothing you do not know, but is extraordinarily confident nonetheless."
+  },
+  {
+    "id": "rads-negative-020",
+    "number": 20,
+    "polarity": "negative",
+    "name": "The Immortal Itch",
+    "description": "Your skin regenerates minor cuts and abrasions almost instantly. Unfortunately, the regeneration produces a persistent, maddening itch that intensifies whenever you are stressed. Scratching provides temporary relief but never eliminates the sensation."
+  },
+  {
+    "id": "rads-negative-021",
+    "number": 21,
+    "polarity": "negative",
+    "name": "Snorty McSnortface",
+    "description": "Your nasal passages have developed a peculiar resonance. Whenever you breathe through your nose, you produce a faint musical hum. The pitch changes with your breathing. Holding your breath stops it, but ordinary stealth becomes considerably more difficult."
+  },
+  {
+    "id": "rads-negative-022",
+    "number": 22,
+    "polarity": "negative",
+    "name": "The Reverse Handshake",
+    "description": "Your palms have developed an involuntary gripping reflex. Whenever you shake someone's hand, your fingers tighten and refuse to release for several uncomfortable seconds. The effect is harmless but makes formal introductions extraordinarily awkward."
+  },
+  {
+    "id": "rads-negative-023",
+    "number": 23,
+    "polarity": "negative",
+    "name": "The Human Popcorn Machine",
+    "description": "Small pockets of gas occasionally form beneath your skin and burst with audible popping noises. The effect is painless but unpredictable. Loud pops are particularly common when you are nervous or trying to remain quiet."
+  },
+  {
+    "id": "rads-negative-024",
+    "number": 24,
+    "polarity": "negative",
+    "name": "The Unfortunate Growth Spurt",
+    "description": "Your fingernails and toenails grow at approximately twenty times the normal rate. Without regular trimming, they become long, curled, and difficult to manage. Cutting them is painless, but maintaining them is practically a full-time occupation."
+  },
+  {
+    "id": "rads-negative-025",
+    "number": 25,
+    "polarity": "negative",
+    "name": "The Internal Canteen",
+    "description": "Your skin becomes slightly transparent whenever it rains. Veins, tendons, and superficial muscles become clearly visible until you dry off. The effect is harmless but makes you look like a walking anatomy textbook."
+  },
+  {
+    "id": "rads-negative-026",
+    "number": 26,
+    "polarity": "negative",
+    "name": "They call me the Sandwich",
+    "description": "Your sweat produces a powerful floral fragrance that cannot be masked by ordinary soap or perfume. The scent is pleasant at first but becomes overwhelming in enclosed spaces. Tracking animals and attentive humans can follow it easily."
+  },
+  {
+    "id": "rads-negative-027",
+    "number": 27,
+    "polarity": "negative",
+    "name": "The Human Accordion",
+    "description": "Your rib cage has become unusually flexible and occasionally expands or contracts involuntarily. This produces loud wheezing noises and makes your torso appear to inflate like a balloon. Breathing remains normal, but fitted clothing rarely survives long."
+  },
+  {
+    "id": "rads-negative-028",
+    "number": 28,
+    "polarity": "negative",
+    "name": "The Reverse Chameleon",
+    "description": "Your skin changes color to contrast sharply with whatever surface you are standing against. Against dark backgrounds, you become bright white; against pale backgrounds, you turn nearly black. You are exceptionally easy to spot."
+  },
+  {
+    "id": "rads-negative-029",
+    "number": 29,
+    "polarity": "negative",
+    "name": "The Human Static Generator",
+    "description": "Your hair and skin constantly accumulate static electricity. Small sparks jump from your fingers whenever you touch metal, and your hair stands on end in dry weather. Delicate electronics are particularly vulnerable to your presence."
+  },
+  {
+    "id": "rads-negative-030",
+    "number": 30,
+    "polarity": "negative",
+    "name": "The Unfortunate Echo",
+    "description": "Your voice occasionally emerges from your mouth several seconds after you intend to speak. You remain fully aware of what you are trying to say, but conversations become frustratingly delayed. The effect is particularly troublesome when timing matters."
+  },
+  {
+    "id": "rads-negative-031",
+    "number": 31,
+    "polarity": "negative",
+    "name": "Goo Boy",
+    "description": "Your feet secrete a thin, slippery mucus whenever you walk barefoot. The substance is harmless but leaves a visible trail that persists for several hours. Shoes contain most of it, although they become unpleasantly damp."
+  },
+  {
+    "id": "rads-negative-032",
+    "number": 32,
+    "polarity": "negative",
+    "name": "The Wrong Temperature",
+    "description": "Your skin feels freezing cold to anyone who touches you, regardless of your actual body temperature. This has no effect on your health but makes physical affection, medical examinations, and reassuring handshakes deeply unsettling."
+  },
+  {
+    "id": "rads-negative-033",
+    "number": 33,
+    "polarity": "negative",
+    "name": "The Human Metronome",
+    "description": "Your heartbeat produces an audible ticking sound that can be heard in quiet rooms. The rhythm is perfectly regular and continues even while you sleep. It becomes louder during physical exertion, making stealth and relaxation difficult."
+  },
+  {
+    "id": "rads-negative-034",
+    "number": 34,
+    "polarity": "negative",
+    "name": "The World's Worst Haircut",
+    "description": "Your hair grows in completely random directions and cannot be permanently styled. Cutting it causes the remaining hair to rearrange itself within minutes. Hats help, but your hair gradually pushes them off your head."
+  },
+  {
+    "id": "rads-negative-035",
+    "number": 35,
+    "polarity": "negative",
+    "name": "The Human Soap Bubble",
+    "description": "Your saliva produces large quantities of harmless bubbles whenever you speak for extended periods. The bubbles float away and burst normally, but they make serious speeches and delicate negotiations extraordinarily difficult."
+  },
+  {
+    "id": "rads-negative-036",
+    "number": 36,
+    "polarity": "negative",
+    "name": "The Unfortunate Reflection",
+    "description": "Your reflection in mirrors appears approximately five seconds behind your actual movements. The effect does not alter your body or perception, but anyone watching you in a mirror will notice the delay. You have become deeply unpopular with superstitious wastelanders."
+  },
+  {
+    "id": "rads-negative-037",
+    "number": 37,
+    "polarity": "negative",
+    "name": "The Human Mosquito Magnet",
+    "description": "Your blood produces an irresistible chemical signal to biting insects. Mosquitoes, fleas, and similar parasites preferentially target you whenever you are nearby. Ordinary repellents are significantly less effective."
+  },
+  {
+    "id": "rads-negative-038",
+    "number": 38,
+    "polarity": "negative",
+    "name": "The Wrong Foot Forward",
+    "description": "Your feet have gradually rotated so that your toes point backward. You can still walk normally, but your footprints appear to travel in the opposite direction. Finding properly fitting shoes is nearly impossible."
+  },
+  {
+    "id": "rads-negative-039",
+    "number": 39,
+    "polarity": "negative",
+    "name": "The Human Sneeze Cannon",
+    "description": "Your sneezes have become extraordinarily powerful. A single sneeze can scatter loose papers, extinguish candles, or knock small objects from tables. Unfortunately, you sneeze whenever exposed to bright sunlight."
+  },
+  {
+    "id": "rads-negative-040",
+    "number": 40,
+    "polarity": "negative",
+    "name": "The Unfortunate Appetite",
+    "description": "Your sense of taste has become inverted. Foods that ordinary humans find delicious taste revolting, while spoiled or unpleasant foods taste wonderful. You can still eat normally, but sharing meals with others becomes a miserable experience."
+  },
+  {
+    "id": "rads-negative-041",
+    "number": 41,
+    "polarity": "negative",
+    "name": "The Human Candle",
+    "description": "Your body produces a faint smell of burning wax, and your fingertips occasionally emit tiny harmless flames when you become excited. The flames cannot be controlled and may ignite extremely flammable materials. You are forbidden from entering several reputable establishments."
+  },
+  {
+    "id": "rads-negative-042",
+    "number": 42,
+    "polarity": "negative",
+    "name": "The Wrong Shadow",
+    "description": "Your shadow occasionally moves independently of your body, adopting poses or gestures that do not match your actions. It cannot interact with physical objects, but it can reveal your location and cause considerable alarm among observers."
+  },
+  {
+    "id": "rads-negative-043",
+    "number": 43,
+    "polarity": "negative",
+    "name": "The Human Whistle",
+    "description": "Your respiratory system produces a high-pitched whistle whenever you exhale forcefully. The sound is audible from a considerable distance and cannot be suppressed. Running, climbing, and other strenuous activities become remarkably conspicuous."
+  },
+  {
+    "id": "rads-negative-044",
+    "number": 44,
+    "polarity": "negative",
+    "name": "The Unfortunate Memory",
+    "description": "Your brain has developed an extraordinary ability to remember embarrassing experiences. You can recall every humiliating moment of your life in perfect detail, including sensations and emotions. Unfortunately, these memories occasionally replay involuntarily during stressful situations."
+  },
+  {
+    "id": "rads-negative-045",
+    "number": 45,
+    "polarity": "negative",
+    "name": "The Human Glowstick",
+    "description": "Your bodily fluids emit a bright fluorescent glow under ultraviolet light. Blood, sweat, saliva, and tears are all affected. The effect is harmless but makes forensic investigation of your activities remarkably easy."
+  },
+  {
+    "id": "rads-negative-046",
+    "number": 46,
+    "polarity": "negative",
+    "name": "The Reverse Midas Touch, Again",
+    "description": "Your skin causes ordinary paper to become brittle and yellow after prolonged contact. Books, maps, documents, and paper currency gradually deteriorate when handled directly. Gloves prevent the effect, provided they remain intact."
+  },
+  {
+    "id": "rads-negative-047",
+    "number": 47,
+    "polarity": "negative",
+    "name": "The Human Bubble Wrap",
+    "description": "Small, fluid-filled blisters develop across your skin whenever you become frightened. They are painless and disappear after several hours, but they burst with loud popping noises when touched. The effect is especially embarrassing during tense negotiations."
+  },
+  {
+    "id": "rads-negative-048",
+    "number": 48,
+    "polarity": "negative",
+    "name": "The Unfortunate Accent",
+    "description": "Your speech involuntarily adopts the accent of the last person you spoke with. The effect persists until you have another conversation. You retain your vocabulary and language, but your constantly changing accent makes you sound like a terrible impersonator."
+  },
+  {
+    "id": "rads-negative-049",
+    "number": 49,
+    "polarity": "negative",
+    "name": "The Human Refrigerator",
+    "description": "Your breath is permanently cold enough to produce visible condensation, even in warm weather. You can slightly chill small objects by breathing on them, but your mouth and throat feel perpetually cold. Hot drinks provide only temporary relief."
+  },
+  {
+    "id": "rads-negative-050",
+    "number": 50,
+    "polarity": "negative",
+    "name": "The Wrong Way Around",
+    "description": "Your internal sense of left and right has become reversed. You instinctively reach left when intending to reach right and vice versa. You can compensate through conscious effort, but sudden instructions and reflexive actions are frequently confused."
+  },
+  {
+    "id": "rads-negative-051",
+    "number": 51,
+    "polarity": "negative",
+    "name": "The Human Confetti Cannon",
+    "description": "Your skin periodically sheds tiny, brightly colored flakes that resemble confetti. The flakes are harmless but accumulate rapidly in clothing, bedding, and enclosed spaces. You leave a faint trail wherever you go."
+  },
+  {
+    "id": "rads-negative-052",
+    "number": 52,
+    "polarity": "negative",
+    "name": "The Unfortunate Honk",
+    "description": "Your nose produces a loud honking noise whenever you experience surprise. The sound is involuntary and cannot be suppressed. Sudden scares, unexpected compliments, and startling revelations become particularly humiliating."
+  },
+  {
+    "id": "rads-negative-053",
+    "number": 53,
+    "polarity": "negative",
+    "name": "The Human Paperweight",
+    "description": "Your body has become unusually dense, approximately doubling your weight without changing your appearance. You retain your normal strength and mobility, but weak floors, fragile furniture, and small boats become serious concerns."
+  },
+  {
+    "id": "rads-negative-054",
+    "number": 54,
+    "polarity": "negative",
+    "name": "The Reverse Thermostat",
+    "description": "Your body becomes uncomfortable whenever the surrounding temperature is perfectly pleasant. You feel cold in mild weather and overheated in comfortable rooms, but experience ordinary comfort in moderately hot or cold environments."
+  },
+  {
+    "id": "rads-negative-055",
+    "number": 55,
+    "polarity": "negative",
+    "name": "The Human Wind Chime",
+    "description": "Your bones produce faint musical tones whenever you move. The sounds are pleasant but impossible to suppress, and become louder during rapid movement. You are effectively accompanied by a tiny invisible orchestra."
+  },
+  {
+    "id": "rads-negative-056",
+    "number": 56,
+    "polarity": "negative",
+    "name": "The Unfortunate Smile",
+    "description": "Your facial muscles have permanently contracted into an enormous grin. You can still speak and eat normally, but your expression never changes. Delivering bad news, attending funerals, and expressing sincere concern become difficult."
+  },
+  {
+    "id": "rads-negative-057",
+    "number": 57,
+    "polarity": "negative",
+    "name": "The Human Dust Magnet",
+    "description": "Your skin attracts airborne dust and dirt at an extraordinary rate. Even clean environments leave you visibly filthy within hours. Bathing removes the accumulated grime, but the effect resumes immediately afterward."
+  },
+  {
+    "id": "rads-negative-058",
+    "number": 58,
+    "polarity": "negative",
+    "name": "The Wrong Flavor",
+    "description": "Everything you eat tastes faintly of gasoline. The flavor does not indicate actual contamination and has no physical effect, but it makes meals unpleasant and can conceal the taste of genuinely dangerous substances."
+  },
+  {
+    "id": "rads-negative-059",
+    "number": 59,
+    "polarity": "negative",
+    "name": "The Human Echo Locator",
+    "description": "Your ears can detect distant sounds with remarkable sensitivity, but your brain involuntarily repeats those sounds internally for several minutes afterward. Crowded environments become overwhelming, and loud noises can leave you distracted long after they stop."
+  },
+  {
+    "id": "rads-negative-060",
+    "number": 60,
+    "polarity": "negative",
+    "name": "The Unfortunate Tail",
+    "description": "A long, muscular tail has developed at the base of your spine. It provides modest assistance with balance and can grasp lightweight objects. Unfortunately, it moves involuntarily whenever you experience strong emotions, making deception and concealment difficult."
+  },
+  {
+    "id": "rads-negative-061",
+    "number": 61,
+    "polarity": "negative",
+    "name": "The Human Ice Cube",
+    "description": "Your skin becomes extremely slippery whenever it gets wet. Rain, sweat, and spilled liquids make it difficult to grip objects or maintain footing. You are particularly dangerous to yourself in bathrooms."
+  },
+  {
+    "id": "rads-negative-062",
+    "number": 62,
+    "polarity": "negative",
+    "name": "The Wrong Reflection, Again",
+    "description": "Your reflection appears to be wearing clothing different from what you are actually wearing. The reflected clothing changes unpredictably and occasionally resembles outfits you have never owned. The effect is harmless but deeply unsettling."
+  },
+  {
+    "id": "rads-negative-063",
+    "number": 63,
+    "polarity": "negative",
+    "name": "The Human Fire Alarm",
+    "description": "Your body produces a loud, involuntary shriek whenever you smell smoke. The reaction occurs even around harmless campfires, cooking fires, and tobacco smoke. You cannot distinguish dangerous fires from ordinary ones through this reflex."
+  },
+  {
+    "id": "rads-negative-064",
+    "number": 64,
+    "polarity": "negative",
+    "name": "The Unfortunate Teeth",
+    "description": "Your teeth have become slightly translucent and emit a faint clicking noise whenever you speak. The effect does not weaken them, but the sound makes quiet conversation difficult and gives your smile an unsettling appearance."
+  },
+  {
+    "id": "rads-negative-065",
+    "number": 65,
+    "polarity": "negative",
+    "name": "The Human Puddle",
+    "description": "Your body periodically releases a large quantity of harmless water through your skin. The event occurs without warning and leaves you, your clothing, and nearby surfaces thoroughly soaked. You cannot control when it happens."
+  },
+  {
+    "id": "rads-negative-066",
+    "number": 66,
+    "polarity": "negative",
+    "name": "The Wrong Direction",
+    "description": "Your body instinctively turns toward the nearest source of strong radiation whenever you are not consciously controlling your movement. You can resist the urge easily, but while distracted or asleep you may gradually orient yourself toward dangerous areas."
+  },
+  {
+    "id": "rads-negative-067",
+    "number": 67,
+    "polarity": "negative",
+    "name": "The Human Bell",
+    "description": "Your skull produces a faint ringing noise whenever struck or tapped. The sound is audible to nearby people and can persist for several minutes. Head injuries are no more dangerous than normal, but even minor bumps become embarrassing."
+  },
+  {
+    "id": "rads-negative-068",
+    "number": 68,
+    "polarity": "negative",
+    "name": "The Unfortunate Growth",
+    "description": "A small, harmless horn has developed on your forehead. It grows continuously and must be trimmed regularly. If neglected, it eventually becomes long enough to interfere with hats, helmets, and ordinary doorways."
+  },
+  {
+    "id": "rads-negative-069",
+    "number": 69,
+    "polarity": "negative",
+    "name": "The Human Perfume Disaster",
+    "description": "Your body emits a different strong odor every morning. The scent may resemble flowers, gasoline, spoiled food, wet dogs, or any number of other substances. You have no control over the selection, and the smell persists throughout the day."
+  },
+  {
+    "id": "rads-negative-070",
+    "number": 70,
+    "polarity": "negative",
+    "name": "The Wrong Color",
+    "description": "Your skin has permanently changed to a vivid, unnatural color. The exact shade is determined by the GM or player, but it is impossible to conceal without clothing or cosmetics. Ordinary people frequently assume you are dangerously radioactive."
+  },
+  {
+    "id": "rads-negative-071",
+    "number": 71,
+    "polarity": "negative",
+    "name": "The Human Doorbell",
+    "description": "Your body produces a cheerful chiming sound whenever you enter a new enclosed space. The sound is involuntary and audible to everyone nearby. Entering buildings quietly becomes extraordinarily difficult."
+  },
+  {
+    "id": "rads-negative-072",
+    "number": 72,
+    "polarity": "negative",
+    "name": "The Unfortunate Fingertips",
+    "description": "Your fingerprints constantly rearrange themselves into new patterns. This makes conventional fingerprint identification unreliable, but also causes your fingertips to feel slightly numb and reduces your ability to manipulate extremely delicate objects."
+  },
+  {
+    "id": "rads-negative-073",
+    "number": 73,
+    "polarity": "negative",
+    "name": "The Human Lightning Bug",
+    "description": "Tiny sparks of harmless light occasionally appear around your body when you experience strong emotions. The sparks are visually striking but difficult to conceal. Fear, anger, and excitement make you look like a malfunctioning electrical appliance."
+  },
+  {
+    "id": "rads-negative-074",
+    "number": 74,
+    "polarity": "negative",
+    "name": "The Wrong Voice, Again",
+    "description": "Your voice sounds approximately one octave higher whenever you speak to someone you find intimidating. The effect is involuntary and becomes more pronounced as your fear increases. Attempts to sound threatening become increasingly pathetic."
+  },
+  {
+    "id": "rads-negative-075",
+    "number": 75,
+    "polarity": "negative",
+    "name": "The Human Cactus",
+    "description": "Small, sharp spines have developed across your forearms and shoulders. They provide modest protection against grappling and close contact, but make ordinary clothing uncomfortable and physical affection hazardous."
+  },
+  {
+    "id": "rads-negative-076",
+    "number": 76,
+    "polarity": "negative",
+    "name": "The Unfortunate Breath",
+    "description": "Your breath contains a harmless chemical that causes nearby plants to wilt temporarily. Flowers droop, leaves curl, and delicate vegetation becomes visibly distressed when you speak directly toward it. The plants recover after several hours."
+  },
+  {
+    "id": "rads-negative-077",
+    "number": 77,
+    "polarity": "negative",
+    "name": "The Human Alarm System",
+    "description": "Your body produces a loud clicking noise whenever you become suspicious of someone. The sound is involuntary and increases in frequency with your level of distrust. Unfortunately, it often alerts the very people you are suspicious of."
+  },
+  {
+    "id": "rads-negative-078",
+    "number": 78,
+    "polarity": "negative",
+    "name": "The Wrong Sleep Schedule",
+    "description": "Your biological clock has become permanently inverted. You feel most alert at night and become increasingly sleepy during daylight hours. You can still function during the day, but prolonged daytime activity is exhausting."
+  },
+  {
+    "id": "rads-negative-079",
+    "number": 79,
+    "polarity": "negative",
+    "name": "The Human Velcro Disaster",
+    "description": "Your skin produces microscopic hooks that cause clothing, bedding, and soft furnishings to cling to you. Removing attached fabrics requires considerable effort and occasionally damages them. Smooth metal and plastic surfaces are unaffected."
+  },
+  {
+    "id": "rads-negative-080",
+    "number": 80,
+    "polarity": "negative",
+    "name": "The Unfortunate Voice of Reason",
+    "description": "A second, independent vocal organ has developed in your throat. It occasionally interrupts your speech to offer unsolicited commentary, usually criticizing your decisions. It cannot reveal information you do not know, but it is remarkably persuasive."
+  },
+  {
+    "id": "rads-negative-081",
+    "number": 81,
+    "polarity": "negative",
+    "name": "The Human Candlewick",
+    "description": "Your hair absorbs oils and other flammable liquids at an extraordinary rate. It becomes dangerously combustible when exposed to such substances. Ordinary washing removes the absorbed material, but even small spills require immediate attention."
+  },
+  {
+    "id": "rads-negative-082",
+    "number": 82,
+    "polarity": "negative",
+    "name": "The Wrong Temperature, Again",
+    "description": "Your hands are permanently hot enough to make prolonged contact uncomfortable. You can warm small objects by holding them, but delicate materials, cold drinks, and physical affection become difficult to manage."
+  },
+  {
+    "id": "rads-negative-083",
+    "number": 83,
+    "polarity": "negative",
+    "name": "The Human Mirror Maze",
+    "description": "Your eyes occasionally perceive reflections where none exist. Shiny surfaces appear to contain additional rooms, doors, or people that are not actually present. The illusions are harmless but can make navigation through reflective environments confusing."
+  },
+  {
+    "id": "rads-negative-084",
+    "number": 84,
+    "polarity": "negative",
+    "name": "The Unfortunate Hunger",
+    "description": "Your body requires a small quantity of ordinary dirt or sand each day to maintain normal digestion. Without it, you experience severe stomach discomfort. The material provides no nutritional benefit and tastes exactly as unpleasant as expected."
+  },
+  {
+    "id": "rads-negative-085",
+    "number": 85,
+    "polarity": "negative",
+    "name": "The Human Trumpet",
+    "description": "Your nose can involuntarily produce a loud trumpet-like blast whenever you laugh. The sound is startling, difficult to suppress, and can be heard from a considerable distance. Jokes have become a genuine tactical liability."
+  },
+  {
+    "id": "rads-negative-086",
+    "number": 86,
+    "polarity": "negative",
+    "name": "The Wrong Shadow, Again",
+    "description": "Your shadow appears to belong to a different person, often someone taller, shorter, or differently shaped than you. The effect changes unpredictably every few days. It does not affect your body, but makes observers deeply suspicious."
+  },
+  {
+    "id": "rads-negative-087",
+    "number": 87,
+    "polarity": "negative",
+    "name": "The Human Water Balloon",
+    "description": "Your skin retains unusually large quantities of water after drinking. You become visibly bloated until the excess water is gradually released through perspiration. Drinking large amounts quickly can make movement uncomfortable."
+  },
+  {
+    "id": "rads-negative-088",
+    "number": 88,
+    "polarity": "negative",
+    "name": "The Unfortunate Whiskers",
+    "description": "Long, sensitive whiskers have developed around your mouth and cheeks. They can detect nearby movement and airflow, but are extremely sensitive to touch. Crowded spaces, strong winds, and ordinary grooming become irritating."
+  },
+  {
+    "id": "rads-negative-089",
+    "number": 89,
+    "polarity": "negative",
+    "name": "The Human Reverse Compass",
+    "description": "Your body instinctively points toward the nearest large concentration of ferrous metal. You can resist the urge, but when distracted you gradually turn toward vehicles, machinery, or metal structures. You are particularly troublesome near scrap yards."
+  },
+  {
+    "id": "rads-negative-090",
+    "number": 90,
+    "polarity": "negative",
+    "name": "The Wrong Face",
+    "description": "Your facial features gradually rearrange themselves while you sleep. The changes are subtle but noticeable, and over several weeks you may become difficult for acquaintances to recognize. Your voice, memories, and identity remain unchanged."
+  },
+  {
+    "id": "rads-negative-091",
+    "number": 91,
+    "polarity": "negative",
+    "name": "The Human Firefly Swarm",
+    "description": "Your skin periodically releases tiny glowing particles that float around you for several minutes before fading. The particles are harmless but reveal your location in darkness and attract curious insects."
+  },
+  {
+    "id": "rads-negative-092",
+    "number": 92,
+    "polarity": "negative",
+    "name": "The Unfortunate Skeleton",
+    "description": "Your bones have developed a faintly visible glow that can be seen through your skin in darkness. The effect is harmless but gives you the appearance of a walking X-ray image. Concealing yourself in dark environments becomes difficult."
+  },
+  {
+    "id": "rads-negative-093",
+    "number": 93,
+    "polarity": "negative",
+    "name": "The Human Weather Disaster",
+    "description": "Your body becomes unusually sensitive to atmospheric pressure changes. Approaching storms cause headaches, joint pain, and irritability. You can often predict bad weather, but only because you begin feeling miserable several hours beforehand."
+  },
+  {
+    "id": "rads-negative-094",
+    "number": 94,
+    "polarity": "negative",
+    "name": "The Wrong Appetite, Again",
+    "description": "Your digestive system has developed an overwhelming preference for extremely spicy food. Ordinary meals provide little satisfaction, and you experience persistent cravings for increasingly intense flavors. Your tolerance for spice does not improve."
+  },
+  {
+    "id": "rads-negative-095",
+    "number": 95,
+    "polarity": "negative",
+    "name": "The Human Radio Interference",
+    "description": "Your nervous system emits weak electromagnetic disturbances that interfere with nearby radio equipment. Signals become distorted within several meters of you, and sensitive receivers may produce loud static. You cannot control the effect."
+  },
+  {
+    "id": "rads-negative-096",
+    "number": 96,
+    "polarity": "negative",
+    "name": "The Unfortunate Echo of Death",
+    "description": "Your body occasionally produces faint sounds resembling your own voice calling for help, even when you are silent. The sounds seem to originate from nearby rooms or behind walls. They are harmless but can cause considerable distress to companions."
+  },
+  {
+    "id": "rads-negative-097",
+    "number": 97,
+    "polarity": "negative",
+    "name": "The Human Gravity Problem",
+    "description": "Your body has developed an unusual sensitivity to changes in elevation. Rapid ascents or descents cause severe dizziness and nausea, even when ordinary humans would feel nothing. Stairs are manageable, but elevators and steep mountain roads are unpleasant."
+  },
+  {
+    "id": "rads-negative-098",
+    "number": 98,
+    "polarity": "negative",
+    "name": "The Wrong Kind of Luck",
+    "description": "You experience an extraordinary number of minor coincidences that inconvenience you without causing serious harm. Doors close just before you reach them, objects roll under furniture, and strangers frequently mistake you for someone else. The GM may introduce harmless complications whenever appropriate."
+  },
+  {
+    "id": "rads-negative-099",
+    "number": 99,
+    "polarity": "negative",
+    "name": "The Human Biological Hazard",
+    "description": "Your body produces a faint chemical secretion that causes nearby organic materials to decay unusually quickly. Food spoils, flowers wilt, and untreated wood deteriorates after prolonged contact. The effect is slow but persistent, and makes long-term storage of supplies difficult."
+  },
+  {
+    "id": "rads-negative-100",
+    "number": 100,
+    "polarity": "negative",
+    "name": "The Ultimate Misfortune",
+    "description": "Your body has developed a catastrophic tendency to react unpredictably to stress. Whenever you experience extreme fear, pain, or emotional distress, one of your existing mutations temporarily becomes dramatically more pronounced. The GM determines which mutation is affected and how its effect intensifies. The result should be inconvenient, dangerous, or spectacularly embarrassing, but not automatically fatal."
+  }
+]

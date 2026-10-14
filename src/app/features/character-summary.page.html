@@ -99,7 +99,7 @@
               step="1"
               [ngModel]="hpInput()"
               (ngModelChange)="hpInput.set($event)"
-              [disabled]="saving()"
+              [disabled]="saving() || recovering()"
           /></mat-form-field>
           <mat-form-field appearance="outline" subscriptSizing="dynamic"
             ><mat-label>Damage / heal</mat-label
@@ -110,11 +110,14 @@
               step="1"
               [ngModel]="hpAmount()"
               (ngModelChange)="hpAmount.set($event)"
-              [disabled]="saving()"
+              [disabled]="saving() || recovering()"
           /></mat-form-field>
           <div class="actions">
-            <button mat-stroked-button (click)="changeHp(-1)" [disabled]="saving()">Damage</button
-            ><button mat-stroked-button (click)="changeHp(1)" [disabled]="saving()">Heal</button>
+            <button mat-stroked-button (click)="changeHp(-1)" [disabled]="saving() || recovering()">
+              Damage</button
+            ><button mat-stroked-button (click)="changeHp(1)" [disabled]="saving() || recovering()">
+              Heal
+            </button>
           </div>
         </div>
       } @else {
@@ -480,6 +483,19 @@
       }
     </ul>
   </section>
+  @if (rules().mutations; as mutations) {
+    <app-mutation-panel
+      [core]="record.core"
+      [rules]="mutations"
+      [canEdit]="record.canEdit"
+      [busy]="saving()"
+      [pending]="!!pendingAction()"
+      [ready]="playReady()"
+      [problem]="error()"
+      (action)="savePlayAction($event.core, $event.message)"
+      (retry)="retryAction()"
+    />
+  }
   <section class="panel" aria-labelledby="abilities-title">
     <h2 id="abilities-title">Abilities</h2>
     @if (resource(); as resource) {
