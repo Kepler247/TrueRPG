@@ -3,6 +3,7 @@ import {
   acquiredMutations,
   awardMutation,
   drawMutation,
+  removeMutation,
   finishReconstitution,
   RADS_MUTATIONS,
   validateMutations,
@@ -61,5 +62,22 @@ describe('501 Rads mutations', () => {
     expect(awardMutation(core(), RADS_MUTATIONS[0]).hpCurrent).toBe(12);
     expect(() => awardMutation(core(), RADS_MUTATIONS[0], true)).toThrow('negative');
     expect(() => finishReconstitution(core())).toThrow('No reconstitution');
+  });
+  it('removes a mutation while preserving history and excluding it from future draws', () => {
+    const mutation = RADS_MUTATIONS[0];
+    const removed = removeMutation(awardMutation(core(), mutation), mutation.id);
+    expect(acquiredMutations(removed)).toEqual([]);
+    expect(drawMutation(removed, 'positive', () => 1).id).not.toBe(mutation.id);
+    expect(() => awardMutation(removed, mutation)).toThrow('already present');
+    expect(removed['future']).toEqual({ keep: true });
+    validateMutations(removed);
+  });
+  it('cannot remove the mutation responsible for a pending reconstitution', () => {
+    const mutation = RADS_MUTATIONS.find((m) => m.polarity === 'negative')!;
+    const pending = awardMutation(core(), mutation, true);
+    expect(() => removeMutation(pending, mutation.id)).toThrow('Finish reconstitution');
+    expect(acquiredMutations(removeMutation(finishReconstitution(pending), mutation.id))).toEqual(
+      [],
+    );
   });
 });

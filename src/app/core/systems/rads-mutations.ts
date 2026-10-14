@@ -31,6 +31,7 @@ export interface MutationRules {
   draw: (core: CharacterCore, polarity: MutationPolarity) => MutationDefinition;
   award: (core: CharacterCore, mutation: MutationDefinition, death: boolean) => CharacterCore;
   recovering: (core: CharacterCore) => boolean;
+  remove: (core: CharacterCore, id: string) => CharacterCore;
   finishRecovery: (core: CharacterCore) => CharacterCore;
 }
 export const RADS_MUTATIONS: readonly MutationDefinition[] = catalog as MutationDefinition[];
@@ -39,12 +40,28 @@ export function acquiredMutations(core: CharacterCore): AcquiredMutation[] {
     .array(acquiredSchema)
     .parse(core['radsMutations'] === undefined ? [] : core['radsMutations']);
 }
+function mutationHistory(core: CharacterCore): string[] {
+  return z
+    .array(z.string())
+    .parse(core['radsMutationHistory'] === undefined ? [] : core['radsMutationHistory']);
+}
+export function removeMutation(core: CharacterCore, id: string): CharacterCore {
+  const acquired = acquiredMutations(core);
+  if (!acquired.some((m) => m.id === id)) throw new Error('Mutation is no longer present.');
+  if (recovering(core) && recoverySchema.parse(core['radsReconstitution']).mutationId === id)
+    throw new Error('Finish reconstitution before removing its mutation.');
+  return {
+    ...core,
+    radsMutations: acquired.filter((m) => m.id !== id),
+    radsMutationHistory: [...new Set([...mutationHistory(core), ...acquired.map((m) => m.id)])],
+  };
+}
 export function drawMutation(
   core: CharacterCore,
   polarity: MutationPolarity,
   roll: (sides: number) => number = rollDie,
 ): MutationDefinition {
-  const owned = new Set(acquiredMutations(core).map((m) => m.id));
+  const owned = new Set([...mutationHistory(core), ...acquiredMutations(core).map((m) => m.id)]);
   const pool = RADS_MUTATIONS.filter((m) => m.polarity === polarity && !owned.has(m.id));
   if (!pool.length)
     throw new Error(`You already have every ${polarity} mutation. No duplicate can be granted.`);
@@ -65,13 +82,16 @@ export function awardMutation(
   if (!definition) throw new Error('Unknown mutation.');
   if (recovering(core)) throw new Error('Finish the current reconstitution first.');
   const acquired = acquiredMutations(core);
-  if (acquired.some((m) => m.id === definition.id))
+  if (acquired.some((m) => m.id === definition.id) || mutationHistory(core).includes(definition.id))
     throw new Error('This mutation is already present.');
   if (death && (definition.polarity !== 'negative' || core.hpMax === null))
     throw new Error('Death requires a negative mutation and a defined HP maximum.');
   const now = new Date().toISOString();
   return {
     ...core,
+    radsMutationHistory: [
+      ...new Set([...mutationHistory(core), ...acquired.map((m) => m.id), definition.id]),
+    ],
     radsMutations: [...acquired, { ...definition, awardedAt: now, revision: 'mutations-1' }],
     ...(death
       ? {
@@ -93,6 +113,12 @@ export function finishReconstitution(core: CharacterCore): CharacterCore {
   };
 }
 export function validateMutations(core: CharacterCore): void {
+  const history = mutationHistory(core);
+  if (
+    history.some((id) => !RADS_MUTATIONS.some((m) => m.id === id)) ||
+    new Set(history).size !== history.length
+  )
+    throw new Error('Saved mutation history is invalid or unsupported.');
   const acquired = acquiredMutations(core),
     ids = new Set<string>();
   for (const item of acquired) {
@@ -118,5 +144,6 @@ export const RADS_MUTATION_RULES: MutationRules = {
   draw: drawMutation,
   award: awardMutation,
   recovering,
+  remove: removeMutation,
   finishRecovery: finishReconstitution,
 };

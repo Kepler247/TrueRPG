@@ -46,6 +46,16 @@ import {
                 {{ mutation.name }}
               </summary>
               <p>{{ mutation.description }}</p>
+              @if (canEdit()) {
+                <button
+                  mat-button
+                  (click)="remove(mutation.id)"
+                  [disabled]="busy() || pending() || !!result()"
+                  [attr.aria-label]="'Remove ' + mutation.name"
+                >
+                  Remove
+                </button>
+              }
             </details>
           } @empty {
             <p>No mutations yet. Your genome is suspiciously ordinary.</p>
@@ -231,6 +241,22 @@ export class MutationPanel {
     this.result.set(null);
     this.spinning.set(false);
     this.expanded.set(true);
+  }
+  remove(id: string): void {
+    if (!this.canEdit() || this.busy() || this.pending() || this.result()) return;
+    if (!this.ready()) {
+      this.error.set('Save HP and resource changes before removing a mutation.');
+      return;
+    }
+    this.error.set('');
+    try {
+      this.action.emit({
+        core: this.rules().remove(this.core(), id),
+        message: 'Mutation removed. It remains excluded from future rolls.',
+      });
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Mutation could not be removed.');
+    }
   }
   finish(): void {
     if (!this.canEdit() || this.busy() || this.pending() || !this.recoveryConfirmed()) return;
