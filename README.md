@@ -127,3 +127,6 @@ The current `truerpg` project uses Workers Static Assets. Keep build command `np
 ## Updating the 501 Rads readable reference
 
 Keep the matching PDF and DOCX drafts together. Run `scripts/import-rads-core.py` with the PDF tools Python environment, then `python scripts/import-rads-docx.py` to import native DOCX headings, paragraphs and all table cells. The PDF remains the original downloadable visual reference; source page numbers for DOCX blocks are approximate because a native paragraph/table may span several PDF pages. Both files are retained with hashes in `core-1.json`. Mutation entries remain subheadings inside Positive Mutations and Negative Mutations, not separate navigation categories. Run `npm run test:references` after import. This imports reference presentation only; rules-engine definitions still require their separate review and tests for actual mechanic changes.
+
+
+D&DS uses the same structured import: `python scripts/import-rads-docx.py --dnds` reads `R:\Downloads\D&DS One Doc.docx`. It preserves native paragraphs/headings and four tables; Chapter Two remains `ship-reference` and is excluded from the app reader while available in the original PDF. Run `npm run test:references` to check both source hashes and category boundaries.

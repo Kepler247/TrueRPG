@@ -4,11 +4,12 @@ Run after import-rads-core.py. Requires only Python's standard library.
 from pathlib import Path
 from zipfile import ZipFile
 import xml.etree.ElementTree as ET
-import json, re, hashlib, shutil, bisect
+import json, re, hashlib, shutil, bisect, sys
 
-source = Path(r"R:\Downloads\501 Rads.docx")
-root = Path('public/systems/501-rads')
-target = root / 'core-1.json'
+dnds = "--dnds" in sys.argv
+source = Path(r"R:\Downloads\D&DS One Doc.docx" if dnds else r"R:\Downloads\501 Rads.docx")
+root = Path('public/systems/dnds' if dnds else 'public/systems/501-rads')
+target = root / ('original.json' if dnds else 'core-1.json')
 doc = json.loads(target.read_text(encoding='utf-8'))
 ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
 w = '{' + ns['w'] + '}'
@@ -18,7 +19,7 @@ def text(node):
 def normalized(value):
     return ' '.join(re.findall(r"\w+", value.lower()))
 # Map structural blocks to their approximate source PDF page without splitting them.
-pdf_text = json.loads(Path('.codex-tmp/rads-core-source.json').read_text(encoding='utf-8'))
+pdf_text = [' '.join(b['text'] for b in page['blocks']) for page in doc['pages']] if dnds else json.loads(Path('.codex-tmp/rads-core-source.json').read_text(encoding='utf-8'))
 page_starts=[]; full=''
 for page in pdf_text:
     page_starts.append(len(full));full+=normalized(page)+' '
@@ -32,8 +33,10 @@ with ZipFile(source) as archive:
             if not value:continue
             style=node.find('w:pPr/w:pStyle',ns)
             styled=style is not None and style.get(w+'val','').startswith('Heading')
-            kind='heading' if styled or value=='501 RADS' else 'paragraph'
-            if value=='Skills':category='rules'
+            kind='heading' if styled or value=='501 RADS' or (dnds and value.startswith('CHAPTER ')) else 'paragraph'
+            if dnds and value.startswith('CHAPTER TWO:'):category='ship-reference'
+            if dnds and value.startswith('CHAPTER THREE:'):category='rules'
+            if not dnds and value=='Skills':category='rules'
             if value=='Mutations':in_mutations=True
             block={'kind':kind,'text':value,'category':category}
             if kind=='paragraph':block['paragraphBoundary']=True
@@ -61,8 +64,9 @@ with ZipFile(source) as archive:
             page['blocks'].append({'kind':'heading','text':'Positive Mutations' if mutation_table==1 else 'Negative Mutations','category':category})
         page['blocks'].append(block)
 # Preserve an exact copy and hash so future revisions have an auditable import source.
-shutil.copyfile(source,root/'501-rads-core-1.docx')
-doc['textSourceFile']='501-rads-core-1.docx'
+source_name='dnds-original.docx' if dnds else '501-rads-core-1.docx'
+shutil.copyfile(source,root/source_name)
+doc['textSourceFile']=source_name
 doc['textSourceSha256']=hashlib.sha256(source.read_bytes()).hexdigest()
 target.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print('Imported DOCX:',sum(b['kind']=='table' for p in doc['pages'] for b in p['blocks']),'tables;',sum(b['kind']=='subheading' for p in doc['pages'] for b in p['blocks']),'mutation titles')

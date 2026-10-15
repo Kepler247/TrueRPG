@@ -23,6 +23,46 @@ for (const [folder, revision, count] of [
       .digest('hex'),
     doc.sha256,
   );
+  if (doc.textSourceFile) {
+    assert.equal(
+      createHash('sha256')
+        .update(await readFile(new URL(doc.textSourceFile, root)))
+        .digest('hex'),
+      doc.textSourceSha256,
+      'Editable source hash must match',
+    );
+  }
+  if (folder === 'dnds') {
+    const blocks = doc.pages.flatMap((p) => p.blocks);
+    assert.equal(
+      blocks.filter((b) => b.kind === 'table').length,
+      4,
+      'All four D&DS tables must remain structured',
+    );
+    assert.ok(
+      blocks.some(
+        (b) =>
+          b.kind === 'heading' &&
+          b.text === 'CHAPTER TWO: EXPLORING SPACE' &&
+          b.category === 'ship-reference',
+      ),
+    );
+    assert.ok(
+      blocks.some(
+        (b) =>
+          b.kind === 'heading' &&
+          b.text === 'CHAPTER THREE: WEAPONS & ARMOR OF THE MILKY WAY' &&
+          b.category === 'rules',
+      ),
+    );
+    assert.ok(
+      blocks.some(
+        (b) =>
+          b.kind === 'heading' &&
+          b.text === 'Section One: History of Civilization in the Milky Way',
+      ),
+    );
+  }
   const text = doc.pages.flatMap((p) => p.blocks.map((b) => b.text)).join('\n');
   assert.ok(text.length > count * 100, 'Reference should contain substantive text');
   assert.ok(!text.includes('\ufffd'), 'Reference should not have replacement glyphs');

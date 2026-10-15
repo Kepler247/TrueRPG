@@ -163,3 +163,30 @@ input {
   background: #fce9e9;
   color: #752a30;
 }
+
+.grant-menu > summary {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-block: 0.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #245c47;
+  border-radius: 0.6rem;
+  background: #245c47;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 3px #0002;
+  list-style: none;
+  &:hover {
+    background: #194735;
+  }
+  &:active {
+    box-shadow: none;
+  }
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+.grant-menu[open] .roulette-chevron {
+  transform: rotate(180deg);
+}

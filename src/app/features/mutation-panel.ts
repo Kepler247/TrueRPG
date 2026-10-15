@@ -172,7 +172,9 @@ import {
         </div>
       } @else if (canEdit()) {
         <details class="grant-menu">
-          <summary>Radiation roulette</summary>
+          <summary>
+            Radiation roulette <span class="roulette-chevron" aria-hidden="true">&#9662;</span>
+          </summary>
           <p>
             Grant a positive mutation for a reward or treatment. Use death reconstitution only when
             this character would die.
