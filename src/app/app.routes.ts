@@ -20,7 +20,12 @@ export const routes: Routes = [
     title: 'System reference | RPG Companion',
     loadComponent: () => import('./features/system-hub.page').then((m) => m.SystemHubPage),
   },
-  { path: '', pathMatch: 'full', redirectTo: 'characters' },
+  {
+    path: '',
+    pathMatch: 'full',
+    title: 'True RPG | Characters, campaigns and worlds',
+    loadComponent: () => import('./features/home.page').then((m) => m.HomePage),
+  },
   {
     path: 'auth',
     title: 'Account | RPG Companion',

@@ -67,11 +67,22 @@ describe('Feature navigation', () => {
     });
   });
 
-  it('opens characters by default for a signed-in player', async () => {
+  it('opens the public homepage for a signed-in player', async () => {
     const harness = await RouterTestingHarness.create('/');
     await harness.fixture.whenStable();
     harness.detectChanges();
-    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe('Characters');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe('True RPG');
+  });
+
+  it('lets signed-out visitors reach the homepage and system links', async () => {
+    user.set(null);
+    const harness = await RouterTestingHarness.create('/');
+    await harness.fixture.whenStable();
+    harness.detectChanges();
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent?.trim()).toBe('True RPG');
+    expect(harness.routeNativeElement?.querySelector('a[href="/auth"]')).not.toBeNull();
+    expect(harness.routeNativeElement?.querySelector('a[href="/systems/501-rads"]')).not.toBeNull();
+    expect(harness.routeNativeElement?.querySelector('a[href="/characters"]')).toBeNull();
   });
 
   it('opens the lazy campaign page', async () => {

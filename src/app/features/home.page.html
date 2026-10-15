@@ -1,0 +1,89 @@
+<section class="hero" aria-labelledby="home-title">
+  <p class="eyebrow">YOUR PARTY. YOUR WORLD. YOUR RULES.</p>
+  <h1 id="home-title">True RPG</h1>
+  <p class="headline">Less bookkeeping.<br />More adventure.</p>
+  <p class="lead">
+    A tabletop RPG companion for your characters, campaigns and the worlds you play in. Keep your
+    sheet close, your rules handy and your attention at the table.
+  </p>
+  <div class="home-actions">
+    @if (auth.user()) {
+      <a class="primary" routerLink="/characters"
+        >Open my characters <span aria-hidden="true">&rarr;</span></a
+      >
+    } @else {
+      <a class="primary" routerLink="/auth"
+        >Sign in or create an account <span aria-hidden="true">&rarr;</span></a
+      >
+    }
+    <a class="secondary" routerLink="/systems">Explore the systems</a>
+  </div>
+  <p class="small">
+    Browse lore and rules without an account. Sign in to save characters and join your party.
+  </p>
+</section>
+<section aria-labelledby="table-title">
+  <p class="eyebrow">BUILT FOR THE TABLE</p>
+  <h2 id="table-title">Your character, without the clutter.</h2>
+  <div class="home-grid">
+    <article>
+      <span class="number" aria-hidden="true">01</span>
+      <h3>A sheet you can trust</h3>
+      <p>
+        Create and level up characters, manage equipment and abilities, and keep your main sheet
+        safe from accidental edits.
+      </p>
+    </article>
+    <article>
+      <span class="number" aria-hidden="true">02</span>
+      <h3>Effects you can follow</h3>
+      <p>
+        See buffs, drawbacks and conditions together. Supported modifiers flow into your checks and
+        weapon formulas, so you can keep rolling your own dice.
+      </p>
+    </article>
+    <article>
+      <span class="number" aria-hidden="true">03</span>
+      <h3>A place for your party</h3>
+      <p>
+        Join campaigns by invitation, see your party's characters and give your GM access to the
+        sheets they need.
+      </p>
+    </article>
+  </div>
+</section>
+<section class="worlds" aria-labelledby="worlds-title">
+  <div>
+    <p class="eyebrow">PICK YOUR NEXT WORLD</p>
+    <h2 id="worlds-title">Different settings. One companion.</h2>
+    <p>Explore the rules and lore before making your character.</p>
+  </div>
+  <div class="home-grid">
+    <a routerLink="/systems/501-rads"
+      ><span class="system-label">POSTNUCLEAR</span>
+      <h3>501 Rads</h3>
+      <p>
+        Mutations, strange factions and dangerous abilities in a world changed by nuclear fallout.
+      </p>
+      <span class="explore">Explore 501 Rads &rarr;</span></a
+    >
+    <a routerLink="/systems/dnds"
+      ><span class="system-label">SCIENCE FICTION</span>
+      <h3>D&amp;DS</h3>
+      <p>
+        Dogfights and Deep Space: distant civilizations, psionic mysteries and futuristic equipment.
+      </p>
+      <span class="explore">Explore D&amp;DS &rarr;</span></a
+    >
+    <a routerLink="/systems/5e"
+      ><span class="system-label">FANTASY</span>
+      <h3>5E (2014)</h3>
+      <p>The familiar fantasy foundation, with the complete SRD 5.1 rules reference.</p>
+      <span class="explore">Explore 5E &rarr;</span></a
+    >
+  </div>
+</section>
+<footer class="home-footer">
+  <p>Made for players and GMs. Ready for your phone.</p>
+  <a href="/rules-attribution.txt">Rules attribution</a>
+</footer>
