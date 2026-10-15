@@ -99,3 +99,30 @@ article.space {
 article.space h2 {
   color: #98e5ec;
 }
+
+.reference-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+  table {
+    border-collapse: collapse;
+    min-width: 100%;
+    font: inherit;
+  }
+  caption {
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 0.85em;
+  }
+  td {
+    border: 1px solid #a7a79c;
+    padding: 0.6rem;
+    min-width: 7rem;
+    vertical-align: top;
+  }
+  tr:nth-child(even) {
+    background: rgb(128 128 128 / 8%);
+  }
+}

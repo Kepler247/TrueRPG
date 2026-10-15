@@ -58,9 +58,10 @@ interface ReferenceDocument {
           <strong>Complete rules revision &middot; 501 Rads</strong>
           <p>
             Maximum level 12. Gain two stat points every level; scores may exceed 20. Shared feats
-            at 3, 6, 9, 12 are awaiting definition. Gunslingers use d8 HP. Six classes, feats, equipment, consumables, loot, vehicles and enemies are defined in this revision. Fan the Hammer costs 2
-            Heat. 100 positive and 100 negative mutations are available. Death grants a random
-            negative mutation; after 30 game minutes of reconstitution, return at 1 HP.
+            at 3, 6, 9, 12 are awaiting definition. Gunslingers use d8 HP. Six classes, feats,
+            equipment, consumables, loot, vehicles and enemies are defined in this revision. Fan the
+            Hammer costs 2 Heat. 100 positive and 100 negative mutations are available. Death grants
+            a random negative mutation; after 30 game minutes of reconstitution, return at 1 HP.
           </p>
         </aside>
       } @else if (system.slug === 'dnds') {
@@ -124,7 +125,33 @@ interface ReferenceDocument {
               @if (block.kind === 'heading') {
                 <h2>{{ block.text }}</h2>
               } @else {
-                <p [class.bullet]="block.kind === 'bullet'">{{ block.text }}</p>
+                @if (block.kind === 'table') {
+                  <div
+                    class="reference-table"
+                    role="region"
+                    tabindex="0"
+                    aria-label="Rules table, scroll horizontally for more columns"
+                  >
+                    <table>
+                      <caption>
+                        Reference table
+                      </caption>
+                      <tbody>
+                        @for (row of block.rows ?? []; track $index) {
+                          <tr>
+                            @for (cell of row; track $index) {
+                              <td>{{ cell }}</td>
+                            }
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                } @else if (block.kind === 'subheading') {
+                  <h3>{{ block.text }}</h3>
+                } @else {
+                  <p [class.bullet]="block.kind === 'bullet'">{{ block.text }}</p>
+                }
               }
             }
           </article>

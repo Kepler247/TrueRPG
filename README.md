@@ -122,3 +122,8 @@ After the first successful deployment, set Supabase Authentication URL Configura
 ## Cloudflare Workers deployment (current hosted project)
 
 The current `truerpg` project uses Workers Static Assets. Keep build command `npm run build`, deploy command `npx wrangler deploy`, and repository root `/`. `wrangler.jsonc` points to `dist/rpg-companion/browser` and enables SPA navigation fallback and the public workers.dev route. No Worker script or server-side Angular runtime is needed. Its public address is https://truerpg.handyboy06.workers.dev/ . The Pages instructions above remain applicable only to a separate Pages project.
+
+
+## Updating the 501 Rads readable reference
+
+Keep the matching PDF and DOCX drafts together. Run `scripts/import-rads-core.py` with the PDF tools Python environment, then `python scripts/import-rads-docx.py` to import native DOCX headings, paragraphs and all table cells. The PDF remains the original downloadable visual reference; source page numbers for DOCX blocks are approximate because a native paragraph/table may span several PDF pages. Both files are retained with hashes in `core-1.json`. Mutation entries remain subheadings inside Positive Mutations and Negative Mutations, not separate navigation categories. Run `npm run test:references` after import. This imports reference presentation only; rules-engine definitions still require their separate review and tests for actual mechanic changes.

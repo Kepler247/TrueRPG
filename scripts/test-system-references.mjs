@@ -33,6 +33,51 @@ for (const [folder, revision, count] of [
         ? text.includes('Fan the Hammer; For -2 Heat')
         : text.includes('Fan the Hammer; For -2 heat points'),
     );
+    if (revision === 'core-1') {
+      const blocks = doc.pages.flatMap((p) => p.blocks);
+      const tables = blocks.filter((b) => b.kind === 'table');
+      assert.equal(tables.length, 33, 'All complete DOCX tables must retain structured cells');
+      assert.equal(
+        createHash('sha256')
+          .update(await readFile(new URL(doc.textSourceFile, root)))
+          .digest('hex'),
+        doc.textSourceSha256,
+      );
+      const skillRows = tables.find((t) => t.rows[0]?.[0] === 'Skill').rows;
+      assert.equal(skillRows.length, 19, 'Skill header and all 18 skill rows must survive');
+      assert.ok(skillRows.some((row) => row[0] === 'Hacking' && row[1] === 'Intelligence'));
+      assert.ok(
+        tables.some((t) =>
+          t.rows.some(
+            (row) =>
+              row[0].includes('Roach Motel') &&
+              row[1] === 'Long Gun' &&
+              row[6]?.replace(/\s+/g, ' ').includes('nearby mutant insects'),
+          ),
+        ),
+        'Wrapped weapon cells must retain their column associations',
+      );
+      const headings = blocks.filter((b) => b.kind === 'heading').map((b) => b.text);
+      for (const heading of [
+        'The history of our fine earth:',
+        'Governmental Organizations',
+        'Creatures, Criminals, and Commoners:',
+        'Consumables, Drugs, Medicines',
+        'Positive Mutations',
+        'Negative Mutations',
+      ])
+        assert.ok(headings.includes(heading), `Missing merged/grouped heading: ${heading}`);
+      assert.equal(
+        headings.filter((h) => /^\d{2,3}\. /.test(h)).length,
+        0,
+        'Mutation entries must not become navigation categories',
+      );
+      assert.equal(
+        blocks.filter((b) => b.kind === 'subheading' && /^\d{2,3}\. /.test(b.text)).length,
+        200,
+        'All 200 mutation titles must remain readable',
+      );
+    }
     if (revision === 'mutations-1') assert.ok(text.includes('The Ultimate Misfortune'));
   }
   for (const expected of folder === '501-rads'

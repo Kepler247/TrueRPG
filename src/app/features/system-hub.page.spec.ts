@@ -23,7 +23,21 @@ describe('System reference hub', () => {
               { kind: 'paragraph', text: 'Wacky Jack lore' },
             ],
           },
-          { number: 2, category: 'rules', blocks: [{ kind: 'heading', text: 'Gunslinger Heat' }] },
+          {
+            number: 2,
+            category: 'rules',
+            blocks: [
+              { kind: 'heading', text: 'Gunslinger Heat' },
+              {
+                kind: 'table',
+                text: 'Weapon Damage Test pistol 1d6',
+                rows: [
+                  ['Weapon', 'Damage'],
+                  ['Test pistol', '1d6'],
+                ],
+              },
+            ],
+          },
         ],
       }),
     });
@@ -45,10 +59,7 @@ describe('System reference hub', () => {
     fixture.detectChanges();
     const page = fixture.componentInstance;
     await vi.waitFor(() => expect(page.document()).not.toBeNull());
-    expect(fetchMock).toHaveBeenCalledWith(
-      '/systems/501-rads/core-1.json',
-      expect.any(Object),
-    );
+    expect(fetchMock).toHaveBeenCalledWith('/systems/501-rads/core-1.json', expect.any(Object));
     expect(page.matches()).toHaveLength(2);
     page.category.set('lore');
     expect(page.matches()).toHaveLength(1);
@@ -58,6 +69,10 @@ describe('System reference hub', () => {
     expect(page.current()?.number).toBe(2);
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Fan the Hammer costs 2 Heat');
+    expect(fixture.nativeElement.querySelectorAll('table tr')).toHaveLength(2);
+    expect(fixture.nativeElement.querySelectorAll('table tr')[1].cells[1].textContent).toBe('1d6');
+    page.query.set('test pistol');
+    expect(page.matches()).toHaveLength(1);
     expect(fixture.nativeElement.querySelector('a[target="_blank"]').getAttribute('href')).toBe(
       '/systems/501-rads/501-rads-draft-1.pdf',
     );
