@@ -583,18 +583,20 @@
               </div>
             }
           }
-          @if (entry.equipped) {
+          @if (entry.equipped && entry['category'] !== 'consumable') {
             <p class="legend">Equipped</p>
           }
           @if (record.canEdit) {
             <div class="actions">
-              <button
-                mat-stroked-button
-                (click)="inventoryAction(entry.id, 'equip')"
-                [disabled]="saving() || !!pendingAction()"
-              >
-                {{ entry.equipped ? 'Unequip' : 'Equip' }}
-              </button>
+              @if (entry['category'] !== 'consumable') {
+                <button
+                  mat-stroked-button
+                  (click)="inventoryAction(entry.id, 'equip')"
+                  [disabled]="saving() || !!pendingAction()"
+                >
+                  {{ entry.equipped ? 'Unequip' : 'Equip' }}
+                </button>
+              }
               <button
                 mat-button
                 (click)="inventoryAction(entry.id, 'add')"
