@@ -139,6 +139,10 @@ export class CharacterEditPage {
   readonly pendingLevelUp = signal(false);
   readonly hpGain = signal(0);
   readonly newFeature = signal('');
+  readonly selectedFeat = computed(() =>
+    this.catalogFeats().find((feat) => feat.name === this.newFeature().trim()),
+  );
+  readonly featChoices = signal<string[]>([]);
   readonly allocation = signal<Partial<Record<StatKey, number>>>({});
   readonly hpDieResult = signal(0);
   readonly resource = computed(() => this.rules().classResource?.(this.core()) ?? null);
@@ -344,6 +348,7 @@ export class CharacterEditPage {
     this.patch({ abilityUses: { ...this.core().abilityUses, [id]: 0 } });
   }
   ability(id: string, patch: Partial<CharacterAbility>): void {
+    if (this.core().abilities.some((a) => a.id === id && this.rules().managedAbility?.(a))) return;
     this.patch({
       abilities: this.core().abilities.map((ability) =>
         ability.id === id ? { ...ability, ...patch } : ability,
@@ -351,7 +356,15 @@ export class CharacterEditPage {
     });
   }
   removeAbility(id: string): void {
+    if (this.core().abilities.some((a) => a.id === id && this.rules().managedAbility?.(a))) return;
     this.patch({ abilities: this.core().abilities.filter((ability) => ability.id !== id) });
+  }
+  chooseFeatOption(index: number, id: string): void {
+    this.featChoices.update((choices) => {
+      const next = [...choices];
+      next[index] = id;
+      return next;
+    });
   }
   beginLevelUp(): void {
     if (
@@ -362,6 +375,7 @@ export class CharacterEditPage {
       return;
     this.hpGain.set(0);
     this.newFeature.set('');
+    this.featChoices.set([]);
     this.allocation.set({});
     this.fixedHp();
     this.leveling.set(true);
@@ -376,6 +390,14 @@ export class CharacterEditPage {
     )
       return;
     const feat = this.newFeature().trim();
+    if (
+      feat &&
+      this.rules().featOnlyAtRequiredLevels &&
+      !this.rules().featRequired?.(core.level + 1)
+    ) {
+      this.error.set('A shared feat is granted only at the levels specified by this ruleset.');
+      return;
+    }
     let featInstead = false;
     try {
       featInstead = this.points() > 0 && (this.rules().featReplacesPoints?.(core, feat) ?? false);
@@ -445,6 +467,14 @@ export class CharacterEditPage {
       hpMax: core.hpMax + hpIncrease + conDelta * core.level,
       abilities,
     };
+    if (feat && this.rules().applyFeat) {
+      try {
+        next = this.rules().applyFeat!(next, feat, this.featChoices());
+      } catch (error) {
+        this.error.set(error instanceof Error ? error.message : 'Invalid feat.');
+        return;
+      }
+    }
     next = this.rules().advance?.(next) ?? next;
     this.patch(next);
     this.pendingLevelUp.set(true);

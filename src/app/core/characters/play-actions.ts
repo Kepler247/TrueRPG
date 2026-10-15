@@ -1,4 +1,4 @@
-﻿import { CharacterCore, currentHitPoints } from './character-core';
+import { CharacterCore, currentHitPoints } from './character-core';
 import { CharacterRuleset } from './character-ruleset';
 import { rollDie } from './dice';
 
@@ -13,6 +13,7 @@ export function completeRest(
   dieRoll: (sides: number) => number = rollDie,
 ): CharacterCore {
   if (!rules.rest) throw new Error('This system has no rest rules.');
+  rules.rest.before?.(core, kind);
   const hp = currentHitPoints(core);
   if (hp === null) throw new Error('Set maximum HP before resting.');
   if (kind === 'long' && hp < 1)
@@ -26,7 +27,8 @@ export function completeRest(
       throw new Error('Invalid Hit Die result.');
     next.hpCurrent = Math.min(
       core.hpMax!,
-      hp + Math.max(0, rolled + rules.abilityModifier(core.scores.con)),
+      hp +
+        Math.max(rules.rest.minimumHealing ?? 0, rolled + rules.abilityModifier(core.scores.con)),
     );
     next.hitDiceSpent = (core.hitDiceSpent ?? 0) + 1;
   }
@@ -50,7 +52,7 @@ export function completeRest(
     recordedAt: new Date().toISOString(),
     healing: (next.hpCurrent ?? hp) - hp,
   };
-  return next;
+  return rules.rest.finish?.(next, kind) ?? next;
 }
 export function inventoryAction(
   core: CharacterCore,

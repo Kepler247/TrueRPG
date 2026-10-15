@@ -1,0 +1,129 @@
+﻿:host {
+  display: block;
+}
+.status-panel {
+  background: #fffef9;
+  border: 1px solid #d7d9d6;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-block: 1rem;
+}
+h2 {
+  margin-top: 0;
+}
+h2 span {
+  font-size: 0.85rem;
+}
+.hint {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.effect-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.effect {
+  padding: 1rem;
+  border: 1px solid #ccd1d4;
+  border-radius: 0.75rem;
+  background: #eef0f2;
+  min-width: 0;
+}
+.effect header {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.effect header span {
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+.effect p {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.positive {
+  background: #e4f2fc;
+  color: #173c57;
+}
+.negative {
+  background: #fce9e9;
+  color: #752a30;
+}
+.modifier {
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+}
+summary,
+button,
+label {
+  min-height: 44px;
+}
+summary {
+  cursor: pointer;
+  padding: 0.75rem 0;
+}
+summary:focus-visible {
+  outline: 3px solid #426d27;
+}
+.control-row,
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-block: 0.75rem;
+}
+label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 16px;
+  max-width: 100%;
+}
+input,
+select {
+  font-size: 16px;
+  min-height: 44px;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0.4rem;
+}
+input[type='checkbox'] {
+  min-height: 24px;
+  width: 24px;
+}
+.circumstances {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.wallet-balances {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 0.75rem;
+  margin-block: 1rem;
+  > div {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #b8c7b0;
+    border-radius: 0.75rem;
+    background: #edf3e7;
+    color: #233b1c;
+  }
+  dt {
+    font-size: 0.875rem;
+  }
+  dd {
+    margin: 0.5rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+    span {
+      font-size: 1rem;
+    }
+  }
+}

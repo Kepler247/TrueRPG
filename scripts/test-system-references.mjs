@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 for (const [folder, revision, count] of [
   ['501-rads', 'draft-1', 69],
   ['501-rads', 'mutations-1', 125],
+  ['501-rads', 'core-1', 275],
   ['5e', 'srd-5-1', 403],
   ['dnds', 'original', 85],
 ]) {
@@ -42,3 +43,5 @@ for (const [folder, revision, count] of [
     assert.ok(text.includes(expected), `Missing ${expected}`);
   console.log(`PASS ${folder}: all ${count} pages present; original PDF hash verified`);
 }
+
+await import('./test-rads-catalog.mjs');

@@ -1,3 +1,6 @@
+import { undefinedWeaponReference } from '../core/characters/weapon-reference';
+import { InventoryEntry } from '../core/characters/character-core';
+import { RadsStatus } from './rads-status';
 import { MutationPanel } from './mutation-panel';
 import { AdventureHistory } from '../core/adventures/adventure-history';
 import {
@@ -17,7 +20,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from '../core/auth/auth.service';
 import { CharacterSheetService, SheetRecord } from '../core/characters/character-sheet.service';
-import { AbilityActionDefinition, RulesetService } from '../core/characters/character-ruleset';
+import {
+  AbilityActionDefinition,
+  CheckSummary,
+  RulesetService,
+} from '../core/characters/character-ruleset';
 import { ImageUpload } from './image-upload';
 import { availableHitDice, completeRest, inventoryAction } from '../core/characters/play-actions';
 import { DiceRoll, rollWithModifier } from '../core/characters/dice';
@@ -39,6 +46,7 @@ import {
     MatFormFieldModule,
     ImageUpload,
     MutationPanel,
+    RadsStatus,
   ],
   templateUrl: './character-summary.page.html',
   styleUrl: './character-summary.page.scss',
@@ -111,13 +119,24 @@ export class CharacterSummaryPage {
       this.error.set('Roll a check first, then use this reroll ability.');
       return;
     }
-    const next = resource.setCurrent(
-      {
-        ...record.core,
-        abilityUses: { ...record.core.abilityUses, [id]: (record.core.abilityUses?.[id] ?? 0) + 1 },
-      },
-      resource.current(record.core) - action.cost,
-    );
+    let next: CharacterCore;
+    try {
+      next =
+        this.rules().useClassAbility?.(record.core, id, this.abilityChoices()[id] ?? {}) ??
+        resource.setCurrent(
+          {
+            ...record.core,
+            abilityUses: {
+              ...record.core.abilityUses,
+              [id]: (record.core.abilityUses?.[id] ?? 0) + 1,
+            },
+          },
+          resource.current(record.core) - action.cost,
+        );
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Ability could not be activated.');
+      return;
+    }
     const version = this.loadVersion;
     this.saving.set(true);
     this.error.set(null);
@@ -129,9 +148,7 @@ export class CharacterSummaryPage {
       this.hpInput.set(currentHitPoints(saved.core));
       this.heatInput.set(resource.current(saved.core));
       if (action.rollMode === 'reroll' && previousRoll) {
-        this.lastRoll.set(
-          rollWithModifier(previousRoll.label, previousRoll.modifier, previousRoll.sides),
-        );
+        this.lastRoll.set(this.checkRoll(previousRoll.label, previousRoll.modifier));
         this.rollCount.update((n) => n + 1);
       }
       if (action.rollMode === 'choose-three') this.preparedTriple.set(true);
@@ -151,7 +168,61 @@ export class CharacterSummaryPage {
       this.saving.set(false);
     }
   }
+  readonly unknownWeights = computed(
+    () => this.record()?.core.inventory.some((i) => i['weightKnown'] === false) ?? false,
+  );
+  readonly checkTags = signal<string[]>([]);
+  readonly abilityChoices = signal<Record<string, Record<string, string>>>({});
+  chooseAbilityOption(id: string, key: string, value: string): void {
+    this.abilityChoices.update((all) => ({ ...all, [id]: { ...all[id], [key]: value } }));
+  }
+  private readonly checkSummaries = computed(() => {
+    const core = this.record()?.core,
+      describe = this.rules().checkSummary;
+    const labels = [
+      ...STATS.flatMap((stat) => [stat.name + ' check', stat.name + ' saving throw']),
+      ...this.skills().map((skill) => skill.name),
+      'Initiative',
+    ];
+    return new Map(
+      core && describe
+        ? labels.map((label) => [label, describe(core, label, this.checkTags())])
+        : [],
+    );
+  });
+  checkSummary(label: string, modifier: number): CheckSummary {
+    return (
+      this.checkSummaries().get(label) ?? { modifier, mode: 'normal', automaticFailure: false }
+    );
+  }
+  checkText(check: CheckSummary): string {
+    return check.automaticFailure
+      ? 'Auto fail'
+      : this.signed(check.modifier) +
+          (check.mode === 'advantage' ? ' A' : check.mode === 'disadvantage' ? ' D' : '');
+  }
+  checkTitle(label: string, check: CheckSummary): string {
+    return `${label}: ${check.automaticFailure ? 'automatic failure' : this.signed(check.modifier) + (check.mode === 'normal' ? '' : ', ' + check.mode)}`;
+  }
+  private checkRoll(label: string, modifier: number, forcedSingle = false): DiceRoll {
+    return this.record() && this.rules().checkRoll
+      ? this.rules().checkRoll!(
+          this.record()!.core,
+          label,
+          modifier,
+          this.checkTags(),
+          forcedSingle,
+        )
+      : rollWithModifier(label, modifier, this.rules().checkDie ?? 20);
+  }
   roll(label: string, modifier: number): void {
+    try {
+      this.performRoll(label, modifier);
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Check could not be rolled.');
+    }
+  }
+  private performRoll(label: string, modifier: number): void {
     if (this.saving()) return;
     if (this.rollChoices().length) {
       this.error.set('Choose one of the three results first.');
@@ -159,48 +230,31 @@ export class CharacterSummaryPage {
     }
     if (this.preparedTriple()) {
       this.lastRoll.set(null);
-      this.rollChoices.set(
-        Array.from({ length: 3 }, () =>
-          rollWithModifier(label, modifier, this.rules().checkDie ?? 20),
-        ),
-      );
+      this.rollChoices.set(Array.from({ length: 3 }, () => this.checkRoll(label, modifier, true)));
       this.preparedTriple.set(false);
       return;
     }
-    this.lastRoll.set(rollWithModifier(label, modifier, this.rules().checkDie ?? 20));
+    this.lastRoll.set(this.checkRoll(label, modifier));
     this.rollCount.update((n) => n + 1);
   }
-  readonly combatMessage = signal<string | null>(null);
-  readonly targetAC = signal(10);
-  readonly targetDistance = signal(30);
-  readonly weaponProficient = signal(true);
-  readonly attackMode = signal<'normal' | 'advantage' | 'disadvantage'>('normal');
-  readonly dualWield = signal(false);
-  readonly mounted = signal(false);
   readonly selectedAmmo = signal('');
-  async attackWeapon(id: string): Promise<void> {
+  private readonly weaponReferences = computed(() => {
+    const core = this.record()?.core;
+    const reference = this.rules().weaponReference ?? undefinedWeaponReference;
+    return new Map(core?.inventory.map((entry) => [entry.id, reference(core, entry)]) ?? []);
+  });
+  weaponReference(entry: InventoryEntry) {
+    return this.weaponReferences().get(entry.id) ?? null;
+  }
+  async adjustWeaponAmmo(id: string, delta: number): Promise<void> {
     const record = this.record();
-    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().weaponAttack)
+    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().adjustWeaponAmmo)
       return;
     try {
-      const action = this.rules().weaponAttack!(
-        record.core,
-        id,
-        {
-          targetAC: this.targetAC(),
-          distance: this.targetDistance(),
-          proficient: this.weaponProficient(),
-          advantage: this.attackMode(),
-          dualWield: this.dualWield(),
-          mounted: this.mounted(),
-        },
-        this.rules(),
-      );
+      const action = this.rules().adjustWeaponAmmo!(record.core, id, delta);
       await this.savePlayAction(action.core, action.message);
-      if (!this.pendingAction() && this.message() === action.message)
-        this.combatMessage.set(action.message);
     } catch (error) {
-      this.error.set(error instanceof Error ? error.message : 'Attack could not be resolved.');
+      this.error.set(error instanceof Error ? error.message : 'Ammunition could not be saved.');
     }
   }
   async reloadWeapon(id: string): Promise<void> {
@@ -240,17 +294,33 @@ export class CharacterSummaryPage {
       this.error.set(error instanceof Error ? error.message : 'Rest could not be completed.');
     }
   }
+  async consumeItem(id: string): Promise<void> {
+    const record = this.record();
+    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().consumeItem)
+      return;
+    if (!this.playReady()) {
+      this.error.set('Save HP/resource edits first.');
+      return;
+    }
+    try {
+      const action = this.rules().consumeItem!(record.core, id);
+      await this.savePlayAction(action.core, action.message);
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Item could not be consumed.');
+    }
+  }
   async inventoryAction(id: string, action: 'equip' | 'add' | 'remove'): Promise<void> {
     const record = this.record();
     if (!record?.canEdit || this.saving() || this.pendingAction()) return;
     await this.savePlayAction(inventoryAction(record.core, id, action), 'Inventory saved.');
   }
-  async savePlayAction(core: CharacterCore, message: string): Promise<void> {
+  async savePlayAction(core: CharacterCore, message: string, retry = false): Promise<void> {
     const record = this.record();
     if (!record?.canEdit || this.saving()) return;
     if (
-      this.hpInput() !== currentHitPoints(record.core) ||
-      this.heatInput() !== (this.resource()?.current(record.core) ?? 0)
+      !retry &&
+      (this.hpInput() !== currentHitPoints(record.core) ||
+        this.heatInput() !== (this.resource()?.current(record.core) ?? 0))
     ) {
       this.error.set('Save HP and resource changes first.');
       return;
@@ -268,7 +338,6 @@ export class CharacterSummaryPage {
       this.heatInput.set(this.resource()?.current(saved.core) ?? 0);
       this.pendingAction.set(null);
       this.message.set(message);
-      if (this.rules().weaponAttack) this.combatMessage.set(message);
       this.restConfirmed.set(false);
       this.preparedTriple.set(false);
       this.rollChoices.set([]);
@@ -298,7 +367,7 @@ export class CharacterSummaryPage {
   }
   async retryAction(): Promise<void> {
     const pending = this.pendingAction();
-    if (pending) await this.savePlayAction(pending.core, pending.message);
+    if (pending) await this.savePlayAction(pending.core, pending.message, true);
   }
   readonly recovering = computed(
     () => !!this.record() && (this.rules().mutations?.recovering(this.record()!.core) ?? false),
@@ -313,6 +382,7 @@ export class CharacterSummaryPage {
   });
   readonly hpInput = signal<number | null>(null);
   readonly heatInput = signal(0);
+  readonly damageType = signal('Untyped');
   readonly hpAmount = signal(1);
   readonly heatAmount = signal(1);
   readonly hp = computed(() => (this.record() ? currentHitPoints(this.record()!.core) : null));
@@ -340,7 +410,6 @@ export class CharacterSummaryPage {
     this.restConfirmed.set(false);
     this.error.set(null);
     this.message.set(null);
-    this.combatMessage.set(null);
     this.lastRoll.set(null);
     this.preparedTriple.set(false);
     this.rollChoices.set([]);
@@ -398,11 +467,21 @@ export class CharacterSummaryPage {
         if (!Number.isSafeInteger(value) || value < 0 || (cap !== null && value > cap))
           throw new Error(`Enter a valid ${resource.name} value within its maximum.`);
       }
+      if (this.rules().healthChange && next.hpCurrent !== undefined) {
+        next = this.rules().healthChange!(
+          { ...next, hpCurrent: currentHitPoints(record.core) ?? undefined },
+          next.hpCurrent,
+        );
+      }
+      validateSystemCore(next, this.rules());
+      if (this.rules().healthChange)
+        this.pendingAction.set({ core: next, message: 'Health and resources saved.' });
       const saved = await this.service.save(record, record.row.name, next);
       if (version !== this.loadVersion) return;
       this.record.set(saved);
       this.hpInput.set(currentHitPoints(saved.core));
       this.heatInput.set(resource?.current(saved.core) ?? 0);
+      this.pendingAction.set(null);
       this.message.set('Resources saved.');
     } catch (error) {
       if (version === this.loadVersion)
@@ -432,6 +511,21 @@ export class CharacterSummaryPage {
       );
       return;
     }
+    if (direction < 0 && this.rules().takeDamage) {
+      if (!this.playReady()) {
+        this.error.set('Save HP/resource edits first.');
+        return;
+      }
+      try {
+        await this.savePlayAction(
+          this.rules().takeDamage!(record.core, amount, this.damageType(), this.checkTags()),
+          'Damage resolved, including active defenses and death-prevention effects.',
+        );
+      } catch (error) {
+        this.error.set(error instanceof Error ? error.message : 'Damage could not be applied.');
+      }
+      return;
+    }
     await this.saveVitals({
       hpCurrent: Math.min(record.core.hpMax, Math.max(0, value + direction * amount)),
     });
@@ -456,7 +550,7 @@ export class CharacterSummaryPage {
   }
   skillTotal(index: number): number {
     const core = this.record()!.core;
-    return this.rules().skillBonus(core, this.skills()[index], this.rules());
+    return this.rules().skillBonus(core, this.skills()[index], this.rules(), this.checkTags());
   }
   weight = inventoryWeight;
   trainingLabel(id: string): string {

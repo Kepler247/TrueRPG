@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { RulesetService } from '../core/characters/character-ruleset';
 import { GAME_SYSTEMS } from '../core/models/game-systems';
 import { systemCatalog } from '../core/systems/system-catalog';
 @Component({
@@ -45,7 +46,11 @@ import { systemCatalog } from '../core/systems/system-catalog';
           <p>
             {{ entry.category
             }}{{
-              entry.category === 'feat' ? ' / Any class' : ' / ' + entry.weight + ' lb (estimate)'
+              entry.category === 'feat'
+                ? ' / Any class'
+                : rules().tracksCarryWeight === false
+                  ? ''
+                  : ' / ' + entry.weight + ' lb (estimate)'
             }}
           </p>
         </article>
@@ -108,6 +113,8 @@ import { systemCatalog } from '../core/systems/system-catalog';
   `,
 })
 export class SystemCatalogPage {
+  private readonly rulesets = inject(RulesetService);
+  readonly rules = computed(() => this.rulesets.get(this.system()?.rulesetKey));
   private readonly route = inject(ActivatedRoute);
   private readonly params = toSignal(this.route.paramMap, {
     initialValue: this.route.snapshot.paramMap,

@@ -1,3 +1,4 @@
+import { makeRadsRules } from './rads-rules';
 import { RADS_MUTATION_RULES, validateMutations } from './rads-mutations';
 import type { CharacterRuleset, ClassResourceDefinition } from '../characters/character-ruleset';
 import { CharacterCore, StatKey, STATS, BASE_SKILLS } from '../characters/character-core';
@@ -113,111 +114,7 @@ function addFeatures(
   return { ...core, abilities };
 }
 export function make501Rules(base: CharacterRuleset): CharacterRuleset {
-  const advance = (core: CharacterCore) => {
-    if (core.class !== 'Gunslinger') return core;
-    const cap = heatCapacity(core.level);
-    return {
-      ...addFeatures(core, GUNSLINGER_FEATURES, '501-gunslinger'),
-      heat: cap === null ? currentHeat(core) : Math.min(cap, currentHeat(core)),
-    };
-  };
-  return {
-    ...base,
-    mutations: RADS_MUTATION_RULES,
-    validate: validateMutations,
-    abilityActions: (core) =>
-      core.class !== 'Gunslinger'
-        ? []
-        : GUNSLINGER_FEATURES.filter((feature) => feature[0] <= core.level).flatMap((feature) => {
-            const costs: Record<string, number> = {
-              'Lucky Strike': 1,
-              'Stroke of Genius': 3,
-              'Fan the Hammer': 2,
-              Distraction: 2,
-              Pickpocket: 2,
-              Deadeye: 5,
-              'Fantastic Story': 4,
-              'No One Walks Away': 7,
-              'Old Friend': 5,
-              'Wild Plan': 8,
-              'Super Deadeye': 11,
-              'Unbelievable Luck': 10,
-              'Divine Intervention': 15,
-            };
-            const cost = costs[feature[1]];
-            return cost === undefined
-              ? []
-              : [
-                  {
-                    abilityId: `501-gunslinger-${feature[0]}-${feature[1].toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
-                    cost,
-                    ...(feature[1] === 'Lucky Strike'
-                      ? { rollMode: 'reroll' as const }
-                      : feature[1] === 'Stroke of Genius'
-                        ? { rollMode: 'choose-three' as const }
-                        : {}),
-                  },
-                ];
-          }),
-    maxLevel: 12,
-    classResource: (core) => (core.class === 'Gunslinger' ? HEAT_RESOURCE : null),
-    maxScore: undefined,
-    improvementMax: null,
-    skills: BASE_SKILLS.map((skill) =>
-      skill.id === 'arcana' ? { id: 'hacking', name: 'Hacking', stat: 'int' } : skill,
-    ),
-    creator: {
-      races: [],
-      classes: ['Gunslinger'],
-      classDescriptions: {
-        Gunslinger:
-          'A pistol and grenade specialist fueled by Heat. Dexterity and Charisma are recommended.',
-      },
-    },
-    characterNotes: (core) => [
-      'Maximum level 12. Hacking (Intelligence) replaces Arcana.',
-      'Gain two ability-score points at every level-up; scores may exceed 20. Shared feats are chosen at levels 3, 6, 9, and 12.',
-      ...(core.class === 'Gunslinger'
-        ? [
-            `Gunslinger HP uses d10: first-level HP is 10 + Constitution; later increases use 6 or a d10 roll + Constitution.`,
-            'Pistol checks +1; pistol damage rolls +1.',
-            `Heat maximum: ${heatCapacity(core.level) ?? 'unlimited'}. Heat gains: ${heatMultiplier(core.level)} times the base amount. Long rests reset Heat.`,
-          ]
-        : []),
-    ],
-    hitDie: (core) => (core.class === 'Gunslinger' ? 10 : null),
-    statPoints: () => 2,
-    featRequired: (level) => level % 3 === 0,
-    heatCapacity,
-    heatGainMultiplier: heatMultiplier,
-    hasHeat: (core) => core.class === 'Gunslinger',
-    testFeatName: 'Test Feat (placeholder)',
-    heatHelp:
-      'Gain 1 base Heat per successful Charisma or Dexterity check/save, pistol hit, or grenade hit (each hit stacks); gain 2 per pistol/grenade kill. Gains double at level 7 and triple at level 12. The GM may award extra Heat.',
-    advance,
-    initialize: (core) =>
-      advance({
-        ...core,
-        hpMax:
-          core.class === 'Gunslinger'
-            ? Math.max(1, 10 + base.abilityModifier(core.scores.con))
-            : core.hpMax,
-      }),
-    levelUpPrompts: (core, level) => [
-      'Allocate two ability-score points; both may go to the same stat. Scores can exceed 20.',
-      ...(level % 3 === 0
-        ? [
-            'Choose a shared feat. The author has not defined the feat catalog yet; record your agreed choice.',
-          ]
-        : []),
-      ...(core.class === 'Gunslinger'
-        ? [
-            `Gunslinger: d10 HP (fixed 6 or roll), plus Constitution; Heat maximum ${heatCapacity(level) ?? 'unlimited'}.`,
-            ...GUNSLINGER_FEATURES.filter((f) => f[0] === level).map((f) => `${f[1]}: ${f[2]}`),
-          ]
-        : []),
-    ],
-  };
+  return makeRadsRules(base);
 }
 
 const CLASSES: Record<string, { die: number; saves: StatKey[] }> = {

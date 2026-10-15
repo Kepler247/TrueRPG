@@ -1,0 +1,872 @@
+[
+  {
+    "id": "501-gunslinger-1-lucky-strike",
+    "class": "Gunslinger",
+    "level": 1,
+    "name": "Lucky Strike",
+    "cost": 1,
+    "description": "for -1 heat, the user can re-roll any check. They must take the new value."
+  },
+  {
+    "id": "501-gunslinger-1-stroke-of-genius",
+    "class": "Gunslinger",
+    "level": 1,
+    "name": "Stroke of Genius",
+    "cost": 3,
+    "description": "for -3 heat, the user can roll 3 dice instead of one for any check, and select which dice they wish. (It's like double advantage!) In addition, gunslingers get +1 to checks and damage rolls done with pistols."
+  },
+  {
+    "id": "501-gunslinger-2-fan-the-hammer",
+    "class": "Gunslinger",
+    "level": 2,
+    "name": "Fan the Hammer",
+    "cost": 2,
+    "description": "For -2 heat points, the gunslinger can fire several times in short succession. The gunslinger's next attack with a pistol has its damage multiplied by 3, but the gunslinger must announce before that attack that this ability is being used. You can still miss!"
+  },
+  {
+    "id": "501-gunslinger-4-distraction",
+    "class": "Gunslinger",
+    "level": 4,
+    "name": "Distraction",
+    "cost": 2,
+    "description": "for -2 heat, the gunslinger can choose any target that a teammate has already done damage to since the gunslingers previous turn. That teammate has “distracted” this opponent. For the remainder of this turn, any checks made to harm the target have advantage, and attacks made with pistols are guaranteed to hit. The same target cannot be distracted more than once."
+  },
+  {
+    "id": "501-gunslinger-4-pickpocket",
+    "class": "Gunslinger",
+    "level": 4,
+    "name": "Pickpocket",
+    "cost": 2,
+    "description": "for -2 heat, when outside or inside combat, the gunslinger can pickpocket any target. If the target is known to have something on their person, the gunslinger can grab it. Otherwise, they can grab something random from the target. The target rolls a D20 to detect the intrusion, and only is aware if they roll a perfect 20."
+  },
+  {
+    "id": "501-gunslinger-5-deadeye",
+    "class": "Gunslinger",
+    "level": 5,
+    "name": "Deadeye",
+    "cost": 5,
+    "description": "for -5 heat, the gunslinger chooses any non-boss target. On the gunslinger's next turn, if both the gunslinger and the target are still alive, and the gunslinger has line of sight to the target, the gunslinger fires a deadly shot. It always kills the target. To activate deadeye, you cannot take any other action, nor can you move. Being moved by any means interrupts the effect, and the heat is not refunded."
+  },
+  {
+    "id": "501-gunslinger-6-shrouded-attack",
+    "class": "Gunslinger",
+    "level": 6,
+    "name": "Shrouded Attack",
+    "cost": null,
+    "description": "if the gunslinger is not detected by enemies, they gain advantage on checks to harm them"
+  },
+  {
+    "id": "501-gunslinger-6-fantastic-story",
+    "class": "Gunslinger",
+    "level": 6,
+    "name": "Fantastic Story",
+    "cost": 4,
+    "description": "for -4 heat, the gunslinger can cobble together a nonsensical story. Despite how crazy it sounds, a portion of it is true. The part of it that is true is at the DM’s discretion, but the effect is always helpful to the gunslinger. Gunslingers can tell fantastic stories to distract, persuade, or intimidate their enemies."
+  },
+  {
+    "id": "501-gunslinger-7-no-one-walks-away",
+    "class": "Gunslinger",
+    "level": 7,
+    "name": "No One Walks Away",
+    "cost": 7,
+    "description": "for -7 heat, the gunslinger pulls an excellent stunt. For any number of targets that the gunslinger can see, the gunslinger fires twice at them. There is no limit to the number of targets."
+  },
+  {
+    "id": "501-gunslinger-8-master-gambler",
+    "class": "Gunslinger",
+    "level": 8,
+    "name": "Master Gambler",
+    "cost": null,
+    "description": "gunslingers have advantage on any check that involves the gambling of money or property"
+  },
+  {
+    "id": "501-gunslinger-8-old-friend",
+    "class": "Gunslinger",
+    "level": 8,
+    "name": "Old Friend",
+    "cost": 5,
+    "description": "for -5 heat, the gambler happens upon an old friend. The friend is helpful, knowledgeable, and useful. They always have some favor they owe the gunslinger. The gunslinger has friends everywhere."
+  },
+  {
+    "id": "501-gunslinger-9-bending-bullets",
+    "class": "Gunslinger",
+    "level": 9,
+    "name": "Bending Bullets",
+    "cost": null,
+    "description": "The gunslinger can now hit targets in cover/they cannot see by accidentally ricocheting shots into them. Attempts to hit in this way incur a -3 to hit penalty."
+  },
+  {
+    "id": "501-gunslinger-9-wild-plan",
+    "class": "Gunslinger",
+    "level": 9,
+    "name": "Wild Plan",
+    "cost": 8,
+    "description": "For -8 heat, the gunslinger can devise a wild plan. They alone have final say on that plan. As long as the steps of that plan are followed by the gunslinger and their teammates, any skill checks which follow the steps of the plan or advance the plan in some way have advantage."
+  },
+  {
+    "id": "501-gunslinger-10-super-deadeye",
+    "class": "Gunslinger",
+    "level": 10,
+    "name": "Super Deadeye",
+    "cost": 11,
+    "description": "for -11 heat, any target, including bosses, can be targeted. If a boss is targeted, the effect works the same as normal deadeye. If a non-boss target is chosen, the gunslinger does not have to wait a full turn, the target simply dies."
+  },
+  {
+    "id": "501-gunslinger-11-unbelievable-luck",
+    "class": "Gunslinger",
+    "level": 11,
+    "name": "Unbelievable Luck",
+    "cost": 10,
+    "description": "For -10 heat, any non-plot item happens to be nearby. It might not be easy to get, but it will be there. It's almost like you wished it into existence"
+  },
+  {
+    "id": "501-gunslinger-12-divine-intervention",
+    "class": "Gunslinger",
+    "level": 12,
+    "name": "Divine Intervention",
+    "cost": 15,
+    "description": "for -15 heat the gunslinger can wish for just about anything and somehow it happens. The ultimate stroke of luck. Each time this ability is used, the probability that an unintended consequence occurs increases."
+  },
+  {
+    "id": "501-gunslinger-3-dual-wield",
+    "class": "Gunslinger",
+    "level": 3,
+    "name": "Dual Wield",
+    "cost": null,
+    "description": "Max heat increases from 3 to 5, and the gunslinger unlocks the ability to wield two pistols at once. Both pistols may attack within the same action",
+    "usesMax": null
+  },
+  {
+    "id": "501-psycho-1-ibuprofen",
+    "class": "Psycho",
+    "level": 1,
+    "name": "Ibuprofen",
+    "cost": 1,
+    "description": "for -1 tolerance, the user can re-roll any check. They must take the new value."
+  },
+  {
+    "id": "501-psycho-1-cocaine",
+    "class": "Psycho",
+    "level": 1,
+    "name": "Cocaine",
+    "cost": 3,
+    "description": "for -3 tolerance, the user can roll 3 dice instead of one for any check, and select which dice they wish. (It's like double advantage!) In addition, Psychos get +1 to checks and damage rolls done with melee weaponry."
+  },
+  {
+    "id": "501-psycho-2-heroin",
+    "class": "Psycho",
+    "level": 2,
+    "name": "Heroin",
+    "cost": 2,
+    "description": "For -2 tolerance points, the psycho reduces all incoming damage taken until their next turn by half. During this time, they have disadvantage on dexterity based checks."
+  },
+  {
+    "id": "501-psycho-4-meth",
+    "class": "Psycho",
+    "level": 4,
+    "name": "Meth",
+    "cost": 2,
+    "description": "for -2 tolerance, the psycho can double his movement speed for three turns, as well as increase melee attack checks by +2. The user gets disadvantage on intelligence checks during the duration of the effect. Activating this ability while it is active extends the duration, but does not stack."
+  },
+  {
+    "id": "501-psycho-4-intelliboostpro",
+    "class": "Psycho",
+    "level": 4,
+    "name": "IntelliBoostPro",
+    "cost": 2,
+    "description": "for -2 tolerance, the psycho gains advantage on all intelligence checks for 5 minutes, but disadvantage on strength checks during the span. When the effect ends, the effect flips, and the psycho gains advantage on strength checks and disadvantage on intelligence checks, also for 5 minutes."
+  },
+  {
+    "id": "501-psycho-5-bromo-dragonfly",
+    "class": "Psycho",
+    "level": 5,
+    "name": "Bromo-Dragonfly",
+    "cost": 5,
+    "description": "for -5 tolerance, the psycho begins hallucinating. While hallucinating, the psycho can see the weak points of nearby people and objects, as well as the locations of nearby valuable items. While hallucinating, if the user takes any damage, their trip turns evil, and they must attack the nearest target every 15 seconds. The trip lasts 3 minutes."
+  },
+  {
+    "id": "501-psycho-6-incredible-intimidation",
+    "class": "Psycho",
+    "level": 6,
+    "name": "Incredible Intimidation",
+    "cost": null,
+    "description": "The mere presence of a psycho is unnerving. For each unspent tolerance point, the psycho gets +2 to intimidation checks."
+  },
+  {
+    "id": "501-psycho-6-dmt",
+    "class": "Psycho",
+    "level": 6,
+    "name": "DMT",
+    "cost": 4,
+    "description": "for -4 tolerance, the psycho can see the emotions of everyone around them. They can tell a person is sad, angry, etc from far away with perfect accuracy, can detect lies, and can see particularly strong emotions through walls. Because of visual distortion, they have disadvantage on any check that relies on normal vision. This effect lasts 30 minutes."
+  },
+  {
+    "id": "501-psycho-7-supersoldier",
+    "class": "Psycho",
+    "level": 7,
+    "name": "SuperSoldier",
+    "cost": 7,
+    "description": "for -7 tolerance, the psycho flies into a combat rage. For the next 3 turns, they may take either an extra action or bonus action, move twice as fast, and have advantage on attack rolls. Once the 3 turns end, they pass out, and are unconscious for 2 turns."
+  },
+  {
+    "id": "501-psycho-8-chemical-immunity",
+    "class": "Psycho",
+    "level": 8,
+    "name": "Chemical Immunity",
+    "cost": null,
+    "description": "the psycho becomes immune to inhaled or ingested poisons or chemicals, and can identify chemicals by tasting them."
+  },
+  {
+    "id": "501-psycho-8-omegamax",
+    "class": "Psycho",
+    "level": 8,
+    "name": "OmegaMax",
+    "cost": 5,
+    "description": "for -5 tolerance, the psycho becomes able to camouflage. It only works effectively when staying still, but is very effective when conditions are met. It lasts 20 mins, and at the end, the psycho glows bright green for 2 mins."
+  },
+  {
+    "id": "501-psycho-9-rage",
+    "class": "Psycho",
+    "level": 9,
+    "name": "Rage",
+    "cost": null,
+    "description": "Not being on drugs makes you really angry. You get +2 to strength checks per unspent tolerance, but -1 to intelligence, wisdom, and dexterity checks per unspent tolerance."
+  },
+  {
+    "id": "501-psycho-9-jericho",
+    "class": "Psycho",
+    "level": 9,
+    "name": "Jericho",
+    "cost": 8,
+    "description": "For -8 tolerance, the psycho becomes obsessed with a target. While the effect is active, all checks made to harm the target are made with advantage, the psycho knows the precise location of the target, and deals double damage to the target. While the effect is active, the psycho may not do any actions that don't result in harm to the target. The effect lasts 3 minutes or until the target is dead."
+  },
+  {
+    "id": "501-psycho-10-ultrasoldier",
+    "class": "Psycho",
+    "level": 10,
+    "name": "UltraSoldier",
+    "cost": 11,
+    "description": "for -11 tolerance, the psycho flies into an ultra combat rage. For the next 3 turns, they may take a sum of two additional actions or bonus actions, move three times as fast, and have advantage on attack rolls, and +4 on damage rolls. Once the 3 turns end, they pass out, and are unconscious for 3 turns."
+  },
+  {
+    "id": "501-psycho-11-wrecking-ball",
+    "class": "Psycho",
+    "level": 11,
+    "name": "Wrecking Ball",
+    "cost": 10,
+    "description": "For -10 tolerance, the psycho gains the ability to run through solid objects as long as they are reasonably thin. This includes enemies, which they can run into to deal damage and push away. This effect lasts 3 minutes."
+  },
+  {
+    "id": "501-psycho-12-ultracocamethmorphine",
+    "class": "Psycho",
+    "level": 12,
+    "name": "UltraCocaMethMorphine",
+    "cost": 15,
+    "description": "for -15 tolerance the psycho becomes invincible and immortal for 3 minutes."
+  },
+  {
+    "id": "501-psycho-3-training",
+    "class": "Psycho",
+    "level": 3,
+    "name": "Psycho training",
+    "cost": null,
+    "description": "Max tolerance increases from 3 to 5, and the psycho unlocks the ability to wield furniture and other environmental objects as a melee weapon. Environmental weapons are up to DM discretion for power levels, but are usually surprisingly effective.",
+    "usesMax": null
+  },
+  {
+    "id": "501-hacker-1-have-you-tried-turning-it-off-and-on-again-",
+    "class": "Hacker",
+    "level": 1,
+    "name": "Have You Tried Turning It Off and On Again?",
+    "cost": 1,
+    "description": "For -1 Access, the Hacker can reroll any check. They must take the new value."
+  },
+  {
+    "id": "501-hacker-1-administrator-privileges",
+    "class": "Hacker",
+    "level": 1,
+    "name": "Administrator Privileges",
+    "cost": 3,
+    "description": "For -3 Access, the Hacker can roll 3 dice instead of one for any check, and select which die they wish. In addition, Hackers get +1 to checks involving hacking, repairing, or modifying electronic devices."
+  },
+  {
+    "id": "501-hacker-2-remote-access",
+    "class": "Hacker",
+    "level": 2,
+    "name": "Remote Access",
+    "cost": 2,
+    "description": "For -2 Access, the Hacker can remotely interact with any electronic device they can see within 100 feet, as though they were physically connected to it. This includes computers, electronic locks, cameras, terminals, and similar devices. The Hacker must still make any checks ordinarily required to manipulate the device, and cannot access systems that have no electronic interface."
+  },
+  {
+    "id": "501-hacker-4-backdoor",
+    "class": "Hacker",
+    "level": 4,
+    "name": "Backdoor",
+    "cost": 2,
+    "description": "For -2 Access, the Hacker can establish a hidden connection to an electronic system they have successfully accessed. For the next 24 hours, they can reconnect to that system without repeating the original security checks, provided the system remains operational and within communication range. Only one Backdoor may be maintained at a time."
+  },
+  {
+    "id": "501-hacker-4-deepfake",
+    "class": "Hacker",
+    "level": 4,
+    "name": "Deepfake",
+    "cost": 2,
+    "description": "For -2 Access, the Hacker can manipulate an electronic recording, image, or transmission to convincingly imitate another person, fabricate an event, or conceal information. The resulting forgery is convincing to ordinary observers, although sophisticated forensic examination may reveal inconsistencies."
+  },
+  {
+    "id": "501-hacker-5-ghost-in-the-machine",
+    "class": "Hacker",
+    "level": 5,
+    "name": "Ghost in the Machine",
+    "cost": 5,
+    "description": "For -5 Access, the Hacker can temporarily seize control of a nearby robotic device, automated turret, security drone, or similar machine for 5 minutes. The target must be electronically accessible and cannot be substantially more sophisticated than the Hacker's available equipment. While controlled, the machine obeys the Hacker's commands, although intelligent machines may attempt to resist or regain control at the GM's discretion."
+  },
+  {
+    "id": "501-hacker-6-technological-intuition",
+    "class": "Hacker",
+    "level": 6,
+    "name": "Technological Intuition",
+    "cost": null,
+    "description": "The Hacker can determine the general purpose, operational condition, and likely weaknesses of any technological device after examining it for one minute. They can also identify whether a device has been tampered with, sabotaged, or modified."
+  },
+  {
+    "id": "501-hacker-6-digital-archaeology",
+    "class": "Hacker",
+    "level": 6,
+    "name": "Digital Archaeology",
+    "cost": 4,
+    "description": "For -4 Access, the Hacker can recover information from a damaged, corrupted, or partially destroyed electronic storage device. The recovered information may be incomplete, but always includes something useful if the device originally contained relevant data. The GM determines exactly what survives."
+  },
+  {
+    "id": "501-hacker-7-system-override",
+    "class": "Hacker",
+    "level": 7,
+    "name": "System Override",
+    "cost": 7,
+    "description": "For -7 Access, the Hacker can seize control of all electronically controlled devices connected to a single local network for 3 minutes. This may include doors, cameras, alarms, lighting, automated defenses, and industrial equipment. Devices physically disconnected from the network are unaffected. Highly sophisticated security systems may resist particularly dangerous commands."
+  },
+  {
+    "id": "501-hacker-8-walking-encyclopedia",
+    "class": "Hacker",
+    "level": 8,
+    "name": "Walking Encyclopedia",
+    "cost": null,
+    "description": "Hackers have advantage on Intelligence checks involving pre-war technology, computer systems, robotics, and electronic infrastructure. They can also recognize the manufacturer and likely purpose of most surviving technological equipment."
+  },
+  {
+    "id": "501-hacker-8-identity-theft",
+    "class": "Hacker",
+    "level": 8,
+    "name": "Identity Theft",
+    "cost": 5,
+    "description": "For -5 Access, the Hacker can fabricate a convincing electronic identity within a system they have accessed. For the next 24 hours, automated systems treat the Hacker as an authorized user with a plausible clearance level. Human observers may still become suspicious if the Hacker behaves inconsistently with their supposed identity."
+  },
+  {
+    "id": "501-hacker-9-wireless-menace",
+    "class": "Hacker",
+    "level": 9,
+    "name": "Wireless Menace",
+    "cost": null,
+    "description": "The Hacker can now remotely access electronic systems within 350 feet, even without direct line of sight, provided they can detect or identify the target's electronic signal. Remote Access no longer requires visual contact."
+  },
+  {
+    "id": "501-hacker-9-skeleton-key",
+    "class": "Hacker",
+    "level": 9,
+    "name": "Skeleton Key",
+    "cost": 8,
+    "description": "For -8 Access, the Hacker can bypass almost any electronic security system they can access, including sophisticated military locks, encrypted databases, and corporate authentication systems. The bypass succeeds automatically unless the system is protected by an extraordinary or plot-critical security measure. The Hacker does not necessarily gain control of everything behind the security system."
+  },
+  {
+    "id": "501-hacker-10-total-system-failure",
+    "class": "Hacker",
+    "level": 10,
+    "name": "Total System Failure",
+    "cost": 11,
+    "description": "For -11 Access, the Hacker can cause a catastrophic malfunction in a technological system they can access. A power grid might collapse, an automated factory might destroy itself, or a military installation's defenses might turn against their operators. The GM determines the exact consequences based on the system's capabilities. The effect cannot create functions the system was never capable of performing."
+  },
+  {
+    "id": "501-hacker-11-i-know-a-guy-who-knows-a-guy",
+    "class": "Hacker",
+    "level": 11,
+    "name": "I Know a Guy Who Knows a Guy",
+    "cost": 10,
+    "description": "For -10 Access, the Hacker discovers a useful connection within an existing technological or communications network. This might be a forgotten administrative account, an abandoned maintenance terminal, a dormant satellite connection, or an overlooked communications relay. The connection always provides a meaningful advantage, although accessing it may require additional work."
+  },
+  {
+    "id": "501-hacker-12-root-access",
+    "class": "Hacker",
+    "level": 12,
+    "name": "Root Access",
+    "cost": 15,
+    "description": "For -15 Access, the Hacker gains near-absolute control over a single technological system they can access for 10 minutes. During this time, the Hacker can issue commands that bypass ordinary software restrictions, override security protocols, and exploit capabilities that even the system's designers may not have anticipated. The system must remain physically capable of performing the requested actions, and the GM determines the consequences of particularly extraordinary commands. This can include vehicles, robots, factories, all sorts of things."
+  },
+  {
+    "id": "501-hacker-3-training",
+    "class": "Hacker",
+    "level": 3,
+    "name": "Hacker training",
+    "cost": null,
+    "description": "Max Access increases from 3 to 5, and the Hacker unlocks the ability to construct improvised electronic devices from scavenged components. These devices can perform simple functions such as recording audio, transmitting signals, detecting movement, or activating mechanical switches. The GM determines what components are required, but Hackers are exceptionally good at finding substitutes.",
+    "usesMax": null
+  },
+  {
+    "id": "501-medic-1-second-opinion",
+    "class": "Medic",
+    "level": 1,
+    "name": "Second Opinion",
+    "cost": 1,
+    "description": "For -1 Malpractice, the Medic can reroll any check. They must take the new value."
+  },
+  {
+    "id": "501-medic-1-clinical-trial",
+    "class": "Medic",
+    "level": 1,
+    "name": "Clinical Trial",
+    "cost": 3,
+    "description": "For -3 Malpractice, the Medic can roll 3 dice instead of one for any check, and select which die they wish. In addition, Medics get +1 to checks involving medicine, surgery, diagnosis, and the administration of biological treatments."
+  },
+  {
+    "id": "501-medic-2-questionable-prescription",
+    "class": "Medic",
+    "level": 2,
+    "name": "Questionable Prescription",
+    "cost": 2,
+    "description": "For -2 Malpractice, the Medic administers a custom pharmaceutical cocktail to themselves or a willing creature they can touch. For the next 10 minutes, the recipient gains advantage on checks using one ability score of the Medic's choice. During this time, they have disadvantage on checks using another ability score, also chosen by the Medic. The recipient must be informed of neither choice."
+  },
+  {
+    "id": "501-medic-4-performance-enhancing-drugs",
+    "class": "Medic",
+    "level": 4,
+    "name": "Performance Enhancing Drugs",
+    "cost": 2,
+    "description": "For -2 Malpractice, the Medic can inject themselves or a willing creature with an experimental stimulant. For the next 3 turns, the recipient gains +2 to attack checks and doubles their movement speed. When the effect ends, the recipient suffers disadvantage on Dexterity and Strength checks for 3 turns. Repeated applications extend the duration but do not stack."
+  },
+  {
+    "id": "501-medic-4-medical-examination",
+    "class": "Medic",
+    "level": 4,
+    "name": "Medical Examination",
+    "cost": 2,
+    "description": "For -2 Malpractice, the Medic can determine the physical condition of any living creature they can examine for at least 30 seconds. The Medic learns about injuries, diseases, poisons, mutations, biological weaknesses, and unusual physiological characteristics. They can also determine whether the creature has recently been exposed to radiation, drugs, or other biological contaminants. Particularly unusual conditions may require further investigation."
+  },
+  {
+    "id": "501-medic-5-organ-donation",
+    "class": "Medic",
+    "level": 5,
+    "name": "Organ Donation",
+    "cost": 5,
+    "description": "For -5 Malpractice, the Medic can temporarily transfer a biological characteristic from one willing creature to another. The Medic may transfer a sense, a natural physical adaptation, or a minor beneficial mutation. The donor loses access to the transferred characteristic for the duration, while the recipient gains it. The effect lasts 10 minutes, after which both creatures return to normal. The procedure cannot transfer major organs necessary for survival or extraordinary mutations at the GM's discretion. The procedure cannot ever transfer any effect or ability that the target already has. If it does, there is no stacking, and the ability is effectively ignored. For example, giving someone an extra nose doesn’t make them smell twice as well."
+  },
+  {
+    "id": "501-medic-6-anatomical-expertise",
+    "class": "Medic",
+    "level": 6,
+    "name": "Anatomical Expertise",
+    "cost": null,
+    "description": "The Medic has advantage on checks involving identifying biological weaknesses, treating injuries, understanding unfamiliar organisms, and determining causes of death. Additionally, the Medic can identify the approximate age, health, and biological condition of a creature through careful observation."
+  },
+  {
+    "id": "501-medic-6-unlicensed-experimentation",
+    "class": "Medic",
+    "level": 6,
+    "name": "Unlicensed Experimentation",
+    "cost": 4,
+    "description": "For -4 Malpractice, the Medic can temporarily alter the physiology of a willing creature for 30 minutes. The Medic may give the recipient one of the following adaptations: the ability to breathe underwater, immunity to ordinary environmental temperatures, enhanced night vision, or the ability to survive without breathing. When the effect ends, the recipient suffers a harmless but conspicuous biological side effect determined by the GM."
+  },
+  {
+    "id": "501-medic-7-hippocratic-suggestion",
+    "class": "Medic",
+    "level": 7,
+    "name": "Hippocratic Suggestion",
+    "cost": 7,
+    "description": "For -7 Malpractice, the Medic can administer a powerful neurochemical treatment to a living creature they can touch. For the next 5 minutes, the target becomes extremely susceptible to suggestion and treats the Medic as a trusted medical authority. The Medic may issue reasonable instructions that the target will attempt to follow. Instructions that directly threaten the target's life or fundamentally contradict its strongest convictions may be resisted through a Wisdom save."
+  },
+  {
+    "id": "501-medic-8-doctor-s-orders",
+    "class": "Medic",
+    "level": 8,
+    "name": "Doctor's Orders",
+    "cost": null,
+    "description": "The Medic has advantage on Charisma checks when presenting themselves as a medical professional, explaining medical procedures, or convincing others that a situation constitutes a medical emergency. This applies even when the Medic's qualifications are completely fabricated."
+  },
+  {
+    "id": "501-medic-8-biological-sabotage",
+    "class": "Medic",
+    "level": 8,
+    "name": "Biological Sabotage",
+    "cost": 5,
+    "description": "For -5 Malpractice, the Medic can administer a specialized biological agent to a living target they can touch or successfully inject. The target suffers one effect chosen by the Medic for 5 minutes: temporary blindness, loss of speech, severely reduced movement speed, or uncontrollable muscle spasms. The target may attempt a Constitution save to resist the effect. The procedure causes no permanent injury unless the GM determines otherwise."
+  },
+  {
+    "id": "501-medic-9-mutational-medicine",
+    "class": "Medic",
+    "level": 9,
+    "name": "Mutational Medicine",
+    "cost": 0,
+    "description": "The Medic gains the ability to temporarily suppress one negative mutation affecting a willing creature for 30 minutes. This requires one minute of examination and treatment. The mutation returns when the effect ends. A creature can only benefit from one such suppression at a time."
+  },
+  {
+    "id": "501-medic-9-experimental-evolution",
+    "class": "Medic",
+    "level": 9,
+    "name": "Experimental Evolution",
+    "cost": 8,
+    "description": "For -8 Malpractice, the Medic can temporarily amplify one positive mutation possessed by a willing creature for 10 minutes. The GM determines how the mutation improves, but the enhancement should be substantial and appropriate to the original effect. When the treatment ends, the mutation becomes inactive for 10 minutes as the recipient's body recovers."
+  },
+  {
+    "id": "501-medic-10-catastrophic-diagnosis",
+    "class": "Medic",
+    "level": 10,
+    "name": "Catastrophic Diagnosis",
+    "cost": 11,
+    "description": "For -11 Malpractice, the Medic can identify and exploit a devastating biological vulnerability in a living creature they can observe. The Medic selects one target and announces a diagnosis. For the next 3 turns, the target suffers disadvantage on all physical checks and saves, takes double damage from attacks, and cannot regain HP through ordinary healing. The target may attempt a Constitution save at the beginning of each turn to end the effect. The Medic must be able to see the target when activating this ability."
+  },
+  {
+    "id": "501-medic-11-medical-miracle",
+    "class": "Medic",
+    "level": 11,
+    "name": "Medical Miracle",
+    "cost": 10,
+    "description": "For -10 Malpractice, the Medic can perform an extraordinary biological procedure that would ordinarily be considered impossible. Examples include restoring a lost limb, curing an otherwise incurable disease, reversing severe biological damage, or reconstructing a critically damaged organ. The procedure requires appropriate materials and at least 10 minutes of uninterrupted work. It cannot reverse death or permanently remove the radiation infection central to the campaign."
+  },
+  {
+    "id": "501-medic-12-god-complex",
+    "class": "Medic",
+    "level": 12,
+    "name": "God Complex",
+    "cost": 15,
+    "description": "For -15 Malpractice, the Medic can completely rewrite the biological condition of a single living creature they can touch. For the next 10 minutes, the Medic may impose extraordinary biological changes, including granting temporary physical adaptations, disabling major bodily functions, radically altering the creature's appearance, or transforming its physiology in ways that defy conventional medicine. The changes must be biological in nature, and the GM determines the limits of particularly extreme transformations. Unwilling targets may attempt a Constitution save to resist the procedure. When the effect ends, the target returns to its original biological state, although the experience may leave lasting psychological consequences."
+  },
+  {
+    "id": "501-medic-3-training",
+    "class": "Medic",
+    "level": 3,
+    "name": "Medic training",
+    "cost": null,
+    "description": "Max Malpractice increases from 3 to 5, and the Medic unlocks the ability to perform surgery under almost any circumstances. The Medic can use improvised tools, perform procedures without a sterile environment, and stabilize critically injured patients using materials ordinarily considered unsuitable for medical purposes. The GM determines the difficulty of particularly extraordinary procedures.",
+    "usesMax": null
+  },
+  {
+    "id": "501-soldier-1-second-attempt-soldier-",
+    "class": "Soldier",
+    "level": 1,
+    "name": "Second Attempt, Soldier!",
+    "cost": 1,
+    "description": "For -1 Authority, the Soldier can reroll any check. They must take the new value."
+  },
+  {
+    "id": "501-soldier-1-military-precision",
+    "class": "Soldier",
+    "level": 1,
+    "name": "Military Precision",
+    "cost": 3,
+    "description": "For -3 Authority, the Soldier can roll 3 dice instead of one for any check, and select which die they wish. In addition, Soldiers get +1 to checks and damage rolls made with rifles and heavy weapons."
+  },
+  {
+    "id": "501-soldier-2-follow-my-lead",
+    "class": "Soldier",
+    "level": 2,
+    "name": "Follow My Lead",
+    "cost": 2,
+    "description": "For -2 Authority, the Soldier can designate one willing ally they can communicate with. For the next 3 turns, whenever the Soldier successfully makes a check using Strength or Wisdom, that ally gains advantage on their next check involving a similar task. Outside combat, this ability lasts 5 minutes."
+  },
+  {
+    "id": "501-soldier-4-suppressing-fire",
+    "class": "Soldier",
+    "level": 4,
+    "name": "Suppressing Fire",
+    "cost": 2,
+    "description": "For -2 Authority, the Soldier can designate an area they can see and fire a sustained burst of weapon fire into it. Until the beginning of their next turn, enemies attempting to move through the designated area must succeed on a Wisdom save or abandon their movement. Enemies that remain in cover are unaffected."
+  },
+  {
+    "id": "501-soldier-4-command-presence",
+    "class": "Soldier",
+    "level": 4,
+    "name": "Command Presence",
+    "cost": 2,
+    "description": "For -2 Authority, the Soldier can issue an authoritative command to a group of creatures who can hear and understand them. For the next 5 minutes, the Soldier gains advantage on Charisma checks involving organizing, directing, or negotiating with that group. Creatures who are actively hostile may resist the effect through a Wisdom save."
+  },
+  {
+    "id": "501-soldier-5-coordinated-assault",
+    "class": "Soldier",
+    "level": 5,
+    "name": "Coordinated Assault",
+    "cost": 5,
+    "description": "For -5 Authority, the Soldier can organize a coordinated attack involving themselves and up to three willing allies. Each participant may immediately make one attack against a target of their choice, provided they are capable of attacking and can receive the Soldier's orders. These attacks have advantage. Each participant may only benefit from this ability once per round."
+  },
+  {
+    "id": "501-soldier-6-veteran-s-instinct",
+    "class": "Soldier",
+    "level": 6,
+    "name": "Veteran's Instinct",
+    "cost": null,
+    "description": "The Soldier has advantage on Wisdom checks involving detecting ambushes, identifying military equipment, recognizing tactical formations, or evaluating the defensibility of a location. Additionally, the Soldier can determine whether an armed group appears professionally trained after observing them briefly."
+  },
+  {
+    "id": "501-soldier-6-emergency-requisition",
+    "class": "Soldier",
+    "level": 6,
+    "name": "Emergency Requisition",
+    "cost": 4,
+    "description": "For -4 Authority, the Soldier can locate a useful piece of military equipment among nearby supplies, abandoned structures, or accessible storage. The item must plausibly exist in the area and cannot be exceptionally rare or plot-critical. The GM determines exactly where it is found, but the Soldier always knows where to look."
+  },
+  {
+    "id": "501-soldier-7-hold-the-line",
+    "class": "Soldier",
+    "level": 7,
+    "name": "Hold the Line",
+    "cost": 7,
+    "description": "For -7 Authority, the Soldier can establish an extraordinarily effective defensive position. For the next 3 turns, the Soldier and up to five willing allies within 45 feet gain advantage on defensive saves and take half damage from ranged attacks while remaining in their designated positions. The effect ends for any participant who abandons their position."
+  },
+  {
+    "id": "501-soldier-8-drill-sergeant",
+    "class": "Soldier",
+    "level": 8,
+    "name": "Drill Sergeant",
+    "cost": 0,
+    "description": "The Soldier can train willing creatures in basic combat skills, weapon handling, and battlefield discipline. After one hour of instruction, up to ten creatures gain +2 to their next three attack checks or relevant physical checks. The benefit expires after 24 hours."
+  },
+  {
+    "id": "501-soldier-8-chain-of-command",
+    "class": "Soldier",
+    "level": 8,
+    "name": "Chain of Command",
+    "cost": 5,
+    "description": "For -5 Authority, the Soldier can temporarily convince a group of non-hostile armed personnel that they possess legitimate military authority. For the next 10 minutes, the group treats the Soldier as a superior officer unless presented with convincing evidence otherwise. The effect works best on organized military or paramilitary groups and may fail against individuals who personally know the actual chain of command."
+  },
+  {
+    "id": "501-soldier-9-perfect-formation",
+    "class": "Soldier",
+    "level": 9,
+    "name": "Perfect Formation",
+    "cost": null,
+    "description": "The Soldier and willing allies within 30 feet of them can move through crowded or dangerous environments without interfering with one another. Allies do not obstruct each other's movement or lines of fire, and the group gains advantage on checks involving coordinated movement, tactical positioning, or organized retreats."
+  },
+  {
+    "id": "501-soldier-9-tactical-genius",
+    "class": "Soldier",
+    "level": 9,
+    "name": "Tactical Genius",
+    "cost": 8,
+    "description": "For -8 Authority, the Soldier can devise a comprehensive plan for a specific objective. The Soldier identifies up to five steps required to accomplish that objective. For the next hour, all willing participants gain advantage on checks directly related to carrying out those steps, provided the plan remains reasonably applicable to the situation. Unexpected complications do not automatically invalidate the plan."
+  },
+  {
+    "id": "501-soldier-10-total-mobilization",
+    "class": "Soldier",
+    "level": 10,
+    "name": "Total Mobilization",
+    "cost": 11,
+    "description": "For -11 Authority, the Soldier grants each member of their party an extra turn, and the turns can be sequenced according to the soldier."
+  },
+  {
+    "id": "501-soldier-11-military-intelligence",
+    "class": "Soldier",
+    "level": 11,
+    "name": "Military Intelligence",
+    "cost": 10,
+    "description": "For -10 Authority, the Soldier can deduce a significant weakness in an enemy organization, fortified location, or planned operation after studying available information for at least one minute. The GM reveals a meaningful vulnerability, overlooked route, logistical problem, or tactical opportunity that the Soldier can exploit. The information must be accurate, although acting upon it may still be dangerous."
+  },
+  {
+    "id": "501-soldier-12-supreme-commander",
+    "class": "Soldier",
+    "level": 12,
+    "name": "Supreme Commander",
+    "cost": 15,
+    "description": "For -15 Authority, the Soldier can issue a single extraordinary order to any number of willing creatures who can receive it. For the next 10 minutes, those creatures perform the ordered objective with nearly supernatural discipline and coordination. Participants gain advantage on all checks directly related to the objective, ignore ordinary fear and intimidation, and may act in coordinated sequences that would otherwise be impossible. The GM determines the limits of particularly extraordinary orders, but the ability cannot force unwilling creatures to obey or make physically impossible actions possible."
+  },
+  {
+    "id": "501-soldier-3-training",
+    "class": "Soldier",
+    "level": 3,
+    "name": "Soldier training",
+    "cost": null,
+    "description": "Max Authority increases from 3 to 5, and the Soldier unlocks the ability to use heavy weapons without suffering ordinary handling penalties. Additionally, the Soldier can organize improvised defensive positions using nearby terrain and materials. Given 10 minutes of preparation, the Soldier can create a defensible position that grants cover to nearby allies, subject to the environment and available resources.",
+    "usesMax": null
+  },
+  {
+    "id": "501-prophet-1-divine-guidance",
+    "class": "Prophet",
+    "level": 1,
+    "name": "Divine Guidance",
+    "cost": 1,
+    "description": "For -1 Faith, the Prophet can reroll any check. They must take the new value."
+  },
+  {
+    "id": "501-prophet-1-the-lord-provides",
+    "class": "Prophet",
+    "level": 1,
+    "name": "The Lord Provides",
+    "cost": 3,
+    "description": "For -3 Faith, the Prophet can roll 3 dice instead of one for any check, and select which die they wish. In addition, Prophets gain +1 to attack checks made with precision rifles and +1 to Wisdom checks involving observation or religious knowledge."
+  },
+  {
+    "id": "501-prophet-2-mark-of-the-heretic",
+    "class": "Prophet",
+    "level": 2,
+    "name": "Mark of the Heretic",
+    "cost": 2,
+    "description": "For -2 Faith, the Prophet can declare a creature they can see to be a heretic. For the next 10 minutes, the Prophet always knows the target's approximate direction while it remains within 300 Feet, and gains advantage on their first attack against that target. Only one creature can be marked at a time."
+  },
+  {
+    "id": "501-prophet-4-blessed-ammunition",
+    "class": "Prophet",
+    "level": 4,
+    "name": "Blessed Ammunition",
+    "cost": 2,
+    "description": "For -2 Faith, the Prophet can bless up to three rounds of ammunition. For the next hour, attacks made with those rounds ignore ordinary cover penalties and count as extraordinary or sanctified attacks against creatures resistant to conventional weaponry. Unused blessed ammunition loses its blessing after one hour."
+  },
+  {
+    "id": "501-prophet-4-street-preacher",
+    "class": "Prophet",
+    "level": 4,
+    "name": "Street Preacher",
+    "cost": 2,
+    "description": "For -2 Faith, the Prophet can deliver an impassioned sermon to creatures capable of understanding them. After one minute of preaching, the Prophet gains advantage on Charisma checks involving persuasion, intimidation, or inspiring the audience for the next 10 minutes. Hostile audiences may resist through a Wisdom save."
+  },
+  {
+    "id": "501-prophet-5-the-lord-works-in-mysterious-ways",
+    "class": "Prophet",
+    "level": 5,
+    "name": "The Lord Works in Mysterious Ways",
+    "cost": 5,
+    "description": "For -5 Faith, the Prophet can declare that an unlikely event is a sign of divine intervention. The GM introduces a plausible but highly fortunate coincidence that advances the Prophet's immediate objective. Examples include a guard abandoning their post, a locked door being left open, or an enemy's weapon unexpectedly malfunctioning. The coincidence cannot directly kill a creature or resolve a major plot objective by itself."
+  },
+  {
+    "id": "501-prophet-6-eye-of-providence",
+    "class": "Prophet",
+    "level": 6,
+    "name": "Eye of Providence",
+    "cost": null,
+    "description": "The Prophet has advantage on Wisdom checks involving detecting concealed creatures, spotting distant details, recognizing deception, and identifying suspicious behavior. Additionally, the Prophet can accurately estimate distances to visible targets without special equipment."
+  },
+  {
+    "id": "501-prophet-6-confession",
+    "class": "Prophet",
+    "level": 6,
+    "name": "Confession",
+    "cost": 4,
+    "description": "For -4 Faith, the Prophet can confront a creature they can communicate with and demand that it confess its sins. The target must make a Wisdom save. On a failure, it feels an overwhelming compulsion to truthfully reveal one significant wrongdoing, secret, or source of guilt. The target chooses which truth to reveal, and the Prophet cannot specify the information disclosed. A successful save makes the creature immune to this ability for 24 hours."
+  },
+  {
+    "id": "501-prophet-7-judgment-day",
+    "class": "Prophet",
+    "level": 7,
+    "name": "Judgment Day",
+    "cost": 7,
+    "description": "For -7 Faith, the Prophet may designate a creature they can see as the subject of divine judgment. For the next 3 turns, the Prophet's ranged attacks against that creature ignore ordinary cover penalties, have advantage, and deal double damage. The effect ends if the target dies or the duration expires."
+  },
+  {
+    "id": "501-prophet-8-unshakable-conviction",
+    "class": "Prophet",
+    "level": 8,
+    "name": "Unshakable Conviction",
+    "cost": null,
+    "description": "The Prophet has advantage on saves against fear, intimidation, and attempts to undermine their beliefs. Additionally, the Prophet can remain perfectly still and alert for extraordinarily long periods without suffering ordinary discomfort or loss of concentration."
+  },
+  {
+    "id": "501-prophet-8-pilgrimage",
+    "class": "Prophet",
+    "level": 8,
+    "name": "Pilgrimage",
+    "cost": 5,
+    "description": "For -5 Faith, the Prophet may pray for guidance toward a specific person, object, or location that they have sufficient reason to believe exists. The GM provides a meaningful clue about where or how it might be found. This may take the form of a vision, an overheard conversation, an unexpected discovery, or an apparent coincidence. The ability does not guarantee that the destination is safe or accessible."
+  },
+  {
+    "id": "501-prophet-9-the-gospel-according-to-ballistics",
+    "class": "Prophet",
+    "level": 9,
+    "name": "The Gospel According to Ballistics",
+    "cost": null,
+    "description": "The Prophet no longer suffers ordinary penalties for attacking targets at extreme range, provided they can clearly see the target and their weapon is physically capable of reaching it. Additionally, the Prophet may use reflective surfaces, shadows, and environmental clues to identify targets who are not directly visible."
+  },
+  {
+    "id": "501-prophet-9-divine-retribution",
+    "class": "Prophet",
+    "level": 9,
+    "name": "Divine Retribution",
+    "cost": 8,
+    "description": "For -8 Faith, when a creature the Prophet can see harms one of their allies, the Prophet may immediately make one ranged attack against that creature, even outside their normal turn. If the attack hits, it deals double damage. This ability cannot be used more than once per round."
+  },
+  {
+    "id": "501-prophet-10-thou-shalt-not-miss",
+    "class": "Prophet",
+    "level": 10,
+    "name": "Thou Shalt Not Miss",
+    "cost": 11,
+    "description": "For -11 Faith, the Prophet may declare a single ranged attack to be divinely ordained. If the target is within the physical range of the weapon and the Prophet has a plausible means of identifying its location, the attack automatically hits, regardless of ordinary cover, visibility, or accuracy penalties. The attack deals triple normal damage. Extraordinary defenses or major plot protections may still apply at the GM's discretion."
+  },
+  {
+    "id": "501-prophet-11-prophet-of-the-wasteland",
+    "class": "Prophet",
+    "level": 11,
+    "name": "Prophet of the Wasteland",
+    "cost": 10,
+    "description": "For -10 Faith, the Prophet can deliver a prophecy concerning a specific future event. The GM determines a plausible way in which the prophecy could become true and provides the Prophet with a cryptic revelation about the circumstances. For the next 24 hours, the Prophet and their allies gain advantage on checks directly related to bringing about or preventing that event. The prophecy cannot guarantee an impossible outcome."
+  },
+  {
+    "id": "501-prophet-12-and-god-said-let-there-be-lead",
+    "class": "Prophet",
+    "level": 12,
+    "name": "And God Said, Let There Be Lead",
+    "cost": 15,
+    "description": "For -15 Faith, the Prophet may invoke divine judgment upon up to six creatures they can identify within the effective range of their weapon. The Prophet makes one ranged attack against each designated creature, regardless of the weapon's normal firing rate or ammunition capacity. These attacks automatically hit and deal triple normal damage. During the attack, the Prophet may describe an extraordinary religious manifestation: a blinding halo, a chorus of distant angels, a thunderous voice from the heavens, or some other unmistakable sign of divine wrath. Whether this manifestation is genuinely supernatural, an extraordinary coincidence, or a shared hallucination is left to the GM. After the attack, the Prophet must spend their next turn reloading, praying, or otherwise recovering from the experience."
+  },
+  {
+    "id": "501-prophet-3-training",
+    "class": "Prophet",
+    "level": 3,
+    "name": "Prophet training",
+    "cost": 0,
+    "description": "Max Faith increases from 3 to 5, and the Prophet gains the ability to interpret omens in ordinary events. After spending one minute examining an environment, the Prophet may ask the GM whether a particular course of action appears favorable, unfavorable, or uncertain. The GM must answer truthfully based on the information available, though the interpretation may be cryptic. This ability may be used once per long rest without spending Faith.",
+    "usesMax": 1
+  },
+  {
+    "id": "501-gunslinger-1-pistol-training",
+    "class": "Gunslinger",
+    "level": 1,
+    "name": "Pistol Training",
+    "cost": null,
+    "description": "+1 to checks and damage rolls done with pistols."
+  },
+  {
+    "id": "501-psycho-1-melee-training",
+    "class": "Psycho",
+    "level": 1,
+    "name": "Melee Training",
+    "cost": null,
+    "description": "+1 to checks and damage rolls done with melee weaponry."
+  },
+  {
+    "id": "501-hacker-1-technical-training",
+    "class": "Hacker",
+    "level": 1,
+    "name": "Technical Training",
+    "cost": null,
+    "description": "+1 to checks involving hacking, repairing or modifying electronic devices."
+  },
+  {
+    "id": "501-medic-1-medical-training",
+    "class": "Medic",
+    "level": 1,
+    "name": "Medical Training",
+    "cost": null,
+    "description": "+1 to checks involving medicine, surgery, diagnosis and administration of biological treatments."
+  },
+  {
+    "id": "501-soldier-1-weapons-training",
+    "class": "Soldier",
+    "level": 1,
+    "name": "Weapons Training",
+    "cost": null,
+    "description": "+1 to checks and damage rolls made with rifles and heavy weapons."
+  },
+  {
+    "id": "501-prophet-1-precision-training",
+    "class": "Prophet",
+    "level": 1,
+    "name": "Precision Training",
+    "cost": null,
+    "description": "+1 to attacks with precision rifles and +1 to Wisdom checks involving observation or religious knowledge."
+  }
+]

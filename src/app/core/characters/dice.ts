@@ -4,6 +4,9 @@ export interface DiceRoll {
   die: number;
   modifier: number;
   total: number;
+  details?: string;
+  mode?: string;
+  automaticFailure?: boolean;
 }
 
 export function rollDie(sides: number): number {

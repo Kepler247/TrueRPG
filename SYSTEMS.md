@@ -2,13 +2,11 @@
 
 501 Rads retains the original Wasteland system UUID, so existing campaigns and characters stay attached. The plain 5E (2014) system is a separate catalog entry. Both use the shared SRD 5.1 character foundation; system adapters override it rather than placing game-specific conditions in the sheet.
 
-## 501 Rads draft 1
+## 501 Rads core-1
 
-The system hub contains every page of the 69-page author-provided PDF, searchable as lore or rules, with a PDF download. Navigation uses headings and displays each section through its next heading, including text continuing onto later pages. Lore uses the document's Atomic Age headings and VT323 body font, self-hosted with their OFL licenses. Pages 58 onward contain rules. At the author's request, the downloadable PDF and readable text now correct Fan the Hammer's “luck points” typo to Heat. Other author clarifications are displayed separately.
+The active reference is the author's final 275-page `501 Rads (3).pdf`, copied unchanged with its SHA-256 hash. Heading navigation, lore typography, readable text and the PDF remain available. Table extraction preserves PDF content order so wrapped names stay next to their statistics. The earlier 69-page draft and 125-page mutation revision remain historical assets; current PDF values supersede their mechanics, including the old Gunslinger d10.
 
-Implemented clarifications: maximum level 12; scores may exceed 20; two ability points every level; shared feat choices at levels 3/6/9/12; Gunslinger d10 HP with fixed 6 or a roll plus Constitution; Fan the Hammer costs 2 Heat. Feats are not defined yet. The optional testing placeholder has no mechanical effect and is clearly labeled.
-
-Gunslinger creation and level-up add unlocked ability references. Heat gains, costs, maximums, long-rest reset, and level-based gain multipliers can be managed directly on the character summary and are saved with the character. Attack resolution, advantage, automatic kill effects, probability of Divine Intervention consequences, creature stat blocks, drugs, and item statistics are not invented where the draft does not supply them. Resolve narrative and combat effects with the GM using the feature text and reference.
+The six class definitions, starting skills/equipment, actual shared feats, class resources and source feature descriptions now use core-1. Active effects compose modifiers and conditions and track required aftermaths. See [current coverage, test cases and remaining work](RADS_IMPLEMENTATION.md); target-dependent abilities and descriptive mutations still require GM adjudication. This foundation is not a claim that every ability, legendary weapon, enemy, vehicle and loot rule has been automated.
 
 ## Plain 5E
 
@@ -20,6 +18,8 @@ Creation uses 27-point buy before racial boosts. Level-up supports fixed or roll
 
 ```powershell
 node scripts/import-501-rads.mjs --pdf "R:\Downloads\501Radsdraft1.pdf" --revision draft-1
+.codex-tmp/pdf-tools/Scripts/python.exe scripts/import-rads-core.py
+python scripts/import-rads-features.py
 node scripts/import-5e-srd.mjs
 node scripts/import-5e-progression.mjs
 ```
@@ -28,6 +28,6 @@ The 501 importer copies the exact input PDF and writes page-based UTF-8 text plu
 
 Character core payloads remain version 2, with unknown fields preserved. System-specific Heat uses an additive core field; invalid or newer saved payloads are never replaced on load. Save validation uses the active ruleset's score and level limits. Database RLS remains responsible for ownership and campaign authorization.
 
-All future 501 Rads classes are expected to earn and spend a class resource. `CharacterRuleset.classResource` supplies its name, current-value storage adapter, maximum, gain multiplier, help text, and optional long-rest reset. Summary, editor, and creator controls use that definition. Heat is the first implementation; other classes' mechanics remain undefined until supplied by the author.
+All future 501 Rads classes are expected to earn and spend a class resource. `CharacterRuleset.classResource` supplies its name, current-value storage adapter, maximum, gain multiplier, help text, and optional long-rest reset. Summary, editor, and creator controls use that definition. 501 Rads defines Heat, Tolerance, Access, Malpractice, Authority and Faith through this adapter.
 
 Run `npm.cmd run build`, `npm.cmd test -- --watch=false`, and `npm.cmd run test:db` after changes to these features or migrations.

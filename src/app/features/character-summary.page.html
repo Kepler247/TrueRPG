@@ -50,13 +50,18 @@
     </div>
     <div>
       <dt>Initiative</dt>
+      @let initiativeCheck = checkSummary('Initiative', rules().initiative(record.core, rules()));
       <dd>
         <button
           class="roll-button"
-          (click)="roll('Initiative', rules().initiative(record.core, rules()))"
-          aria-label="Roll initiative"
+          (click)="roll('Initiative', initiativeCheck.modifier)"
+          [attr.aria-label]="'Roll ' + checkTitle('Initiative', initiativeCheck)"
+          [title]="checkTitle('Initiative', initiativeCheck)"
+          [class.check-advantage]="initiativeCheck.mode === 'advantage'"
+          [class.check-disadvantage]="initiativeCheck.mode === 'disadvantage'"
+          [class.check-failure]="initiativeCheck.automaticFailure"
         >
-          {{ signed(rules().initiative(record.core, rules())) }}
+          {{ checkText(initiativeCheck) }}
         </button>
       </dd>
     </div>
@@ -75,7 +80,8 @@
     <div>
       <dt>Speed</dt>
       <dd>
-        {{ record.core.speed.distance }} {{ record.core.speed.unit }} / {{ record.core.speed.per }}
+        {{ rules().movementSpeed?.(record.core) ?? record.core.speed.distance }}
+        {{ record.core.speed.unit }} / {{ record.core.speed.per }}
       </dd>
     </div>
     <div>
@@ -87,6 +93,33 @@
     <section class="panel quick-resources" aria-labelledby="resources-title">
       <h2 id="resources-title">HP{{ resource() ? ' and ' + resource()?.name : '' }}</h2>
       <p class="legend">Buttons save immediately.</p>
+      @if (rules().takeDamage) {
+        <label class="damage-type-control"
+          >Damage type
+          <select [ngModel]="damageType()" (ngModelChange)="damageType.set($event)">
+            @for (
+              type of [
+                'Untyped',
+                'Ballistic',
+                'Piercing',
+                'Slashing',
+                'Bludgeoning',
+                'Fire',
+                'Cold',
+                'Electrical',
+                'Chemical',
+                'Radiation',
+                'Psychic',
+                'Energy',
+                'Blast',
+              ];
+              track type
+            ) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select></label
+        >
+      }
       @if (record.core.hpMax !== null) {
         <div class="resource-row">
           <mat-form-field appearance="outline" subscriptSizing="dynamic"
@@ -250,6 +283,16 @@
       </button>
     </section>
   }
+  @if (rules().statusPanel) {
+    <app-rads-status
+      [core]="record.core"
+      [canEdit]="record.canEdit"
+      [busy]="saving() || !!pendingAction() || !playReady()"
+      [tags]="checkTags()"
+      (tagsChange)="checkTags.set($event)"
+      (action)="savePlayAction($event.core, $event.message)"
+    />
+  }
   <section class="panel" aria-labelledby="stats-title">
     <h2 id="stats-title">Core stats</h2>
     <p class="legend">
@@ -261,30 +304,48 @@
         <div class="stat-tile">
           <h3>{{ stat.key.toUpperCase() }}</h3>
           <span class="stat-name">{{ stat.name }}</span>
+          @let abilityCheck =
+            checkSummary(
+              stat.name + ' check',
+              rules().abilityModifier(record.core.scores[stat.key])
+            );
+          @let saveCheck =
+            checkSummary(
+              stat.name + ' saving throw',
+              rules().savingThrow(record.core, stat.key, rules(), checkTags())
+            );
           <button
             class="roll-button modifier"
-            [attr.aria-label]="'Roll ' + stat.name + ' check'"
-            (click)="
-              roll(stat.name + ' check', rules().abilityModifier(record.core.scores[stat.key]))
-            "
+            [attr.aria-label]="'Roll ' + checkTitle(stat.name + ' check', abilityCheck)"
+            [title]="checkTitle(stat.name + ' check', abilityCheck)"
+            [class.check-advantage]="abilityCheck.mode === 'advantage'"
+            [class.check-disadvantage]="abilityCheck.mode === 'disadvantage'"
+            [class.check-failure]="abilityCheck.automaticFailure"
+            (click)="roll(stat.name + ' check', abilityCheck.modifier)"
           >
-            {{ signed(rules().abilityModifier(record.core.scores[stat.key])) }}
+            {{ checkText(abilityCheck) }}
           </button>
           <span class="score">Score {{ record.core.scores[stat.key] }}</span>
           <button
             class="roll-button save"
-            [attr.aria-label]="'Roll ' + stat.name + ' saving throw'"
-            (click)="
-              roll(stat.name + ' saving throw', rules().savingThrow(record.core, stat.key, rules()))
-            "
+            [attr.aria-label]="'Roll ' + checkTitle(stat.name + ' saving throw', saveCheck)"
+            [title]="checkTitle(stat.name + ' saving throw', saveCheck)"
+            [class.check-advantage]="saveCheck.mode === 'advantage'"
+            [class.check-disadvantage]="saveCheck.mode === 'disadvantage'"
+            [class.check-failure]="saveCheck.automaticFailure"
+            (click)="roll(stat.name + ' saving throw', saveCheck.modifier)"
           >
-            Save {{ signed(rules().savingThrow(record.core, stat.key, rules()))
-            }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}
+            Save {{ checkText(saveCheck) }}{{ record.core.saves[stat.key].proficient ? ' *' : '' }}
           </button>
         </div>
       }
     </div>
-    <p class="legend">* Proficient saving throw</p>
+    <p class="legend">
+      * Proficient saving throw
+      @if (rules().checkSummary) {
+        &middot; A = advantage; D = disadvantage. Opposing effects cancel.
+      }
+    </p>
   </section>
   @if (rules().characterNotes; as notes) {
     <section class="panel" aria-labelledby="system-rules-title">
@@ -300,6 +361,7 @@
     <h2 id="skills-title">Skills</h2>
     <div class="skills-grid">
       @for (skill of skills(); track skill.id; let index = $index) {
+        @let skillCheck = checkSummary(skill.name, skillTotal(index));
         <div class="skill-row">
           <div>
             <strong>{{ skill.name }}</strong
@@ -309,10 +371,14 @@
           </div>
           <button
             class="roll-button skill-total"
-            [attr.aria-label]="'Roll ' + skill.name"
-            (click)="roll(skill.name, skillTotal(index))"
+            [attr.aria-label]="'Roll ' + checkTitle(skill.name, skillCheck)"
+            [title]="checkTitle(skill.name, skillCheck)"
+            [class.check-advantage]="skillCheck.mode === 'advantage'"
+            [class.check-disadvantage]="skillCheck.mode === 'disadvantage'"
+            [class.check-failure]="skillCheck.automaticFailure"
+            (click)="roll(skill.name, skillCheck.modifier)"
           >
-            {{ signed(skillTotal(index)) }}
+            {{ checkText(skillCheck) }}
           </button>
         </div>
       }
@@ -340,108 +406,125 @@
   </section>
   <section class="panel" aria-labelledby="inventory-title">
     <h2 id="inventory-title">Inventory</h2>
+    @if (rules().tracksCarryWeight !== false && unknownWeights()) {
+      <p class="legend">
+        Some item weights are unspecified. The carried total includes known weights only; set
+        missing weights on the edit page.
+      </p>
+    }
     @if (rules().armorSummary) {
       <p>{{ rules().armorSummary!(record.core, rules()) }}</p>
     }
-    <p>
-      {{ weight(record.core) }} lb carried / {{ rules().carryCapacity(record.core) }} lb capacity
-    </p>
-    @if (!record.enforceCarryWeight) {
-      <p class="legend">Carrying capacity is disabled for this campaign.</p>
-    } @else if (weight(record.core) > rules().carryCapacity(record.core)) {
-      <p class="feedback error">Over carrying capacity</p>
+    @if (rules().tracksCarryWeight !== false) {
+      <p>
+        {{ weight(record.core) }} lb carried / {{ rules().carryCapacity(record.core) }} lb capacity
+      </p>
+      @if (!record.enforceCarryWeight) {
+        <p class="legend">Carrying capacity is disabled for this campaign.</p>
+      } @else if (weight(record.core) > rules().carryCapacity(record.core)) {
+        <p class="feedback error">Over carrying capacity</p>
+      }
     }
-    @if (record.canEdit && rules().weaponAttack) {
-      <details class="weapon-controls">
-        <summary>Weapon attack settings</summary>
-        <div class="weapon-fields">
-          <label
-            >Target AC<input
-              type="number"
-              min="0"
-              [ngModel]="targetAC()"
-              (ngModelChange)="targetAC.set($event)"
-          /></label>
-          <label
-            >Distance (ft)<input
-              type="number"
-              min="0"
-              [ngModel]="targetDistance()"
-              (ngModelChange)="targetDistance.set($event)"
-          /></label>
-          <label
-            >Roll mode<select [ngModel]="attackMode()" (ngModelChange)="attackMode.set($event)">
-              <option value="normal">Normal</option>
-              <option value="advantage">Advantage</option>
-              <option value="disadvantage">Disadvantage</option>
-            </select></label
-          >
-          <label
-            >Reload ammunition<select
-              [ngModel]="selectedAmmo()"
-              (ngModelChange)="selectedAmmo.set($event)"
-            >
-              <option value="">Standard (free)</option>
-              @for (ammo of record.core.inventory; track ammo.id) {
-                @if (ammo['ammoType']) {
-                  <option [value]="ammo.id">{{ ammo.name }} ({{ ammo.quantity }})</option>
-                }
-              }
-            </select></label
-          >
-          <label
-            ><input
-              type="checkbox"
-              [ngModel]="weaponProficient()"
-              (ngModelChange)="weaponProficient.set($event)"
-            />
-            Proficient with this weapon</label
-          >
-          <label
-            ><input
-              type="checkbox"
-              [ngModel]="dualWield()"
-              (ngModelChange)="dualWield.set($event)"
-            />
-            Dual wield (-2 each)</label
-          >
-          <label
-            ><input type="checkbox" [ngModel]="mounted()" (ngModelChange)="mounted.set($event)" />
-            Mounted heavy weapon</label
-          >
-        </div>
-      </details>
+    @if (record.canEdit && rules().reloadWeapon) {
+      <label class="damage-type-control"
+        >Reload ammunition<select
+          [ngModel]="selectedAmmo()"
+          (ngModelChange)="selectedAmmo.set($event)"
+        >
+          <option value="">Standard (free)</option>
+          @for (ammo of record.core.inventory; track ammo.id) {
+            @if (ammo['ammoType']) {
+              <option [value]="ammo.id">{{ ammo.name }} ({{ ammo.quantity }})</option>
+            }
+          }
+        </select></label
+      >
     }
     <ul class="entry-list">
       @for (entry of record.core.inventory; track entry.id) {
         <li>
           <div class="entry-heading">
             <strong>{{ entry.name }}</strong
-            ><span>{{ entry.quantity }} x {{ entry.weight }} lb</span>
+            ><span
+              >{{ entry.quantity }}
+              @if (rules().tracksCarryWeight !== false) {
+                x
+                {{ entry['weightKnown'] === false ? 'weight unspecified' : entry.weight + ' lb' }}
+              }
+            </span>
           </div>
           @if (entry['isMock']) {
-            <p class="legend">MOCK / TEST &middot; Example weight</p>
-          }
-          @if (entry['weapon']) {
             <p class="legend">
-              Firing actions left: {{ entry['chargesRemaining'] }} &middot; Ammo:
-              {{ entry['loadedAmmo'] || 'Standard' }}
+              MOCK / TEST
+              @if (rules().tracksCarryWeight !== false) {
+                &middot; Example weight
+              }
             </p>
-            @if (record.canEdit && rules().weaponAttack) {
-              <div class="actions">
-                <button
-                  mat-flat-button
-                  (click)="attackWeapon(entry.id)"
-                  [disabled]="saving() || !!pendingAction() || !entry.equipped"
+          }
+          @if (entry['radsConsumable'] && record.canEdit) {
+            <button
+              mat-flat-button
+              (click)="consumeItem(entry.id)"
+              [disabled]="saving() || !!pendingAction()"
+            >
+              Use on self
+            </button>
+          }
+          @if (weaponReference(entry); as reference) {
+            <dl class="weapon-reference">
+              <div>
+                <dt>Attack roll</dt>
+                <dd>{{ reference.attack }}</dd>
+              </div>
+              <div>
+                <dt>Damage roll</dt>
+                <dd>{{ reference.damage }}</dd>
+              </div>
+            </dl>
+            @if (reference.notes.length) {
+              <details class="weapon-notes">
+                <summary>Roll notes</summary>
+                @for (note of reference.notes; track $index) {
+                  <p class="legend">{{ note }}</p>
+                }
+              </details>
+            }
+            @if (reference.ammunition; as ammo) {
+              <div class="manual-ammo">
+                <span
+                  >{{ ammo.label }}: {{ ammo.current
+                  }}{{ ammo.maximum !== undefined ? ' / ' + ammo.maximum : '' }}</span
                 >
-                  Attack</button
-                ><button
-                  mat-stroked-button
-                  (click)="reloadWeapon(entry.id)"
-                  [disabled]="saving() || !!pendingAction()"
-                >
-                  Reload
-                </button>
+                @if (record.canEdit && rules().adjustWeaponAmmo) {
+                  <button
+                    mat-stroked-button
+                    (click)="adjustWeaponAmmo(entry.id, -1)"
+                    [disabled]="saving() || !!pendingAction() || ammo.current < 1"
+                    [attr.aria-label]="'Spend one ammo for ' + entry.name"
+                  >
+                    Spend one</button
+                  ><button
+                    mat-button
+                    (click)="adjustWeaponAmmo(entry.id, 1)"
+                    [disabled]="
+                      saving() ||
+                      !!pendingAction() ||
+                      (ammo.maximum !== undefined && ammo.current >= ammo.maximum)
+                    "
+                    [attr.aria-label]="'Add one ammo for ' + entry.name"
+                  >
+                    +1 ammo
+                  </button>
+                }
+                @if (record.canEdit && rules().reloadWeapon) {
+                  <button
+                    mat-stroked-button
+                    (click)="reloadWeapon(entry.id)"
+                    [disabled]="saving() || !!pendingAction()"
+                  >
+                    Reload
+                  </button>
+                }
               </div>
             }
           }
@@ -470,7 +553,7 @@
                 (click)="inventoryAction(entry.id, 'remove')"
                 [disabled]="saving() || !!pendingAction()"
               >
-                {{ entry.category === 'consumable' ? 'Consume one' : 'Remove one' }}
+                {{ entry.category === 'consumable' ? 'Discard one' : 'Remove one' }}
               </button>
             </div>
           }
@@ -564,6 +647,28 @@
             <p class="legend">MOCK / TEST</p>
           }
           @if (record.canEdit && abilityAction(ability.id); as action) {
+            @for (
+              choice of rules().abilityChoices?.(
+                record.core,
+                ability.id,
+                abilityChoices()[ability.id]
+              ) ?? [];
+              track choice.key
+            ) {
+              <label class="damage-type-control"
+                >{{ choice.label
+                }}<select
+                  [ngModel]="abilityChoices()[ability.id]?.[choice.key] ?? ''"
+                  (ngModelChange)="chooseAbilityOption(ability.id, choice.key, $event)"
+                  [disabled]="saving() || !!pendingAction()"
+                >
+                  <option value="">Choose</option>
+                  @for (option of choice.options; track option.id) {
+                    <option [value]="option.id">{{ option.name }}</option>
+                  }
+                </select></label
+              >
+            }
             <button
               mat-stroked-button
               (click)="useAbility(ability.id)"
@@ -616,21 +721,19 @@
 @if (lastRoll(); as result) {
   <aside class="roll-result" role="status" aria-live="polite" aria-atomic="true">
     <div>
-      <strong>{{ result.label }}: {{ result.total }}</strong
+      <strong
+        >{{ result.label }}:
+        {{ result.automaticFailure ? 'Automatic failure' : result.total }}</strong
       ><span
         >d{{ result.sides }} ({{ result.die }}) {{ signed(result.modifier) }} =
         {{ result.total }} &middot; Roll {{ rollCount() }}</span
       >
     </div>
+    @if (result.details) {
+      <p>{{ result.details }}</p>
+    }
     <button mat-button (click)="lastRoll.set(null)" aria-label="Dismiss roll result">
       Dismiss
     </button>
-  </aside>
-}
-
-@if (combatMessage(); as result) {
-  <aside class="combat-result" role="status" aria-live="polite">
-    <p>{{ result }}</p>
-    <button mat-button (click)="combatMessage.set(null)">Dismiss</button>
   </aside>
 }

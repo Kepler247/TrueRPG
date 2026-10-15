@@ -48,12 +48,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>System</mat-label>
-          <mat-select
-            formControlName="systemId"
-            (selectionChange)="changeSystem()"
-            [disabled]="saving()"
-            required
-          >
+          <mat-select formControlName="systemId" (selectionChange)="changeSystem()" required>
             @for (system of context().systems; track system.id) {
               <mat-option [value]="system.id">{{ system.name }}</mat-option>
             }
@@ -72,7 +67,7 @@
         @if (kind() === 'characters') {
           <mat-form-field appearance="outline">
             <mat-label>Campaign (optional)</mat-label>
-            <mat-select formControlName="campaignId" [disabled]="saving()">
+            <mat-select formControlName="campaignId">
               <mat-option value="">No campaign</mat-option>
               @for (campaign of eligibleCampaigns(); track campaign.id) {
                 <mat-option [value]="campaign.id">{{ campaign.name }}</mat-option>
@@ -107,7 +102,7 @@
           @if (creatorOptions().races.length) {
             <mat-form-field appearance="outline"
               ><mat-label>Race (required)</mat-label
-              ><mat-select required formControlName="race" [disabled]="saving()"
+              ><mat-select required formControlName="race"
                 ><mat-option value="">Not selected</mat-option>
                 @for (race of creatorOptions().races; track race) {
                   <mat-option [value]="race">{{ race }}</mat-option>
@@ -118,7 +113,7 @@
           @if (creatorOptions().classes.length) {
             <mat-form-field appearance="outline"
               ><mat-label>Class</mat-label
-              ><mat-select formControlName="class" [disabled]="saving()"
+              ><mat-select formControlName="class"
                 ><mat-option value="">Not selected</mat-option>
                 @for (class of creatorOptions().classes; track class) {
                   <mat-option [value]="class">{{ class }}</mat-option>
@@ -136,7 +131,7 @@
             <p>Choose two different abilities to receive +1, in addition to +2 Charisma.</p>
             <mat-form-field
               ><mat-label>First racial +1</mat-label
-              ><mat-select formControlName="raceBoostOne" [disabled]="saving()">
+              ><mat-select formControlName="raceBoostOne">
                 @for (stat of raceStats; track stat.key) {
                   <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
                 }
@@ -144,23 +139,79 @@
             >
             <mat-form-field
               ><mat-label>Second racial +1</mat-label
-              ><mat-select formControlName="raceBoostTwo" [disabled]="saving()">
+              ><mat-select formControlName="raceBoostTwo">
                 @for (stat of raceStats; track stat.key) {
                   <mat-option [value]="stat.key">{{ stat.name }}</mat-option>
                 }
               </mat-select></mat-form-field
             >
           }
-          <h3>Buy your base stats</h3>
-          <p>
-            Point buy sets base scores. The selected race applies its bonuses when you create the
-            character. Review class skill, equipment, and feature choices in the system reference.
-          </p>
-          <app-point-buy
-            [scores]="pointBuyScores()"
-            (scoresChange)="pointBuyScores.set($event)"
-            [disabled]="saving()"
-          />
+          <h3>Starting ability scores</h3>
+          <mat-form-field appearance="outline"
+            ><mat-label>Method</mat-label
+            ><mat-select formControlName="statMethod" (selectionChange)="scoreMethodChanged()"
+              ><mat-option value="point-buy">Point Buy (27 points)</mat-option
+              ><mat-option value="standard-array">Standard Array</mat-option></mat-select
+            ></mat-form-field
+          >
+          @if (form.controls.statMethod.value === 'standard-array') {
+            <div class="field-grid">
+              @for (stat of allStats; track stat.key) {
+                <mat-form-field appearance="outline"
+                  ><mat-label>{{ stat.name }}</mat-label
+                  ><mat-select
+                    [value]="pointBuyScores()[stat.key]"
+                    (selectionChange)="arrayScore(stat.key, $event.value)"
+                  >
+                    @for (value of [15, 14, 13, 12, 10, 8]; track value) {
+                      <mat-option [value]="value">{{ value }}</mat-option>
+                    }
+                  </mat-select></mat-form-field
+                >
+              }
+            </div>
+          } @else {
+            <app-point-buy
+              [scores]="pointBuyScores()"
+              (scoresChange)="pointBuyScores.set($event)"
+              [disabled]="saving()"
+            />
+          }
+          @if (creatorOptions().startingSkills) {
+            <mat-form-field appearance="outline" class="full-width"
+              ><mat-label>Four starting skill proficiencies</mat-label
+              ><mat-select formControlName="startingSkills" multiple>
+                @for (skill of rules().skills; track skill.id) {
+                  <mat-option [value]="skill.id"
+                    >{{ skill.name }} ({{ skill.stat.toUpperCase() }})</mat-option
+                  >
+                }</mat-select
+              ><mat-hint
+                >Choose four different skills. At least two must use a primary ability of your
+                class.</mat-hint
+              ></mat-form-field
+            >
+          }
+          @if (creatorOptions().startingWeapons) {
+            <mat-form-field appearance="outline"
+              ><mat-label>Pipe-tier starting weapon</mat-label
+              ><mat-select formControlName="startingWeapon">
+                @for (
+                  weapon of creatorOptions().startingWeapons!(form.controls.class.value);
+                  track weapon.id
+                ) {
+                  <mat-option [value]="weapon.id">{{ weapon.name }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+            <p>Starting chips: {{ startingChips() }} (2d4 times 10, rolled once for this draft).</p>
+            @if (creatorOptions().armorAlternative?.(form.controls.class.value)) {
+              <label
+                ><input type="checkbox" formControlName="startingArmor" /> Exchange starting chips
+                for light armor; keep your weapon.</label
+              >
+            }
+          }
           @if (creatorOnly()) {
             <section class="creation-review" aria-labelledby="creation-review-title">
               <h3 id="creation-review-title">Your starting sheet</h3>

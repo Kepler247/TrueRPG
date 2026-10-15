@@ -35,7 +35,7 @@ Run `npm.cmd run build`, `npm.cmd test -- --watch=false`, and `npm.cmd run test:
 
 ## Rest and equipment tracking
 
-Summary pages support confirmed short and long rests using the system adapter's SRD 5.1 defaults: one hour short rest, eight hours long rest (six asleep), one Hit Die per character level, Constitution added to each healing roll with minimum zero healing. Spend dice one at a time; long rests restore HP and recover half total Hit Dice rounded down, minimum one. 501 Rads inherits these base rules and resets Heat on a long rest. Players confirm in-game duration, interruption conditions, starting HP and the once-per-24-game-hours limit; browser elapsed time is not game time. Racial exceptions and class-specific rest features remain manual.
+Summary pages support confirmed short and long rests using the system adapter's SRD 5.1 defaults: one hour short rest, eight hours long rest (six asleep), one Hit Die per character level, Constitution added to each healing roll with minimum zero healing. Spend dice one at a time; long rests restore HP and recover half total Hit Dice rounded down, minimum one. 501 Rads core-1 instead restores all spent Hit Dice on a long rest, heals at least 1 HP per short-rest die, and resets its class resource. Its rest controls advance game time; damaging aftermaths must be resolved before completing a rest. Players confirm in-game duration, interruption conditions, starting HP and the once-per-24-game-hours limit; browser elapsed time is not game time. Racial exceptions and class-specific rest features remain manual.
 
 Spent dice are stored in optional `core.hitDiceSpent`, so old characters begin with all dice available and leveling increases the available pool. Rest records store kind, recording time and HP recovery. Abilities recharge only when explicitly configured on the edit page; unspecified counters (including lifetime Gunslinger uses) are preserved. Limited-use ability buttons spend one use and save. Spell slots and class-specific recovery are not inferred from feature prose.
 
@@ -46,8 +46,29 @@ Failed play-action saves retain their exact result for Retry save; other play wr
 
 ## 501 Rads mutations
 
-The current reference is `mutations-1` (125 pages), imported unchanged from the author's revised PDF. The original 69-page draft is retained as a historical asset. `scripts/import-rads-mutations.py` imports the reference and exactly 100 positive/100 negative definitions, stripping closing commentary from the last entries. The app does not fabricate numerical modifiers for descriptive effects.
+The mutation catalog was imported from `mutations-1` (125 pages) and remains unchanged in the current `core-1` reference (275 pages). The original 69-page draft is retained as a historical asset. `scripts/import-rads-mutations.py` imports the reference and exactly 100 positive/100 negative definitions, stripping closing commentary from the last entries. The app does not fabricate numerical modifiers for descriptive effects.
 
 Mutation snapshots live in optional `core.radsMutations`: stable catalog ID, table number, polarity, name, description, acquisition timestamp and source revision. Unknown snapshot/core fields survive saves. Rules-adapter validation rejects invalid, newer unsupported or duplicate entries. Each roll uniformly samples the remaining entries of the chosen table; there is no mutation-count ceiling. An exhausted finite catalog reports no eligible mutation instead of repeating one. Grants use existing owner/GM/admin edit authorization, while party viewers may read the menu.
 
 The picker commits one draw, shows a reduced-motion-aware DNA animation and reveals only after saving. Failed saves keep the exact draw and pending sheet for retry through the existing optimistic-concurrency path. Positive mutations are rewards/treatments. The negative picker is attached to explicit death confirmation; it sets HP to zero and stores a 30-minute reconstitution state. Recovery uses **game time**, confirmed by the player/GM; page reload or elapsed wall time never resurrects the character automatically. Healing and rest cannot bypass the pending state. Completion clears the state and saves 1 HP. Recovery persists across devices through the character payload. Remove buttons save immediately and retain previously granted IDs in `core.radsMutationHistory`, excluding them from future rolls. The mutation causing an active reconstitution cannot be removed until recovery completes. No cure mechanics or mutation-derived stat bonuses have been invented; once-per-session effects remain reference text until session tracking is defined.
+
+
+## 501 Rads active effects
+
+The character summary has blue benefits, red drawbacks/conditions, gray contextual effects, and separately colored modifiers for mixed effects. Text labels supplement color. Full source ability or consumable descriptions are available on each effect. End removes modifiers and starts mandatory aftermaths rather than dropping them. Conditions can be ended when the GM says; Burning also has an Action-consuming extinguish control.
+
+Check circumstances explicitly identify tasks requiring sight/hearing, fear visibility, technical/medical situations, designated targets and other conditional rules. Roll results explain applied sources and advantage/disadvantage cancellation. Game time and own turns advance explicitly; no browser timer determines game outcomes. Damage handles reductions, resistance, immunity and temporary HP before real HP and death handling. Required crash damage/radiation results remain queued until resolved; Rad Enthusiast's two options are saved before choosing. Failed resolution saves use the normal exact-result retry workflow.
+
+See [501 Rads implementation coverage](RADS_IMPLEMENTATION.md) for automated and reference-based mechanics. Ordinary 5E and D&DS play behavior continues through their own adapters.
+
+
+## Physical-dice weapon play (current workflow)
+
+All systems show Attack roll and Damage roll references instead of an automated Attack button. Known own-character bonuses/effects are combined in those expressions. Target-dependent benefits are labeled conditionally; enemies, distance, cover and hit outcomes are resolved at the table. Item/ability rule blurbs remain available. Undefined test weapons show that their formulas are not defined, rather than fabricated stats.
+
+Ammo/firing counters are adjusted manually with Spend one/+1 ammo, and D&DS reloads remain explicit. Next-attack effects remain active until End is used. Displaying a weapon never rolls or saves. Optional ability/skill dice rollers are unchanged.
+
+501 Rads does not use carry weight. Its summaries, editors and catalogs hide item weights, capacity totals/overrides, carrying warnings and campaign carry switches. Body weight is still optional physical description. Other systems retain their carrying rules. The HP damage-type selector occupies its own row with space before the controls below it.
+
+
+Check totals on the summary now display `A` for advantage and `D` for disadvantage, with full accessible labels and blue/red styling. Stat checks, skills, saves and initiative use the same rules resolver as their rolls; opposing advantage/disadvantage cancels normally. Meth marks Intelligence checks/skills, not Intelligence saves. Numeric check adjustments are also reflected without changing the underlying ability score.

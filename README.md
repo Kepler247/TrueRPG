@@ -86,7 +86,7 @@ Tap ability modifiers, saving throws, skill totals, initiative, or the proficien
 
 Characters > Character creator opens `/characters/new`. Choose a system, class, details, and point-buy scores. A live starting-sheet preview shows final scores, modifiers, saves, skills, HP, hit die, initiative, speed, system rules, and starting abilities. The saved character uses that same initialized preview and opens its summary after creation.
 
-For 501 Rads, Gunslinger is selected as its currently defined class. Starting HP is 10 + Constitution, Heat starts at 0 with a maximum of 3, and Lucky Strike, Stroke of Genius, and Pistol Training are included. Hacking replaces Arcana. The character summary displays system rules and quick resource/ability actions; level-up choices open the edit page and save immediately when applied.
+501 Rads uses the current 275-page core-1 revision: choose one of six classes, Standard Array or point buy, four starting skills (at least two using class primary abilities), and a proficient Pipe-tier starting weapon. Starting chips are rolled once per draft. Psycho and Soldier may exchange those chips for light armor. Class HP, saving throws, movement, resources and unlocked feature descriptions come from the current PDF. Hacking replaces Arcana. See [501 Rads implementation coverage](RADS_IMPLEMENTATION.md) before the larger playtest.
 
 ## Catalogs, ability actions, pictures, and campaigns
 
@@ -104,4 +104,16 @@ D&DS (Dogfights and Deep Space) is available as a third system, with its origina
 Race selection is required when a system offers races (5E and D&DS). Existing sheets can select a missing race on the edit page without automatically reapplying creation bonuses. Character/campaign lists support alphabetical, system and recently-opened sorting; sort preferences and opened history are per-account on the current browser, not synced between devices.
 
 
-501 Rads now includes the 125-page mutation revision and a character mutation menu with a dramatic random reveal. Positive rewards/treatments draw from the positive table; death reconstitution draws a negative mutation, holds HP at zero for 30 game minutes and returns at 1 HP after explicit confirmation. No duplicate mutations and no arbitrary count limit; exhausted tables report no eligible result. Failed saves keep the same draw for retry.
+501 Rads now includes the 275-page core revision, retaining the earlier mutation catalog and a character mutation menu with a dramatic random reveal. Positive rewards/treatments draw from the positive table; death reconstitution draws a negative mutation, holds HP at zero for 30 game minutes and returns at 1 HP after explicit confirmation. No duplicate mutations and no arbitrary count limit; exhausted tables report no eligible result. Failed saves keep the same draw for retry.
+
+
+Weapon entries now show physical-dice Attack roll and Damage roll formulas, including own-character effects. Players/DMs handle targets, distance, cover and hits at the table; ammo/actions and next-attack effect completion are manual. 501 Rads no longer uses carry weight, so its weight and capacity UI is hidden. Other systems retain carrying rules.
+
+
+## Cloudflare Pages deployment
+
+Connect the GitHub repository as a Pages project with production branch `main`, build command `npm run build`, root directory left blank, and output directory `dist/rpg-companion/browser`. The committed `.node-version` selects Node 22.18.0. Supabase browser configuration is already in source; no service-role key or server secret belongs in Pages. Pages supplies SPA fallback when no top-level `404.html` is present.
+
+Pushes to the connected production branch trigger deployment when automatic deployments are enabled. Branch previews share the configured Supabase project unless explicitly configured otherwise; preview changes to saved data affect that same database. A Pages rollback restores frontend assets only, not database state.
+
+After the first successful deployment, set Supabase Authentication URL Configuration's Site URL to the public HTTPS address and allow the exact authentication redirect URLs used by the app. Retain local development URLs as needed. Verify sign-in, direct character URLs after refresh, rules PDFs, uploads and campaign invitations on the public site before inviting the group.

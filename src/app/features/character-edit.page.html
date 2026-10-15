@@ -85,41 +85,66 @@
             (ngModelChange)="hpGain.set($event)"
         /></mat-form-field>
       }
-      <div class="level-up-feats">
-        <mat-form-field appearance="outline" class="full-width"
-          ><mat-label>{{
-            rules().featRequired?.(core().level + 1)
-              ? 'Shared feat choice (required)'
-              : 'New feature or feat name (optional)'
-          }}</mat-label
-          ><input
-            matInput
-            [ngModel]="newFeature()"
-            (ngModelChange)="newFeature.set($event)"
-            maxlength="150"
-        /></mat-form-field>
-        @if (rules().featRequired?.(core().level + 1) || points()) {
+      @if (!rules().featOnlyAtRequiredLevels || rules().featRequired?.(core().level + 1)) {
+        <div class="level-up-feats">
           <mat-form-field appearance="outline" class="full-width"
-            ><mat-label>Shared feat catalog</mat-label
-            ><mat-select
+            ><mat-label>{{
+              rules().featRequired?.(core().level + 1)
+                ? 'Shared feat choice (required)'
+                : 'New feature or feat name (optional)'
+            }}</mat-label
+            ><input
+              matInput
               [ngModel]="newFeature()"
               (ngModelChange)="newFeature.set($event)"
-              [disabled]="saving()"
+              maxlength="150"
+          /></mat-form-field>
+          @if (rules().featRequired?.(core().level + 1) || points()) {
+            <mat-form-field appearance="outline" class="full-width"
+              ><mat-label>Shared feat catalog</mat-label
+              ><mat-select
+                [ngModel]="newFeature()"
+                (ngModelChange)="newFeature.set($event)"
+                [disabled]="saving()"
+              >
+                @for (feat of catalogFeats(); track feat.id) {
+                  <mat-option [value]="feat.name"
+                    >{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</mat-option
+                  >
+                }
+              </mat-select></mat-form-field
             >
-              @for (feat of catalogFeats(); track feat.id) {
-                <mat-option [value]="feat.name"
-                  >{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</mat-option
-                >
-              }
-            </mat-select></mat-form-field
-          >
-        }
-        @if (rules().testFeatName && rules().featRequired?.(core().level + 1)) {
-          <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
-            Use test feat (no mechanical effect)
-          </button>
-        }
-      </div>
+          }
+          @if (selectedFeat(); as feat) {
+            <div class="feat-preview" aria-live="polite">
+              <h3>{{ feat.name }}{{ feat.isMock ? ' (mock)' : '' }}</h3>
+              <p>{{ feat.description }}</p>
+            </div>
+          }
+          @for (
+            choice of rules().featChoices?.(newFeature()) ?? [];
+            track $index;
+            let index = $index
+          ) {
+            <mat-form-field appearance="outline" class="full-width"
+              ><mat-label>{{ choice.label }}</mat-label
+              ><mat-select
+                [ngModel]="featChoices().at(index) ?? ''"
+                (ngModelChange)="chooseFeatOption(index, $event)"
+              >
+                @for (option of choice.options; track option.id) {
+                  <mat-option [value]="option.id">{{ option.name }}</mat-option>
+                }
+              </mat-select></mat-form-field
+            >
+          }
+          @if (rules().testFeatName && rules().featRequired?.(core().level + 1)) {
+            <button mat-button (click)="newFeature.set(rules().testFeatName ?? '')">
+              Use test feat (no mechanical effect)
+            </button>
+          }
+        </div>
+      }
       <ul>
         @for (prompt of rules().levelUpPrompts(core(), core().level + 1); track $index) {
           <li>{{ prompt }}</li>
@@ -385,7 +410,9 @@
           [disabled]="disabled()"
         >
           @for (item of catalogItems(); track item.id) {
-            <mat-option [value]="item.id">{{ item.name }} (mock)</mat-option>
+            <mat-option [value]="item.id"
+              >{{ item.name }}{{ item.isMock ? ' (mock)' : '' }}</mat-option
+            >
           }
         </mat-select></mat-form-field
       ><button
@@ -396,19 +423,21 @@
         Add catalog item
       </button>
     </div>
-    @if (record.canManageCarryRules) {
-      <mat-checkbox
-        [checked]="record.enforceCarryWeight"
-        [disabled]="changingCarryRule()"
-        (change)="setCarryRule($event.checked, $event.source)"
-        >Enforce carrying capacity for this campaign</mat-checkbox
-      >
-    } @else if (!record.enforceCarryWeight) {
-      <p>Your GM has disabled carrying capacity for this campaign.</p>
-    }
-    <p>Carried {{ weight() }} lb &middot; capacity {{ capacity() }} lb</p>
-    @if (record.enforceCarryWeight && weight() > capacity()) {
-      <p class="feedback error">Over carrying capacity. Check your campaign's carrying rules.</p>
+    @if (rules().tracksCarryWeight !== false) {
+      @if (record.canManageCarryRules) {
+        <mat-checkbox
+          [checked]="record.enforceCarryWeight"
+          [disabled]="changingCarryRule()"
+          (change)="setCarryRule($event.checked, $event.source)"
+          >Enforce carrying capacity for this campaign</mat-checkbox
+        >
+      } @else if (!record.enforceCarryWeight) {
+        <p>Your GM has disabled carrying capacity for this campaign.</p>
+      }
+      <p>Carried {{ weight() }} lb &middot; capacity {{ capacity() }} lb</p>
+      @if (record.enforceCarryWeight && weight() > capacity()) {
+        <p class="feedback error">Over carrying capacity. Check your campaign's carrying rules.</p>
+      }
     }
     <div class="field-grid">
       <mat-form-field appearance="outline"
@@ -423,17 +452,19 @@
           }
         </mat-select></mat-form-field
       >
-      <mat-form-field appearance="outline"
-        ><mat-label>Capacity override (lb, optional)</mat-label
-        ><input
-          matInput
-          type="number"
-          min="0"
-          [ngModel]="core().carryCapacityOverride"
-          (ngModelChange)="patch({ carryCapacityOverride: $event })"
-          [disabled]="disabled()"
-        /><mat-hint>Blank uses Strength &times; 15, adjusted for size.</mat-hint></mat-form-field
-      >
+      @if (rules().tracksCarryWeight !== false) {
+        <mat-form-field appearance="outline"
+          ><mat-label>Capacity override (lb, optional)</mat-label
+          ><input
+            matInput
+            type="number"
+            min="0"
+            [ngModel]="core().carryCapacityOverride"
+            (ngModelChange)="patch({ carryCapacityOverride: $event })"
+            [disabled]="disabled()"
+          /><mat-hint>Blank uses Strength &times; 15, adjusted for size.</mat-hint></mat-form-field
+        >
+      }
     </div>
     @for (entry of core().inventory; track entry.id) {
       <div class="entry">
@@ -458,18 +489,55 @@
               (ngModelChange)="item(entry.id, { quantity: $event })"
               [disabled]="disabled()"
           /></mat-form-field>
+          @if (rules().tracksCarryWeight !== false) {
+            <mat-form-field appearance="outline"
+              ><mat-label>Weight each (lb)</mat-label
+              ><input
+                matInput
+                type="number"
+                min="0"
+                [ngModel]="entry.weight"
+                (ngModelChange)="item(entry.id, { weight: $event })"
+                [disabled]="disabled()"
+            /></mat-form-field>
+          }
+        </div>
+        @if (entry['radsWeapon']) {
+          <mat-checkbox
+            [ngModel]="$any(entry['radsWeapon']).tracked || entry['ammoTracked'] || false"
+            (ngModelChange)="item(entry.id, { ammoTracked: $event })"
+            [disabled]="disabled() || $any(entry['radsWeapon']).tracked"
+            >Track individual ammunition (GM decides)</mat-checkbox
+          >
           <mat-form-field appearance="outline"
-            ><mat-label>Weight each (lb)</mat-label
+            ><mat-label>Tracked ammunition carried</mat-label
             ><input
               matInput
               type="number"
               min="0"
-              [ngModel]="entry.weight"
-              (ngModelChange)="item(entry.id, { weight: $event })"
+              step="1"
+              [ngModel]="entry['ammoRemaining'] ?? 0"
+              (ngModelChange)="item(entry.id, { ammoRemaining: $event })"
               [disabled]="disabled()"
-          /></mat-form-field>
-        </div>
+            /><mat-hint
+              >Only used for explicitly tracked explosive ammunition. Throwables use item
+              quantity.</mat-hint
+            ></mat-form-field
+          >
+        }
         @if (entry['weapon']) {
+          <mat-checkbox
+            [ngModel]="entry['attackProficient'] !== false"
+            (ngModelChange)="item(entry.id, { attackProficient: $event })"
+            [disabled]="disabled()"
+            >Proficient with this weapon</mat-checkbox
+          >
+          <mat-checkbox
+            [ngModel]="entry['dualWield'] === true"
+            (ngModelChange)="item(entry.id, { dualWield: $event })"
+            [disabled]="disabled()"
+            >Dual-wielded weapon (-2 attack)</mat-checkbox
+          >
           <div class="field-grid">
             @for (key of ['range', 'longRange', 'reload', 'misfire', 'price']; track key) {
               <mat-form-field appearance="outline"
@@ -597,7 +665,7 @@
               [ngModel]="entry.name"
               (ngModelChange)="ability(entry.id, { name: $event })"
               maxlength="150"
-              [disabled]="disabled()"
+              [disabled]="disabled() || !!rules().managedAbility?.(entry)"
           /></mat-form-field>
           <mat-form-field appearance="outline"
             ><mat-label>Ability kind</mat-label
@@ -605,7 +673,7 @@
               matInput
               [ngModel]="entry.kind"
               (ngModelChange)="ability(entry.id, { kind: $event })"
-              [disabled]="disabled()"
+              [disabled]="disabled() || !!rules().managedAbility?.(entry)"
             /><mat-hint>For example: spell, feature, perk.</mat-hint></mat-form-field
           >
           @if (entry.kind === 'spell') {
@@ -619,7 +687,7 @@
                 step="1"
                 [ngModel]="entry.spellLevel"
                 (ngModelChange)="ability(entry.id, { spellLevel: $event })"
-                [disabled]="disabled()"
+                [disabled]="disabled() || !!rules().managedAbility?.(entry)"
             /></mat-form-field>
           }
           <mat-form-field appearance="outline"
@@ -631,14 +699,14 @@
               step="1"
               [ngModel]="entry.usesMax"
               (ngModelChange)="ability(entry.id, { usesMax: $event })"
-              [disabled]="disabled()"
+              [disabled]="disabled() || !!rules().managedAbility?.(entry)"
           /></mat-form-field>
           <mat-form-field appearance="outline"
             ><mat-label>Use recovery</mat-label>
             <mat-select
               [ngModel]="entry.recharge ?? 'manual'"
               (ngModelChange)="ability(entry.id, { recharge: $event })"
-              [disabled]="disabled()"
+              [disabled]="disabled() || !!rules().managedAbility?.(entry)"
             >
               <mat-option value="manual">Manual</mat-option
               ><mat-option value="short-rest">Short or long rest</mat-option
@@ -646,7 +714,11 @@
             </mat-select>
           </mat-form-field>
           @if (entry.usesMax !== null) {
-            <button mat-button (click)="resetAbilityUses(entry.id)" [disabled]="disabled()">
+            <button
+              mat-button
+              (click)="resetAbilityUses(entry.id)"
+              [disabled]="disabled() || !!rules().managedAbility?.(entry)"
+            >
               Reset uses (save draft)
             </button>
           }
@@ -658,11 +730,15 @@
             rows="3"
             [ngModel]="entry.description"
             (ngModelChange)="ability(entry.id, { description: $event })"
-            [disabled]="disabled()"
+            [disabled]="disabled() || !!rules().managedAbility?.(entry)"
           ></textarea>
         </mat-form-field>
         @if (record.canEdit) {
-          <button mat-button (click)="removeAbility(entry.id)" [disabled]="saving()">
+          <button
+            mat-button
+            (click)="removeAbility(entry.id)"
+            [disabled]="saving() || !!rules().managedAbility?.(entry)"
+          >
             Remove ability
           </button>
         }

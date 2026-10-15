@@ -1,3 +1,4 @@
+import { rollDie } from '../core/characters/dice';
 import {
   AdventureHistory,
   AdventureSort,
@@ -59,6 +60,7 @@ const emptyContext = (): AdventureContext => ({
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdventureCollection {
+  readonly allStats = STATS;
   readonly raceStats = STATS.filter((stat) => stat.key !== 'cha');
   readonly kind = input.required<CollectionKind>();
   readonly creatorOnly = input(false);
@@ -98,6 +100,10 @@ export class AdventureCollection {
     campaignId: new FormControl('', { nonNullable: true }),
     description: new FormControl('', { nonNullable: true }),
     race: new FormControl('', { nonNullable: true }),
+    startingWeapon: new FormControl('', { nonNullable: true }),
+    startingArmor: new FormControl(false, { nonNullable: true }),
+    statMethod: new FormControl('point-buy', { nonNullable: true }),
+    startingSkills: new FormControl<string[]>([], { nonNullable: true }),
     class: new FormControl('', { nonNullable: true }),
     raceBoostOne: new FormControl('str', { nonNullable: true }),
     raceBoostTwo: new FormControl('dex', { nonNullable: true }),
@@ -107,6 +113,7 @@ export class AdventureCollection {
   private readonly formValue = toSignal(this.form.valueChanges, {
     initialValue: this.form.getRawValue(),
   });
+  readonly startingChips = signal(0);
   readonly preview = computed<{ core: CharacterCore | null; error: string | null }>(() => {
     this.formValue();
     const value = this.form.getRawValue();
@@ -121,7 +128,44 @@ export class AdventureCollection {
       raceBoosts: [value.raceBoostOne, value.raceBoostTwo],
     };
     try {
-      const core = this.rules().initialize?.(draft) ?? draft;
+      if (
+        value.statMethod === 'standard-array' &&
+        STATS.map((stat) => draft.scores[stat.key])
+          .sort((a, b) => a - b)
+          .join(',') !== '8,10,12,13,14,15'
+      )
+        throw new Error('Assign each Standard Array value exactly once.');
+      const choices = this.creatorOptions();
+      if (choices.startingSkills) {
+        const selected = value.startingSkills;
+        const primary = choices.primaryStats?.(value.class) ?? [];
+        if (
+          selected.length !== choices.startingSkills ||
+          new Set(selected).size !== selected.length ||
+          selected.some((id) => !this.rules().skills.some((skill) => skill.id === id))
+        )
+          throw new Error('Choose four different starting skills.');
+        if (
+          this.rules().skills.filter(
+            (skill) => selected.includes(skill.id) && primary.includes(skill.stat),
+          ).length < (choices.primarySkills ?? 0)
+        )
+          throw new Error('At least two starting skills must use a primary class ability.');
+        draft.skills = {
+          ...draft.skills,
+          ...Object.fromEntries(
+            selected.map((id) => [id, { proficiency: 'proficient' as const, bonus: 0 }]),
+          ),
+        };
+      }
+      let core = this.rules().initialize?.(draft) ?? draft;
+      if (this.rules().completeCreation)
+        core = this.rules().completeCreation!(
+          core,
+          value.startingWeapon,
+          this.startingChips(),
+          value.startingArmor,
+        );
       validateSystemCore(core, this.rules());
       return { core, error: null };
     } catch (error) {
@@ -131,6 +175,13 @@ export class AdventureCollection {
       };
     }
   });
+  scoreMethodChanged(): void {
+    if (this.form.controls.statMethod.value === 'standard-array')
+      this.pointBuyScores.set({ str: 15, dex: 14, con: 13, int: 12, wis: 10, cha: 8 });
+  }
+  arrayScore(key: (typeof STATS)[number]['key'], value: number): void {
+    this.pointBuyScores.update((scores) => ({ ...scores, [key]: Number(value) }));
+  }
   signed(value: number): string {
     return `${value >= 0 ? '+' : ''}${value}`;
   }
@@ -159,6 +210,10 @@ export class AdventureCollection {
   });
 
   constructor() {
+    effect(() => {
+      if (this.saving()) this.form.disable({ emitEvent: false });
+      else this.form.enable({ emitEvent: false });
+    });
     effect(() => {
       this.kind();
       this.userId();
@@ -190,6 +245,7 @@ export class AdventureCollection {
     }
   }
   startCreate(): void {
+    this.startingChips.set((rollDie(4) + rollDie(4)) * 10);
     const systemId = this.context().systems[0]?.id ?? '';
     this.pointBuyScores.set(startingScores());
     this.form.reset({ name: '', systemId, campaignId: '', description: '' });
@@ -204,6 +260,9 @@ export class AdventureCollection {
     this.selectedSystem.set(this.form.controls.systemId.value);
     this.form.controls.campaignId.setValue('');
     this.form.controls.race.setValue('');
+    this.form.controls.startingWeapon.setValue('');
+    this.form.controls.startingArmor.setValue(false);
+    this.form.controls.startingSkills.setValue([]);
     this.form.controls.class.setValue('');
     if (this.creatorOnly() && this.creatorOptions().classes.length === 1)
       this.form.controls.class.setValue(this.creatorOptions().classes[0]);
@@ -216,7 +275,7 @@ export class AdventureCollection {
   }
   async create(): Promise<void> {
     if (this.saving() || !this.loaded()) return;
-    this.form.controls.name.setValue(this.form.controls.name.value.trim());
+    this.form.controls.name.setValue(this.form.controls.name.value.trim(), { emitEvent: false });
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;

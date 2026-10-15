@@ -55,10 +55,10 @@ interface ReferenceDocument {
       </div>
       @if (system.slug === '501-rads') {
         <aside>
-          <strong>Mutation revision &middot; author clarifications</strong>
+          <strong>Complete rules revision &middot; 501 Rads</strong>
           <p>
             Maximum level 12. Gain two stat points every level; scores may exceed 20. Shared feats
-            at 3, 6, 9, 12 are awaiting definition. Gunslingers use d10 HP. Fan the Hammer costs 2
+            at 3, 6, 9, 12 are awaiting definition. Gunslingers use d8 HP. Six classes, feats, equipment, consumables, loot, vehicles and enemies are defined in this revision. Fan the Hammer costs 2
             Heat. 100 positive and 100 negative mutations are available. Death grants a random
             negative mutation; after 30 game minutes of reconstitution, return at 1 HP.
           </p>
@@ -175,7 +175,7 @@ export class SystemHubPage {
       const controller = new AbortController();
       onCleanup(() => controller.abort());
       void fetch(
-        `${root}/${system.slug === '501-rads' ? 'mutations-1' : system.slug === 'dnds' ? 'original' : 'srd-5-1'}.json`,
+        `${root}/${system.slug === '501-rads' ? 'core-1' : system.slug === 'dnds' ? 'original' : 'srd-5-1'}.json`,
         {
           signal: controller.signal,
         },

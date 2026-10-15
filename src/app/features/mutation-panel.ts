@@ -1,4 +1,4 @@
-﻿import { A11yModule } from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,6 +17,7 @@ import {
   MutationDefinition,
   MutationRules,
   MutationPolarity,
+  MutationTreatment,
 } from '../core/systems/rads-mutations';
 @Component({
   selector: 'app-mutation-panel',
@@ -25,19 +26,49 @@ import {
   template: `<section class="mutation-panel" aria-labelledby="mutations-title">
       <div class="heading">
         <h2 id="mutations-title">
-          Mutations <span>{{ acquired().length }}</span>
+          Mutations <span>{{ views().length }}</span>
         </h2>
         <button mat-button (click)="expanded.set(!expanded())" [attr.aria-expanded]="expanded()">
           {{ expanded() ? 'Close menu' : 'View mutations' }}
         </button>
       </div>
       <p class="hint">
-        {{ positiveCount() }} positive / {{ acquired().length - positiveCount() }} negative. Every
+        {{ positiveCount() }} positive / {{ views().length - positiveCount() }} negative. Every
         mutation is unique.
       </p>
       @if (expanded()) {
+        @if (canEdit() && rules().treat) {
+          <details class="treatment-menu">
+            <summary>Record a Medic treatment</summary>
+            <p>
+              Use this to record a treatment received at the table. The Medic spends their own
+              resources. Mutational Medicine needs one minute of examination; the GM approves
+              donation eligibility and amplification. Apply GM-defined enhancement bonuses at the
+              table.
+            </p>
+            <label
+              ><input type="checkbox" [(ngModel)]="treatmentConfirmed" />GM/Medic confirms the
+              procedure is complete and eligible.</label
+            >
+            <label
+              >Received Organ Donation<select [(ngModel)]="borrowedMutation">
+                <option value="">Choose the donor's positive minor mutation</option>
+                @for (mutation of receivable(); track mutation.id) {
+                  <option [value]="mutation.id">{{ mutation.name }}</option>
+                }
+              </select></label
+            >
+            <button
+              mat-stroked-button
+              (click)="treat(borrowedMutation, 'receive')"
+              [disabled]="busy() || pending() || !treatmentConfirmed || !borrowedMutation"
+            >
+              Record borrowed mutation (10 minutes)
+            </button>
+          </details>
+        }
         <div class="mutation-menu">
-          @for (mutation of acquired(); track mutation.id) {
+          @for (mutation of views(); track mutation.id) {
             <details>
               <summary>
                 <span class="polarity" [class.negative]="mutation.polarity === 'negative'">{{
@@ -46,7 +77,59 @@ import {
                 {{ mutation.name }}
               </summary>
               <p>{{ mutation.description }}</p>
-              @if (canEdit()) {
+              @if (mutation.temporary) {
+                <p class="hint">Temporary / borrowed. This is not a permanent grant.</p>
+              }
+              @for (state of mutation.states; track state.id) {
+                <p
+                  class="mutation-state"
+                  [class.negative]="state.mode === 'suppressed' || state.mode === 'inactive'"
+                >
+                  {{ state.name }}: {{ state.mode }}
+                  @if (state.seconds !== undefined) {
+                    &middot; {{ state.seconds }} game seconds remaining
+                  }
+                </p>
+                @if (canEdit() && rules().endTreatment) {
+                  <button
+                    mat-button
+                    (click)="endTreatment(state.id)"
+                    [disabled]="busy() || pending() || !!result()"
+                  >
+                    End {{ state.mode }}
+                  </button>
+                }
+              }
+              @if (canEdit() && rules().treat) {
+                @if (mutation.polarity === 'negative') {
+                  <button
+                    mat-button
+                    (click)="treat(mutation.id, 'suppress')"
+                    [disabled]="busy() || pending() || !treatmentConfirmed"
+                  >
+                    Record suppression
+                  </button>
+                }
+                @if (mutation.polarity === 'positive') {
+                  <button
+                    mat-button
+                    (click)="treat(mutation.id, 'amplify')"
+                    [disabled]="busy() || pending() || !treatmentConfirmed"
+                  >
+                    Record amplification
+                  </button>
+                }
+                @if (mutation.polarity === 'positive') {
+                  <button
+                    mat-button
+                    (click)="treat(mutation.id, 'donate')"
+                    [disabled]="busy() || pending() || !treatmentConfirmed"
+                  >
+                    Record donated characteristic
+                  </button>
+                }
+              }
+              @if (canEdit() && !mutation.temporary) {
                 <button
                   mat-button
                   (click)="remove(mutation.id)"
@@ -198,8 +281,24 @@ export class MutationPanel {
   readonly result = signal<{ mutation: MutationDefinition; death: boolean } | null>(null);
   readonly spinning = signal(false);
   readonly acquired = computed(() => this.rules().acquired(this.core()));
+  readonly views = computed(
+    () =>
+      this.rules().views?.(this.core()) ??
+      this.acquired().map((m) => ({
+        ...m,
+        temporary: false,
+        states: [] as { id: string; name: string; mode: string; seconds?: number }[],
+      })),
+  );
+  readonly receivable = computed(() =>
+    this.rules().catalog.filter(
+      (m) => m.polarity === 'positive' && !this.views().some((owned) => owned.id === m.id),
+    ),
+  );
+  treatmentConfirmed = false;
+  borrowedMutation = '';
   readonly positiveCount = computed(
-    () => this.acquired().filter((m) => m.polarity === 'positive').length,
+    () => this.views().filter((m) => m.polarity === 'positive').length,
   );
   readonly saved = computed(
     () => !!this.result() && this.acquired().some((m) => m.id === this.result()!.mutation.id),
@@ -256,6 +355,32 @@ export class MutationPanel {
       });
     } catch (error) {
       this.error.set(error instanceof Error ? error.message : 'Mutation could not be removed.');
+    }
+  }
+  treat(id: string, kind: MutationTreatment): void {
+    this.mutationAction(() => {
+      if (!this.treatmentConfirmed)
+        throw new Error('Confirm treatment completion and eligibility first.');
+      return this.rules().treat!(this.core(), id, kind);
+    }, 'Mutation treatment recorded. The Medic tracks their resource cost separately.');
+  }
+  endTreatment(id: string): void {
+    this.mutationAction(
+      () => this.rules().endTreatment!(this.core(), id),
+      'Mutation effect ended; required recovery applied.',
+    );
+  }
+  private mutationAction(fn: () => CharacterCore, message: string): void {
+    if (!this.canEdit() || this.busy() || this.pending() || this.result()) return;
+    if (!this.ready()) {
+      this.error.set('Save HP/resource changes first.');
+      return;
+    }
+    this.error.set('');
+    try {
+      this.action.emit({ core: fn(), message });
+    } catch (error) {
+      this.error.set(error instanceof Error ? error.message : 'Treatment failed.');
     }
   }
   finish(): void {

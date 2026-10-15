@@ -1,4 +1,7 @@
-﻿import { signal } from '@angular/core';
+import { addEffect, endRadsEffect } from '../core/systems/rads-engine';
+import { classEffect } from '../core/systems/rads-abilities';
+import { RADS_CATALOG } from '../core/systems/rads-catalog';
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import { of } from 'rxjs';
@@ -221,7 +224,7 @@ describe('Read-only character summary', () => {
       (array as Uint32Array)[0] = 19;
       return array;
     });
-    fixture.nativeElement.querySelector('button[aria-label="Roll Strength check"]').click();
+    fixture.nativeElement.querySelector('button[aria-label^="Roll Strength check"]').click();
     fixture.detectChanges();
     expect(fixture.componentInstance.lastRoll()?.total).toBe(23);
     expect(fixture.nativeElement.querySelector('.roll-result').textContent).toContain(
@@ -276,7 +279,7 @@ describe('Read-only character summary', () => {
   });
   it('charges Lucky Strike once and replaces the previous check with its reroll', async () => {
     const rules = make501Rules(BASE_5E_RULES);
-    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    const gunslinger = { ...rules.initialize!({ ...core, class: 'Gunslinger' }), heat: 3 };
     service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
     const page = (await create()).componentInstance;
     page.roll('Dexterity', 2);
@@ -289,7 +292,7 @@ describe('Read-only character summary', () => {
   });
   it('offers three results for Stroke of Genius without charging again when chosen', async () => {
     const rules = make501Rules(BASE_5E_RULES);
-    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    const gunslinger = { ...rules.initialize!({ ...core, class: 'Gunslinger' }), heat: 3 };
     service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
     const page = (await create()).componentInstance;
     const id = page
@@ -306,7 +309,7 @@ describe('Read-only character summary', () => {
   });
   it('does not spend resources or apply an ability roll after a failed save', async () => {
     const rules = make501Rules(BASE_5E_RULES);
-    const gunslinger = rules.initialize!({ ...core, class: 'Gunslinger', heat: 3 });
+    const gunslinger = { ...rules.initialize!({ ...core, class: 'Gunslinger' }), heat: 3 };
     service.load.mockResolvedValue({ ...record, rulesetKey: '501-rads', core: gunslinger });
     const page = (await create()).componentInstance;
     page.roll('Dexterity', 2);
@@ -319,7 +322,7 @@ describe('Read-only character summary', () => {
     expect(page.lastRoll()).toEqual(previous);
     expect(page.error()).toBe('Conflict');
   });
-  it('preserves a failed firearm action and saves its exact charge/roll result on retry', async () => {
+  it('preserves a failed manual ammunition change and retries the exact counter snapshot', async () => {
     const weapon = catalogInventory(
       DNDS_CATALOG.find((e) => e.name === 'Pistol')!,
       'dnds',
@@ -332,7 +335,7 @@ describe('Read-only character summary', () => {
     });
     const page = (await create()).componentInstance;
     service.save.mockRejectedValueOnce(new Error('Offline'));
-    await page.attackWeapon(weapon.id);
+    await page.adjustWeaponAmmo(weapon.id, -1);
     const pending = page.pendingAction()!;
     expect(pending.core.inventory[0]['chargesRemaining']).toBe(9);
     expect(page.record()!.core.inventory[0]['chargesRemaining']).toBe(10);
@@ -359,5 +362,122 @@ describe('Read-only character summary', () => {
     expect(page.record()!.core.hpCurrent).toBe(1);
     expect(page.recovering()).toBe(false);
     expect(rules.acquired(page.record()!.core)[0].id).toBe(mutation.id);
+  });
+  it('shows physical weapon formulas to party viewers without attack settings or save side effects', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    const weapon = {
+      ...catalogInventory(
+        RADS_CATALOG.find((e) => e.name === '9mm Service Pistol')!,
+        '501-rads',
+      ),
+      equipped: true,
+    };
+    const character = rules.initialize!({
+      ...structuredClone(core),
+      class: 'Gunslinger',
+      scores: { ...core.scores, dex: 16 },
+    });
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      canEdit: false,
+      rulesetKey: '501-rads',
+      core: { ...character, inventory: [weapon] },
+    });
+    const fixture = await create(),
+      text = fixture.nativeElement.textContent;
+    expect(text).toContain('Attack roll');
+    expect(text).toContain('d20 + 7');
+    expect(text).toContain('Damage roll');
+    expect(text).toContain('1d8 + 4 Ballistic');
+    expect(text).not.toContain('Weapon attack settings');
+    expect(text).not.toContain('Target AC');
+    expect(text).not.toContain('Distance (ft)');
+    expect(
+      [...fixture.nativeElement.querySelectorAll('button')].some(
+        (b: any) => b.textContent.trim() === 'Attack',
+      ),
+    ).toBe(false);
+    expect(service.save).not.toHaveBeenCalled();
+  });
+  it('hides every carry-weight total and warning in 501, including unspecified item weights', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    const character = rules.initialize!({ ...structuredClone(core), class: 'Gunslinger' });
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: '501-rads',
+      core: {
+        ...character,
+        inventory: [{ ...character.inventory[0], weight: 99999, weightKnown: false }],
+      },
+    });
+    const fixture = await create(),
+      text = fixture.nativeElement.textContent.toLowerCase();
+    expect(text).not.toContain('lb carried');
+    expect(text).not.toContain('carrying capacity');
+    expect(text).not.toContain('weight unspecified');
+    expect(text).not.toContain('99999');
+    expect(fixture.nativeElement.querySelector('.damage-type-control select')).not.toBeNull();
+  });
+  it('marks Meth-affected Intelligence stats and skills with D, leaves saves normal, and clears after End', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    let character = rules.initialize!({
+      ...structuredClone(core),
+      class: 'Psycho',
+      level: 4,
+      scores: { ...core.scores, int: 12 },
+    });
+    character = addEffect(character, classEffect('Meth', character)!);
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: '501-rads',
+      core: character,
+    });
+    const fixture = await create();
+    const stat = () =>
+      [...fixture.nativeElement.querySelectorAll('.stat-tile')].find(
+        (el: any) => el.querySelector('.stat-name')?.textContent === 'Intelligence',
+      ) as HTMLElement;
+    const hacking = () =>
+      [...fixture.nativeElement.querySelectorAll('.skill-row')].find(
+        (el: any) => el.querySelector('strong')?.textContent === 'Hacking',
+      ) as HTMLElement;
+    expect(stat().querySelector('.modifier')!.textContent!.trim()).toBe('+1 D');
+    expect(hacking().querySelector('button')!.textContent!.trim()).toBe('+1 D');
+    expect(hacking().querySelector('button')!.getAttribute('aria-label')).toContain('disadvantage');
+    expect(hacking().querySelector('button')!.classList.contains('check-disadvantage')).toBe(true);
+    expect(stat().querySelector('.save')!.textContent).not.toContain('D');
+    await fixture.componentInstance.savePlayAction(endRadsEffect(character, 'meth'), 'Meth ended.');
+    fixture.detectChanges();
+    expect(stat().querySelector('.modifier')!.textContent!.trim()).toBe('+1');
+    expect(hacking().querySelector('button')!.textContent!.trim()).toBe('+1');
+  });
+  it('shows A for an applicable advantage and removes it when opposing disadvantage cancels', async () => {
+    const rules = make501Rules(BASE_5E_RULES);
+    let character = rules.initialize!({
+      ...structuredClone(core),
+      class: 'Psycho',
+      level: 4,
+      scores: { ...core.scores, int: 12 },
+    });
+    character = addEffect(character, classEffect('IntelliBoostPro', character)!);
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: '501-rads',
+      core: character,
+    });
+    const fixture = await create();
+    const hacking = () =>
+      [...fixture.nativeElement.querySelectorAll('.skill-row')].find(
+        (el: any) => el.querySelector('strong')?.textContent === 'Hacking',
+      ) as HTMLElement;
+    expect(hacking().querySelector('button')!.textContent!.trim()).toBe('+1 A');
+    expect(hacking().querySelector('button')!.classList.contains('check-advantage')).toBe(true);
+    await fixture.componentInstance.savePlayAction(
+      addEffect(character, classEffect('Meth', character)!),
+      'Meth activated.',
+    );
+    fixture.detectChanges();
+    expect(hacking().querySelector('button')!.textContent!.trim()).toBe('+1');
+    expect(hacking().querySelector('button')!.classList.contains('check-advantage')).toBe(false);
   });
 });

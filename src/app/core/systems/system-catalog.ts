@@ -1,3 +1,5 @@
+import { RADS_CONSUMABLES } from './rads-consumables';
+import { RADS_CATALOG, RadsWeapon } from './rads-catalog';
 import { DNDS_CATALOG, DndsWeapon } from './dnds-catalog';
 import { CharacterAbility, createEntryId, InventoryEntry } from '../characters/character-core';
 export interface CatalogEntry {
@@ -8,6 +10,9 @@ export interface CatalogEntry {
   weight: number;
   isMock: boolean;
   weapon?: DndsWeapon;
+  radsWeapon?: RadsWeapon;
+  radsArmor?: number;
+  radsConsumable?: string;
   armor?: {
     ac: number;
     dexCap: number | null;
@@ -64,6 +69,7 @@ const MOCK_FEATS: readonly CatalogEntry[] = ['Survivor', 'Marksman', 'Scholar'].
   isMock: true,
 }));
 export function systemCatalog(key: string | undefined): readonly CatalogEntry[] {
+  if (key === '501-rads' || key === 'wasteland') return [...RADS_CATALOG, ...RADS_CONSUMABLES];
   if (key === 'dnds')
     return [
       ...DNDS_CATALOG,
@@ -101,6 +107,15 @@ export function catalogInventory(entry: CatalogEntry, rulesetKey: string): Inven
     ...(entry.weapon ? { weapon: entry.weapon, chargesRemaining: entry.weapon.reload } : {}),
     ...(entry.armor ? { armor: entry.armor } : {}),
     ...(entry.ammoType ? { ammoType: entry.ammoType } : {}),
+    ...(entry.radsWeapon
+      ? {
+          radsWeapon: entry.radsWeapon,
+          weightKnown: false,
+          ...(entry.radsWeapon.tracked ? { ammoRemaining: 0 } : {}),
+        }
+      : {}),
+    ...(entry.radsArmor ? { radsArmor: entry.radsArmor, weightKnown: false } : {}),
+    ...(entry.radsConsumable ? { radsConsumable: entry.radsConsumable, weightKnown: false } : {}),
     catalogId: entry.id,
     catalogRuleset: rulesetKey,
     isMock: entry.isMock,

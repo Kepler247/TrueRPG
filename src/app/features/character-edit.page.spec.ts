@@ -123,7 +123,7 @@ describe('Character sheet', () => {
     expect(page.dirty()).toBe(true);
     expect(page.saving()).toBe(false);
   });
-  it('requires the 501 Rads feat and applies stat increases, d10 HP, and retroactive Constitution', async () => {
+  it('requires the 501 Rads feat and applies stat increases, d8 HP, and retroactive Constitution', async () => {
     const core = createCore();
     core.class = 'Gunslinger';
     core.level = 2;
@@ -137,11 +137,11 @@ describe('Character sheet', () => {
     await page.applyLevelUp();
     expect(page.core().level).toBe(2);
     expect(page.error()).toContain('feat');
-    page.newFeature.set('Test Feat (placeholder)');
+    page.newFeature.set('Sharpshooter Training');
     await page.applyLevelUp();
     expect(page.core().level).toBe(3);
     expect(page.core().scores.con).toBe(15);
-    expect(page.core().hpMax).toBe(30);
+    expect(page.core().hpMax).toBe(29);
     expect(page.core().abilities.some((a) => a.name === 'Dual Wield')).toBe(true);
     expect(page.dirty()).toBe(false);
     expect(service.save).toHaveBeenCalledTimes(1);
@@ -193,5 +193,25 @@ describe('Character sheet', () => {
     expect(page.core().inventory[0]['isMock']).toBe(true);
     expect(page.core().inventory[0]['damage']).toBeUndefined();
     expect(page.dirty()).toBe(true);
+  });
+  it('removes 501 carrying controls and per-item weights while keeping inventory quantities', async () => {
+    service.load.mockResolvedValue({
+      ...structuredClone(record),
+      rulesetKey: '501-rads',
+      canManageCarryRules: true,
+      core: {
+        ...createCore(),
+        class: 'Gunslinger',
+        inventory: [{ id: 'item', name: 'Test item', quantity: 1, weight: 25, description: '' }],
+      },
+    });
+    const fixture = await create(),
+      text = fixture.nativeElement.textContent;
+    expect(text).not.toContain('Enforce carrying capacity');
+    expect(text).not.toContain('Capacity override');
+    expect(text).not.toContain('Weight each');
+    expect(text).not.toContain('Carried ');
+    expect(text).toContain('Quantity');
+    expect(text).toContain('Body weight');
   });
 });

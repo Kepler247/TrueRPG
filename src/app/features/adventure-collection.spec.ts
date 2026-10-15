@@ -243,11 +243,14 @@ describe('Adventure creation and lists', () => {
     const page = fixture.componentInstance;
     const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
     expect(page.creating()).toBe(true);
-    expect(page.form.controls.class.value).toBe('Gunslinger');
+    expect(page.form.controls.class.value).toBe('');
+    page.form.controls.class.setValue('Gunslinger');
+    page.form.controls.startingSkills.setValue(['acrobatics', 'stealth', 'medicine', 'history']);
+    page.form.controls.startingWeapon.setValue('rads-pipe-popper-pistol');
     page.form.controls.name.setValue('Jack');
     page.pointBuyScores.set({ str: 8, dex: 15, con: 14, int: 8, wis: 10, cha: 15 });
     const preview = page.preview().core!;
-    expect(preview.hpMax).toBe(12);
+    expect(preview.hpMax).toBe(10);
     expect(preview['heat']).toBe(0);
     expect(preview.abilities.map((a) => a.name)).toEqual([
       'Lucky Strike',

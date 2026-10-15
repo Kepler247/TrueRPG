@@ -1,4 +1,4 @@
-﻿import { attackDnds, reloadDnds, weaponSchema } from './dnds-combat';
+import { dndsWeaponReference, adjustDndsAmmo, reloadDnds, weaponSchema } from './dnds-combat';
 import type { CharacterRuleset } from '../characters/character-ruleset';
 import { CharacterCore, CharacterAbility } from '../characters/character-core';
 import { makePlain5eRules } from './system-rules';
@@ -172,7 +172,8 @@ export function makeDndsRules(base: CharacterRuleset): CharacterRuleset {
         a = item['armor'] as { ac: number; dexCap: number | null; resistances: string[] };
       return `${item.name}: AC ${a.ac + (a.dexCap === 0 ? 0 : Math.min(rules.abilityModifier(core.scores.dex), a.dexCap ?? Infinity))}; resistance: ${a.resistances.join(', ')}.`;
     },
-    weaponAttack: (core, id, input, rules) => attackDnds(core, rules, id, input),
+    weaponReference: dndsWeaponReference,
+    adjustWeaponAmmo: adjustDndsAmmo,
     reloadWeapon: reloadDnds,
     creator: {
       races: Object.keys(RACES),

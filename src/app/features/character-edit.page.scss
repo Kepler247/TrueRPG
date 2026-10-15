@@ -68,3 +68,17 @@ footer {
 .level-up-feats mat-form-field {
   min-width: 0;
 }
+
+.feat-preview {
+  padding: 1rem;
+  border: 1px solid #dddcd5;
+  border-radius: 0.75rem;
+  overflow-wrap: anywhere;
+  h3 {
+    margin: 0 0 0.5rem;
+  }
+  p {
+    margin: 0;
+    white-space: pre-line;
+  }
+}

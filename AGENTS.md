@@ -55,3 +55,6 @@ Do not publish or create external resources unless requested.
 - Character detail URLs show summaries with authorized quick current-HP/Heat controls and local dice rolls. Keep general sheet editing controls on /characters/:id/edit. Applying a level-up saves immediately; preserve failed level-up changes for retry without advancing twice.
 - Summary layouts must remain compact and readable on phones, including skill totals and stat modifiers/saves.
 - Write text assets as UTF-8; use HTML entities or escaped Unicode for symbols when shell encoding could corrupt them.
+
+- 501 Rads does not use carry weights: hide item weights, carrying totals/capacity, overrides and campaign carrying controls for that ruleset. Body weight remains optional character description data.
+- Weapon play uses physical dice in all systems. Show combined attack and damage formulas including active own-character effects. No live target/enemy-condition, distance, cover or hit calculations. Ammo, attack actions and next-attack effect completion are manual; keep situational rules as reference text.

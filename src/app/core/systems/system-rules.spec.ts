@@ -21,6 +21,7 @@ describe('501 Rads author-defined rules', () => {
   });
   it('permits scores above 30 but rejects levels above 12', () => {
     const core = createCore();
+    core.class = 'Gunslinger';
     core.scores.str = 37;
     expect(coreSchema.safeParse(core).success).toBe(true);
     expect(() => validateSystemCore(core, rules)).not.toThrow();
@@ -29,14 +30,14 @@ describe('501 Rads author-defined rules', () => {
     core.level = 1;
     expect(() => validateSystemCore(core, BASE_5E_RULES)).toThrow('30');
   });
-  it('uses Ranger-like d10 HP without inventing Gunslinger saving proficiencies', () => {
+  it('uses published d8 Gunslinger HP and Dexterity/Charisma saves', () => {
     const core = createCore();
     core.class = 'Gunslinger';
     core.scores.con = 16;
     const initialized = rules.initialize!(core);
-    expect(initialized.hpMax).toBe(13);
-    expect(rules.hitDie!(initialized)).toBe(10);
-    expect(initialized.saves.dex.proficient).toBe(false);
+    expect(initialized.hpMax).toBe(11);
+    expect(rules.hitDie!(initialized)).toBe(8);
+    expect(initialized.saves.dex.proficient).toBe(true);
     expect(currentHeat(initialized)).toBe(0);
   });
   it('uses finite Heat caps through 10, then unlimited; level 12 triples base gains', () => {
@@ -78,7 +79,7 @@ describe('501 Rads author-defined rules', () => {
     expect(core['futureMechanic']).toEqual({ keep: true });
     expect(currentHeat(core)).toBe(29);
     expect(core.abilities.find((a) => a.name === 'Fan the Hammer')?.description).toContain(
-      '2 Heat',
+      '2 heat points',
     );
     expect(core.abilities.some((a) => a.name === 'Divine Intervention')).toBe(true);
   });
@@ -159,6 +160,8 @@ describe('Plain 5E SRD foundation', () => {
       'Choose a race',
     );
     expect(() => validateSystemCore({ ...createCore(), race: 'Human' }, rules)).not.toThrow();
-    expect(() => validateSystemCore(createCore(), make501Rules(BASE_5E_RULES))).not.toThrow();
+    expect(() =>
+      validateSystemCore({ ...createCore(), class: 'Gunslinger' }, make501Rules(BASE_5E_RULES)),
+    ).not.toThrow();
   });
 });

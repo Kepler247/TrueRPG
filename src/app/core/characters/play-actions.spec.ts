@@ -19,25 +19,23 @@ describe('Rest recovery and inventory actions', () => {
   it('spends one die, adds Constitution, and clamps healing to maximum HP', () => {
     const c = core();
     c.scores.con = 14;
-    const next = completeRest(c, rules, 'short', true, () => 10);
-    expect(next.hpCurrent).toBe(20);
+    const next = completeRest(c, rules, 'short', true, () => 8);
+    expect(next.hpCurrent).toBe(18);
     expect(next.hitDiceSpent).toBe(4);
     expect(availableHitDice(next)).toBe(1);
     expect(next['heat']).toBe(5);
-    expect(completeRest({ ...c, hpCurrent: 39 }, rules, 'short', true, () => 10).hpCurrent).toBe(
-      40,
-    );
+    expect(completeRest({ ...c, hpCurrent: 39 }, rules, 'short', true, () => 8).hpCurrent).toBe(40);
     expect(c.hitDiceSpent).toBe(3);
   });
   it('negative Constitution never damages a character during a rest', () => {
     const c = core();
     c.scores.con = 1;
-    expect(completeRest(c, rules, 'short', true, () => 1).hpCurrent).toBe(8);
+    expect(completeRest(c, rules, 'short', true, () => 1).hpCurrent).toBe(9);
   });
-  it('long rest restores HP and half total dice rounded down, and resets Heat', () => {
+  it('long rest restores HP and all spent dice, and resets Heat', () => {
     const next = completeRest(core(), rules, 'long');
     expect(next.hpCurrent).toBe(40);
-    expect(next.hitDiceSpent).toBe(1);
+    expect(next.hitDiceSpent).toBe(0);
     expect(next['heat']).toBe(0);
     expect(completeRest({ ...core(), level: 1, hitDiceSpent: 1 }, rules, 'long').hitDiceSpent).toBe(
       0,
@@ -47,7 +45,7 @@ describe('Rest recovery and inventory actions', () => {
     expect(() => completeRest({ ...core(), hitDiceSpent: 5 }, rules, 'short', true)).toThrow(
       'No available',
     );
-    expect(() => completeRest({ ...core(), hpCurrent: 0 }, rules, 'long')).toThrow('at least 1 HP');
+    expect(() => completeRest({ ...core(), hpCurrent: 0 }, rules, 'long')).toThrow('reconstitute');
   });
   it('only recharges explicitly configured abilities and preserves lifetime counts', () => {
     const c = core();

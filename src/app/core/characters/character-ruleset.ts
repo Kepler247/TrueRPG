@@ -1,6 +1,7 @@
 import type { MutationRules } from '../systems/rads-mutations';
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import type { WeaponAttackInput, PlayActionResult } from '../systems/dnds-combat';
+import type { PlayActionResult } from '../systems/dnds-combat';
+import { WeaponReference, undefinedWeaponReference } from './weapon-reference';
 import { makeDndsRules } from '../systems/dnds-rules';
 import { make501Rules, makePlain5eRules } from '../systems/system-rules';
 import {
@@ -8,6 +9,7 @@ import {
   BASE_SKILLS,
   carryCapacity,
   CharacterCore,
+  InventoryEntry,
   proficiencyBonus,
   SkillDefinition,
   StatKey,
@@ -23,7 +25,55 @@ export interface ClassResourceDefinition {
   help: string;
   resetsOnLongRest?: boolean;
 }
+export interface CheckSummary {
+  modifier: number;
+  mode: 'normal' | 'advantage' | 'disadvantage';
+  automaticFailure: boolean;
+}
+export type AbilityChoices = Record<string, string>;
+export interface AbilityChoice {
+  key: string;
+  label: string;
+  options: readonly { id: string; name: string }[];
+}
 export interface CharacterRuleset {
+  abilityChoices?: (
+    core: CharacterCore,
+    id: string,
+    choices?: AbilityChoices,
+  ) => readonly AbilityChoice[];
+  movementSpeed?: (core: CharacterCore) => number;
+  checkSummary?: (core: CharacterCore, label: string, tags: string[]) => CheckSummary | null;
+  tracksCarryWeight?: boolean;
+  statusPanel?: boolean;
+  managedAbility?: (ability: import('./character-core').CharacterAbility) => boolean;
+  featChoices?: (
+    name: string,
+  ) => readonly { label: string; options: readonly { id: string; name: string }[] }[];
+  completeCreation?: (
+    core: CharacterCore,
+    weaponId: string,
+    chips: number,
+    armor: boolean,
+  ) => CharacterCore;
+  consumeItem?: (core: CharacterCore, id: string) => { core: CharacterCore; message: string };
+  migrate?: (core: CharacterCore) => CharacterCore;
+  applyFeat?: (core: CharacterCore, name: string, choices?: string[]) => CharacterCore;
+  checkRoll?: (
+    core: CharacterCore,
+    label: string,
+    modifier: number,
+    tags: string[],
+    forcedSingle?: boolean,
+  ) => import('./dice').DiceRoll;
+  useClassAbility?: (core: CharacterCore, id: string, choices?: AbilityChoices) => CharacterCore;
+  takeDamage?: (
+    core: CharacterCore,
+    amount: number,
+    type: string,
+    tags?: string[],
+  ) => CharacterCore;
+  healthChange?: (core: CharacterCore, hp: number) => CharacterCore;
   mutations?: MutationRules;
   extraProficiencies?: {
     names: readonly string[];
@@ -32,14 +82,17 @@ export interface CharacterRuleset {
   };
   armorSummary?: (core: CharacterCore, rules: CharacterRuleset) => string;
   validate?: (core: CharacterCore) => void;
-  weaponAttack?: (
-    core: CharacterCore,
-    id: string,
-    input: WeaponAttackInput,
-    rules: CharacterRuleset,
-  ) => PlayActionResult;
+  weaponReference?: (core: CharacterCore, entry: InventoryEntry) => WeaponReference | null;
+  adjustWeaponAmmo?: (core: CharacterCore, id: string, delta: number) => PlayActionResult;
   reloadWeapon?: (core: CharacterCore, id: string, ammoId?: string) => PlayActionResult;
-  rest?: { shortHours: number; longHours: number; recoverHitDice: (level: number) => number };
+  rest?: {
+    before?: (core: CharacterCore, kind: 'short' | 'long') => void;
+    minimumHealing?: number;
+    finish?: (core: CharacterCore, kind: 'short' | 'long') => CharacterCore;
+    shortHours: number;
+    longHours: number;
+    recoverHitDice: (level: number) => number;
+  };
   abilityActions?: (core: CharacterCore) => readonly AbilityActionDefinition[];
   classResource?: (core: CharacterCore) => ClassResourceDefinition | null;
   maxLevel?: number;
@@ -49,6 +102,7 @@ export interface CharacterRuleset {
   advance?: (core: CharacterCore) => CharacterCore;
   hitDie?: (core: CharacterCore) => number | null;
   statPoints?: (core: CharacterCore, nextLevel: number) => number;
+  featOnlyAtRequiredLevels?: boolean;
   featRequired?: (nextLevel: number) => boolean;
   heatCapacity?: (level: number) => number | null;
   heatGainMultiplier?: (level: number) => number;
@@ -64,12 +118,27 @@ export interface CharacterRuleset {
   creator: {
     races: readonly string[];
     classes: readonly string[];
+    startingSkills?: number;
+    startingWeapons?: (className: string) => readonly { id: string; name: string }[];
+    armorAlternative?: (className: string) => boolean;
+    primarySkills?: number;
+    primaryStats?: (className: string) => readonly StatKey[];
     classDescriptions?: Readonly<Record<string, string>>;
   };
   abilityModifier: (score: number) => number;
   proficiencyBonus: (level: number) => number;
-  savingThrow: (core: CharacterCore, stat: StatKey, rules: CharacterRuleset) => number;
-  skillBonus: (core: CharacterCore, skill: SkillDefinition, rules: CharacterRuleset) => number;
+  savingThrow: (
+    core: CharacterCore,
+    stat: StatKey,
+    rules: CharacterRuleset,
+    tags?: string[],
+  ) => number;
+  skillBonus: (
+    core: CharacterCore,
+    skill: SkillDefinition,
+    rules: CharacterRuleset,
+    tags?: string[],
+  ) => number;
   initiative: (core: CharacterCore, rules: CharacterRuleset) => number;
   carryCapacity: (core: CharacterCore) => number;
   levelUpPrompts: (core: CharacterCore, nextLevel: number) => readonly string[];
@@ -81,6 +150,7 @@ export interface AbilityActionDefinition {
 }
 
 export const BASE_5E_RULES: CharacterRuleset = {
+  weaponReference: undefinedWeaponReference,
   rest: {
     shortHours: 1,
     longHours: 8,

@@ -62,7 +62,9 @@ export class CharacterSheetService {
     if ([profile, system, role, campaign].some((result) => result.error))
       throw new Error('Could not load character details. Please retry.');
     const userId = this.auth.user()?.id;
-    const core = readCore(row.data, row.data_version);
+    const loadedCore = readCore(row.data, row.data_version);
+    const rules = this.rulesets.get(system.data?.ruleset_key);
+    const core = rules.migrate?.(loadedCore) ?? loadedCore;
     this.rulesets.get(system.data?.ruleset_key).validate?.(core);
     return {
       row,
