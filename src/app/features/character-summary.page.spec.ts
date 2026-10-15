@@ -91,15 +91,67 @@ describe('Read-only character summary', () => {
     const fixture = await create();
     expect(
       fixture.nativeElement.querySelectorAll(
-        'textarea,select,mat-select,mat-checkbox,[contenteditable]',
+        'textarea,select:not(.inventory-lookup select),mat-select,mat-checkbox,[contenteditable]',
       ).length,
     ).toBe(0);
-    expect(fixture.nativeElement.querySelectorAll('input').length).toBe(3);
+    expect(
+      [...fixture.nativeElement.querySelectorAll('input')].filter(
+        (input: Element) => !input.closest('.inventory-lookup'),
+      ).length,
+    ).toBe(3);
     expect(fixture.nativeElement.querySelectorAll('.stat-tile').length).toBe(6);
     expect(fixture.nativeElement.querySelectorAll('.skill-row').length).toBe(18);
     expect(fixture.nativeElement.textContent).toContain('Courier');
     expect(fixture.nativeElement.textContent).toContain('Water');
     expect(fixture.nativeElement.textContent).toContain('Scavenger');
+    expect(service.save).not.toHaveBeenCalled();
+  });
+  it('looks up system items, previews their rules and saves the requested quantity', async () => {
+    const fixture = await create(),
+      page = fixture.componentInstance;
+    page.itemQuery.set('test water');
+    expect(page.itemMatches().map((item) => item.id)).toEqual(['test-water']);
+    page.selectedItemId.set('test-water');
+    page.itemQuantity.set(3);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.item-preview').textContent).toContain(
+      'Testing placeholder',
+    );
+    await page.addCatalogItem();
+    const added = page.record()!.core.inventory.at(-1)!;
+    expect(added.quantity).toBe(3);
+    expect(added['catalogId']).toBe('test-water');
+    await page.consumeItem(added.id);
+    expect(page.record()!.core.inventory.at(-1)!.quantity).toBe(2);
+    expect(page.record()!.core.hpCurrent).toBe(core.hpCurrent);
+  });
+  it('retains the exact added item after a failed save and rejects invalid quantities', async () => {
+    const fixture = await create(),
+      page = fixture.componentInstance;
+    page.selectedItemId.set('test-water');
+    page.itemQuantity.set(0);
+    await page.addCatalogItem();
+    expect(service.save).not.toHaveBeenCalled();
+    page.itemQuantity.set(2);
+    service.save.mockRejectedValueOnce(new Error('Offline'));
+    await page.addCatalogItem();
+    const pending = page.pendingAction()!.core;
+    await page.addCatalogItem();
+    expect(service.save).toHaveBeenCalledTimes(1);
+    await page.retryAction();
+    expect(service.save.mock.calls[1][2]).toBe(pending);
+    expect(
+      page.record()!.core.inventory.filter((item) => item['catalogId'] === 'test-water'),
+    ).toHaveLength(1);
+  });
+  it('prevents viewers from adding and consuming items', async () => {
+    service.load.mockResolvedValue({ ...structuredClone(record), canEdit: false });
+    const fixture = await create(),
+      page = fixture.componentInstance;
+    expect(fixture.nativeElement.querySelector('.inventory-lookup')).toBeNull();
+    page.selectedItemId.set('test-water');
+    await page.addCatalogItem();
+    await page.consumeItem('item');
     expect(service.save).not.toHaveBeenCalled();
   });
   it('retains a failed rest result for retry and prevents intervening inventory writes', async () => {

@@ -1,3 +1,4 @@
+import { catalogInventory, systemCatalog } from '../core/systems/system-catalog';
 import { undefinedWeaponReference } from '../core/characters/weapon-reference';
 import { InventoryEntry } from '../core/characters/character-core';
 import { RadsStatus } from './rads-status';
@@ -65,6 +66,36 @@ export class CharacterSummaryPage {
   private readonly userId = computed(() => this.auth.user()?.id ?? null);
   private loadVersion = 0;
   readonly record = signal<SheetRecord | null>(null);
+  readonly itemQuery = signal('');
+  readonly selectedItemId = signal('');
+  readonly itemQuantity = signal(1);
+  readonly itemMatches = computed(() => {
+    const query = this.itemQuery().trim().toLowerCase();
+    return systemCatalog(this.record()?.rulesetKey).filter(
+      (item) =>
+        item.category !== 'feat' &&
+        (!query ||
+          (item.name + ' ' + item.category + ' ' + item.description).toLowerCase().includes(query)),
+    );
+  });
+  readonly selectedItem = computed(() =>
+    this.itemMatches().find((item) => item.id === this.selectedItemId()),
+  );
+  async addCatalogItem(): Promise<void> {
+    const record = this.record(),
+      item = this.selectedItem(),
+      quantity = this.itemQuantity();
+    if (!record?.canEdit || !item || this.saving() || this.pendingAction()) return;
+    if (!Number.isSafeInteger(quantity) || quantity < 1 || quantity > 9999) {
+      this.error.set('Choose a whole quantity from 1 to 9999.');
+      return;
+    }
+    const entry = { ...catalogInventory(item, record.rulesetKey ?? 'base5e'), quantity };
+    await this.savePlayAction(
+      { ...record.core, inventory: [...record.core.inventory, entry] },
+      `${item.name} added to inventory.`,
+    );
+  }
   readonly loading = signal(true);
   readonly error = signal<string | null>(null);
   readonly saving = signal(false);
@@ -296,14 +327,19 @@ export class CharacterSummaryPage {
   }
   async consumeItem(id: string): Promise<void> {
     const record = this.record();
-    if (!record?.canEdit || this.saving() || this.pendingAction() || !this.rules().consumeItem)
-      return;
+    if (!record?.canEdit || this.saving() || this.pendingAction()) return;
     if (!this.playReady()) {
       this.error.set('Save HP/resource edits first.');
       return;
     }
     try {
-      const action = this.rules().consumeItem!(record.core, id);
+      const entry = record.core.inventory.find((item) => item.id === id);
+      if (!entry || entry['category'] !== 'consumable')
+        throw new Error('Choose a consumable in your inventory.');
+      const action = this.rules().consumeItem?.(record.core, id) ?? {
+        core: inventoryAction(record.core, id, 'remove'),
+        message: `${entry.name} consumed. Apply any effects described by its rules at the table.`,
+      };
       await this.savePlayAction(action.core, action.message);
     } catch (error) {
       this.error.set(error instanceof Error ? error.message : 'Item could not be consumed.');

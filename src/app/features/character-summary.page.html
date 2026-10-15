@@ -406,6 +406,61 @@
   </section>
   <section class="panel" aria-labelledby="inventory-title">
     <h2 id="inventory-title">Inventory</h2>
+    @if (record.canEdit) {
+      <details class="inventory-lookup">
+        <summary>Add items</summary>
+        <label class="damage-type-control"
+          >Search items
+          <input
+            type="search"
+            [ngModel]="itemQuery()"
+            (ngModelChange)="itemQuery.set($event)"
+            placeholder="Name, type or rules text"
+          />
+        </label>
+        <label class="damage-type-control"
+          >Matching items
+          <select
+            [ngModel]="selectedItemId()"
+            (ngModelChange)="selectedItemId.set($event)"
+            [disabled]="saving() || !!pendingAction()"
+          >
+            <option value="">Choose an item ({{ itemMatches().length }} matches)</option>
+            @for (item of itemMatches(); track item.id) {
+              <option [value]="item.id">
+                {{ item.name }} &middot; {{ item.category }}{{ item.isMock ? ' (mock)' : '' }}
+              </option>
+            }
+          </select>
+        </label>
+        @if (selectedItem(); as item) {
+          <p class="item-preview">
+            <strong>{{ item.name }}</strong
+            ><br />{{ item.description }}
+          </p>
+          <label class="damage-type-control"
+            >Quantity
+            <input
+              type="number"
+              min="1"
+              max="9999"
+              step="1"
+              [ngModel]="itemQuantity()"
+              (ngModelChange)="itemQuantity.set($event)"
+            />
+          </label>
+          <button
+            mat-flat-button
+            (click)="addCatalogItem()"
+            [disabled]="saving() || !!pendingAction()"
+          >
+            Add to inventory
+          </button>
+        } @else if (!itemMatches().length) {
+          <p>No matching items in this system's catalog.</p>
+        }
+      </details>
+    }
     @if (rules().tracksCarryWeight !== false && unknownWeights()) {
       <p class="legend">
         Some item weights are unspecified. The carried total includes known weights only; set
@@ -461,13 +516,13 @@
               }
             </p>
           }
-          @if (entry['radsConsumable'] && record.canEdit) {
+          @if (entry['category'] === 'consumable' && record.canEdit) {
             <button
               mat-flat-button
               (click)="consumeItem(entry.id)"
               [disabled]="saving() || !!pendingAction()"
             >
-              Use on self
+              Consume
             </button>
           }
           @if (weaponReference(entry); as reference) {

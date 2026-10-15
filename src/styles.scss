@@ -155,3 +155,24 @@ app-character-summary .roll-button.check-failure {
   color: #752a30;
   border-color: #d9a2a5;
 }
+
+app-character-summary .inventory-lookup {
+  padding: 1rem;
+  border: 1px solid #c7cfb5;
+  border-radius: 0.75rem;
+  margin-block: 1rem;
+  summary {
+    cursor: pointer;
+    min-height: 44px;
+    font-weight: 700;
+  }
+  input {
+    font-size: 16px;
+    min-height: 44px;
+    max-width: 100%;
+  }
+  .item-preview {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+}
