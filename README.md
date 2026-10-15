@@ -117,3 +117,8 @@ Connect the GitHub repository as a Pages project with production branch `main`, 
 Pushes to the connected production branch trigger deployment when automatic deployments are enabled. Branch previews share the configured Supabase project unless explicitly configured otherwise; preview changes to saved data affect that same database. A Pages rollback restores frontend assets only, not database state.
 
 After the first successful deployment, set Supabase Authentication URL Configuration's Site URL to the public HTTPS address and allow the exact authentication redirect URLs used by the app. Retain local development URLs as needed. Verify sign-in, direct character URLs after refresh, rules PDFs, uploads and campaign invitations on the public site before inviting the group.
+
+
+## Cloudflare Workers deployment (current hosted project)
+
+The current `truerpg` project uses Workers Static Assets. Keep build command `npm run build`, deploy command `npx wrangler deploy`, and repository root `/`. `wrangler.jsonc` points to `dist/rpg-companion/browser` and enables SPA navigation fallback and the public workers.dev route. No Worker script or server-side Angular runtime is needed. Its public address is https://truerpg.handyboy06.workers.dev/ . The Pages instructions above remain applicable only to a separate Pages project.

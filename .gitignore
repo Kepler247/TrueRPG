@@ -45,3 +45,6 @@ Thumbs.db
 
 # Local document inspection and render artifacts
 /.codex-tmp/
+
+# Local Cloudflare development state
+/.wrangler/
