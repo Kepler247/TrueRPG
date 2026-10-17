@@ -126,3 +126,13 @@ article.space h2 {
     background: rgb(128 128 128 / 8%);
   }
 }
+
+.setting-views {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  button[aria-pressed='true'] {
+    background: #245c47;
+    color: white;
+    border: 1px solid #245c47;
+  }
+}

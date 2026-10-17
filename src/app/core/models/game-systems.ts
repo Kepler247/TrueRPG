@@ -16,9 +16,15 @@ export const GAME_SYSTEMS: readonly GameSystem[] = [
     slug: '501-rads',
     name: '501 Rads',
     description:
-      'A postnuclear world of strange factions, mutated wildlife, and Gunslingers. Explore the complete first draft and its evolving rules.',
+      'A postnuclear world of strange factions, mutated wildlife, and Gunslingers. Explore its evolving lore, regional map and rules.',
     rulesetKey: '501-rads',
     themeKey: '501-rads',
+    map: {
+      src: '/systems/501-rads/north-america-map.jpg',
+      title: 'Map of North America',
+      description:
+        'The 501 Rads setting map shows the regions and settlements of postnuclear North America, including the Olympic Commonwealth, Central Wasteland, Thunder Valley, New South and Capital Wastes.',
+    },
   },
   {
     id: 'ec4fcb8a-b5de-4da4-9c35-c7bdb49c5e01',

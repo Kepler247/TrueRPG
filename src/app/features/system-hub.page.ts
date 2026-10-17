@@ -1,3 +1,4 @@
+import { SettingMap } from './setting-map';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,7 +26,7 @@ interface ReferenceDocument {
 }
 @Component({
   selector: 'app-system-hub',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, SettingMap],
   template: `
     <a routerLink="/systems">All systems</a>
     <h1>{{ system()?.name ?? 'System not found' }}</h1>
@@ -34,132 +35,153 @@ interface ReferenceDocument {
       <a [routerLink]="['/systems', system.slug, 'catalog']">Items and shared feats</a>
     }
     @if (system(); as system) {
-      <div class="tools">
-        <label
-          >Search reference<input
-            type="search"
-            [ngModel]="query()"
-            (ngModelChange)="query.set($event); selected.set(0)"
-            placeholder="Faction, spell, class, item..."
-        /></label>
-        <label
-          >Read<select
-            [ngModel]="category()"
-            (ngModelChange)="category.set($event); selected.set(0)"
+      @if (system.map; as map) {
+        <nav class="setting-views" aria-label="Setting views">
+          <button
+            type="button"
+            [attr.aria-pressed]="view() === 'reference'"
+            (click)="view.set('reference')"
           >
-            <option value="all">Everything</option>
-            <option value="lore">Lore</option>
-            <option value="rules">Rules</option>
-          </select></label
-        >
-      </div>
-      @if (system.slug === '501-rads') {
-        <aside>
-          <strong>Complete rules revision &middot; 501 Rads</strong>
-          <p>
-            Maximum level 12. Gain two stat points every level; scores may exceed 20. Shared feats
-            at 3, 6, 9, 12 are awaiting definition. Gunslingers use d8 HP. Six classes, feats,
-            equipment, consumables, loot, vehicles and enemies are defined in this revision. Fan the
-            Hammer costs 2 Heat. 100 positive and 100 negative mutations are available. Death grants
-            a random negative mutation; after 30 game minutes of reconstitution, return at 1 HP.
-          </p>
-        </aside>
-      } @else if (system.slug === 'dnds') {
-        <aside>
-          <strong>Dogfights and Deep Space</strong>
-          <p>
-            2014 5E is the foundation, maximum level 20. Technology replaces Arcana. Equipment
-            estimates are labeled. Ship combat is available in the original PDF only.
-          </p>
-          <a routerLink="/systems/5e">Shared 5E rules and attribution</a>
-        </aside>
-      } @else {
-        <aside>
-          <strong>Plain 5E &middot; 2014 SRD 5.1</strong>
-          <p>
-            Complete open rules, including races, classes, equipment, spells, monsters, and GM
-            guidance. The shared character foundation uses these calculations. Class and race
-            choices initialize HP, speed, scores, and saving throws; use the reference for detailed
-            choices and combat resolution.
-          </p>
-          <p>
-            This work includes material taken from the System Reference Document 5.1 (&ldquo;SRD
-            5.1&rdquo;) by Wizards of the Coast LLC, available at
-            <a href="https://dnd.wizards.com/resources/systems-reference-document"
-              >the official SRD site</a
-            >. The SRD 5.1 is licensed under the
-            <a href="https://creativecommons.org/licenses/by/4.0/legalcode"
-              >Creative Commons Attribution 4.0 International License</a
-            >.
-          </p>
-        </aside>
-      }
-      @if (document(); as doc) {
-        <p>
-          <a [href]="assetRoot() + '/' + doc.sourceFile" target="_blank" rel="noopener"
-            >Open PDF ({{ doc.pageCount }} pages)</a
-          >
-          &middot; {{ matches().length }} matching sections
-        </p>
-        <label class="jump"
-          >Jump to heading<select [ngModel]="selected()" (ngModelChange)="selected.set(+$event)">
-            @for (section of matches(); track section.id; let i = $index) {
-              <option [value]="i">{{ section.heading }}</option>
-            }
-          </select></label
-        >
-        <nav aria-label="Reference headings">
-          <button (click)="selected.set(selected() - 1)" [disabled]="selected() <= 0">
-            Previous heading</button
-          ><span>{{ current()?.heading ?? '--' }}</span
-          ><button
-            (click)="selected.set(selected() + 1)"
-            [disabled]="selected() >= matches().length - 1"
-          >
-            Next heading
+            Lore and rules
+          </button>
+          <button type="button" [attr.aria-pressed]="view() === 'map'" (click)="view.set('map')">
+            Map
           </button>
         </nav>
-        @if (current(); as page) {
-          <article [class.rads]="system.slug === '501-rads'" [class.space]="system.slug === 'dnds'">
-            @for (block of page.blocks; track $index) {
-              @if (block.kind === 'heading') {
-                <h2>{{ block.text }}</h2>
-              } @else {
-                @if (block.kind === 'table') {
-                  <div
-                    class="reference-table"
-                    role="region"
-                    tabindex="0"
-                    aria-label="Rules table, scroll horizontally for more columns"
-                  >
-                    <table>
-                      <caption>
-                        Reference table
-                      </caption>
-                      <tbody>
-                        @for (row of block.rows ?? []; track $index) {
-                          <tr>
-                            @for (cell of row; track $index) {
-                              <td>{{ cell }}</td>
-                            }
-                          </tr>
-                        }
-                      </tbody>
-                    </table>
-                  </div>
-                } @else if (block.kind === 'subheading') {
-                  <h3>{{ block.text }}</h3>
+      }
+      @if (view() === 'map' && system.map; as map) {
+        <app-setting-map [src]="map.src" [title]="map.title" [description]="map.description" />
+      } @else {
+        <div class="tools">
+          <label
+            >Search reference<input
+              type="search"
+              [ngModel]="query()"
+              (ngModelChange)="query.set($event); selected.set(0)"
+              placeholder="Faction, spell, class, item..."
+          /></label>
+          <label
+            >Read<select
+              [ngModel]="category()"
+              (ngModelChange)="category.set($event); selected.set(0)"
+            >
+              <option value="all">Everything</option>
+              <option value="lore">Lore</option>
+              <option value="rules">Rules</option>
+            </select></label
+          >
+        </div>
+        @if (system.slug === '501-rads') {
+          <aside>
+            <strong>Complete rules revision &middot; 501 Rads</strong>
+            <p>
+              Maximum level 12. Gain two stat points every level; scores may exceed 20. Shared feats
+              at 3, 6, 9, 12. Gunslingers use d8 HP. Six classes, feats, equipment, consumables,
+              loot, vehicles and enemies are defined in this revision. Fan the Hammer costs 2 Heat.
+              100 positive and 100 negative mutations are available. Death grants a random negative
+              mutation; after 30 game minutes of reconstitution, return at 1 HP.
+            </p>
+          </aside>
+        } @else if (system.slug === 'dnds') {
+          <aside>
+            <strong>Dogfights and Deep Space</strong>
+            <p>
+              2014 5E is the foundation, maximum level 20. Technology replaces Arcana. Equipment
+              estimates are labeled. Ship combat is available in the original PDF only.
+            </p>
+            <a routerLink="/systems/5e">Shared 5E rules and attribution</a>
+          </aside>
+        } @else {
+          <aside>
+            <strong>Plain 5E &middot; 2014 SRD 5.1</strong>
+            <p>
+              Complete open rules, including races, classes, equipment, spells, monsters, and GM
+              guidance. The shared character foundation uses these calculations. Class and race
+              choices initialize HP, speed, scores, and saving throws; use the reference for
+              detailed choices and combat resolution.
+            </p>
+            <p>
+              This work includes material taken from the System Reference Document 5.1 (&ldquo;SRD
+              5.1&rdquo;) by Wizards of the Coast LLC, available at
+              <a href="https://dnd.wizards.com/resources/systems-reference-document"
+                >the official SRD site</a
+              >. The SRD 5.1 is licensed under the
+              <a href="https://creativecommons.org/licenses/by/4.0/legalcode"
+                >Creative Commons Attribution 4.0 International License</a
+              >.
+            </p>
+          </aside>
+        }
+        @if (document(); as doc) {
+          <p>
+            <a [href]="assetRoot() + '/' + doc.sourceFile" target="_blank" rel="noopener"
+              >Open PDF ({{ doc.pageCount }} pages)</a
+            >
+            &middot; {{ matches().length }} matching sections
+          </p>
+          <label class="jump"
+            >Jump to heading<select [ngModel]="selected()" (ngModelChange)="selected.set(+$event)">
+              @for (section of matches(); track section.id; let i = $index) {
+                <option [value]="i">{{ section.heading }}</option>
+              }
+            </select></label
+          >
+          <nav aria-label="Reference headings">
+            <button (click)="selected.set(selected() - 1)" [disabled]="selected() <= 0">
+              Previous heading</button
+            ><span>{{ current()?.heading ?? '--' }}</span
+            ><button
+              (click)="selected.set(selected() + 1)"
+              [disabled]="selected() >= matches().length - 1"
+            >
+              Next heading
+            </button>
+          </nav>
+          @if (current(); as page) {
+            <article
+              [class.rads]="system.slug === '501-rads'"
+              [class.space]="system.slug === 'dnds'"
+            >
+              @for (block of page.blocks; track $index) {
+                @if (block.kind === 'heading') {
+                  <h2>{{ block.text }}</h2>
                 } @else {
-                  <p [class.bullet]="block.kind === 'bullet'">{{ block.text }}</p>
+                  @if (block.kind === 'table') {
+                    <div
+                      class="reference-table"
+                      role="region"
+                      tabindex="0"
+                      aria-label="Rules table, scroll horizontally for more columns"
+                    >
+                      <table>
+                        <caption>
+                          Reference table
+                        </caption>
+                        <tbody>
+                          @for (row of block.rows ?? []; track $index) {
+                            <tr>
+                              @for (cell of row; track $index) {
+                                <td>{{ cell }}</td>
+                              }
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+                  } @else if (block.kind === 'subheading') {
+                    <h3>{{ block.text }}</h3>
+                  } @else {
+                    <p [class.bullet]="block.kind === 'bullet'">{{ block.text }}</p>
+                  }
                 }
               }
-            }
-          </article>
+            </article>
+          } @else {
+            <p>No sections match your search.</p>
+          }
         } @else {
-          <p>No sections match your search.</p>
+          <p role="status">{{ error() || 'Loading reference...' }}</p>
         }
-      } @else {
-        <p role="status">{{ error() || 'Loading reference...' }}</p>
       }
     }
   `,
@@ -175,6 +197,7 @@ export class SystemHubPage {
   readonly document = signal<ReferenceDocument | null>(null);
   readonly error = signal('');
   readonly query = signal('');
+  readonly view = signal<'reference' | 'map'>('reference');
   readonly category = signal('all');
   readonly selected = signal(0);
   readonly assetRoot = computed(
@@ -202,7 +225,7 @@ export class SystemHubPage {
       const controller = new AbortController();
       onCleanup(() => controller.abort());
       void fetch(
-        `${root}/${system.slug === '501-rads' ? 'core-1' : system.slug === 'dnds' ? 'original' : 'srd-5-1'}.json`,
+        `${root}/${system.slug === '501-rads' ? 'core-2' : system.slug === 'dnds' ? 'original' : 'srd-5-1'}.json`,
         {
           signal: controller.signal,
         },

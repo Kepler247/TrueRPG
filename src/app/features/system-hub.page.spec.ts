@@ -59,8 +59,20 @@ describe('System reference hub', () => {
     fixture.detectChanges();
     const page = fixture.componentInstance;
     await vi.waitFor(() => expect(page.document()).not.toBeNull());
-    expect(fetchMock).toHaveBeenCalledWith('/systems/501-rads/core-1.json', expect.any(Object));
+    expect(fetchMock).toHaveBeenCalledWith('/systems/501-rads/core-2.json', expect.any(Object));
     expect(page.matches()).toHaveLength(2);
+    page.view.set('map');
+    fixture.detectChanges();
+    const map = fixture.nativeElement.querySelector('app-setting-map');
+    expect(map.querySelector('img').getAttribute('src')).toBe(
+      '/systems/501-rads/north-america-map.jpg',
+    );
+    const zoomIn = map.querySelector('button[aria-label="Zoom in"]');
+    zoomIn.click();
+    fixture.detectChanges();
+    expect(map.querySelector('img').style.width).toBe('150%');
+    page.view.set('reference');
+    fixture.detectChanges();
     page.category.set('lore');
     expect(page.matches()).toHaveLength(1);
     page.query.set('heat');

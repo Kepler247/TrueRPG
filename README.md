@@ -130,3 +130,6 @@ Keep the matching PDF and DOCX drafts together. Run `scripts/import-rads-core.py
 
 
 D&DS uses the same structured import: `python scripts/import-rads-docx.py --dnds` reads `R:\Downloads\D&DS One Doc.docx`. It preserves native paragraphs/headings and four tables; Chapter Two remains `ship-reference` and is excluded from the app reader while available in the original PDF. Run `npm run test:references` to check both source hashes and category boundaries.
+
+
+The current 501 Rads reference is `core-2` (lore/geography revision); `core-1` is retained for source history. Import paired updates with `scripts/import-rads-core.py --source "R:\Downloads\501 Rads (4).pdf" --revision core-2`, followed by `python scripts/import-rads-docx.py --source "R:\Downloads\501 Rads (1).docx" --revision core-2`. The setting hub's Map view uses the supplied North America map with fit/zoom controls and a full-resolution link. No new weather or radiation mechanics are inferred from descriptive lore.

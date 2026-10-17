@@ -6,6 +6,7 @@ for (const [folder, revision, count] of [
   ['501-rads', 'draft-1', 69],
   ['501-rads', 'mutations-1', 125],
   ['501-rads', 'core-1', 275],
+  ['501-rads', 'core-2', 282],
   ['5e', 'srd-5-1', 403],
   ['dnds', 'original', 85],
 ]) {
@@ -73,7 +74,29 @@ for (const [folder, revision, count] of [
         ? text.includes('Fan the Hammer; For -2 Heat')
         : text.includes('Fan the Hammer; For -2 heat points'),
     );
-    if (revision === 'core-1') {
+    if (revision === 'core-1' || revision === 'core-2') {
+      if (revision === 'core-2') {
+        const oldDoc = JSON.parse(await readFile(new URL('core-1.json', root), 'utf8'));
+        const allTables = (d) =>
+          d.pages.flatMap((p) => p.blocks.filter((b) => b.kind === 'table').map((b) => b.rows));
+        assert.deepEqual(
+          allTables(doc),
+          allTables(oldDoc),
+          'This lore revision must preserve mechanical table values',
+        );
+        for (const heading of ['Drugs', 'Geography and Weather', 'Regions'])
+          assert.ok(
+            doc.pages.some((p) =>
+              p.blocks.some(
+                (b) => b.kind === 'heading' && b.text === heading && b.category === 'lore',
+              ),
+            ),
+          );
+        assert.ok(
+          (await readFile(new URL('north-america-map.jpg', root))).length > 100000,
+          'Setting map must be included',
+        );
+      }
       const blocks = doc.pages.flatMap((p) => p.blocks);
       const tables = blocks.filter((b) => b.kind === 'table');
       assert.equal(tables.length, 33, 'All complete DOCX tables must retain structured cells');

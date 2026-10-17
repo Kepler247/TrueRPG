@@ -1,6 +1,7 @@
 from pathlib import Path
-import pymupdf,json,hashlib,shutil,re
-src=Path(r'R:\Downloads\501 Rads (3).pdf'); pdf=pymupdf.open(src); pages=[]
+import pymupdf,json,hashlib,shutil,re,argparse
+parser=argparse.ArgumentParser();parser.add_argument("--source",default=r"R:\Downloads\501 Rads (3).pdf");parser.add_argument("--revision",default="core-1");args=parser.parse_args()
+src=Path(args.source); pdf=pymupdf.open(src); pages=[]
 for i,p in enumerate(pdf):
  blocks=[]; previous_heading=None
  tables=[]
@@ -66,8 +67,8 @@ for page in pages:
    block={**block,'kind':'subheading'}
   grouped.append(block)
  page['blocks']=grouped
-root=Path('public/systems/501-rads'); shutil.copyfile(src,root/'501-rads-core-1.pdf')
-(root/'core-1.json').write_text(json.dumps({'title':'501 Rads','revision':'core-1','sourceFile':'501-rads-core-1.pdf','sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'pageCount':len(pdf),'pages':pages},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+root=Path('public/systems/501-rads'); shutil.copyfile(src,root/('501-rads-'+args.revision+'.pdf'))
+(root/(args.revision+'.json')).write_text(json.dumps({'title':'501 Rads','revision':args.revision,'sourceFile':'501-rads-'+args.revision+'.pdf','sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'pageCount':len(pdf),'pages':pages},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 # Preserve source text separately for definition audits and regression checks.
 Path('.codex-tmp/rads-core-source.json').write_text(json.dumps([p.get_text(sort=False) for p in pdf]),encoding='utf-8')
 print('Imported',len(pdf),'pages')

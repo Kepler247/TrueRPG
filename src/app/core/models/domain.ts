@@ -10,6 +10,7 @@ export interface GameSystem {
   // Selects the future rules engine and visual theme; not the campaign's house rules.
   rulesetKey: string;
   themeKey: string;
+  map?: { src: string; title: string; description: string };
 }
 
 export interface Campaign {

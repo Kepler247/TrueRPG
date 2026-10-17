@@ -4,12 +4,13 @@ Run after import-rads-core.py. Requires only Python's standard library.
 from pathlib import Path
 from zipfile import ZipFile
 import xml.etree.ElementTree as ET
-import json, re, hashlib, shutil, bisect, sys
+import json, re, hashlib, shutil, bisect, sys, argparse
+parser=argparse.ArgumentParser();parser.add_argument("--dnds",action="store_true");parser.add_argument("--source");parser.add_argument("--revision",default="core-1");args=parser.parse_args()
 
-dnds = "--dnds" in sys.argv
-source = Path(r"R:\Downloads\D&DS One Doc.docx" if dnds else r"R:\Downloads\501 Rads.docx")
+dnds = args.dnds
+source = Path(args.source) if args.source else Path(r"R:\Downloads\D&DS One Doc.docx" if dnds else r"R:\Downloads\501 Rads.docx")
 root = Path('public/systems/dnds' if dnds else 'public/systems/501-rads')
-target = root / ('original.json' if dnds else 'core-1.json')
+target = root / ('original.json' if dnds else args.revision+'.json')
 doc = json.loads(target.read_text(encoding='utf-8'))
 ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
 w = '{' + ns['w'] + '}'
@@ -64,7 +65,7 @@ with ZipFile(source) as archive:
             page['blocks'].append({'kind':'heading','text':'Positive Mutations' if mutation_table==1 else 'Negative Mutations','category':category})
         page['blocks'].append(block)
 # Preserve an exact copy and hash so future revisions have an auditable import source.
-source_name='dnds-original.docx' if dnds else '501-rads-core-1.docx'
+source_name='dnds-original.docx' if dnds else '501-rads-'+args.revision+'.docx'
 shutil.copyfile(source,root/source_name)
 doc['textSourceFile']=source_name
 doc['textSourceSha256']=hashlib.sha256(source.read_bytes()).hexdigest()
